@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema
 
-var TagSchema = new Schema({});
+var TagSchema = new mongoose.Schema({
+  post_id: Number,
+  text: String,
+});
 
 module.exports = mongoose.model('Tag', TagSchema);

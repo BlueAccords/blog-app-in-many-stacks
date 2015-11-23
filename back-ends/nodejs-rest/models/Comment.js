@@ -1,7 +1,10 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 
-var CommentSchema = new Schema({});
+var CommentSchema = new mongoose.Schema({
+  post_id: Number,
+  author_id: Number,
+  text: String,
+});
 
 model.exports = mongoose.model('Comment', CommentSchema);
 
