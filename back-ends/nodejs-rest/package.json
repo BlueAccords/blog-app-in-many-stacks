@@ -24,10 +24,15 @@
   },
   "homepage": "https://github.com/chiedolabs/blog-app-in-many-stacks#readme",
   "dependencies": {
+    "babel-eslint": "^4.1.6",
     "bcrypt": "^0.8.5",
     "body-parser": "^1.14.1",
     "cookie-parser": "^1.4.0",
+    "eslint": "^1.10.2",
     "express": "^4.13.3",
     "mongoose": "^4.2.7"
+  },
+  "devDependencies": {
+    "eslint-plugin-react": "^3.11.2"
   }
 }
