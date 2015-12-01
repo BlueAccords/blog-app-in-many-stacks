@@ -1,19 +1,23 @@
-var express = require('express'),
-    router = express.Router(),
-    User = require('./../models/User');
+'use strict';
 
-router.get('/', function(req, res) {
+import express from 'express';
+import bcrypt from 'bcrypt';
+import User from './../models/User';
+let router = express.Router();
+
+router.get('/', (req, res) => {
   res.sendFile('login.html', {root: 'public'});
 });
 
-router.post('/', function(req, res) {
-  User.findOne({username: req.body.username}, function(err, user) {
-    if (user === null) {
-      res.send('Enter a valid username')
-    } else if (user.comparePassword(req.body.password)) {
-      res.send('Now logged in');
-    } else {
-      res.send('Invalid password');
+router.post('/', (req, res) => {
+  User.findOne({username: req.body.username}, (err, user) => {
+    if (user === null) { res.send('Enter a valid username'); }
+    else {
+      if (bcrypt.compareSync(req.body.password, user.password)) {
+        res.send('Now logged in');
+      } else {
+        res.send('Invalid password');
+      }
     }
   });
 });

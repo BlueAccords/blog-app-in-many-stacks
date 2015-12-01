@@ -1,7 +1,7 @@
-var express = require('express'),
-    router = express.Router(),
-    bcrypt = require('bcrypt'),
-    path = require('path');
+'use strict';
+
+let express = require('express');
+let router = express.Router();
 
 router.use('/', require('./login'));
 router.use('/', require('./users'));

@@ -50,9 +50,9 @@
     "no-console": 0,
     "comma-dangle": [1, "always-multiline"],
     "radix": 1,
-    "no-var": 1,
-    "no-unused-vars": [1, {
-        "vars": "all",
+    "no-let": 1,
+    "no-unused-lets": [1, {
+        "lets": "all",
         "args": "none"
       }
     ],
@@ -74,7 +74,7 @@
     "react/jsx-sort-prop-types": 0,
     "react/jsx-sort-props": 0,
     "react/jsx-uses-react": 1,
-    "react/jsx-uses-vars": 1,
+    "react/jsx-uses-lets": 1,
     "react/no-danger": 1,
     "react/no-did-mount-set-state": 1,
     "react/no-did-update-set-state": 1,
