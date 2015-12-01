@@ -3,7 +3,7 @@ var router = express.Router();
 var User = require('./../models/User');
 
 router.get('/', function(req, res) {
-  res.sendFile('sign-in.html', {root: 'public'});
+  res.sendFile('login.html', {root: 'public'});
 });
 
 router.post('/', function(req, res) {

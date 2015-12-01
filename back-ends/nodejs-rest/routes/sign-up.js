@@ -7,18 +7,18 @@ router.get('/sign-up', function(req, res) {
   res.sendFile('sign-up.html', {root: 'public'});
 });
 
-router.post('/', function(req, res) {
-  var hash = bcrypt.hashSync(req.body.password, 8);
-
-  User.create({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    username: req.body.username,
-    password: hash,
+router.post('/sign-up', function(req, res) {
+  bcrypt.hash(req.body.password, 8, function(err, hash) {
+    User.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      username: req.body.username,
+      password: hash,
+    });
   });
 
-  res.send(req.body.username + ' has been created!');
+  res.send('Your user has been created!');
 });
 
 module.exports = router;
