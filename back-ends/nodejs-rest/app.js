@@ -16,7 +16,7 @@ app.use(express.static(__dirname + '/public'));
 app.use('/', routes);
 
 app.get('*', function(req, res){
-  res.send(404);
+  res.sendStatus(404);
 });
 
 app.listen(3000, function(err){

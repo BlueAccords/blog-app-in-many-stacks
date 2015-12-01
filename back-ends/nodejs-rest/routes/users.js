@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var bcrypt = require('bcrypt');
-var User = require('./../models/User');
+var express = require('express'),
+    router = express.Router(),
+    bcrypt = require('bcrypt'),
+    User = require('./../models/User');
 
 /**
 * New User form (DONE)

@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var bcrypt = require('bcrypt');
-var path = require('path');
+var express = require('express'),
+    router = express.Router(),
+    bcrypt = require('bcrypt'),
+    path = require('path');
 
 router.use('/', require('./login'));
 router.use('/', require('./users'));
