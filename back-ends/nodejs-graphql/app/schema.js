@@ -21,17 +21,8 @@ let queryType = new GraphQLObjectType({
 });
 
 
-let mutationType = new GraphQLObjectType({
-  name: 'Mutation',
-  fields: () => ({
-   // Mutation fields go here, with no fields here 'npm run update-schema' will fail
-  }),
-});
-
-
 let schema = new GraphQLSchema({
   query: queryType,
-  mutation: mutationType,
 });
 
 module.exports = schema;
