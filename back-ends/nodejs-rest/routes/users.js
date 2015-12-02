@@ -26,7 +26,9 @@ router.post('/sign-up', (req, res) => {
     });
   });
 
-  res.json({message: 'This user has successfully been created!'});
+  res.json({
+    message: 'This user has successfully been created!',
+  });
 });
 
 /**
