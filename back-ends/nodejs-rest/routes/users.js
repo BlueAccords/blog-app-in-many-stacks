@@ -30,6 +30,16 @@ router.post('/sign-up', (req, res) => {
 });
 
 /**
+* LIST all the users in the DB (DONE)
+*/
+router.get('/user', (req, res) => {
+  User.find((err, users) => {
+    if (users === null) {res.json({message: 'No users exist YET.'});}
+    else {res.json(users);}
+  });
+});
+
+/**
 * READ an individual users infromation (DONE)
 */
 router.get('/user/:username', (req, res) => {
