@@ -8,6 +8,7 @@ router.use((req, res, next) => {
   next();
 });
 router.use('/', require('./login'));
-router.use('/', require('./users'));
+router.use('/sign-up', require('./sign-up'));
+router.use('/user', require('./users'));
 
 module.exports = router;

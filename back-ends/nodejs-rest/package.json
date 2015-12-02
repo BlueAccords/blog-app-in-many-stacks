@@ -33,6 +33,7 @@
     "cookie-parser": "^1.4.0",
     "eslint": "^1.10.2",
     "express": "^4.13.3",
+    "jsonwebtoken": "^5.4.1",
     "mongoose": "^4.2.7"
   },
   "devDependencies": {
