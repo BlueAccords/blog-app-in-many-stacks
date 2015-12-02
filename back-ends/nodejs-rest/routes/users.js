@@ -30,7 +30,7 @@ router.post('/sign-up', (req, res) => {
 });
 
 /**
-* LIST all the users in the DB (DONE)
+* LIST all the Users in the DB (DONE)
 */
 router.get('/user', (req, res) => {
   User.find((err, users) => {
@@ -40,7 +40,7 @@ router.get('/user', (req, res) => {
 });
 
 /**
-* READ an individual users infromation (DONE)
+* READ an individual User's infromation (DONE)
 */
 router.get('/user/:username', (req, res) => {
   User.findOne({username: req.params.username}, (err, user) => {
