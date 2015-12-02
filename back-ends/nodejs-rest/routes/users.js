@@ -1,9 +1,9 @@
 'use strict';
 
-let express = require('express');
+import express from 'express';
+import bcrypt from 'bcrypt';
+import User from './../models/User';
 let router = express.Router();
-let bcrypt = require('bcrypt');
-let User = require('./../models/User');
 
 /**
 * New User form (DONE)
@@ -26,7 +26,7 @@ router.post('/sign-up', (req, res) => {
     });
   });
 
-  res.send('Your user has been created!');
+  res.json({message: 'This user has successfully been created!'});
 });
 
 /**
@@ -34,7 +34,7 @@ router.post('/sign-up', (req, res) => {
 */
 router.get('/user/:username', (req, res) => {
   User.findOne({username: req.params.username}, (err, user) => {
-    if (user === null) {res.send('no user found');}
+    if (user === null) {res.json({message: 'This user does not exist.'});}
     else {res.json(user);}
   });
 });
@@ -42,9 +42,9 @@ router.get('/user/:username', (req, res) => {
 /**
 * UPDATE an individual User (DONE)
 */
-router.put('/user/:username/edit', (req, res) => {
+router.put('/user/:username', (req, res) => {
   User.findOne({username: req.params.username}, (err, user) => {
-    if (user === null) {res.send('no user found');}
+    if (user === null) {res.json({message: 'This user does not exist.'});}
 
     user.firstName = req.body.firstName;
     user.lastName = req.body.lastName;
@@ -54,7 +54,7 @@ router.put('/user/:username/edit', (req, res) => {
 
     user.save((err) => {
       if (err) {return err;}
-      res.send('User has been updated');
+      res.json({message: 'This user has successfully been updated!'});
     });
   });
 });
@@ -62,12 +62,12 @@ router.put('/user/:username/edit', (req, res) => {
 /**
 * DELETE an individual User (DONE)
 */
-router.delete('/user/:username/edit', (req, res) => {
+router.delete('/user/:username', (req, res) => {
   User.findOne({username: req.params.username}, (err, user) => {
-    if (user === null) {res.send('no user found');}
+    if (user === null) {res.json({message: 'This user does not exist.'});}
 
     user.remove();
-    res.send('User has been removed');
+    res.json({message: 'This user has successfully been deleted!'});
   });
 });
 
