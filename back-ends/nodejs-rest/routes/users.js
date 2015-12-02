@@ -6,35 +6,9 @@ import User from './../models/User';
 let router = express.Router();
 
 /**
-* New User form (DONE)
+* LIST (GET request) all the Users in the DB.
 */
-router.get('/sign-up', (req, res) => {
-  res.sendFile('sign-up.html', {root: 'public'});
-});
-
-/**
-* CREATE the individual User via post request (DONE)
-*/
-router.post('/sign-up', (req, res) => {
-  bcrypt.hash(req.body.password, 8, (err, hash) => {
-    User.create({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      username: req.body.username,
-      password: hash,
-    });
-  });
-
-  res.json({
-    message: 'This user has successfully been created!',
-  });
-});
-
-/**
-* LIST all the Users in the DB (DONE)
-*/
-router.get('/user', (req, res) => {
+router.get('/', (req, res) => {
   User.find((err, users) => {
     if (users === null) {
       res.json({
@@ -47,9 +21,9 @@ router.get('/user', (req, res) => {
 });
 
 /**
-* READ an individual User's infromation (DONE)
+* READ (GET request) an individual User's infromation.
 */
-router.get('/user/:username', (req, res) => {
+router.get('/:username', (req, res) => {
   User.findOne({
     username: req.params.username,
   }, (err, user) => {
@@ -64,9 +38,9 @@ router.get('/user/:username', (req, res) => {
 });
 
 /**
-* UPDATE an individual User (DONE)
+* UPDATE an individual User via PUT request.
 */
-router.put('/user/:username', (req, res) => {
+router.put('/:username', (req, res) => {
   User.findOne({
     username: req.params.username,
   }, (err, user) => {
@@ -95,9 +69,9 @@ router.put('/user/:username', (req, res) => {
 });
 
 /**
-* DELETE an individual User (DONE)
+* DELETE (via DELETE request) an individual User.
 */
-router.delete('/user/:username', (req, res) => {
+router.delete('/:username', (req, res) => {
   User.findOne({
     username: req.params.username,
   }, (err, user) => {

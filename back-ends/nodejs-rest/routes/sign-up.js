@@ -6,14 +6,14 @@ import User from './../models/User';
 let router = express.Router();
 
 /**
-* New User form (DONE)
+* NEW User form. Simple GUI for tests.
 */
 router.get('/', (req, res) => {
   res.sendFile('sign-up.html', {root: 'public'});
 });
 
 /**
-* CREATE the individual User via post request (DONE)
+* CREATE the individual User via POST request
 */
 router.post('/', (req, res) => {
   bcrypt.hash(req.body.password, 8, (err, hash) => {
@@ -30,3 +30,5 @@ router.post('/', (req, res) => {
     message: 'This user has successfully been created!',
   });
 });
+
+module.exports = router;

@@ -5,27 +5,37 @@ import bcrypt from 'bcrypt';
 import User from './../models/User';
 let router = express.Router();
 
+/**
+* Arrive at home page. This will prompt the user to log in.
+*/
 router.get('/', (req, res) => {
   res.sendFile('login.html', {root: 'public'});
 });
 
+/**
+* A post request on the home page will set user authentication in motion.
+*/
 router.post('/', (req, res) => {
+  // look for the user (based on username) in the DB
   User.findOne({
     username: req.body.username,
   }, (err, user) => {
     if (user === null) {
+      // user does not exist.
       res.json({
-        message: 'Please enter a valid username',
+        message: 'Please enter a valid username. Or create a new user.',
       });
     } else {
       // compare the attempted pw to the pw stored for the user
       if (bcrypt.compareSync(req.body.password, user.password)) {
+        // User exists and the password is correct.
         res.json({
           message: 'You are now logged in!',
         });
       } else {
+        // User exists and the password is incorrect.
         res.json({
-          message: 'Invalid password, please try again.',
+          message: 'Invalid password, double check and try again!',
         });
       }
     }
