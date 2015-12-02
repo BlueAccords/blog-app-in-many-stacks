@@ -10,13 +10,23 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  User.findOne({username: req.body.username}, (err, user) => {
-    if (user === null) { res.send('Enter a valid username'); }
-    else {
+  User.findOne({
+    username: req.body.username,
+  }, (err, user) => {
+    if (user === null) {
+      res.json({
+        message: 'Please enter a valid username',
+      });
+    } else {
+      // compare the attempted pw to the pw stored for the user
       if (bcrypt.compareSync(req.body.password, user.password)) {
-        res.send('Now logged in');
+        res.json({
+          message: 'You are now logged in!',
+        });
       } else {
-        res.send('Invalid password');
+        res.json({
+          message: 'Invalid password, please try again.',
+        });
       }
     }
   });

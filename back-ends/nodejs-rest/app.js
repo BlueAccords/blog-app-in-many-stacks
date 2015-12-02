@@ -10,7 +10,7 @@ let routes = require('./routes/index');
 let app = express();
 
 let db = mongoose.connection;
-mongoose.connect('mongodb://localhost/blog_test');
+mongoose.connect();
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {console.log('DB is working properly');});
 

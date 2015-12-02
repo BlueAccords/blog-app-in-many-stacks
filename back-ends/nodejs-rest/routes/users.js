@@ -34,8 +34,13 @@ router.post('/sign-up', (req, res) => {
 */
 router.get('/user', (req, res) => {
   User.find((err, users) => {
-    if (users === null) {res.json({message: 'No users exist YET.'});}
-    else {res.json(users);}
+    if (users === null) {
+      res.json({
+        message: 'No users exist YET.',
+      });
+    } else {
+      res.json(users);
+    }
   });
 });
 
@@ -43,9 +48,16 @@ router.get('/user', (req, res) => {
 * READ an individual User's infromation (DONE)
 */
 router.get('/user/:username', (req, res) => {
-  User.findOne({username: req.params.username}, (err, user) => {
-    if (user === null) {res.json({message: 'This user does not exist.'});}
-    else {res.json(user);}
+  User.findOne({
+    username: req.params.username,
+  }, (err, user) => {
+    if (user === null) {
+      res.json({
+        message: 'This user does not exist.',
+      });
+    } else {
+      res.json(user);
+    }
   });
 });
 
@@ -53,8 +65,14 @@ router.get('/user/:username', (req, res) => {
 * UPDATE an individual User (DONE)
 */
 router.put('/user/:username', (req, res) => {
-  User.findOne({username: req.params.username}, (err, user) => {
-    if (user === null) {res.json({message: 'This user does not exist.'});}
+  User.findOne({
+    username: req.params.username,
+  }, (err, user) => {
+    if (user === null) {
+      res.json({
+        message: 'This user does not exist.',
+      });
+    }
 
     user.firstName = req.body.firstName;
     user.lastName = req.body.lastName;
@@ -63,8 +81,13 @@ router.put('/user/:username', (req, res) => {
     user.password = bcrypt.hashSync(req.body.password, 8);
 
     user.save((err) => {
-      if (err) {return err;}
-      res.json({message: 'This user has successfully been updated!'});
+      if (err) {
+        return err;
+      }
+
+      res.json({
+        message: 'This user has successfully been updated!',
+      });
     });
   });
 });
@@ -73,11 +96,19 @@ router.put('/user/:username', (req, res) => {
 * DELETE an individual User (DONE)
 */
 router.delete('/user/:username', (req, res) => {
-  User.findOne({username: req.params.username}, (err, user) => {
-    if (user === null) {res.json({message: 'This user does not exist.'});}
+  User.findOne({
+    username: req.params.username,
+  }, (err, user) => {
+    if (user === null) {
+      res.json({
+        message: 'This user does not exist.',
+      });
+    }
 
     user.remove();
-    res.json({message: 'This user has successfully been deleted!'});
+    res.json({
+      message: 'This user has successfully been deleted!',
+    });
   });
 });
 
