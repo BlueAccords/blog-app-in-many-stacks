@@ -1,0 +1,47 @@
+{
+  "name": "mailSultanApiNode",
+  "private": true,
+  "version": "0.0.0",
+  "description": "The node api for Mail Sultan",
+  "keywords": [],
+  "dependencies": {
+    "babel": "^5.8.29",
+    "babel-core": "^6.1.2",
+    "babel-preset-es2015": "^6.1.18",
+    "bcrypt": "^0.8.5",
+    "body-parser": "^1.14.1",
+    "cors": "^2.7.1",
+    "dotenv": "^1.2.0",
+    "es6-promise": "^3.0.2",
+    "express": "^4.13.3",
+    "express-graphql": "^0.4.0",
+    "graphql": "^0.4.12",
+    "graphql-relay": "^0.3.4",
+    "jsonwebtoken": "^5.4.0",
+    "lodash": "^3.10.1",
+    "mongoose": "^4.2.2",
+    "morgan": "^1.6.1",
+    "passport": "^0.3.0",
+    "passport-jwt": "^1.2.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^3.1.9",
+    "babel-preset-es2015": "^6.1.18",
+    "colors": "^1.1.2",
+    "eslint": "^1.7.2",
+    "nodemon": "^1.8.0"
+  },
+  "scripts": {
+    "start": "nodemon app.js",
+    "update-schema": "babel-node ./scripts/update-schema.js",
+    "seed": "NODE_ENV=development babel-node ./scripts/seed.js"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://bitbucket.org/chiedolabs/mail-sultan-api-node.git"
+  },
+  "author": "chiedo",
+  "license": ""
+}
