@@ -37,7 +37,7 @@
     "start": "nodemon app.js",
     "update-schema": "babel-node ./scripts/update-schema.js",
     "seed": "NODE_ENV=development node ./scripts/seed.js",
-    "lint": "eslint app"
+    "lint": "eslint ./"
   },
   "main": "app.js",
   "repository": {

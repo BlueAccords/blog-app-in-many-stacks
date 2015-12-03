@@ -19,8 +19,8 @@ if(process.env.NODE_ENV === 'development') {
 
   // User seeds
   User.remove({})
-  .then(function(){
-    bcrypt.hash('testtest', 8, function(err, hash) {
+  .then(() => {
+    bcrypt.hash('testtest', 8, (err, hash) => {
       let user = new User({
         _id: '5634d4760066be016bf10c9a',
         name: 'Bruce Wayne',
@@ -31,8 +31,8 @@ if(process.env.NODE_ENV === 'development') {
       return user.save();
     });
   })
-  .then(function(){
-    bcrypt.hash('testtest', 8, function(err, hash) {
+  .then(() => {
+    bcrypt.hash('testtest', 8, (err, hash) => {
       let user = new User({
         _id: '5634d4750066be016bf10c9a',
         name: 'Kyle Townsbeginning',
@@ -43,8 +43,8 @@ if(process.env.NODE_ENV === 'development') {
       return user.save();
     });
   })
-  .then(function(){
-    bcrypt.hash('testtest', 8, function(err, hash) {
+  .then(() => {
+    bcrypt.hash('testtest', 8, (err, hash) => {
       let user = new User({
         _id: '5634d4750066be016bf10c9r',
         name: 'King Bobby',
@@ -61,7 +61,7 @@ if(process.env.NODE_ENV === 'development') {
   .then(() => {
     let post = new Post({
       _id: '5634d4760066be016bf10c9r',
-      title: 'How to boil an egg', 
+      title: 'How to boil an egg',
       body: 'Step 1: heat up water, step 2: put the eggs in the water, step 3: boil for 10 minutes, step 4: run cold water over them',
       _author: '5634d4760066be016bf10c9a', // bruce wayne
     });
@@ -70,7 +70,7 @@ if(process.env.NODE_ENV === 'development') {
   .then(() => {
     let post = new Post({
       _id: '5634d4760066be016bf10a8r',
-      title: 'How to play basketball', 
+      title: 'How to play basketball',
       body: 'Step 1: Dribble, step 2: Pass, step 3: Shoot, step 4: Score!',
       _author: '5634d4750066be016bf10c9a', // kyle@begin.com
     });
@@ -81,7 +81,7 @@ if(process.env.NODE_ENV === 'development') {
       _id: '5624d4760066be016bf10a8r',
       title: 'How to fix a clogged drain',
       body: 'Step 1: Buy some draino, step 2: pour it down the drain, step 3: Voila!',
-      _author: '5634d4750066be016bf10c9r' // King bobby
+      _author: '5634d4750066be016bf10c9r', // King bobby
     });
     return post.save();
   })
@@ -90,30 +90,30 @@ if(process.env.NODE_ENV === 'development') {
   .then(() => Comment.remove({}))
   .then(() => {
     let comment = new Comment({
-      _id: '5634d4760066be016bf10c9e', 
+      _id: '5634d4760066be016bf10c9e',
       _post : '5634d4760066be016bf10c9r', // how to boil an egg => author: Bruce Wayne
       _author : '5634d4750066be016bf10c9a', // commenter: kyle@begin.com
-      text: 'Thanks Bruce for the post, very helpful!'
+      text: 'Thanks Bruce for the post, very helpful!',
     });
     return comment.save();
   })
 
   .then(() => {
     let comment = new Comment({
-      _id: '5634d4760067be016bf10c9e', 
+      _id: '5634d4760067be016bf10c9e',
       _post : '5634d4760066be016bf10a8r', // how to play basketball => author: Kyle@begin.com
       _author : '5634d4760066be016bf10c9a', // commenter: bruce wayne
-      text: 'Thanks Kyle for the great post, I will now master the court like Dwayne Wade'
+      text: 'Thanks Kyle for the great post, I will now master the court like Dwayne Wade',
     });
     return comment.save();
   })
 
   .then(() => {
     let comment = new Comment({
-      _id: '5634d4760067be016bf19c9e', 
+      _id: '5634d4760067be016bf19c9e',
       _post : '5624d4760066be016bf10a8r', // how to fix a clogged drain => author: King Bobby
       _author : '5634d4760066be016bf10c9a', // commenter: bruce wayne
-      text: 'Thanks King Bobby, my drain is now flowing like the river Nile'
+      text: 'Thanks King Bobby, my drain is now flowing like the river Nile',
     });
     return comment.save();
   })
@@ -123,26 +123,26 @@ if(process.env.NODE_ENV === 'development') {
   .then(() => {
     let tag = new Tag({
       _post: '5634d4760066be016bf10c9r', // how to boil an egg
-      text: 'cooking-skills'
+      text: 'cooking-skills',
     });
     return tag.save();
   })
   .then(() => {
     let tag = new Tag({
       _post: '5634d4760066be016bf10a8r', // how to play basketball
-      text: 'outdoor-skills'
+      text: 'outdoor-skills',
     });
     return tag.save();
   })
   .then(() => {
     let tag = new Tag({
       _post: '5624d4760066be016bf10a8r', // how to unclog a drain
-      text: 'plumbing-skills'
+      text: 'plumbing-skills',
     });
     return tag.save();
   })
 
-  .then(function(){
+  .then(() => {
     console.log('Consider the seeds planted!');
     process.exit();
   });
