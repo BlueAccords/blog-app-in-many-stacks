@@ -9,6 +9,7 @@ module.exports = function(req, res, next) {
   // check header or url parameters or post parameters for token
   try {
     token = req.query.token || req.headers['authorization'].split(' ')[1];
+
   } catch(err) {
     token = null;
   }

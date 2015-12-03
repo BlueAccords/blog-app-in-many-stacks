@@ -21,11 +21,14 @@ router.post('/user', user.create);
  * the jwtMiddleware line
  */
 router.use(jwtMiddleware);
+
+router.get('/admin', root.admin);
 router.post('/graphql', graphqlHTTP((req) => ({
   schema,
   rootValue: {user: req.user},
   graphql: true,
 })));
+
 
 
 module.exports = router;
