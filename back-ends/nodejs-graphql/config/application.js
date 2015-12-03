@@ -15,7 +15,7 @@ let general = {
     port: process.env.DB_PORT || 27017,
     user: process.env.DB_USER || '',
     password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || 'mail_sultan_api_node',
+    database: process.env.DB_NAME || 'blog_app',
   },
 };
 
