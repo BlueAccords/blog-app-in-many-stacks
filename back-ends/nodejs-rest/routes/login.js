@@ -9,13 +9,6 @@ import helper from './helper';
 let router = express.Router();
 
 /**
-* Arrive at home page. This will prompt the user to log in.
-*/
-router.get('/', (req, res) => {
-  res.sendFile('login.html', {root: 'public'});
-});
-
-/**
 * A post request on the home page will set user authentication in motion.
 */
 router.post('/', (req, res) => {
@@ -26,7 +19,7 @@ router.post('/', (req, res) => {
         // compare the attempted pw to the pw stored for the user
       if (bcrypt.compareSync(req.body.password, user.password)) {
           //Create a new token, passing in the user IF pw is correct
-        let token = jwt.sign(user.username, config.secret, {
+        let token = jwt.sign(user, config.secret, {
           expiresIn: 1440 * 60,
         });
 
