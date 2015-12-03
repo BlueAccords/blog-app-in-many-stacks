@@ -1,4 +1,6 @@
 'use strict';
+//Allow the use of more es6 features within the node project, such as es6 imports, etc.
+require('babel/register');
 /*
  * Only to be used in development
  */
