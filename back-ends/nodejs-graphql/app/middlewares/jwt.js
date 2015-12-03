@@ -15,7 +15,7 @@ module.exports = function(req, res, next) {
   }
   // decode token
   // verifies secret and checks exp
-  jwt.verify(token, config.jwt.secret, function(err, decoded) {
+  jwt.verify(token, config.jwt.secret, (err, decoded) => {
     if('graphql' === url.parse(req.url).pathname.replace('/','')) {
       // We want the graphql endpoint to still be accessed but just with no data.
       req.user = decoded;

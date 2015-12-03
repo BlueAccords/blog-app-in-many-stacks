@@ -1,3 +1,5 @@
+import Post from '../models/Post';
+import postConnectionDefinitions from '../connection-definitions/post-connection-definitions';
 
 import {
   GraphQLObjectType,
@@ -25,6 +27,19 @@ let userType = new GraphQLObjectType({
     name: {
       type: GraphQLString,
       resolve: (user) => user.name,
+    },
+    posts: {
+      type: postConnectionDefinitions.postConnection,
+      args: connectionArgs,
+      description: 'The posts',
+      resolve: function(user, args) {
+        if (user) {
+          return Post.find({'_author': user._id})
+          .then((posts) => connectionFromArray(posts, args));
+        } else {
+          return [];
+        }
+      },
     },
   },
 });

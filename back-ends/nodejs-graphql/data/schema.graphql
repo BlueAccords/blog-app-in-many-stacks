@@ -2,6 +2,30 @@ interface Node {
   id: ID!
 }
 
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Post implements Node {
+  id: ID!
+  title: String
+  body: String
+  author: String
+}
+
+type PostConnection {
+  pageInfo: PageInfo!
+  edges: [PostEdge]
+}
+
+type PostEdge {
+  node: Post
+  cursor: String!
+}
+
 type Query {
   node(id: ID!): Node
   viewer: User
@@ -11,4 +35,5 @@ type User implements Node {
   id: ID!
   email: String
   name: String
+  posts(after: String, first: Int, before: String, last: Int): PostConnection
 }
