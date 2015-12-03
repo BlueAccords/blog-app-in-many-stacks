@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt';
 import User from './../models/User';
 import jwt from 'jsonwebtoken';
 import config from './../config';
+import helper from './helper';
 let router = express.Router();
 
 /**
@@ -19,33 +20,21 @@ router.get('/', (req, res) => {
 */
 router.post('/', (req, res) => {
   // look for the user (based on username) in the DB
-  User.findOne({
-    username: req.body.username,
-  }, (err, user) => {
-    if (user === null) {
-      // user does not exist.
-      res.json({
-        message: 'Please enter a valid username. Or create a new user.',
-      });
-    } else {
-      // compare the attempted pw to the pw stored for the user
+  User.findOne({ username: req.body.username }, (err, user) => {
+    if (user === null) { helper.noUserFound(res); } // user does not exist.
+    else {
+        // compare the attempted pw to the pw stored for the user
       if (bcrypt.compareSync(req.body.password, user.password)) {
-        //User exists and the password is correct.
-        //Create a new token, passing in the user
-        let token = jwt.sign(user, config.secret, {
+          //Create a new token, passing in the user IF pw is correct
+        let token = jwt.sign(user.username, config.secret, {
           expiresIn: 1440 * 60,
         });
 
         res.json({
           message: 'A token has been passed. You are now logged in!',
-          token: token,
-        });
-      } else {
-        // User exists but the password is incorrect.
-        res.json({
-          message: 'Invalid password, double check and try again!',
-        });
-      }
+          token,
+        }); // v- User exists but pw is incorrect. -v
+      } else { helper.permissionDenied(res); }
     }
   });
 });

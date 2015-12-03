@@ -3,6 +3,7 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import User from './../models/User';
+import helper from './helper';
 let router = express.Router();
 
 /**
@@ -26,9 +27,7 @@ router.post('/', (req, res) => {
     });
   });
 
-  res.json({
-    message: 'This user has successfully been created!',
-  });
+  helper.success(res);
 });
 
 module.exports = router;
