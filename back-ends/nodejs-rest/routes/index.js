@@ -7,7 +7,9 @@ router.use((req, res, next) => {
   console.log('New action...');
   next();
 });
-router.use('/', require('./login'));
-router.use('/', require('./users'));
+
+router.use('/', require('./login')); // Public route: anyone can req.
+router.use('/sign-up', require('./sign-up')); // Public route: anyone can req.
+router.use('/user', require('./users')); // Private route: req will need token.
 
 module.exports = router;

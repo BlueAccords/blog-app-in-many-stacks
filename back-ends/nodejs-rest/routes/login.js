@@ -3,31 +3,38 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import User from './../models/User';
+import jwt from 'jsonwebtoken';
+import config from './../config';
+import helper from './helper';
 let router = express.Router();
 
+/**
+* Arrive at home page. This will prompt the user to log in.
+*/
 router.get('/', (req, res) => {
   res.sendFile('login.html', {root: 'public'});
 });
 
+/**
+* A post request on the home page will set user authentication in motion.
+*/
 router.post('/', (req, res) => {
-  User.findOne({
-    username: req.body.username,
-  }, (err, user) => {
-    if (user === null) {
-      res.json({
-        message: 'Please enter a valid username',
-      });
-    } else {
-      // compare the attempted pw to the pw stored for the user
+  // look for the user (based on username) in the DB
+  User.findOne({ username: req.body.username }, (err, user) => {
+    if (user === null) { helper.noUserFound(res); } // user does not exist.
+    else {
+        // compare the attempted pw to the pw stored for the user
       if (bcrypt.compareSync(req.body.password, user.password)) {
-        res.json({
-          message: 'You are now logged in!',
+          //Create a new token, passing in the user IF pw is correct
+        let token = jwt.sign(user.username, config.secret, {
+          expiresIn: 1440 * 60,
         });
-      } else {
+
         res.json({
-          message: 'Invalid password, please try again.',
-        });
-      }
+          message: 'A token has been passed. You are now logged in!',
+          token,
+        }); // v- User exists but pw is incorrect. -v
+      } else { helper.permissionDenied(res); }
     }
   });
 });
