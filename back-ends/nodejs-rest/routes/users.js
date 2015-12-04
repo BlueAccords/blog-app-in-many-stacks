@@ -48,7 +48,7 @@ router.get('/', (req, res) => {
 * READ (GET request) an individual User's infromation.
 */
 router.get('/:username', (req, res) => {
-  User.findOne({ username: req.params.username },
+  User.findOne({ username: req.params.username.toLowerCase() },
     (err, user) => {
       if (user === null) { helper.noUserFound(res); }
       else { res.json(user); }
@@ -59,15 +59,15 @@ router.get('/:username', (req, res) => {
 * UPDATE an individual User via PUT request. (If the user is making the req)
 */
 router.put('/:username', (req, res) => {
-  if (req.decoded.username === req.params.username) {
-    User.findOne({ username: req.params.username, },
+  if (req.decoded.username === req.params.username.toLowerCase()) {
+    User.findOne({ username: req.params.username.toLowerCase() },
       (err, user) => {
         if (user === null) { helper.noUserFound(res); }
         else {
           user.fName = req.body.fName;
           user.lName = req.body.lName;
           user.email = req.body.email;
-          user.username = req.body.username;
+          user.username = req.body.username.toLowerCase();
           user.password = bcrypt.hashSync(req.body.password, 8);
 
           user.save((err) => {
@@ -85,8 +85,8 @@ router.put('/:username', (req, res) => {
 */
 router.delete('/:username', (req, res) => {
   // view router.put. Same concept, but for deleting users.
-  if (req.decoded.username === req.params.username) {
-    User.findOne({ username: req.params.username },
+  if (req.decoded.username === req.params.username.toLowerCase()) {
+    User.findOne({ username: req.params.username.toLowerCase() },
       (err, user) => {
         if (user === null) { helper.noUserFound(res); }
         else {
@@ -101,7 +101,7 @@ router.delete('/:username', (req, res) => {
 * get a list of posts for a specific user
 */
 router.get('/:username/posts', (req, res) => {
-  Post.find({ user: req.params.username }, (err, posts) => {
+  Post.find({ user: req.params.username.toLowerCase() }, (err, posts) => {
     res.json(posts);
   });
 });
@@ -110,14 +110,14 @@ router.get('/:username/posts', (req, res) => {
 * create a new post (if you are the user)
 */
 router.post('/:username/posts', (req, res) => {
-  if (req.decoded.username === req.params.username) {
+  if (req.decoded.username === req.params.username.toLowerCase()) {
     let tagArr = req.body.tags.split(', ');
 
     // the post
     let newPost = new Post({
       title: req.body.title.toLowerCase(),
       body: req.body.body,
-      user: req.params.username,
+      user: req.params.username.toLowerCase(),
       tags: tagArr,
     });
     newPost.save();
@@ -139,11 +139,11 @@ router.post('/:username/posts', (req, res) => {
 */
 router.get('/:username/posts/:postname', (req, res) => {
   // spaces in a posts title are seperated by a - in the route
-    var urlTitle = req.params.postname.split('-');
-    var fixedTitle = urlTitle.join(' ');
+    let urlTitle = req.params.postname.split('-');
+    let fixedTitle = urlTitle.join(' ');
 
     Post.findOne({ title: fixedTitle,
-      user: req.params.username,
+      user: req.params.username.toLowerCase(),
     }, (err, post) => {
       res.json(post);
     });
@@ -154,33 +154,38 @@ router.get('/:username/posts/:postname', (req, res) => {
 */
 router.put('/:username/posts/:postname', (req, res) => {
     // spaces in a posts title are seperated by a - in the route
-    var urlTitle = req.params.postname.split('-');
-    var fixedTitle = urlTitle.join(' ');
+    let urlTitle = req.params.postname.split('-');
+    let fixedTitle = urlTitle.join(' ');
+    let tagArr = req.body.tags.split(', ');
 
-    if (req.decoded.user === req.params.username) {
+    if (req.decoded.username === req.params.username.toLowerCase()) {
       Post.findOne({ title: fixedTitle,
-        user: req.params.username,
+        user: req.params.username.toLowerCase(),
       }, (err, post) => {
-        let tagArr = req.body.tags.split(', ');
-
         // to lowercase for consistent search
         post.title = req.body.title.toLowerCase();
         post.body = req.body.body;
-        post.user = req.params.username;
+        post.user = req.params.username.toLowerCase();
         post.tags = tagArr;
 
+        post.save();
+
+        helper.success(res);
       });
     } else { helper.permissionDenied(res); }
 });
 
 // delete a post (if you're the user)
 router.delete('/:username/posts/:postname', (req, res) => {
-  if (req.decoded.user === req.params.username) {
-    Post.findOne({ title: req.params.postname }, (err, post) => {
+  let urlTitle = req.params.postname.split('-');
+  let fixedTitle = urlTitle.join(' ');
+
+  if (req.decoded.username === req.params.username.toLowerCase()) {
+    Post.findOne({ title: fixedTitle }, (err, post) => {
       if (err) { res.send(err) }
       else {
         post.remove();
-        helper.permissionDenied(res);
+        helper.success(res);
       }
     });
   } else { helper.permissionDenied(res); }

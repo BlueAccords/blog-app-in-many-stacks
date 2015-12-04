@@ -4,6 +4,11 @@ module.exports = {
       message: 'Successful request.',
     });
   },
+  userExists: (res) => {
+    return res.json({
+      message: 'Error: That user already exits.',
+    });
+  },
   noUserFound: (res) => {
     return res.json({
       message: 'User(s) not found',

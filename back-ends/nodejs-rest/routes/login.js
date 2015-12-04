@@ -13,7 +13,7 @@ let router = express.Router();
 */
 router.post('/', (req, res) => {
   // look for the user (based on username) in the DB
-  User.findOne({ username: req.body.username }, (err, user) => {
+  User.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {
     if (user === null) { helper.noUserFound(res); } // user does not exist.
     else {
         // compare the attempted pw to the pw stored for the user

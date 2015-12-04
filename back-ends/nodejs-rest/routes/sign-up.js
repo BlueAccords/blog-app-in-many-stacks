@@ -10,17 +10,23 @@ let router = express.Router();
 * CREATE the individual User via POST request
 */
 router.post('/', (req, res) => {
-  bcrypt.hash(req.body.password, 8, (err, hash) => {
-    User.create({
-      fName: req.body.fName,
-      lName: req.body.lName,
-      email: req.body.email,
-      username: req.body.username,
-      password: hash,
-    });
+  // check to see if user already exists
+  User.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {
+    if (!user) {
+      bcrypt.hash(req.body.password, 8, (err, hash) => {
+        User.create({
+          fName: req.body.fName,
+          lName: req.body.lName,
+          email: req.body.email.toLowerCase(),
+          username: req.body.username.toLowerCase(),
+          password: hash,
+        });
+      });
+
+      helper.success(res);
+    } else { helper.userExists(res); }
   });
 
-  helper.success(res);
 });
 
 module.exports = router;
