@@ -1,0 +1,556 @@
+{
+	"id": "5031f6ad-6265-2943-27dc-53e2e2136d3d",
+	"name": "nodejs-rest",
+	"description": "",
+	"order": [
+		"9f128262-fddf-33b0-9b78-abc8aab50708",
+		"f588c186-0f20-74fe-bd4d-854555bad696",
+		"1f124e46-cea0-9e48-ebc8-2b7b91b8f906",
+		"f91cd67b-0f62-a31e-4f1f-a6322b404339",
+		"20d18111-2455-fe08-616e-37277790cf0c",
+		"b300fcbb-eb98-10d7-4733-8e8c9bbe06db",
+		"7b7be98a-3744-9778-f4c4-ede38ce009b2",
+		"0af4a1a9-afa1-a9a7-c013-e8d6c4cb5148",
+		"5cdc29e1-9e3a-e471-3a15-f1dff7cc8432",
+		"70b0b836-0a34-cd06-bf62-4083bef1034d",
+		"ab6569a4-6b9f-d562-99b7-5156a13e5304",
+		"39393f2b-f638-2d70-69dd-f776b5d316be",
+		"8b173eba-f630-f9e1-2868-116fe2d05a2b",
+		"7aad4356-94b4-2fde-6e4d-80410046655d",
+		"2400aa14-967f-935c-a2ef-853cd49be141",
+		"92606af0-bb65-40d1-335c-4b5dde17cc9d",
+		"41608f72-e0f8-a206-8078-30236462fb5a",
+		"5e4b17f8-3681-b806-c592-035ccfe36676",
+		"c95a40b1-6973-d336-a236-b14ff6920f83"
+	],
+	"folders": [],
+	"timestamp": 1449255627034,
+	"owner": "177465",
+	"remoteLink": "https://www.getpostman.com/collections/baa2b45aa88c6bb8f25a",
+	"public": false,
+	"requests": [
+		{
+			"id": "0af4a1a9-afa1-a9a7-c013-e8d6c4cb5148",
+			"url": "http://localhost:3000/user/realfinAl/posts",
+			"method": "POST",
+			"headers": "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"data": [
+				{
+					"key": "title",
+					"value": "test post man",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "body",
+					"value": "this is the body of the post",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "tags",
+					"value": "this, is, where, tags, go",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "http://localhost:3000/user/realfinAl/posts",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "5031f6ad-6265-2943-27dc-53e2e2136d3d"
+		},
+		{
+			"id": "1f124e46-cea0-9e48-ebc8-2b7b91b8f906",
+			"url": "http://localhost:3000/",
+			"method": "POST",
+			"headers": "",
+			"data": [
+				{
+					"key": "fName",
+					"value": "RealFinal",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "lName",
+					"value": "Test",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "realfinaltest@gmail.com",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "username",
+					"value": "realfINaL",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "pw",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "http://localhost:3000/",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "5031f6ad-6265-2943-27dc-53e2e2136d3d"
+		},
+		{
+			"id": "20d18111-2455-fe08-616e-37277790cf0c",
+			"url": "http://localhost:3000/user/roselpadilla",
+			"method": "PUT",
+			"headers": "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"data": [
+				{
+					"key": "fName",
+					"value": "RealFinal",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "lName",
+					"value": "Test",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "realfinaltest@gmail.com",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "username",
+					"value": "realfINaL",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "pw",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "http://localhost:3000/user/roselpadilla",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "5031f6ad-6265-2943-27dc-53e2e2136d3d"
+		},
+		{
+			"id": "2400aa14-967f-935c-a2ef-853cd49be141",
+			"url": "http://localhost:3000/user/realfinAl/posts/test-post-man-update",
+			"method": "DELETE",
+			"headers": "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "http://localhost:3000/user/realfinAl/posts/test-post-man-update",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "5031f6ad-6265-2943-27dc-53e2e2136d3d"
+		},
+		{
+			"id": "39393f2b-f638-2d70-69dd-f776b5d316be",
+			"url": "http://localhost:3000/user/realfinAl/posts/test-post-man-update",
+			"method": "GET",
+			"headers": "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "http://localhost:3000/user/realfinAl/posts/test-post-man-update",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "5031f6ad-6265-2943-27dc-53e2e2136d3d"
+		},
+		{
+			"id": "41608f72-e0f8-a206-8078-30236462fb5a",
+			"url": "http://localhost:3000/tags/the",
+			"method": "GET",
+			"headers": "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "http://localhost:3000/tags/the",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "5031f6ad-6265-2943-27dc-53e2e2136d3d"
+		},
+		{
+			"id": "5cdc29e1-9e3a-e471-3a15-f1dff7cc8432",
+			"url": "http://localhost:3000/user/realfinAl/posts",
+			"method": "GET",
+			"headers": "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "http://localhost:3000/user/realfinAl/posts",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "5031f6ad-6265-2943-27dc-53e2e2136d3d"
+		},
+		{
+			"id": "5e4b17f8-3681-b806-c592-035ccfe36676",
+			"url": "http://localhost:3000/tags/etc",
+			"method": "GET",
+			"headers": "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "http://localhost:3000/tags/etc",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "5031f6ad-6265-2943-27dc-53e2e2136d3d"
+		},
+		{
+			"id": "70b0b836-0a34-cd06-bf62-4083bef1034d",
+			"url": "http://localhost:3000/user/realfinAl/posts/test-post-man",
+			"method": "PUT",
+			"headers": "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"data": [
+				{
+					"key": "title",
+					"value": "test post man update",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "body",
+					"value": "this is the body of the post",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "tags",
+					"value": "this, is, where, tags, go",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "http://localhost:3000/user/realfinAl/posts/test-post-man",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "5031f6ad-6265-2943-27dc-53e2e2136d3d"
+		},
+		{
+			"id": "7aad4356-94b4-2fde-6e4d-80410046655d",
+			"url": "http://localhost:3000/user/realfinAl/posts/test-post-man-update/comments",
+			"method": "GET",
+			"headers": "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "http://localhost:3000/user/realfinAl/posts/test-post-man-update/comments",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "5031f6ad-6265-2943-27dc-53e2e2136d3d"
+		},
+		{
+			"id": "7b7be98a-3744-9778-f4c4-ede38ce009b2",
+			"url": "http://localhost:3000/user/",
+			"method": "GET",
+			"headers": "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "http://localhost:3000/user/",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "5031f6ad-6265-2943-27dc-53e2e2136d3d"
+		},
+		{
+			"id": "8b173eba-f630-f9e1-2868-116fe2d05a2b",
+			"url": "http://localhost:3000/user/realfinAl/posts/test-post-man-update",
+			"method": "POST",
+			"headers": "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"data": [
+				{
+					"key": "text",
+					"value": "this is a comment on this post",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "http://localhost:3000/user/realfinAl/posts/test-post-man-update",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "5031f6ad-6265-2943-27dc-53e2e2136d3d"
+		},
+		{
+			"id": "92606af0-bb65-40d1-335c-4b5dde17cc9d",
+			"url": "http://localhost:3000/user/realfinAl/posts/",
+			"method": "GET",
+			"headers": "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "http://localhost:3000/user/realfinAl/posts/",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "5031f6ad-6265-2943-27dc-53e2e2136d3d"
+		},
+		{
+			"id": "9f128262-fddf-33b0-9b78-abc8aab50708",
+			"url": "http://localhost:3000/sign-up",
+			"method": "POST",
+			"headers": "",
+			"data": [
+				{
+					"key": "fName",
+					"value": "RealFinal",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "lName",
+					"value": "Test",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "realfinaltest@gmail.com",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "username",
+					"value": "realfINaL",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "pw",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "http://localhost:3000/sign-up",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "5031f6ad-6265-2943-27dc-53e2e2136d3d"
+		},
+		{
+			"id": "ab6569a4-6b9f-d562-99b7-5156a13e5304",
+			"url": "http://localhost:3000/user/realfinAl/posts/test-post-man",
+			"method": "GET",
+			"headers": "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "http://localhost:3000/user/realfinAl/posts/test-post-man",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "5031f6ad-6265-2943-27dc-53e2e2136d3d"
+		},
+		{
+			"id": "b300fcbb-eb98-10d7-4733-8e8c9bbe06db",
+			"url": "http://localhost:3000/user/realfinal",
+			"method": "PUT",
+			"headers": "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"data": [
+				{
+					"key": "fName",
+					"value": "RealFinalupdate",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "lName",
+					"value": "Test",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "realfinaltest@gmail.com",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "username",
+					"value": "realfINaL",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "pw",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "http://localhost:3000/user/realfinal",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "5031f6ad-6265-2943-27dc-53e2e2136d3d"
+		},
+		{
+			"id": "c95a40b1-6973-d336-a236-b14ff6920f83",
+			"url": "http://localhost:3000/user/realfinal",
+			"method": "DELETE",
+			"headers": "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "http://localhost:3000/user/realfinal",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "5031f6ad-6265-2943-27dc-53e2e2136d3d"
+		},
+		{
+			"id": "f588c186-0f20-74fe-bd4d-854555bad696",
+			"url": "http://localhost:3000/sign-up",
+			"method": "POST",
+			"headers": "",
+			"data": [
+				{
+					"key": "fName",
+					"value": "RealFinal",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "lName",
+					"value": "Test",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "realfinaltest@gmail.com",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "username",
+					"value": "realfINaL",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "pw",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": "",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "http://localhost:3000/sign-up",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "5031f6ad-6265-2943-27dc-53e2e2136d3d"
+		},
+		{
+			"id": "f91cd67b-0f62-a31e-4f1f-a6322b404339",
+			"url": "http://localhost:3000/user/roselpadilla",
+			"method": "GET",
+			"headers": "x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "http://localhost:3000/user/roselpadilla",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "5031f6ad-6265-2943-27dc-53e2e2136d3d"
+		}
+	]
+}
