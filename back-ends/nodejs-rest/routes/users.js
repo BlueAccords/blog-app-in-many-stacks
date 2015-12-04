@@ -10,6 +10,7 @@ let router = express.Router();
 import User from './../models/User';
 import Post from './../models/Post';
 import Comment from './../models/Comment';
+import Tag from './../models/Tag';
 
 /**
 * Middleware to check for user tokens
@@ -96,33 +97,48 @@ router.delete('/:username', (req, res) => {
   } else { helper.permissionDenied(res); }
 });
 
-// get a list of posts for a specific user
+/**
+* get a list of posts for a specific user
+*/
 router.get('/:username/posts', (req, res) => {
   Post.find({ user: req.params.username }, (err, posts) => {
     res.json(posts);
   });
 });
 
-// create a new post (if you are the user)
+/**
+* create a new post (if you are the user)
+*/
 router.post('/:username/posts', (req, res) => {
   if (req.decoded.username === req.params.username) {
     let tagArr = req.body.tags.split(', ');
 
+    // the post
     let newPost = new Post({
       title: req.body.title.toLowerCase(),
       body: req.body.body,
       user: req.params.username,
       tags: tagArr,
     });
-
     newPost.save();
+
+    // for each tag in the array, make a new Tag w/ the title of the post
+    tagArr.forEach( (tag) => {
+      Tag.create({
+        text: tag.toLowerCase(),
+        post: req.body.title.toLowerCase(),
+      });
+    });
 
     helper.success(res);
   } else { helper.permissionDenied(res); }
 });
 
-// go to a specific post, by a specific user.
+/**
+* get a specific post, by a specific user.
+*/
 router.get('/:username/posts/:postname', (req, res) => {
+  // spaces in a posts title are seperated by a - in the route
     var urlTitle = req.params.postname.split('-');
     var fixedTitle = urlTitle.join(' ');
 
@@ -133,8 +149,11 @@ router.get('/:username/posts/:postname', (req, res) => {
     });
 });
 
-// update a post (if you're the author)
+/**
+* update a post (if you're the author)
+*/
 router.put('/:username/posts/:postname', (req, res) => {
+    // spaces in a posts title are seperated by a - in the route
     var urlTitle = req.params.postname.split('-');
     var fixedTitle = urlTitle.join(' ');
 
@@ -144,6 +163,7 @@ router.put('/:username/posts/:postname', (req, res) => {
       }, (err, post) => {
         let tagArr = req.body.tags.split(', ');
 
+        // to lowercase for consistent search
         post.title = req.body.title.toLowerCase();
         post.body = req.body.body;
         post.user = req.params.username;
@@ -153,7 +173,7 @@ router.put('/:username/posts/:postname', (req, res) => {
     } else { helper.permissionDenied(res); }
 });
 
-// delete a post (if you're the author)
+// delete a post (if you're the user)
 router.delete('/:username/posts/:postname', (req, res) => {
   if (req.decoded.user === req.params.username) {
     Post.findOne({ title: req.params.postname }, (err, post) => {
