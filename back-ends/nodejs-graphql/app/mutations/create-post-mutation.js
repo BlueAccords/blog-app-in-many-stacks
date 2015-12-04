@@ -28,10 +28,18 @@ let createPostMutation = new mutationWithClientMutationId({
   },
   mutateAndGetPayload: (args, root) => {
 
-    let post = new Post(args);
+    let user = root.rootValue.user;
 
-    return post.save()
-    .then((post) => ({postId: post._id, user: root.rootValue.user}));
+    if (user) {
+      let x = {_author: user._id};
+      let postParams = Object.assign(x, args);
+      let post = new Post(postParams);
+
+      return post.save()
+      .then((post) => ({postId: post._id, user: root.rootValue.user}));
+    } else {
+      throw "You must be logged in to create a post";
+    }
   },
 });
 
