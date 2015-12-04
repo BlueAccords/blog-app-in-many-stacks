@@ -55,13 +55,9 @@ router.get('/:username', (req, res) => {
 });
 
 /**
-* UPDATE an individual User via PUT request.
+* UPDATE an individual User via PUT request. (If the user is making the req)
 */
 router.put('/:username', (req, res) => {
-  // check the value of the username in the route,
-  // and the value of the username for the user requesting the update (token),
-  // if they match, the current user IS the user matching the route,
-  // which means we can allow the request to go through and update the info.
   if (req.decoded.username === req.params.username) {
     User.findOne({ username: req.params.username, },
       (err, user) => {
@@ -100,24 +96,32 @@ router.delete('/:username', (req, res) => {
   } else { helper.permissionDenied(res); }
 });
 
+// get a list of posts for a specific user
 router.get('/:username/posts', (req, res) => {
   Post.find({ user: req.params.username }, (err, posts) => {
     res.json(posts);
   });
 });
 
+// create a new post (if you are the user)
 router.post('/:username/posts', (req, res) => {
   if (req.decoded.username === req.params.username) {
-    Post.create({
+    let tagArr = req.body.tags.split(', ');
+
+    let newPost = new Post({
       title: req.body.title.toLowerCase(),
       body: req.body.body,
       user: req.params.username,
+      tags: tagArr,
     });
+
+    newPost.save();
 
     helper.success(res);
   } else { helper.permissionDenied(res); }
 });
 
+// go to a specific post, by a specific user.
 router.get('/:username/posts/:postname', (req, res) => {
     var urlTitle = req.params.postname.split('-');
     var fixedTitle = urlTitle.join(' ');
@@ -129,6 +133,40 @@ router.get('/:username/posts/:postname', (req, res) => {
     });
 });
 
+// update a post (if you're the author)
+router.put('/:username/posts/:postname', (req, res) => {
+    var urlTitle = req.params.postname.split('-');
+    var fixedTitle = urlTitle.join(' ');
+
+    if (req.decoded.user === req.params.username) {
+      Post.findOne({ title: fixedTitle,
+        user: req.params.username,
+      }, (err, post) => {
+        let tagArr = req.body.tags.split(', ');
+
+        post.title = req.body.title.toLowerCase();
+        post.body = req.body.body;
+        post.user = req.params.username;
+        post.tags = tagArr;
+
+      });
+    } else { helper.permissionDenied(res); }
+});
+
+// delete a post (if you're the author)
+router.delete('/:username/posts/:postname', (req, res) => {
+  if (req.decoded.user === req.params.username) {
+    Post.findOne({ title: req.params.postname }, (err, post) => {
+      if (err) { res.send(err) }
+      else {
+        post.remove();
+        helper.permissionDenied(res);
+      }
+    });
+  } else { helper.permissionDenied(res); }
+});
+
+// add a comment to a post
 router.post('/:username/posts/:postname', (req, res) => {
   Comment.create({
     post: req.params.postname,
@@ -139,6 +177,7 @@ router.post('/:username/posts/:postname', (req, res) => {
   helper.success(res);
 });
 
+// get the list of comments for a specific post
 router.get('/:username/posts/:postname/comments', (req, res) => {
   Comment.find({ post: req.params.postname }, (err, list) => {
     res.json(list);
