@@ -15,7 +15,16 @@ let queryType = new GraphQLObjectType({
     node: nodeField,
     viewer: {
       type: userType,
-      resolve: (root) => root.user,
+      resolve: (root) => {
+        if(root.user) {
+          return root.user;
+        } else {
+          return {
+            name: null,
+            email: null,
+          };
+        }
+      },
     },
   }),
 });

@@ -33,12 +33,8 @@ let userType = new GraphQLObjectType({
       args: connectionArgs,
       description: 'The posts',
       resolve: function(user, args) {
-        if (user) {
-          return Post.find({'_author': user._id})
-          .then((posts) => connectionFromArray(posts, args));
-        } else {
-          return [];
-        }
+        return Post.find()
+        .then((posts) => connectionFromArray(posts, args));
       },
     },
   },

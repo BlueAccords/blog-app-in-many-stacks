@@ -1,11 +1,18 @@
 import User from '../models/User';
+import Tag from '../models/Tag';
+import tagType from './tag-type';
+import commentConnectionDefinitions from '../connection-definitions/comment-connection-definitions';
+import Comment from '../models/Comment';
+
 
 import {
   GraphQLObjectType,
   GraphQLString,
+  GraphQLList,
 } from 'graphql';
 
 import {
+  connectionFromArray,
   globalIdField,
   connectionArgs,
 } from 'graphql-relay';
@@ -26,6 +33,21 @@ let postType = new GraphQLObjectType({
     body: {
       type: GraphQLString,
       resolve: (post) => post.body,
+    },
+    tags: {
+      type: new GraphQLList(tagType),
+      description: 'The tags',
+      resolve: function(post) { return Tag.find({_post: post._id}); },
+    },
+    comments: {
+      type: commentConnectionDefinitions.commentConnection,
+      args: connectionArgs,
+      description: 'The comments',
+      resolve: function(post, args) {
+        return Comment.find({_post: post._id})
+        .exec((err, comments) => comments)
+        .then((comments) => connectionFromArray(comments, args));
+      },
     },
     author: {
       type: GraphQLString,
