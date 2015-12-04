@@ -2,6 +2,8 @@
 
 import userType from './types/user-type';
 
+import createPostMutation from './mutations/create-post-mutation';
+
 import {
   GraphQLObjectType,
   GraphQLSchema,
@@ -29,9 +31,17 @@ let queryType = new GraphQLObjectType({
   }),
 });
 
+let mutationType = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: () => ({
+    createPost: createPostMutation,
+  }),
+});
+
 
 let schema = new GraphQLSchema({
   query: queryType,
+  mutation: mutationType,
 });
 
 module.exports = schema;
