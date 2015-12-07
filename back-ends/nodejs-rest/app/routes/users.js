@@ -2,7 +2,7 @@
 
 import express from 'express';
 import bcrypt from 'bcrypt';
-import config from './../config';
+import config from '../../config';
 import jwt from 'jsonwebtoken';
 import helper from './helper';
 let router = express.Router();
@@ -22,7 +22,7 @@ router.use((req, res, next) => {
   // if the token exists
   if (token) {
     // check to see if the token is valid
-    jwt.verify(token, config.secret, (err, decoded) => {
+    jwt.verify(token, config.app.secret, (err, decoded) => {
       if (err) { helper.tokenFail(res) }
       else {
         // a new key is added to the request object

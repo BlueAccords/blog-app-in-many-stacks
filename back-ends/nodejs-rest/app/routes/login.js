@@ -4,7 +4,7 @@ import express from 'express';
 import bcrypt from 'bcrypt';
 import User from './../models/User';
 import jwt from 'jsonwebtoken';
-import config from './../config';
+import config from '../../config';
 import helper from './helper';
 let router = express.Router();
 
@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
         // compare the attempted pw to the pw stored for the user
       if (bcrypt.compareSync(req.body.password, user.password)) {
           //Create a new token, passing in the user IF pw is correct
-        let token = jwt.sign(user, config.secret, {
+        let token = jwt.sign(user, config.app.secret, {
           expiresIn: 1440 * 60,
         });
 
