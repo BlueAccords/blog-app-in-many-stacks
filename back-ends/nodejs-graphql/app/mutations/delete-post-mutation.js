@@ -1,4 +1,5 @@
 import Post from '../models/Post';
+import userType from '../types/user-type';
 import { blockPostNonEditors } from '../utils/model-filters';
 
 import {
@@ -21,6 +22,10 @@ let deletePostMutation = new mutationWithClientMutationId({
     id: {
       type: GraphQLString,
       resolve: (data) => data.id,
+    },
+    viewer: {
+      type: userType,
+      resolve: (data) => data.user,
     },
   },
   mutateAndGetPayload: (args, root) => {
