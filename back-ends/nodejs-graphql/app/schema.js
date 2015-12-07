@@ -4,6 +4,7 @@ import userType from './types/user-type';
 
 import createPostMutation from './mutations/create-post-mutation';
 import updatePostMutation from './mutations/update-post-mutation';
+import deletePostMutation from './mutations/delete-post-mutation';
 
 import {
   GraphQLObjectType,
@@ -37,6 +38,7 @@ let mutationType = new GraphQLObjectType({
   fields: () => ({
     createPost: createPostMutation,
     updatePost: updatePostMutation,
+    deletePost: deletePostMutation,
   }),
 });
 
