@@ -1,6 +1,7 @@
 import postType from '../types/post-type';
 import Post from '../models/Post';
 import Comment from '../models/Comment';
+import commentType from '../types/comment-type';
 
 import {
   GraphQLNonNull,
@@ -20,6 +21,13 @@ let createCommentMutation = new mutationWithClientMutationId({
     text: {type: new GraphQLNonNull(GraphQLString)},
   },
   outputFields: {
+    comment: {
+      type: commentType,
+      resolve: (data) => {
+        return Comment.findOne({'_id': data.commentId})
+        .then((comment) => comment);
+      },
+    },
     post: {
       type: postType,
       resolve: (data) => {
