@@ -1,0 +1,53 @@
+import postType from '../types/post-type';
+import Post from '../models/Post';
+import Comment from '../models/Comment';
+
+import {
+  GraphQLNonNull,
+  GraphQLString,
+} from 'graphql';
+
+import {
+  mutationWithClientMutationId,
+  fromGlobalId,
+} from 'graphql-relay';
+
+let createCommentMutation = new mutationWithClientMutationId({
+  name: 'CreateComment',
+  description: 'Create a comment',
+  inputFields: {
+    postId: {type: new GraphQLNonNull(GraphQLString)},
+    text: {type: new GraphQLNonNull(GraphQLString)},
+  },
+  outputFields: {
+    post: {
+      type: postType,
+      resolve: (data) => {
+        let post = Post.find({'_id': data.postId});
+        console.dir("post id is :", data.postId);
+      },
+    },
+  },
+  mutateAndGetPayload: (args, root) => {
+
+    let user = root.rootValue.user;
+    let postId  = fromGlobalId(args.postId).id;
+
+    if (user) {
+
+      let x = {_author: user._id};
+
+      args['_post'] = postId;
+      let commentParams = Object.assign(x, args);
+      let comment = new Comment(commentParams);
+
+      return comment.save()
+      .then((comment) => { return {commentId: comment._id, postId: postId, user: root.rootValue.user}; });
+
+    } else {
+      throw 'You must be logged in to create a comment';
+    }
+  },
+});
+
+module.exports = createCommentMutation;
