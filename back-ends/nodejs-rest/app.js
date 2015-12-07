@@ -43,7 +43,7 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 // Routes
 app.use(express.static(__dirname + '/public'));
-app.use(require('./app/routes/index'));
+app.use(require('./app/routes'));
 
 app.get('*', (req, res) => {
   res.sendStatus(404);
