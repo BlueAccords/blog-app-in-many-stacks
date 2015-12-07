@@ -23,8 +23,10 @@ let createCommentMutation = new mutationWithClientMutationId({
     post: {
       type: postType,
       resolve: (data) => {
-        let post = Post.find({'_id': data.postId});
-        console.dir("post id is :", data.postId);
+        return Post.findOne({'_id': data.postId})
+          .then((post) => {
+            return post;
+          });
       },
     },
   },
