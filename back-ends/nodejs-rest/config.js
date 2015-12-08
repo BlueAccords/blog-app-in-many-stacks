@@ -22,7 +22,7 @@ let general = {
 
 let test = {
   db: {
-    host: general.db.rhost,
+    host: general.db.host,
     port: general.db.port,
     user: general.db.user,
     password: general.db.password,
