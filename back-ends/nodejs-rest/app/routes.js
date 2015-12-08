@@ -22,7 +22,7 @@ router.use(jwtMiddleware);
 router.get('/user', user.currentUser);
 
 // User info routes.
-router.get('/user/:username', user.readUser);
+router.get('/user/:username', user.showUser);
 router.put('/user/:username', user.updateUser);
 router.delete('/user/:username', user.deleteUser);
 

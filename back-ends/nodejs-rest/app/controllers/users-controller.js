@@ -72,7 +72,7 @@ module.exports.currentUser = (req, res) => {
 };
 
 // Read a specific user's info.
-module.exports.readUser = (req, res) => {
+module.exports.showUser = (req, res) => {
   User.findOne({
     username: req.params.username.toLowerCase(),
   }, (err, user) => {
