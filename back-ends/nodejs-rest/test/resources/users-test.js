@@ -10,13 +10,13 @@ let mockgoose     = require('mockgoose');
 describe('User routes', () => {
   let  app;
 
-  before((done) => {
+  beforeEach((done) => {
     app = require('../../app');
     mockgoose(mongoose);
     mongoose.connect(`mongodb://localhost/test`, done);
   });
 
-  after(() => {
+  afterEach(() => {
     app.close();
   });
 
@@ -33,11 +33,9 @@ describe('User routes', () => {
     })
     .expect(200)
     .end((err, res) => {
-      //expect(err).to.equal(null);
-      //expect(res.body.success).to.equal(true);
-      //expect(res.body.user).to.be.an('object');
-      //expect(res.body.user.email).to.equal('test@test.com');
-      //expect(res.body.user.password).to.equal(undefined);
+      expect(err).to.equal(null);
+      expect(res.body.message).to.equal('Successful request.');
+      expect(res.body).to.be.an('object');
       done();
     });
   });
