@@ -23,7 +23,7 @@ describe('User routes', () => {
   it('should login a user', (done) => {
     request(app)
     .post('/sign-up')
-    .type('form')
+    .set('Accept', /json/)
     .send({
       fName: 'Test',
       lName: 'Last',
