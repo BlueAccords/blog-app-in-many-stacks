@@ -61,21 +61,15 @@ app.use(require('./app/routes'));
 app.get('*', (req, res) => {
   res.sendStatus(404);
 });
-let server;
-if(env === 'test') {
-  server = app.listen(8001, () => {
-    let host = server.address().address;
-    let port = server.address().port;
 
-    console.log('Test server running at http://%s:%s', host, port);
+let port;
+env === 'test' ? process.env.TEST_POST || 8001 : port = process.env.WEB_PORT;
 
-  });
-} else {
-  server = app.listen(process.env.WEB_PORT, () => {
-    let host = server.address().address;
-    let port = server.address().port;
+let server = app.listen(port, () => {
+  let host = server.address().address;
+  let port = server.address().port;
 
-    console.log('Example app listening at http://%s:%s', host, port);
-  });
-}
+  console.log('Example app listening at http://%s:%s', host, port);
+});
+
 module.exports = server;
