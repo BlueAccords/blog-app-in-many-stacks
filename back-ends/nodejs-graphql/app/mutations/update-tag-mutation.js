@@ -1,6 +1,5 @@
 import tagType from '../types/tag-type';
 import Tag from '../models/Tag';
-import { blockTagNonEditors } from '../utils/model-filters';
 
 import {
   GraphQLNonNull,
