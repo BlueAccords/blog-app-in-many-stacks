@@ -12,8 +12,7 @@
  * @apiName Create A New User/ Account
  * @apiGroup Sign-Up
  *
- * @apiParam {string} fName User's First name.
- * @apiParam {string} lName User's Last name.
+ * @apiParam {string} name User's name.
  * @apiParam {string} email User's email.
  * @apiParam {string} username User's username.
  * @apiParam {string} password User's password.
@@ -54,8 +53,7 @@
  * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
- * @apiParam {string} fName User's First name.
- * @apiParam {string} lName User's Last name.
+ * @apiParam {string} name User's name.
  * @apiParam {string} email User's email.
  * @apiParam {string} username User's username.
  * @apiParam {string} password User's password.

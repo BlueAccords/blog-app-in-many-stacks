@@ -42,8 +42,7 @@ module.exports.createNewUser = (req, res) => {
     if (!user) {
       bcrypt.hash(req.body.password, 8, (err, hash) => {
         User.create({
-          fName: req.body.fName,
-          lName: req.body.lName,
+          name: req.body.name,
           email: req.body.email.toLowerCase(),
           username: req.body.username.toLowerCase(),
           password: hash,
@@ -94,8 +93,7 @@ module.exports.updateUser = (req, res) => {
       if (user === null) {
         helper.noUserFound(res);
       } else {
-        user.fName = req.body.fName;
-        user.lName = req.body.lName;
+        user.name = req.body.name;
         user.email = req.body.email;
         user.username = req.body.username.toLowerCase();
         user.password = bcrypt.hashSync(req.body.password, 8);
