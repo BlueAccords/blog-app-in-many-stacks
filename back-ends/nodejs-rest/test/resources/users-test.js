@@ -23,12 +23,16 @@ describe('User routes', () => {
   it('should login a user', (done) => {
     request(app)
     .post('/sign-up')
-    .field('fName', 'my awesome avatar')
+    .type('form')
+    .send({
+      fName: 'Test',
+      lName: 'Last',
+      email: 'test@test.com',
+      username: 'testest',
+      password: 'testtest',
+    })
     .expect(200)
     .end((err, res) => {
-      console.log(err);
-      console.log(res.body);
-      console.log(res.body);
       //expect(err).to.equal(null);
       //expect(res.body.success).to.equal(true);
       //expect(res.body.user).to.be.an('object');
