@@ -1,28 +1,29 @@
 /* eslint max-nested-callbacks: 0*/
+/* eslint no-undef: 0*/
 'use strict';
 
 let expect = require('chai').expect;
 let request = require('supertest');
+let mongoose = require('mongoose');
+let mockgoose     = require('mockgoose');
 
 describe('User routes', () => {
   let  app;
-  beforeEach(() => {
+
+  before((done) => {
     app = require('../../app');
+    mockgoose(mongoose);
+    mongoose.connect(`mongodb://localhost/test`, done);
   });
-  afterEach(() => {
+
+  after(() => {
     app.close();
   });
 
   it('should login a user', (done) => {
     request(app)
     .post('/sign-up')
-    .send({
-      fName: 'Test',
-      lName: 'Last',
-      email: 'test@test.com',
-      username: 'testest',
-      password: 'testtest',
-    })
+    .field('fName', 'my awesome avatar')
     .expect(200)
     .end((err, res) => {
       console.log(err);

@@ -5,7 +5,7 @@ let env  = process.env.NODE_ENV;
 // Ensure we're in the project directory, so relative paths work as expected
 // no matter where we actually lift from.
 // Load dotenv
-if(env === 'development' || env === 'test') {
+if(env === 'development') {
   require('dotenv').load();
 }
 process.chdir(__dirname);
@@ -21,18 +21,26 @@ let config        = require('./config');
 let bodyParser    = require('body-parser');
 let morgan        = require('morgan');
 let cors          = require('cors');
-let mockgoose     = require('mockgoose');
 
 // connect to Mongo when the app initializes
 // No password needed in development
-if(env === 'development' || env === 'test') {
-  if(env === 'test') {
-    mockgoose(mongoose);
-  }
+if(env === 'development') {
   mongoose.connect(`mongodb://${config.db.host}:${config.db.port}/${config.db.database}`);
+} else if(env === 'test') {
+  // Will be created in each test
 } else {
   mongoose.connect(`mongodb://${config.db.user}:${config.db.password}@${config.db.host}:${config.db.port}/${config.db.database}`);
 }
+
+// on successful connect
+mongoose.connection.on('connected', () => {
+  console.log('Mongoose connected');
+});
+
+// If the connection throws an error
+mongoose.connection.on('error',(err) => {
+  console.log('Mongoose error: ' + err);
+});
 
 app.set('secretKey', config.app.secret);
 
@@ -54,7 +62,7 @@ app.get('*', (req, res) => {
 });
 let server;
 if(env === 'test') {
-  server = app.listen(process.env.TEST_PORT, () => {
+  server = app.listen(8001, () => {
     let host = server.address().address;
     let port = server.address().port;
 
