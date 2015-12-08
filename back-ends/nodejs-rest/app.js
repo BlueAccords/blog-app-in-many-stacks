@@ -66,7 +66,10 @@ app.get('*', (req, res) => {
 });
 
 let port;
-env === 'test' ? process.env.TEST_POST || 8001 : port = process.env.WEB_PORT;
+
+if(env !== 'test') {
+  port = process.env.WEB_PORT;
+}
 
 let server = app.listen(port, () => {
   let host = server.address().address;
