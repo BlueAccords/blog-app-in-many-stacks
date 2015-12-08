@@ -12,6 +12,7 @@ import deleteCommentMutation from './mutations/delete-comment-mutation';
 
 import createTagMutation from './mutations/create-tag-mutation';
 import updateTagMutation from './mutations/update-tag-mutation';
+import deleteTagMutation from './mutations/delete-tag-mutation';
 
 import {
   GraphQLObjectType,
@@ -51,6 +52,7 @@ let mutationType = new GraphQLObjectType({
     deleteComment: deleteCommentMutation,
     createTag: createTagMutation,
     updateTag: updateTagMutation,
+    deleteTag: deleteTagMutation,
   }),
 });
 
