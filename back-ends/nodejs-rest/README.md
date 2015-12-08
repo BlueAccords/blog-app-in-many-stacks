@@ -25,8 +25,8 @@ A sample Postman collection is provided inside of the `Data/` directory.
 
 ### Documentation
 
-To view the api documentation, start the app and visit /api-documentation
+To view the api documentation, start the app and visit /api-documentation.
 
-Place updates made to the api in `app/apidocs.js`.
+The api documentation style is with apidocs.js. Please be sure to follow the apidocs.js standards when editing controllers.
 
 To update the documentation run `npm run update-docs`

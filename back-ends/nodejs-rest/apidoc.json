@@ -2,5 +2,5 @@
   "name": "RESTful-Nodejs",
   "description": "Documentation for the API",
   "title": "API Documentation",
-  "url" : "http://localhost:3000"
+  "url" : "http://localhost:8000"
 }
