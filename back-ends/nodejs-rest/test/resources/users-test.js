@@ -6,17 +6,15 @@ require('babel/register');
 
 let expect = require('chai').expect;
 let request = require('supertest');
-let mongoose = require('mongoose');
-let mockgoose     = require('mockgoose');
 let User = require('../../app/models/User');
+let setupDB = require('../test-helper').setupDB;
 
-describe('User routes', () => {
+describe('User requests', () => {
   let  app;
 
   before((done) => {
     app = require('../../app');
-    mockgoose(mongoose);
-    mongoose.connect('mongodb://localhost/test', done);
+    setupDB(done);
   });
 
   after(() => {
