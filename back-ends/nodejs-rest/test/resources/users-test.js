@@ -6,20 +6,24 @@ let mongoose = require('mongoose');
 let mockgoose = require('mockgoose');
 
 mockgoose(mongoose);
-let app = require('../app');
+let app = require('../../app');
 
 
 describe('User routes', () => {
   it('should login a user', (done) => {
     request(app)
-    .post('/user')
-    .send({email: 'test@test2.com', password: 'testtest', name: 'Test Master'})
+    .post('/sign-up')
+    .send({
+      fName: 'Test',
+      lName: 'Last',
+      email: 'test@test.com',
+      username: 'testest',
+      password: 'testtest',
+    })
     .expect(200)
     .end((err, res) => {
-      if (err) {
-        return done(err);
-      }
-      console.log(res);
+      console.log(res.body);
+      console.log(res.body);
       //expect(err).to.equal(null);
       //expect(res.body.success).to.equal(true);
       //expect(res.body.user).to.be.an('object');
@@ -29,3 +33,4 @@ describe('User routes', () => {
     });
   });
 });
+
