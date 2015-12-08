@@ -1,7 +1,7 @@
 'user strict';
 
 import config from '../../config';
-import helper from '../controllers/helper';
+// import helper from '../controllers/helper';
 import jwt from 'jsonwebtoken';
 
 module.exports = (req, res, next) => {
@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
     // check to see if the token is valid
     jwt.verify(token, config.app.secret, (err, decoded) => {
       if (err) {
-        helper.tokenFail(res);
+        // helper.tokenFail(res);
       } else {
         // a new key is added to the request object
         // the new key has a value of the unencoded token payload (user info)
@@ -22,6 +22,6 @@ module.exports = (req, res, next) => {
       }
     });
   } else {
-    helper.tokenFail(res);
+    // helper.tokenFail(res);
   }
 };

@@ -5,7 +5,7 @@
 import bcrypt from 'bcrypt';
 import config from '../../config';
 import jwt from 'jsonwebtoken';
-import helper from './helper';
+// import helper from './helper';
 
 import User from './../models/User';
 import Post from './../models/Post';
@@ -25,7 +25,9 @@ module.exports.authenticate = (req, res) => {
     username: req.body.username.toLowerCase(),
   }, (err, user) => {
     if (user === null) {
-      helper.noUserFound(res);
+      res.json({
+        msg: 'Err. No user found.'
+      });
     } else {
       if (bcrypt.compareSync(req.body.password, user.password)) {
         let token = jwt.sign(user, config.app.secret, {
@@ -37,7 +39,7 @@ module.exports.authenticate = (req, res) => {
           token,
         });
       } else {
-        helper.permissionDenied(res);
+        // helper.permissionDenied(res);
       }
     }
   });
@@ -64,12 +66,15 @@ module.exports.createNewUser = (req, res) => {
           email: req.body.email.toLowerCase(),
           username: req.body.username.toLowerCase(),
           password: hash,
+        }, (err, user) => {
+          res.json(user);
         });
       });
 
-      helper.success(res);
     } else {
-      helper.userExists(res);
+      res.json({
+        msg: 'Err. This user already exists.'
+      });
     }
   });
 };
@@ -86,7 +91,9 @@ module.exports.currentUser = (req, res) => {
     username: req.decoded.username,
   }, (err, user) => {
     if (user === null) {
-      helper.noUserFound(res);
+      res.json({
+        msg: 'Err. No user found.'
+      });
     }
     else {
       res.json(user);
@@ -108,7 +115,9 @@ module.exports.showUser = (req, res) => {
     username: req.params.username.toLowerCase(),
   }, (err, user) => {
     if (user === null) {
-      helper.noUserFound(res);
+      res.json({
+        msg: 'Err. No user found.'
+      });
     }
     else {
       res.json(user);
@@ -135,24 +144,28 @@ module.exports.updateUser = (req, res) => {
       username: req.params.username.toLowerCase(),
     }, (err, user) => {
       if (user === null) {
-        helper.noUserFound(res);
+        res.json({
+          msg: 'Err. No user found.'
+        });
       } else {
         user.name = req.body.name;
         user.email = req.body.email;
         user.username = req.body.username.toLowerCase();
         user.password = bcrypt.hashSync(req.body.password, 8);
 
-        user.save((err) => {
+        user.save((err, user) => {
           if (err) {
             return err;
           } else {
-            helper.success(res);
+            res.json(user);
           }
         });
       }
     });
   } else {
-    helper.permissionDenied(res);
+    res.json({
+      msg: 'You are not authorized to do that.'
+    });
   }
 };
 
@@ -171,14 +184,23 @@ module.exports.deleteUser = (req, res) => {
       username: req.params.username.toLowerCase(),
     }, (err, user) => {
       if (user === null) {
-        helper.noUserFound(res);
+        res.json({
+          msg: 'Err. No user found.'
+        });
       } else {
-        user.remove();
-        helper.success(res);
+        let deletedUser = user.username;
+        user.remove()
+        .then(() => {
+          return res.json({
+            deleted_id: user.id,
+          });
+        });
       }
     });
   } else {
-    helper.permissionDenied(res);
+    res.json({
+      msg: 'You are not authorized to do that.'
+    });
   }
 };
 
@@ -230,9 +252,9 @@ module.exports.createNewPost = (req, res) => {
       });
     });
 
-    helper.success(res);
+    // helper.success(res);
   } else {
-    helper.permissionDenied(res);
+    // helper.permissionDenied(res);
   }
 };
 
@@ -275,9 +297,9 @@ module.exports.commentOnPost = (req, res) => {
     post: req.params.postname,
     user: req.decoded.username,
     text: req.body.text,
+  }, (err, comment) => {
+    return res.json(comment);
   });
-
-  helper.success(res);
 };
 
 /**
@@ -328,10 +350,10 @@ module.exports.updatePost = (req, res) => {
       post.tags = tagArr;
 
       post.save();
-      helper.success(res);
+      // helper.success(res);
     });
   } else {
-    helper.permissionDenied(res);
+    // helper.permissionDenied(res);
   }
 };
 
@@ -357,10 +379,10 @@ module.exports.deletePost = (req, res) => {
         res.send(err);
       } else {
         post.remove();
-        helper.success(res);
+        // helper.success(res);
       }
     });
   } else {
-    helper.permissionDenied(res);
+    // helper.permissionDenied(res);
   }
 };
