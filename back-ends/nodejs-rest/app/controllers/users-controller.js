@@ -135,7 +135,7 @@ module.exports.deleteUser = (req, res) => {
 // List all the posts written by a specific user.
 module.exports.listUserPosts = (req, res) => {
   Post.find({
-    user: req.params.username.toLowerCase()
+    user: req.params.username.toLowerCase(),
   }, (err, posts) => {
     res.json(posts);
   });
