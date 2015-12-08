@@ -22,6 +22,8 @@
     "jest": true,
     "describe": true,
     "it": true,
+    "beforeEach": true,
+    "afterEach": true,
   },
   "env": {
     "node": true,

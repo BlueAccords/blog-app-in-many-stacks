@@ -1,15 +1,18 @@
+/* eslint max-nested-callbacks: 0*/
 'use strict';
 
 let expect = require('chai').expect;
 let request = require('supertest');
-let mongoose = require('mongoose');
-let mockgoose = require('mockgoose');
-
-mockgoose(mongoose);
-let app = require('../../app');
-
 
 describe('User routes', () => {
+  let  app;
+  beforeEach(() => {
+    app = require('../../app');
+  });
+  afterEach(() => {
+    app.close();
+  });
+
   it('should login a user', (done) => {
     request(app)
     .post('/sign-up')
@@ -22,6 +25,7 @@ describe('User routes', () => {
     })
     .expect(200)
     .end((err, res) => {
+      console.log(err);
       console.log(res.body);
       console.log(res.body);
       //expect(err).to.equal(null);

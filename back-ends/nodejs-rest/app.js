@@ -5,7 +5,7 @@ let env  = process.env.NODE_ENV;
 // Ensure we're in the project directory, so relative paths work as expected
 // no matter where we actually lift from.
 // Load dotenv
-if(env === 'development') {
+if(env === 'development' || env === 'test') {
   require('dotenv').load();
 }
 process.chdir(__dirname);
@@ -21,11 +21,14 @@ let config        = require('./config');
 let bodyParser    = require('body-parser');
 let morgan        = require('morgan');
 let cors          = require('cors');
-let portfinder    = require('portfinder');
+let mockgoose     = require('mockgoose');
 
 // connect to Mongo when the app initializes
 // No password needed in development
-if(env === 'development') {
+if(env === 'development' || env === 'test') {
+  if(env === 'test') {
+    mockgoose(mongoose);
+  }
   mongoose.connect(`mongodb://${config.db.host}:${config.db.port}/${config.db.database}`);
 } else {
   mongoose.connect(`mongodb://${config.db.user}:${config.db.password}@${config.db.host}:${config.db.port}/${config.db.database}`);
@@ -49,7 +52,6 @@ app.use(require('./app/routes'));
 app.get('*', (req, res) => {
   res.sendStatus(404);
 });
-
 let server;
 if(env === 'test') {
   server = app.listen(process.env.TEST_PORT, () => {
