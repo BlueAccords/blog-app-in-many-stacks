@@ -25,12 +25,8 @@ A sample Postman collection is provided inside of the `Data/` directory.
 
 ### Documentation
 
-To view the api documentation, open the `index.html` file inside of `apidocs/` in your browser.
+To view the api documentation, start the app and visit /api-documentation
 
 Place updates made to the api in `app/apidocs.js`.
 
-Follow the conventions in the file.
-
-Make sure apidoc is installed globally. If not run `npm i -g apidoc`.
-
-To update the documentation run `apidoc -i app/ -o apidocs/` and double check to make sure the docs have been updated.
+To update the documentation run `npm run update-docs`
