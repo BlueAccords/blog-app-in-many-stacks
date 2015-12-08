@@ -10,14 +10,15 @@ import Post from './../models/Post';
 import Comment from './../models/Comment';
 import Tag from './../models/Tag';
 
+// Authenticate a user by logging in.
 module.exports.authenticate = (req, res) => {
-  // look for the user (based on username) in the DB
-  User.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {
-    if (user === null) { helper.noUserFound(res); } // user does not exist.
-    else {
-      // compare the attempted pw to the pw stored for the user
+  User.findOne({
+    username: req.body.username.toLowerCase(),
+  }, (err, user) => {
+    if (user === null) {
+      helper.noUserFound(res);
+    } else {
       if (bcrypt.compareSync(req.body.password, user.password)) {
-        //Create a new token, passing in the user IF pw is correct
         let token = jwt.sign(user, config.app.secret, {
           expiresIn: 1440 * 60,
         });
@@ -25,14 +26,19 @@ module.exports.authenticate = (req, res) => {
         res.json({
           message: 'A token has been passed. You are now logged in!',
           token,
-        }); // v- User exists but pw is incorrect. -v
-      } else { helper.permissionDenied(res); }
+        });
+      } else {
+        helper.permissionDenied(res);
+      }
     }
   });
 };
 
+// Create a new user.
 module.exports.createNewUser = (req, res) => {
-  User.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {
+  User.findOne({
+    username: req.body.username.toLowerCase(),
+  }, (err, user) => {
     if (!user) {
       bcrypt.hash(req.body.password, 8, (err, hash) => {
         User.create({
@@ -45,72 +51,101 @@ module.exports.createNewUser = (req, res) => {
       });
 
       helper.success(res);
-    } else { helper.userExists(res); }
+    } else {
+      helper.userExists(res);
+    }
   });
 };
 
+// Show the current user's info.
 module.exports.currentUser = (req, res) => {
-  User.findOne({ username: req.decoded.username }, (err, user) => {
-    if (user === null) { helper.noUserFound(res); }
-    else { res.json(user); }
+  User.findOne({
+    username: req.decoded.username,
+  }, (err, user) => {
+    if (user === null) {
+      helper.noUserFound(res);
+    }
+    else {
+      res.json(user);
+    }
   });
 };
 
+// Read a specific user's info.
 module.exports.readUser = (req, res) => {
-  User.findOne({ username: req.params.username.toLowerCase() },
-    (err, user) => {
-      if (user === null) { helper.noUserFound(res); }
-      else { res.json(user); }
-    });
+  User.findOne({
+    username: req.params.username.toLowerCase(),
+  }, (err, user) => {
+    if (user === null) {
+      helper.noUserFound(res);
+    }
+    else {
+      res.json(user);
+    }
+  });
 };
 
+// Update the current user's info.
 module.exports.updateUser = (req, res) => {
   if (req.decoded.username === req.params.username.toLowerCase()) {
-    User.findOne({ username: req.params.username.toLowerCase() },
-      (err, user) => {
-        if (user === null) { helper.noUserFound(res); }
-        else {
-          user.fName = req.body.fName;
-          user.lName = req.body.lName;
-          user.email = req.body.email;
-          user.username = req.body.username.toLowerCase();
-          user.password = bcrypt.hashSync(req.body.password, 8);
+    User.findOne({
+      username: req.params.username.toLowerCase(),
+    }, (err, user) => {
+      if (user === null) {
+        helper.noUserFound(res);
+      } else {
+        user.fName = req.body.fName;
+        user.lName = req.body.lName;
+        user.email = req.body.email;
+        user.username = req.body.username.toLowerCase();
+        user.password = bcrypt.hashSync(req.body.password, 8);
 
-          user.save((err) => {
-            if (err) { return err; }
-            else { helper.success(res); }
-          });
-        }
-      });
-  } // do not allow users to update other users.
-  else { helper.permissionDenied(res); }
+        user.save((err) => {
+          if (err) {
+            return err;
+          } else {
+            helper.success(res);
+          }
+        });
+      }
+    });
+  } else {
+    helper.permissionDenied(res);
+  }
 };
 
+// Delete the current user's account.
 module.exports.deleteUser = (req, res) => {
-  // view router.put. Same concept, but for deleting users.
   if (req.decoded.username === req.params.username.toLowerCase()) {
-    User.findOne({ username: req.params.username.toLowerCase() },
-      (err, user) => {
-        if (user === null) { helper.noUserFound(res); }
-        else {
-          user.remove();
-          helper.success(res);
-        }
-      });
-  } else { helper.permissionDenied(res); }
+    User.findOne({
+      username: req.params.username.toLowerCase(),
+    }, (err, user) => {
+      if (user === null) {
+        helper.noUserFound(res);
+      } else {
+        user.remove();
+        helper.success(res);
+      }
+    });
+  } else {
+    helper.permissionDenied(res);
+  }
 };
 
+// List all the posts written by a specific user.
 module.exports.listUserPosts = (req, res) => {
-  Post.find({ user: req.params.username.toLowerCase() }, (err, posts) => {
+  Post.find({
+    user: req.params.username.toLowerCase()
+  }, (err, posts) => {
     res.json(posts);
   });
 };
 
+// Create a new post as the current user.
 module.exports.createNewPost = (req, res) => {
   if (req.decoded.username === req.params.username.toLowerCase()) {
     let tagArr = req.body.tags.split(', ');
 
-    // the post
     let newPost = new Post({
       title: req.body.title.toLowerCase(),
       body: req.body.body,
@@ -119,7 +154,7 @@ module.exports.createNewPost = (req, res) => {
     });
     newPost.save();
 
-    // for each tag in the array, make a new Tag w/ the title of the post
+    // Create a new tag for each tag listed on a post.
     tagArr.forEach( (tag) => {
       Tag.create({
         text: tag.toLowerCase(),
@@ -128,21 +163,26 @@ module.exports.createNewPost = (req, res) => {
     });
 
     helper.success(res);
-  } else { helper.permissionDenied(res); }
+  } else {
+    helper.permissionDenied(res);
+  }
 };
 
+// Read a specific post written by a user.
 module.exports.readUserPost = (req, res) => {
-  // spaces in a posts title are seperated by a - in the route
+  // Single Post URL (The title. Words seperated by a "-") to string
   let urlTitle = req.params.postname.split('-');
   let fixedTitle = urlTitle.join(' ');
 
-  Post.findOne({ title: fixedTitle,
-      user: req.params.username.toLowerCase(),
-    }, (err, post) => {
+  Post.findOne({
+    title: fixedTitle,
+    user: req.params.username.toLowerCase(),
+  }, (err, post) => {
     res.json(post);
   });
 };
 
+// Comment on a post as the current user.
 module.exports.commentOnPost = (req, res) => {
   Comment.create({
     post: req.params.postname,
@@ -153,46 +193,58 @@ module.exports.commentOnPost = (req, res) => {
   helper.success(res);
 };
 
+// List all the comments on a given post.
 module.exports.listAllComments = (req, res) => {
-  Comment.find({ post: req.params.postname }, (err, list) => {
+  Comment.find({
+    post: req.params.postname,
+  }, (err, list) => {
     res.json(list);
   });
 };
 
+// Update a post written by the current user.
 module.exports.updatePost = (req, res) => {
-  // spaces in a posts title are seperated by a - in the route
   let urlTitle = req.params.postname.split('-');
   let fixedTitle = urlTitle.join(' ');
+  // Tags in the post body (comman seperated) go in an array.
   let tagArr = req.body.tags.split(', ');
 
   if (req.decoded.username === req.params.username.toLowerCase()) {
-    Post.findOne({ title: fixedTitle,
+    // Lowercase for consistent search.
+    Post.findOne({
+      title: fixedTitle,
       user: req.params.username.toLowerCase(),
     }, (err, post) => {
-      // to lowercase for consistent search
       post.title = req.body.title.toLowerCase();
       post.body = req.body.body;
       post.user = req.params.username.toLowerCase();
       post.tags = tagArr;
 
       post.save();
-
       helper.success(res);
     });
-  } else { helper.permissionDenied(res); }
+  } else {
+    helper.permissionDenied(res);
+  }
 };
 
+// Delete a post written by the current user.
 module.exports.deletePost = (req, res) => {
   let urlTitle = req.params.postname.split('-');
   let fixedTitle = urlTitle.join(' ');
 
   if (req.decoded.username === req.params.username.toLowerCase()) {
-    Post.findOne({ title: fixedTitle }, (err, post) => {
-      if (err) { res.send(err); }
-      else {
+    Post.findOne({
+      title: fixedTitle,
+    }, (err, post) => {
+      if (err) {
+        res.send(err);
+      } else {
         post.remove();
         helper.success(res);
       }
     });
-  } else { helper.permissionDenied(res); }
+  } else {
+    helper.permissionDenied(res);
+  }
 };

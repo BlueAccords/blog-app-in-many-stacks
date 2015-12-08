@@ -7,29 +7,34 @@ import tag from './controllers/tags-controller';
 import jwtMiddleware from './middlewares/jwt';
 
 /**
-* Public Routes
+* Public Routes (anyone can visit).
 */
 router.post('/', user.authenticate);
 router.post('/sign-up', user.createNewUser);
 router.get('/tag/:name', tag.findAllPostWithTag);
 
 /**
-* Routes that need jwt tokens
+* Private Routes (need jwt token).
 */
 router.use(jwtMiddleware);
+
+// User index.
 router.get('/user', user.currentUser);
+
+// User info routes.
 router.get('/user/:username', user.readUser);
 router.put('/user/:username', user.updateUser);
 router.delete('/user/:username', user.deleteUser);
 
-router.get('/user/:username/posts', user.listUserPosts);
+// User Post routes.
 router.post('/user/:username/posts', user.createNewPost);
-
-router.get('/user/:username/posts/:postname', user.readUserPost);
-router.post('/user/:username/posts/:postname', user.commentOnPost);
-router.get('/user/:username/posts/:postname/comments', user.listAllComments);
+router.get('/user/:username/posts', user.listUserPosts);
 router.put('/user/:username/posts/:postname', user.updatePost);
 router.delete('/user/:username/posts/:postname', user.deletePost);
-// router.use('/tags', require('./tags')); // public: view post that has a tag
+
+// User Post/Comment routes.
+router.post('/user/:username/posts/:postname', user.commentOnPost);
+router.get('/user/:username/posts/:postname', user.readUserPost);
+router.get('/user/:username/posts/:postname/comments', user.listAllComments);
 
 module.exports = router;
