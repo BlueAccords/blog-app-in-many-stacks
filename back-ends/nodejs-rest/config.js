@@ -20,6 +20,16 @@ let general = {
   },
 };
 
+let test = {
+  db: {
+    host: general.db.rhost,
+    port: general.db.port,
+    user: general.db.user,
+    password: general.db.password,
+    database: `test_${general.db.database}`,
+  },
+};
+
 let development = {
 };
 
@@ -28,10 +38,13 @@ let production = {
 
 _.assign(config, general);
 
+
+if('test' === process.env.NODE_ENV) {
+  _.assign(config, test);
+}
 if('development' === process.env.NODE_ENV) {
   _.assign(config, development);
 }
-
 if('production' === process.env.NODE_ENV) {
   _.assign(config, production);
 }

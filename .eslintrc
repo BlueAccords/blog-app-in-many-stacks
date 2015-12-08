@@ -20,6 +20,8 @@
     "classnames": true,
     "d3": true,
     "jest": true,
+    "describe": true,
+    "it": true,
   },
   "env": {
     "node": true,

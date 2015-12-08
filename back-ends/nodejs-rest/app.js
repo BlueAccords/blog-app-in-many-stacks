@@ -21,6 +21,7 @@ let config        = require('./config');
 let bodyParser    = require('body-parser');
 let morgan        = require('morgan');
 let cors          = require('cors');
+let portfinder    = require('portfinder');
 
 // connect to Mongo when the app initializes
 // No password needed in development
@@ -49,9 +50,21 @@ app.get('*', (req, res) => {
   res.sendStatus(404);
 });
 
-let server = app.listen(process.env.WEB_PORT, () => {
-  let host = server.address().address;
-  let port = server.address().port;
+let server;
+if(env === 'test') {
+  server = app.listen(process.env.TEST_PORT, () => {
+    let host = server.address().address;
+    let port = server.address().port;
 
-  console.log('Example app listening at http://%s:%s', host, port);
-});
+    console.log('Test server running at http://%s:%s', host, port);
+
+  });
+} else {
+  server = app.listen(process.env.WEB_PORT, () => {
+    let host = server.address().address;
+    let port = server.address().port;
+
+    console.log('Example app listening at http://%s:%s', host, port);
+  });
+}
+module.exports = server;
