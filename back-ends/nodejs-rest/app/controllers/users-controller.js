@@ -169,7 +169,7 @@ module.exports.deleteUser = (req, res) => {
     .then(user => {
       user.remove();
       res.json({
-        deleted: user._id,
+        deleted_id: user._id,
       });
     });
   } else {
@@ -368,7 +368,7 @@ module.exports.deletePost = (req, res) => {
       });
 
       res.json({
-        deleted: post._id,
+        deleted_id: post._id,
       });
     });
   } else {
