@@ -87,7 +87,7 @@ module.exports.createNewUser = (req, res) => {
  * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
 */
 module.exports.currentUser = (req, res) => {
-  User.findOne({ username: req.decoded.username })
+  User.findOne({ username: req.user.username })
   .then(user => {
     res.json(user);
   });
@@ -130,7 +130,7 @@ module.exports.showUser = (req, res) => {
  * @apiParam {string} password User's password.
 */
 module.exports.updateUser = (req, res) => {
-  if (req.decoded.username === req.params.username.toLowerCase()) {
+  if (req.user.username === req.params.username.toLowerCase()) {
     User.findOne({ username: req.params.username.toLowerCase() })
     .then(user => {
       if (user === null) {
@@ -164,7 +164,7 @@ module.exports.updateUser = (req, res) => {
  * @apiParam {URL-param} url.username User's username.
 */
 module.exports.deleteUser = (req, res) => {
-  if (req.decoded.username === req.params.username.toLowerCase()) {
+  if (req.user.username === req.params.username.toLowerCase()) {
     User.findOne({ username: req.params.username.toLowerCase() })
     .then(user => {
       user.remove();
@@ -207,7 +207,7 @@ module.exports.listUserPosts = (req, res) => {
  * @apiParam {string} title Body of the post.
 */
 module.exports.createNewPost = (req, res) => {
-  if (req.decoded.username === req.params.username.toLowerCase()) {
+  if (req.user.username === req.params.username.toLowerCase()) {
     let tagArr = req.body.tags.split(', ');
 
     let newPost = new Post({
@@ -278,7 +278,7 @@ module.exports.readUserPost = (req, res) => {
 module.exports.commentOnPost = (req, res) => {
   Comment.create({
     post: req.params.postname,
-    user: req.decoded.username,
+    user: req.user.username,
     text: req.body.text,
   }).then(comment => {
     res.json(comment);
@@ -320,7 +320,7 @@ module.exports.updatePost = (req, res) => {
   // Tags in the post body (comman seperated) go in an array.
   let tagArr = req.body.tags.split(', ');
 
-  if (req.decoded.username === req.params.username.toLowerCase()) {
+  if (req.user.username === req.params.username.toLowerCase()) {
     // Lowercase for consistent search.
     Post.findOne({
       title: fixedTitle,
@@ -355,7 +355,7 @@ module.exports.deletePost = (req, res) => {
   let urlTitle = req.params.postname.split('-');
   let fixedTitle = urlTitle.join(' ');
 
-  if (req.decoded.username === req.params.username.toLowerCase()) {
+  if (req.user.username === req.params.username.toLowerCase()) {
     Post.findOne({ title: fixedTitle })
     .then(post => {
       post.remove();
