@@ -3,6 +3,7 @@
 import { expect } from 'chai';
 import request from 'supertest';
 import { setupDB } from '../test-helper';
+import User from '../../app/models/User';
 import Factory from '../Factory.js';
 
 describe('User requests', () => {
@@ -54,7 +55,6 @@ describe('User requests', () => {
         expect(err).to.equal(null);
         expect(res.body.message).to.equal('Error: That user already exits.');
         expect(res.body).to.be.an('object');
-        done();
       });
     });
   });

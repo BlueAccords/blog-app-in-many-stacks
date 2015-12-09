@@ -9,4 +9,4 @@ Factory.define('user', User, {
   password: faker.internet.password(),
 });
 
-module.exports = Factory;
+export default Factory;
