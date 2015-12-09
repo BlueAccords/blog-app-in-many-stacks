@@ -217,11 +217,12 @@ module.exports.createNewPost = (req, res) => {
       tags: tagArr,
     });
     newPost.save()
-    .then( () => {
-      tagArr.forEach( (tag) => {
+    .then( (post) => {
+      post.tags.forEach( (tag) => {
         Tag.create({
           text: tag.toLowerCase(),
-          post: req.body.title.toLowerCase(),
+          post: post.title,
+          post_id: post._id,
         });
       });
     });
@@ -252,8 +253,14 @@ module.exports.readUserPost = (req, res) => {
   Post.findOne({
     title: fixedTitle,
     user: req.params.username.toLowerCase(),
-  }).then(post => {
-    res.json(post);
+  }).then( post => {
+    if (post) {
+      res.json(post);
+    } else {
+      res.json({
+        msg: 'This post does not exist',
+      });
+    }
   });
 };
 
@@ -352,15 +359,16 @@ module.exports.deletePost = (req, res) => {
     Post.findOne({ title: fixedTitle })
     .then(post => {
       post.remove();
+
+      Tag.find({post_id: post._id})
+      .then(tags => {
+        tags.forEach(tag => {
+          tag.remove();
+        });
+      });
+
       res.json({
         deleted: post._id,
-      });
-    });
-
-    Tag.find({post: fixedTitle})
-    .then(tags => {
-      tags.forEach(tag => {
-        tag.remove();
       });
     });
   } else {
