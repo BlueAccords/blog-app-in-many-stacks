@@ -59,7 +59,7 @@
 			"currentHelper": "normal",
 			"pathVariables": {},
 			"version": 2,
-			"name": "http://localhost:8000/user/realfinAl/posts/test-post-man",
+			"name": "Update a single post",
 			"description": "",
 			"descriptionFormat": "html",
 			"collectionId": "343bc93c-ee26-efb0-5f24-fb69d74a02f6"
@@ -76,7 +76,7 @@
 			"currentHelper": "normal",
 			"pathVariables": {},
 			"version": 2,
-			"name": "http://localhost:8000/user/realfinAl/posts/",
+			"name": "View list of posts by a user.",
 			"description": "",
 			"descriptionFormat": "html",
 			"collectionId": "343bc93c-ee26-efb0-5f24-fb69d74a02f6"
@@ -111,7 +111,7 @@
 			"currentHelper": "normal",
 			"pathVariables": {},
 			"version": 2,
-			"name": "http://localhost:8000/tags/the",
+			"name": "Lists post with a certain tag.",
 			"description": "",
 			"descriptionFormat": "html",
 			"collectionId": "343bc93c-ee26-efb0-5f24-fb69d74a02f6"
@@ -128,7 +128,7 @@
 			"currentHelper": "normal",
 			"pathVariables": {},
 			"version": 2,
-			"name": "http://localhost:8000/user/",
+			"name": "Get current user info.",
 			"description": "",
 			"descriptionFormat": "html",
 			"collectionId": "343bc93c-ee26-efb0-5f24-fb69d74a02f6"
@@ -145,7 +145,7 @@
 			"currentHelper": "normal",
 			"pathVariables": {},
 			"version": 2,
-			"name": "http://localhost:8000/tags/etc",
+			"name": "List all posts with a certain tag.",
 			"description": "",
 			"descriptionFormat": "html",
 			"collectionId": "343bc93c-ee26-efb0-5f24-fb69d74a02f6"
@@ -162,7 +162,7 @@
 			"currentHelper": "normal",
 			"pathVariables": {},
 			"version": 2,
-			"name": "http://localhost:8000/user/realfinAl/posts/test-post-man-update",
+			"name": "Delete a post.",
 			"description": "",
 			"descriptionFormat": "html",
 			"collectionId": "343bc93c-ee26-efb0-5f24-fb69d74a02f6"
@@ -235,7 +235,7 @@
 			"currentHelper": "normal",
 			"pathVariables": {},
 			"version": 2,
-			"name": "http://localhost:8000/user/realfinAl/posts/test-post-man-update",
+			"name": "Post a comment.",
 			"description": "",
 			"descriptionFormat": "html",
 			"collectionId": "343bc93c-ee26-efb0-5f24-fb69d74a02f6"
@@ -252,7 +252,7 @@
 			"currentHelper": "normal",
 			"pathVariables": {},
 			"version": 2,
-			"name": "http://localhost:8000/user/realfinAl/posts/test-post-man",
+			"name": "Get a specific post written by a user.",
 			"description": "",
 			"descriptionFormat": "html",
 			"collectionId": "343bc93c-ee26-efb0-5f24-fb69d74a02f6"
@@ -269,7 +269,7 @@
 			"currentHelper": "normal",
 			"pathVariables": {},
 			"version": 2,
-			"name": "http://localhost:8000/user/realfinAl/posts/test-post-man-update/comments",
+			"name": "Show list of comments for a given post",
 			"description": "",
 			"descriptionFormat": "html",
 			"collectionId": "343bc93c-ee26-efb0-5f24-fb69d74a02f6"
@@ -319,7 +319,7 @@
 			"currentHelper": "normal",
 			"helperAttributes": {},
 			"time": 1449599069464,
-			"name": "Update User",
+			"name": "Update current user.",
 			"description": "",
 			"collectionId": "343bc93c-ee26-efb0-5f24-fb69d74a02f6"
 		},
@@ -354,7 +354,7 @@
 			"currentHelper": "normal",
 			"pathVariables": {},
 			"version": 2,
-			"name": "http://localhost:8000/user/realfinAl/posts",
+			"name": "Create a new post.",
 			"description": "",
 			"descriptionFormat": "html",
 			"collectionId": "343bc93c-ee26-efb0-5f24-fb69d74a02f6"
@@ -371,7 +371,7 @@
 			"currentHelper": "normal",
 			"pathVariables": {},
 			"version": 2,
-			"name": "http://localhost:8000/user/realfinAl/posts/test-post-man-update",
+			"name": "Get a specific post written by a user.",
 			"description": "",
 			"descriptionFormat": "html",
 			"collectionId": "343bc93c-ee26-efb0-5f24-fb69d74a02f6"
@@ -419,7 +419,7 @@
 			"currentHelper": "normal",
 			"pathVariables": {},
 			"version": 2,
-			"name": "http://localhost:8000/user/realfinal",
+			"name": "Update current user.",
 			"description": "",
 			"descriptionFormat": "html",
 			"collectionId": "343bc93c-ee26-efb0-5f24-fb69d74a02f6"
@@ -467,7 +467,7 @@
 			"currentHelper": "normal",
 			"pathVariables": {},
 			"version": 2,
-			"name": "http://localhost:8000/user/realfinAl/posts",
+			"name": "View a list of posts by a user",
 			"description": "",
 			"descriptionFormat": "html",
 			"collectionId": "343bc93c-ee26-efb0-5f24-fb69d74a02f6"
@@ -484,7 +484,7 @@
 			"currentHelper": "normal",
 			"pathVariables": {},
 			"version": 2,
-			"name": "http://localhost:8000/user/realfinal",
+			"name": "Delete the current user.",
 			"description": "",
 			"descriptionFormat": "html",
 			"collectionId": "343bc93c-ee26-efb0-5f24-fb69d74a02f6"
