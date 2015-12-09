@@ -5,7 +5,6 @@
 import bcrypt from 'bcrypt';
 import config from '../../config';
 import jwt from 'jsonwebtoken';
-// import helper from './helper';
 
 import User from './../models/User';
 import Post from './../models/Post';
@@ -21,25 +20,23 @@ import Tag from './../models/Tag';
  * @apiParam {string} password Users unique password.
 */
 module.exports.authenticate = (req, res) => {
-  User.findOne({
-    username: req.body.username.toLowerCase(),
-  }, (err, user) => {
+  User.findOne({ username: req.body.username.toLowerCase() })
+  .then( (user) => {
     if (user === null) {
       res.json({
-        msg: 'Err. No user found.'
+        msg: 'Err. No user found.',
       });
     } else {
       if (bcrypt.compareSync(req.body.password, user.password)) {
-        let token = jwt.sign(user, config.app.secret, {
-          expiresIn: 1440 * 60,
-        });
+        let token = jwt.sign(user, config.app.secret, { expiresIn: 1440 * 60 });
 
         res.json({
-          message: 'A token has been passed. You are now logged in!',
           token,
         });
       } else {
-        // helper.permissionDenied(res);
+        res.json({
+          msg: 'Err. Failed to authenticate.',
+        });
       }
     }
   });
@@ -56,24 +53,27 @@ module.exports.authenticate = (req, res) => {
  * @apiParam {string} password User's password.
 */
 module.exports.createNewUser = (req, res) => {
-  User.findOne({
-    username: req.body.username.toLowerCase(),
-  }, (err, user) => {
-    if (!user) {
-      bcrypt.hash(req.body.password, 8, (err, hash) => {
-        User.create({
-          name: req.body.name,
-          email: req.body.email.toLowerCase(),
-          username: req.body.username.toLowerCase(),
-          password: hash,
-        }, (err, user) => {
-          res.json(user);
-        });
-      });
-
-    } else {
+  User.findOne({ username: req.body.username.toLowerCase() })
+  .then( (user) => {
+    if (user !== null) {
       res.json({
-        msg: 'Err. This user already exists.'
+        msg: 'Err. This user already exists.',
+      });
+    } else {
+      bcrypt.hash(req.body.password, 8, (err, hash) => {
+        if (err) {
+          res.send(err);
+        } else {
+          let newUser = new User({
+            name: req.body.name,
+            email: req.body.email.toLowerCase(),
+            username: req.body.username.toLowerCase(),
+            password: hash,
+          });
+          newUser.save();
+
+          res.json(newUser);
+        }
       });
     }
   });
@@ -84,20 +84,12 @@ module.exports.createNewUser = (req, res) => {
  * @apiName currentUser
  * @apiGroup User
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
 */
 module.exports.currentUser = (req, res) => {
-  User.findOne({
-    username: req.decoded.username,
-  }, (err, user) => {
-    if (user === null) {
-      res.json({
-        msg: 'Err. No user found.'
-      });
-    }
-    else {
-      res.json(user);
-    }
+  User.findOne({ username: req.user.username })
+  .then(user => {
+    res.json(user);
   });
 };
 
@@ -106,17 +98,16 @@ module.exports.currentUser = (req, res) => {
  * @apiName showUser
  * @apiGroup User
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
 */
 module.exports.showUser = (req, res) => {
-  User.findOne({
-    username: req.params.username.toLowerCase(),
-  }, (err, user) => {
+  User.findOne({ username: req.params.username.toLowerCase() })
+  .then(user => {
     if (user === null) {
       res.json({
-        msg: 'Err. No user found.'
+        msg: 'Err. No user found.',
       });
     }
     else {
@@ -130,7 +121,7 @@ module.exports.showUser = (req, res) => {
  * @apiName updateUser
  * @apiGroup User
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
  * @apiParam {string} name User's name.
@@ -139,13 +130,12 @@ module.exports.showUser = (req, res) => {
  * @apiParam {string} password User's password.
 */
 module.exports.updateUser = (req, res) => {
-  if (req.decoded.username === req.params.username.toLowerCase()) {
-    User.findOne({
-      username: req.params.username.toLowerCase(),
-    }, (err, user) => {
+  if (req.user.username === req.params.username.toLowerCase()) {
+    User.findOne({ username: req.params.username.toLowerCase() })
+    .then(user => {
       if (user === null) {
         res.json({
-          msg: 'Err. No user found.'
+          msg: 'Err. No user found.',
         });
       } else {
         user.name = req.body.name;
@@ -153,18 +143,13 @@ module.exports.updateUser = (req, res) => {
         user.username = req.body.username.toLowerCase();
         user.password = bcrypt.hashSync(req.body.password, 8);
 
-        user.save((err, user) => {
-          if (err) {
-            return err;
-          } else {
-            res.json(user);
-          }
-        });
+        user.save();
+        res.json(user);
       }
     });
   } else {
     res.json({
-      msg: 'You are not authorized to do that.'
+      msg: 'You are not authorized to do that.',
     });
   }
 };
@@ -174,32 +159,22 @@ module.exports.updateUser = (req, res) => {
  * @apiName deleteUser
  * @apiGroup User
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
 */
 module.exports.deleteUser = (req, res) => {
-  if (req.decoded.username === req.params.username.toLowerCase()) {
-    User.findOne({
-      username: req.params.username.toLowerCase(),
-    }, (err, user) => {
-      if (user === null) {
-        res.json({
-          msg: 'Err. No user found.'
-        });
-      } else {
-        let deletedUser = user.username;
-        user.remove()
-        .then(() => {
-          return res.json({
-            deleted_id: user.id,
-          });
-        });
-      }
+  if (req.user.username === req.params.username.toLowerCase()) {
+    User.findOne({ username: req.params.username.toLowerCase() })
+    .then(user => {
+      user.remove();
+      res.json({
+        deleted_id: user._id,
+      });
     });
   } else {
     res.json({
-      msg: 'You are not authorized to do that.'
+      msg: 'You are not authorized to do that.',
     });
   }
 };
@@ -209,14 +184,13 @@ module.exports.deleteUser = (req, res) => {
  * @apiName listUserPosts
  * @apiGroup User-Posts
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
 */
 module.exports.listUserPosts = (req, res) => {
-  Post.find({
-    user: req.params.username.toLowerCase(),
-  }, (err, posts) => {
+  Post.find({ user: req.params.username.toLowerCase() })
+  .then(posts => {
     res.json(posts);
   });
 };
@@ -226,14 +200,14 @@ module.exports.listUserPosts = (req, res) => {
  * @apiName createNewPost
  * @apiGroup User-Posts
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
  * @apiParam {string} title Title of the post.
  * @apiParam {string} title Body of the post.
 */
 module.exports.createNewPost = (req, res) => {
-  if (req.decoded.username === req.params.username.toLowerCase()) {
+  if (req.user.username === req.params.username.toLowerCase()) {
     let tagArr = req.body.tags.split(', ');
 
     let newPost = new Post({
@@ -242,19 +216,22 @@ module.exports.createNewPost = (req, res) => {
       user: req.params.username.toLowerCase(),
       tags: tagArr,
     });
-    newPost.save();
-
-    // Create a new tag for each tag listed on a post.
-    tagArr.forEach( (tag) => {
-      Tag.create({
-        text: tag.toLowerCase(),
-        post: req.body.title.toLowerCase(),
+    newPost.save()
+    .then( (post) => {
+      post.tags.forEach( (tag) => {
+        Tag.create({
+          text: tag.toLowerCase(),
+          post: post.title,
+          post_id: post._id,
+        });
       });
     });
 
-    // helper.success(res);
+    res.json(newPost);
   } else {
-    // helper.permissionDenied(res);
+    res.json({
+      msg: 'You are not authorized to do that.',
+    });
   }
 };
 
@@ -263,7 +240,7 @@ module.exports.createNewPost = (req, res) => {
  * @apiName readUserPost
  * @apiGroup User-Posts
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
  * @apiParam {URL-param} url.postname User's post title-url.
@@ -276,8 +253,14 @@ module.exports.readUserPost = (req, res) => {
   Post.findOne({
     title: fixedTitle,
     user: req.params.username.toLowerCase(),
-  }, (err, post) => {
-    res.json(post);
+  }).then( post => {
+    if (post) {
+      res.json(post);
+    } else {
+      res.json({
+        msg: 'This post does not exist',
+      });
+    }
   });
 };
 
@@ -286,7 +269,7 @@ module.exports.readUserPost = (req, res) => {
  * @apiName commentOnPost
  * @apiGroup .Post-Comments
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
  * @apiParam {URL-param} url.postname User's post title-url.
@@ -295,10 +278,10 @@ module.exports.readUserPost = (req, res) => {
 module.exports.commentOnPost = (req, res) => {
   Comment.create({
     post: req.params.postname,
-    user: req.decoded.username,
+    user: req.user.username,
     text: req.body.text,
-  }, (err, comment) => {
-    return res.json(comment);
+  }).then(comment => {
+    res.json(comment);
   });
 };
 
@@ -307,15 +290,14 @@ module.exports.commentOnPost = (req, res) => {
  * @apiName listAllComments
  * @apiGroup .Post-Comments
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
  * @apiParam {URL-param} url.postname User's post title-url.
 */
 module.exports.listAllComments = (req, res) => {
-  Comment.find({
-    post: req.params.postname,
-  }, (err, list) => {
+  Comment.find({ post: req.params.postname})
+  .then(list => {
     res.json(list);
   });
 };
@@ -325,7 +307,7 @@ module.exports.listAllComments = (req, res) => {
  * @apiName updatePost
  * @apiGroup User-Posts
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
  * @apiParam {URL-param} url.postname User's post title-url.
@@ -338,22 +320,24 @@ module.exports.updatePost = (req, res) => {
   // Tags in the post body (comman seperated) go in an array.
   let tagArr = req.body.tags.split(', ');
 
-  if (req.decoded.username === req.params.username.toLowerCase()) {
+  if (req.user.username === req.params.username.toLowerCase()) {
     // Lowercase for consistent search.
     Post.findOne({
       title: fixedTitle,
       user: req.params.username.toLowerCase(),
-    }, (err, post) => {
+    }).then(post => {
       post.title = req.body.title.toLowerCase();
       post.body = req.body.body;
       post.user = req.params.username.toLowerCase();
       post.tags = tagArr;
 
       post.save();
-      // helper.success(res);
+      res.json(post);
     });
   } else {
-    // helper.permissionDenied(res);
+    res.json({
+      msg: 'You are not authorized to do that.',
+    });
   }
 };
 
@@ -362,7 +346,7 @@ module.exports.updatePost = (req, res) => {
  * @apiName deletePost
  * @apiGroup User-Posts
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
  * @apiParam {URL-param} url.postname User's post title-url.
@@ -371,18 +355,25 @@ module.exports.deletePost = (req, res) => {
   let urlTitle = req.params.postname.split('-');
   let fixedTitle = urlTitle.join(' ');
 
-  if (req.decoded.username === req.params.username.toLowerCase()) {
-    Post.findOne({
-      title: fixedTitle,
-    }, (err, post) => {
-      if (err) {
-        res.send(err);
-      } else {
-        post.remove();
-        // helper.success(res);
-      }
+  if (req.user.username === req.params.username.toLowerCase()) {
+    Post.findOne({ title: fixedTitle })
+    .then(post => {
+      post.remove();
+
+      Tag.find({post_id: post._id})
+      .then(tags => {
+        tags.forEach(tag => {
+          tag.remove();
+        });
+      });
+
+      res.json({
+        deleted_id: post._id,
+      });
     });
   } else {
-    // helper.permissionDenied(res);
+    res.json({
+      msg: 'You are not authorized to do that.',
+    });
   }
 };

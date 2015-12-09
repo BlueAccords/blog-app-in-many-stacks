@@ -5,23 +5,35 @@ import config from '../../config';
 import jwt from 'jsonwebtoken';
 
 module.exports = (req, res, next) => {
-  // token is assigned to any token passed through the body, head, or query
-  let token = req.body.token || req.query.token || req.headers['x-access-token'];
+  let token;
+  try {
+    // token is assigned to any token passed through the body, head, or query
+    token = req.body.token || req.query.token || req.headers['authorization'];
+  } catch(err) {
+    token = null;
+  }
+
 
   // if the token exists
   if (token) {
     // check to see if the token is valid
     jwt.verify(token, config.app.secret, (err, decoded) => {
       if (err) {
-        // helper.tokenFail(res);
+        return res.json({
+          success: false,
+          msg: 'Failed to authenticate token.',
+        });
       } else {
         // a new key is added to the request object
         // the new key has a value of the unencoded token payload (user info)
-        req.decoded = decoded;
+        req.user = decoded;
         next();
       }
     });
   } else {
-    // helper.tokenFail(res);
+    return res.json({
+      success: false,
+      msg: 'Failed to authenticate token.',
+    });
   }
 };
