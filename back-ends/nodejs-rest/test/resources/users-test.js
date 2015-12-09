@@ -1,13 +1,9 @@
 /* eslint max-nested-callbacks: 0*/
 /* eslint no-undef: 0*/
-'use strict';
-
-require('babel/register');
-
-let expect = require('chai').expect;
-let request = require('supertest');
-let User = require('../../app/models/User');
-let setupDB = require('../test-helper').setupDB;
+import { expect } from 'chai';
+import request from 'supertest';
+import { setupDB } from '../test-helper';
+import Factory from '../Factory.js';
 
 describe('User requests', () => {
   let  app;
@@ -22,42 +18,36 @@ describe('User requests', () => {
   });
 
   it('should register a user when given the correct credentials', (done) => {
+    let user = {
+      name: 'Bob Nolan',
+      email: 'bob@bob.com',
+      username: 'delicious',
+      password: 'testtest',
+    };
+
     request(app)
     .post('/sign-up')
     .set('Accept', /json/)
-    .send({
-      fName: 'Test',
-      lName: 'Last',
-      email: 'test@test.com',
-      username: 'testest',
-      password: 'testtest',
-    })
+    .send(user)
     .expect(200)
     .end((err, res) => {
       expect(err).to.equal(null);
-      expect(res.body.message).to.equal('Successful request.');
+      expect(res.body.name).to.equal(user.name);
       expect(res.body).to.be.an('object');
       done();
     });
   });
 
   it('should not register a user that already exists', (done) => {
-    User.create({
-      fName: 'Test',
-      lName: 'Last',
-      email: 'test@test.com',
-      username: 'testtest',
-      password: 'testtest',
-    }).then((user) => {
+    Factory.create('user', (user) => {
       request(app)
       .post('/sign-up')
       .set('Accept', /json/)
       .send({
-        fName: 'Test',
-        lName: 'Last',
-        email: 'test@test.com',
-        username: 'testest',
-        password: 'testtest',
+        name: user.name,
+        email: user.email,
+        username: user.username,
+        password: user.password,
       })
       .expect(200)
       .end((err, res) => {

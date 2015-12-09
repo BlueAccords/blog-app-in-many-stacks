@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=development nodemon app.js",
-    "test": "NODE_ENV=test mocha test --recursive --reporter spec",
+    "test": "NODE_ENV=test mocha test --recursive --compilers js:babel/register --reporter spec ",
     "update-docs": "apidoc -i app/ -o apidocs/"
   },
   "repository": {
