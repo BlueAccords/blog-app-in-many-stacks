@@ -84,7 +84,7 @@ module.exports.createNewUser = (req, res) => {
  * @apiName currentUser
  * @apiGroup User
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
 */
 module.exports.currentUser = (req, res) => {
   User.findOne({ username: req.user.username })
@@ -98,7 +98,7 @@ module.exports.currentUser = (req, res) => {
  * @apiName showUser
  * @apiGroup User
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
 */
@@ -121,7 +121,7 @@ module.exports.showUser = (req, res) => {
  * @apiName updateUser
  * @apiGroup User
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
  * @apiParam {string} name User's name.
@@ -159,7 +159,7 @@ module.exports.updateUser = (req, res) => {
  * @apiName deleteUser
  * @apiGroup User
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
 */
@@ -184,7 +184,7 @@ module.exports.deleteUser = (req, res) => {
  * @apiName listUserPosts
  * @apiGroup User-Posts
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
 */
@@ -200,7 +200,7 @@ module.exports.listUserPosts = (req, res) => {
  * @apiName createNewPost
  * @apiGroup User-Posts
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
  * @apiParam {string} title Title of the post.
@@ -240,7 +240,7 @@ module.exports.createNewPost = (req, res) => {
  * @apiName readUserPost
  * @apiGroup User-Posts
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
  * @apiParam {URL-param} url.postname User's post title-url.
@@ -269,7 +269,7 @@ module.exports.readUserPost = (req, res) => {
  * @apiName commentOnPost
  * @apiGroup .Post-Comments
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
  * @apiParam {URL-param} url.postname User's post title-url.
@@ -290,7 +290,7 @@ module.exports.commentOnPost = (req, res) => {
  * @apiName listAllComments
  * @apiGroup .Post-Comments
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
  * @apiParam {URL-param} url.postname User's post title-url.
@@ -307,7 +307,7 @@ module.exports.listAllComments = (req, res) => {
  * @apiName updatePost
  * @apiGroup User-Posts
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
  * @apiParam {URL-param} url.postname User's post title-url.
@@ -346,7 +346,7 @@ module.exports.updatePost = (req, res) => {
  * @apiName deletePost
  * @apiGroup User-Posts
  *
- * @apiHeader (jwt-token) {String} x-access-token Token Authentication.
+ * @apiHeader (jwt-token) {String} authorization Token Authentication.
  *
  * @apiParam {URL-param} url.username User's username.
  * @apiParam {URL-param} url.postname User's post title-url.
