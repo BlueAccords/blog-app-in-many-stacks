@@ -114,8 +114,7 @@
 
 /**
  * @api {get} /posts Get all posts
- * @apiName Get posts
- * @apiDescription Get all posts
+ * @apiName Get all posts
  * @apiGroup Posts
  *
  * @apiUse postsResponse
@@ -152,7 +151,7 @@
  *
  * @apiParam {Object} post
  * @apiParam {String} post.title The title of the post
- * @apiParam {string} post.url_path The unique url path for the post (eg. blog.com/:url-path)
+ * @apiParam {string} post.url_path The unique url path for the post (eg. blog.com/:url-path). Must be hiphenated.
  * @apiParam {string} post.body The post content
  */
 
@@ -292,6 +291,14 @@
  */
 
 /**
+ * @api {get} /tags Get all tags
+ * @apiName Get all tags
+ * @apiGroup Tags
+ *
+ * @apiUse tagsResponse
+ */
+
+/**
  * @api {get} /posts/:post_id/tags Get tags by post
  * @apiName Get tags by post
  * @apiGroup Tags
@@ -322,4 +329,26 @@
  * @apiParam {String} id The tag id
  * @apiParam {Object} tag
  * @apiParam {String} tag.text
-*/
+ */
+
+
+/****************************************************** SEARCH ***********************************/
+/**
+ * @api {get} /posts?path_url=:path_url Get post by post path_url
+ * @apiName Get post by post path_url
+ * @apiGroup Search
+ *
+ * @apiParam {String} path_url The unique path_url for the post you want to find
+ *
+ * @apiUse postResponse
+ */
+
+/**
+ * @api {get} /tags/?text=:text Get tag by tag text
+ * @apiName Get tag by tag text
+ * @apiGroup Search
+ *
+ * @apiParam {String} text The unique tag text
+ *
+ * @apiUse tagResponse
+ */
