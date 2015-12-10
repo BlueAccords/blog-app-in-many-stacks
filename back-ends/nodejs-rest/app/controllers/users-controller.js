@@ -1,8 +1,8 @@
 'use strict';
 
 import bcrypt from 'bcrypt';
-import config from '../../config';
 import jwt from 'jsonwebtoken';
+import config from '../../config';
 
 import User from './../models/User';
 import Post from './../models/Post';
@@ -10,7 +10,9 @@ import Comment from './../models/Comment';
 import Tag from './../models/Tag';
 
 module.exports.authenticate = (req, res) => {
-  User.findOne({ username: req.body.username.toLowerCase() })
+  User.findOne({
+    email: req.body.email.toLowerCase(),
+  })
   .then( (user) => {
     if (user === null) {
       res.json({
@@ -33,8 +35,10 @@ module.exports.authenticate = (req, res) => {
 };
 
 module.exports.createNewUser = (req, res) => {
-  User.findOne({ username: req.body.username.toLowerCase() })
-  .then( (user) => {
+  User.findOne({
+    email: req.body.email.toLowerCase(),
+  })
+  .then(user => {
     if (user !== null) {
       res.json({
         msg: 'Err. This user already exists.',
@@ -47,7 +51,6 @@ module.exports.createNewUser = (req, res) => {
           let newUser = new User({
             name: req.body.name,
             email: req.body.email.toLowerCase(),
-            username: req.body.username.toLowerCase(),
             password: hash,
           });
           newUser.save();
@@ -60,14 +63,20 @@ module.exports.createNewUser = (req, res) => {
 };
 
 module.exports.currentUser = (req, res) => {
-  User.findOne({ username: req.user.username })
+  User.findOne({
+    email: req.user.email,
+  })
   .then(user => {
-    res.json({'user': user});
+    res.json({
+      'user': user,
+    });
   });
 };
 
 module.exports.showUser = (req, res) => {
-  User.findOne({ username: req.params.username.toLowerCase() })
+  User.findOne({
+    email: req.params.email.toLowerCase(),
+  })
   .then(user => {
     if (user === null) {
       res.json({
@@ -81,8 +90,10 @@ module.exports.showUser = (req, res) => {
 };
 
 module.exports.updateUser = (req, res) => {
-  if (req.user.username === req.params.username.toLowerCase()) {
-    User.findOne({ username: req.params.username.toLowerCase() })
+  if (req.user.email === req.params.email.toLowerCase()) {
+    User.findOne({
+      email: req.params.email.toLowerCase(),
+    })
     .then(user => {
       if (user === null) {
         res.json({
@@ -90,8 +101,7 @@ module.exports.updateUser = (req, res) => {
         });
       } else {
         user.name = req.body.name;
-        user.email = req.body.email;
-        user.username = req.body.username.toLowerCase();
+        user.email = req.body.email.toLowerCase();
         user.password = bcrypt.hashSync(req.body.password, 8);
 
         user.save();
@@ -106,8 +116,10 @@ module.exports.updateUser = (req, res) => {
 };
 
 module.exports.deleteUser = (req, res) => {
-  if (req.user.username === req.params.username.toLowerCase()) {
-    User.findOne({ username: req.params.username.toLowerCase() })
+  if (req.user.email === req.params.email.toLowerCase()) {
+    User.findOne({
+      email: req.params.email.toLowerCase(),
+    })
     .then(user => {
       user.remove();
       res.json({
@@ -122,20 +134,22 @@ module.exports.deleteUser = (req, res) => {
 };
 
 module.exports.listUserPosts = (req, res) => {
-  Post.find({ user: req.params.username.toLowerCase() })
+  Post.find({
+    user: req.params.email.toLowerCase(),
+  })
   .then(posts => {
     res.json(posts);
   });
 };
 
 module.exports.createNewPost = (req, res) => {
-  if (req.user.username === req.params.username.toLowerCase()) {
+  if (req.user.email === req.params.email.toLowerCase()) {
     let tagArr = req.body.tags.split(', ');
 
     let newPost = new Post({
       title: req.body.title.toLowerCase(),
       body: req.body.body,
-      user: req.params.username.toLowerCase(),
+      user: req.user._id,
       tags: tagArr,
     });
     newPost.save()
@@ -164,7 +178,7 @@ module.exports.readUserPost = (req, res) => {
 
   Post.findOne({
     title: fixedTitle,
-    user: req.params.username.toLowerCase(),
+    user: req.user._id,
   }).then( post => {
     if (post) {
       res.json(post);
