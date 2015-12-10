@@ -32,7 +32,8 @@ router.route('/tag/:name')
 router.use(jwtMiddleware);
 
 // User Index/Home.
-router.get('/user', user.currentUser);
+router.route('/user')
+  .get(user.currentUser);
 
 // User Info routes.
 router.route('/user/:username')
