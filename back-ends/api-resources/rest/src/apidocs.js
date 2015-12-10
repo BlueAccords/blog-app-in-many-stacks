@@ -243,3 +243,67 @@
  * @apiParam {Object} comment
  * @apiParam {String} comment.text
 */
+/****************************************************** COMMENTS ***********************************/
+/**
+ * @apiDefine tagResponse
+ *
+ * @apiSuccess {Object} tag
+ * @apiSuccess {Integer} tag.id
+ * @apiSuccess {string} tag.text
+ */
+
+/**
+ * @apiDefine tagsResponse
+ *
+ * @apiSuccess {Object[]} tags
+ * @apiSuccess {Object} tags
+ * @apiSuccess {Integer} tags.id
+ * @apiSuccess {string} tags.text
+ */
+
+/**
+ * @api {post} /posts/:post_id/tags Create a tag
+ * @apiName Create a tag
+ * @apiGroup Tags
+ *
+ * @apiUse protected
+ * @apiUse tagResponse
+ * @apiDescription - Any user that is logged in can create a tag
+ *
+ * @apiParam {String} post_id The post id
+ * @apiParam {Object} tag
+ * @apiParam {String} tag.text The tag text
+ */
+
+/**
+ * @api {get} /posts/:post_id/tags Get tags by post
+ * @apiName Get tags by post
+ * @apiGroup Tags
+ *
+ * @apiUse tagsResponse
+ *
+ * @apiParam {String} post_id The post id
+ */
+
+/**
+ * @api {get} /tags/:id Delete tag
+ * @apiName Delete tag
+ * @apiGroup Tags
+ *
+ * @apiUse protected
+ * @apiUse successfulDeletion
+ *
+ * @apiParam {String} id The tag id
+ */
+
+/**
+ * @api {put} /tags/:id Update tag
+ * @apiName Update tag
+ * @apiUse protected
+ * @apiUse tagResponse
+ * @apiGroup Tags
+ *
+ * @apiParam {String} id The tag id
+ * @apiParam {Object} tag
+ * @apiParam {String} tag.text
+*/
