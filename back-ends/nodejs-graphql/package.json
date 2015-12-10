@@ -1,8 +1,8 @@
 {
-  "name": "mailSultanApiNode",
+  "name": "blog-app-with-many-stacks-node-graphql",
   "private": true,
   "version": "0.0.0",
-  "description": "The node api for Mail Sultan",
+  "description": "The nodejs graphql backend for the blog app",
   "keywords": [],
   "dependencies": {
     "babel": "^5.8.29",
@@ -44,6 +44,9 @@
     "type": "git",
     "url": "git://bitbucket.org/chiedolabs/mail-sultan-api-node.git"
   },
-  "author": "chiedo",
-  "license": ""
+  "authors": [
+    "Chiedo",
+    "Eric DuVon"
+  ],
+  "license": "MIT"
 }
