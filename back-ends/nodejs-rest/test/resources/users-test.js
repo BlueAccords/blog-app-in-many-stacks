@@ -3,7 +3,6 @@
 import { expect } from 'chai';
 import request from 'supertest';
 import { setupDB } from '../test-helper';
-import User from '../../app/models/User';
 import factory from '../factory.js';
 
 describe('User requests', () => {
@@ -40,7 +39,8 @@ describe('User requests', () => {
   });
 
   it('should not register a user that already exists', (done) => {
-    factory.create('user', (err, user) => {
+    factory.create('user')
+    .then((user) => {
       request(app)
       .post('/sign-up')
       .set('Accept', /json/)
@@ -55,6 +55,7 @@ describe('User requests', () => {
         expect(err).to.equal(null);
         expect(res.body.message).to.equal('Error: That user already exits.');
         expect(res.body).to.be.an('object');
+        done();
       });
     });
   });
