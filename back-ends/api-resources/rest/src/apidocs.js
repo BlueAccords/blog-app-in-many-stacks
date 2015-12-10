@@ -1,7 +1,7 @@
 /****************************************************** General ***********************************/
 /**
  * @apiDefine protected
- * @apiHeader (Authentication Headers) {String} Authorization Value will be in the following format 'Bearer: tokenvalue'. This token will be used to ensure the user has permissions to access a requested resource. Site admins can access any resource.
+ * @apiHeader (Authentication Headers) {String} Authorization Value will be in the following format 'Bearer: tokenvalue'. This token will be used to ensure the user has permissions to access a requested resource. A user must be the owner of the resource or the most top-level parent of the resource to have permissions.
  */
 
 /**
