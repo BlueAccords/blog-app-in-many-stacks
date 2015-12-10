@@ -21,6 +21,7 @@ let config        = require('./config');
 let bodyParser    = require('body-parser');
 let morgan        = require('morgan');
 let cors          = require('cors');
+let path          = require('path');
 
 // connect to Mongo when the app initializes
 // No password needed in development
@@ -55,9 +56,9 @@ app.use(cookieParser());
 // Log requests to the console
 app.use(morgan('dev'));
 // Routes
-app.use(express.static(__dirname + '/apidocs'));
+app.use(express.static(__dirname + '/../apidocs/build'));
 app.get('/api-documentation', (req, res) => {
-  res.sendfile(__dirname + '/apidocs/index.html');
+  res.sendfile(path.resolve(__dirname + '/../apidocs/build/index.html'));
 });
 app.use(require('./app/routes'));
 

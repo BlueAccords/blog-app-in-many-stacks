@@ -1,0 +1,18 @@
+{
+  "name": "blog-apps-with-many-stacks-rest",
+  "version": "1.0.0",
+  "description": "Rest backend.",
+  "main": "app.js",
+  "scripts": {
+    "update-docs": "apidoc -i src -o build/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiedolabs/blog-app-in-many-stacks.git"
+  },
+  "author": "Chiedo Labs",
+  "license": "MIT",
+  "devDependencies": {
+    "apidoc": "^0.13.1"
+  }
+}

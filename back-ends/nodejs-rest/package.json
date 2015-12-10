@@ -5,8 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=development nodemon app.js",
-    "test": "NODE_ENV=test mocha test --recursive --compilers js:babel/register --reporter spec ",
-    "update-docs": "apidoc -i app/ -o apidocs/"
+    "test": "NODE_ENV=test mocha test --recursive --compilers js:babel/register --reporter spec "
   },
   "repository": {
     "type": "git",
@@ -39,7 +38,6 @@
     "morgan": "^1.6.1"
   },
   "devDependencies": {
-    "apidoc": "^0.13.1",
     "babel-eslint": "^3.1.9",
     "bluebird": "^3.0.6",
     "chai": "^3.4.1",
