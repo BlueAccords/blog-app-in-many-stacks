@@ -18,7 +18,6 @@
  *
  * @apiParam {Object} user
  * @apiParam {string} user.email
- * @apiParam {string} user.username
  * @apiParam {string} user.password
  */
 
