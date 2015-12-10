@@ -334,8 +334,8 @@
 
 /****************************************************** SEARCH ***********************************/
 /**
- * @api {get} /posts?path_url=:path_url Get post by post path_url
- * @apiName Get post by post path_url
+ * @api {get} /posts?path_url=:path_url Get post by path_url
+ * @apiName Get post by path_url
  * @apiGroup Search
  *
  * @apiParam {String} path_url The unique path_url for the post you want to find
@@ -344,11 +344,22 @@
  */
 
 /**
- * @api {get} /tags/?text=:text Get tag by tag text
- * @apiName Get tag by tag text
+ * @api {get} /tags/?text=:text Get tag by text
+ * @apiName Get tag by text
  * @apiGroup Search
  *
- * @apiParam {String} text The unique tag text
+ * @apiParam {String} text The text
  *
  * @apiUse tagResponse
+ */
+
+/**
+ * @api {get} /users/?username=:username Get user by username
+ * @apiName Get user by username
+ * @apiGroup Search
+ *
+ * @apiParam {String} username The username
+ *
+ * @apiSuccess {Object} user
+ * @apiSuccess {Integer} user.id
  */
