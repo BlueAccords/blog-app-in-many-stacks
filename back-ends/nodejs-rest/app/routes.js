@@ -7,54 +7,36 @@ import jwtMiddleware from './middlewares/jwt';
 import tag from './controllers/tags-controller';
 import user from './controllers/users-controller';
 
-/**
-* Public Routes (anyone can visit).
-**/
-
-// User Auth.
-router.route('/')
+// Authenticate a User.
+router.route('/sign-in')
   .post(user.authenticate);
-
-// Create User/ Acc.
-router.route('/sign-up')
-  .post(user.createNewUser);
-
-// Search for Tag & Posts
-router.route('/tag/:name')
-  .get(tag.findAllPostWithTag);
-
-
-/**
-* Private Routes (need jwt token).
-**/
 
 // Auth/ JWT middleware.
 router.use(jwtMiddleware);
 
-// User Index/Home.
-router.route('/user')
-  .get(user.currentUser);
+// Create and List Comments.
+router.route('/posts/:post_id/comments')
+  .post(user.createComment)
+  .get(user.getAllComments);
 
-// User Info routes.
-router.route('/user/:username')
-  .get(user.showUser)
-  .put(user.updateUser)
-  .delete(user.deleteUser);
+// Update and Delete Comment.
+router.route('/comments/:id')
+  .put(user.updateComment)
+  .delete(user.deleteComment);
 
-// User Post(s) routes.
-router.route('/user/:username/posts')
-  .get(user.listUserPosts)
-  .post(user.createNewPost);
+// Create and List Posts
+router.route('/posts')
+  .post(user.createPost)
+  .get(user.getAllPosts);
 
-// User Post routes.
-router.route('/user/:username/posts/:postname')
-  .get(user.readUserPost)
-  .post(user.commentOnPost)
+// Read, Update, and Delete Post
+router.route('/posts/:id')
+  .get(user.readPost)
   .put(user.updatePost)
   .delete(user.deletePost);
 
-// User Post Comment routes
-router.route('/user/:username/posts/:postname/comments')
-  .get(user.listAllComments);
+// List All Posts By A User
+router.route('/user/:user_id/posts')
+  .get(user.getPostByUser);
 
 module.exports = router;
