@@ -21,7 +21,7 @@ Nodemon will update changes automatically.
 
 Check the console for errors.
 
-A sample Postman collection is provided inside of the `Data/` directory.
+A sample Postman collection is provided at the `blog-app-in-many-stacks/back-ends/api-resources/rest` directory.
 
 ### Documentation
 
