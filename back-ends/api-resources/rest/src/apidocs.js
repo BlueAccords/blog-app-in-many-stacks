@@ -128,6 +128,16 @@
  */
 
 /**
+ * @api {get} /tag/:tag_id/posts Get posts by tag
+ * @apiName Get all posts by tag
+ * @apiGroup Posts
+ *
+ * @apiUse postsResponse
+ *
+ * @apiParam {String} tag_id The tag's id
+ */
+
+/**
  * @api {post} /posts Create post
  * @apiName Create post
  * @apiGroup Posts
