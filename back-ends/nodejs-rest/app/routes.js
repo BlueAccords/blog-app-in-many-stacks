@@ -2,39 +2,58 @@
 
 import express from 'express';
 let router = express.Router();
-import user from './controllers/users-controller';
-import tag from './controllers/tags-controller';
+
 import jwtMiddleware from './middlewares/jwt';
+import tag from './controllers/tags-controller';
+import user from './controllers/users-controller';
 
 /**
 * Public Routes (anyone can visit).
-*/
-router.post('/', user.authenticate);
-router.post('/sign-up', user.createNewUser);
-router.get('/tag/:name', tag.findAllPostWithTag);
+**/
+
+// User Auth.
+router.route('/')
+  .post(user.authenticate);
+
+// Create User/ Acc.
+router.route('/sign-up')
+  .post(user.createNewUser);
+
+// Search for Tag & Posts
+router.route('/tag/:name')
+  .get(tag.findAllPostWithTag);
+
 
 /**
 * Private Routes (need jwt token).
-*/
+**/
+
+// Auth/ JWT middleware.
 router.use(jwtMiddleware);
 
-// User index.
+// User Index/Home.
 router.get('/user', user.currentUser);
 
-// User info routes.
-router.get('/user/:username', user.showUser);
-router.put('/user/:username', user.updateUser);
-router.delete('/user/:username', user.deleteUser);
+// User Info routes.
+router.route('/user/:username')
+  .get(user.showUser)
+  .put(user.updateUser)
+  .delete(user.deleteUser);
+
+// User Post(s) routes.
+router.route('/user/:username/posts')
+  .get(user.listUserPosts)
+  .post(user.createNewPost);
 
 // User Post routes.
-router.post('/user/:username/posts', user.createNewPost);
-router.get('/user/:username/posts', user.listUserPosts);
-router.put('/user/:username/posts/:postname', user.updatePost);
-router.delete('/user/:username/posts/:postname', user.deletePost);
+router.route('/user/:username/posts/:postname')
+  .get(user.readUserPost)
+  .post(user.commentOnPost)
+  .put(user.updatePost)
+  .delete(user.deletePost);
 
-// User Post/Comment routes.
-router.post('/user/:username/posts/:postname', user.commentOnPost);
-router.get('/user/:username/posts/:postname', user.readUserPost);
-router.get('/user/:username/posts/:postname/comments', user.listAllComments);
+// User Post Comment routes
+router.route('/user/:username/posts/:postname/comments')
+  .get(user.listAllComments);
 
 module.exports = router;

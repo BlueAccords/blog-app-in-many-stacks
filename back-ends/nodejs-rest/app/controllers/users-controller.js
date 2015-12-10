@@ -72,7 +72,7 @@ module.exports.createNewUser = (req, res) => {
           });
           newUser.save();
 
-          res.json(newUser);
+          res.json({'user': newUser});
         }
       });
     }
@@ -89,7 +89,7 @@ module.exports.createNewUser = (req, res) => {
 module.exports.currentUser = (req, res) => {
   User.findOne({ username: req.user.username })
   .then(user => {
-    res.json(user);
+    res.json({'user': user});
   });
 };
 
