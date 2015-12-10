@@ -56,9 +56,9 @@ app.use(cookieParser());
 // Log requests to the console
 app.use(morgan('dev'));
 // Routes
-app.use(express.static(__dirname + '/../apidocs/build'));
+app.use(express.static(__dirname + '/../apidocs/rest/build'));
 app.get('/api-documentation', (req, res) => {
-  res.sendfile(path.resolve(__dirname + '/../apidocs/build/index.html'));
+  res.sendfile(path.resolve(__dirname + '/../apidocs/rest/build/index.html'));
 });
 app.use(require('./app/routes'));
 
