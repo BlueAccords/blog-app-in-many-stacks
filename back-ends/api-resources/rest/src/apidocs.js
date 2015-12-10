@@ -18,6 +18,7 @@
  *
  * @apiParam {Object} user
  * @apiParam {string} user.email
+ * @apiParam {string} user.username
  * @apiParam {string} user.password
  */
 
@@ -30,6 +31,7 @@
  * @apiSuccess {Integer} user.id
  * @apiSuccess {string} user.name
  * @apiSuccess {string} user.email
+ * @apiSuccess {string} user.username
  * @apiSuccess {string} user.date_created
  * @apiSuccess {string} user.date_modified
  * @apiSuccess {String} token The user's jwt token
@@ -45,6 +47,7 @@
  * @apiParam {Object} user
  * @apiParam {String} user.name
  * @apiParam {string} user.email
+ * @apiParam {string} user.username
  * @apiParam {string} user.password
  */
 
@@ -71,6 +74,7 @@
  * @apiParam {Object} user
  * @apiParam {String} user.name
  * @apiParam {string} user.email
+ * @apiParam {string} user.username
  * @apiParam {string} user.password
  */
 

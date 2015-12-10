@@ -12,6 +12,7 @@
 		"5f4f9654-aa50-37bb-4335-6e1bc417aa2c",
 		"f0d1dc87-ee42-a907-cc8e-e784cafeecd5",
 		"b451af1d-5e11-417b-debb-e85d833c0bb5",
+		"a1982843-cb3f-9a25-91d0-b1c83c0d8c7f",
 		"2cff3bc6-df75-12b7-521c-f52e045abe20",
 		"2e9f928a-c01f-2fa2-f877-5a3c7223b5dd",
 		"3147c1f3-d5f8-f5eb-27d7-2c0ab3421e79",
@@ -165,9 +166,27 @@
 			"collectionId": "ee2efe10-cc66-fdb9-d3b9-d54b6279a0ac"
 		},
 		{
+			"id": "a1982843-cb3f-9a25-91d0-b1c83c0d8c7f",
+			"headers": "",
+			"url": "http://localhost:8000/tags/1/posts",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1449765205054,
+			"name": "Get posts by tag",
+			"description": "",
+			"collectionId": "ee2efe10-cc66-fdb9-d3b9-d54b6279a0ac"
+		},
+		{
 			"id": "a1add6ec-0de2-fe3d-f007-52f358738a3c",
 			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
-			"url": "http://localhost:8000/user/1",
+			"url": "http://localhost:8000/users/1",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "PUT",
@@ -183,6 +202,12 @@
 					"value": "new@new.com",
 					"type": "text",
 					"enabled": true
+				},
+				{
+					"key": "username",
+					"value": "updatedname",
+					"type": "text",
+					"enabled": true
 				}
 			],
 			"dataMode": "urlencoded",
@@ -190,7 +215,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449761943993,
+			"time": 1449765422915,
 			"name": "Update User",
 			"description": "",
 			"collectionId": "ee2efe10-cc66-fdb9-d3b9-d54b6279a0ac"
@@ -223,7 +248,7 @@
 		{
 			"id": "a9e187e6-7790-e543-f5ae-63d6ad8baf31",
 			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
-			"url": "http://localhost:8000/user/1",
+			"url": "http://localhost:8000/users/1",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "DELETE",
@@ -233,7 +258,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449762211871,
+			"time": 1449765233118,
 			"name": "Delete user",
 			"description": "",
 			"collectionId": "ee2efe10-cc66-fdb9-d3b9-d54b6279a0ac"
@@ -263,6 +288,12 @@
 					"value": "testtest",
 					"type": "text",
 					"enabled": true
+				},
+				{
+					"key": "username",
+					"value": "testtest",
+					"type": "text",
+					"enabled": true
 				}
 			],
 			"dataMode": "urlencoded",
@@ -270,15 +301,15 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449761709098,
+			"time": 1449765436634,
 			"name": "Sign up",
 			"description": "",
 			"collectionId": "ee2efe10-cc66-fdb9-d3b9-d54b6279a0ac"
 		},
 		{
 			"id": "b451af1d-5e11-417b-debb-e85d833c0bb5",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
-			"url": "http://localhost:8000/user/1/posts",
+			"headers": "",
+			"url": "http://localhost:8000/users/1/posts",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "GET",
@@ -288,7 +319,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449761992487,
+			"time": 1449765216389,
 			"name": "Get posts by user",
 			"description": "",
 			"collectionId": "ee2efe10-cc66-fdb9-d3b9-d54b6279a0ac"
@@ -332,7 +363,7 @@
 		{
 			"id": "d7f4c4ba-9f55-eaa5-1cbb-bae8c797404d",
 			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
-			"url": "http://localhost:8000/user/1",
+			"url": "http://localhost:8000/users/1",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "GET",
@@ -342,7 +373,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449761762222,
+			"time": 1449765223536,
 			"name": "Get User",
 			"description": "",
 			"collectionId": "ee2efe10-cc66-fdb9-d3b9-d54b6279a0ac"
