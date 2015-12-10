@@ -18,7 +18,10 @@
     "Mongoose",
     "JavaScript"
   ],
-  "author": "Rosel Padilla",
+  "authors": [
+    "Chiedo",
+    "Rosel Padilla"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/chiedolabs/blog-app-in-many-stacks/issues"
