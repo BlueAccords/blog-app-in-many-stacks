@@ -436,7 +436,7 @@
 			"method": "POST",
 			"data": [
 				{
-					"key": "username",
+					"key": "email",
 					"value": "test@test.com",
 					"type": "text",
 					"enabled": true
@@ -453,7 +453,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449761732713,
+			"time": 1449765534118,
 			"name": "Sign In",
 			"description": "",
 			"collectionId": "ee2efe10-cc66-fdb9-d3b9-d54b6279a0ac"

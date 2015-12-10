@@ -95,6 +95,7 @@
  *
  * @apiSuccess {Object} post
  * @apiSuccess {Integer} post.id
+ * @apiSuccess {string} post.url_path
  * @apiSuccess {string} post.title
  * @apiSuccess {string} post.body
  * @apiSuccess {string} post.date_created
@@ -152,6 +153,7 @@
  *
  * @apiParam {Object} post
  * @apiParam {String} post.title The title of the post
+ * @apiParam {string} post.url_path The unique url path for the post (eg. blog.com/:url-path)
  * @apiParam {string} post.body The post content
  */
 
@@ -176,6 +178,7 @@
  * @apiParam {String} id The post ID
  * @apiParam {Object} post
  * @apiParam {string} post.title
+ * @apiParam {string} post.url_path
  * @apiParam {string} post.body
 */
 /**
