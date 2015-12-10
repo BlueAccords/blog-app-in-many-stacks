@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import request from 'supertest';
 import { setupDB } from '../test-helper';
 import User from '../../app/models/User';
-import Factory from '../Factory.js';
+import factory from '../factory.js';
 
 describe('User requests', () => {
   let  app;
@@ -33,14 +33,14 @@ describe('User requests', () => {
     .expect(200)
     .end((err, res) => {
       expect(err).to.equal(null);
-      expect(res.body.name).to.equal(user.name);
-      expect(res.body).to.be.an('object');
+      expect(res.body.user.name).to.equal(user.name);
+      expect(res.body.user).to.be.an('object');
       done();
     });
   });
 
   it('should not register a user that already exists', (done) => {
-    Factory.create('user', (user) => {
+    factory.create('user', (err, user) => {
       request(app)
       .post('/sign-up')
       .set('Accept', /json/)
