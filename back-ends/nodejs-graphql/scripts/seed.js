@@ -90,6 +90,16 @@ if(process.env.NODE_ENV === 'development') {
   .then(() => Comment.remove({}))
   .then(() => {
     let comment = new Comment({
+      _id: '5634d4760067be016bf10c9e',
+      _post : '5634d4760066be016bf10a8r', // how to play basketball => author: Kyle@begin.com
+      _author : '5634d4760066be016bf10c9a', // commenter: bruce wayne
+      text: 'Thanks Kyle for the great post, I will now master the court like Dwayne Wade',
+    });
+    return comment.save();
+  })
+  
+  .then(() => {
+    let comment = new Comment({
       _id: '5634d4760066be016bf10c9e',
       _post : '5634d4760066be016bf10c9r', // how to boil an egg => author: Bruce Wayne
       _author : '5634d4750066be016bf10c9a', // commenter: kyle@begin.com
@@ -98,15 +108,6 @@ if(process.env.NODE_ENV === 'development') {
     return comment.save();
   })
 
-  .then(() => {
-    let comment = new Comment({
-      _id: '5634d4760067be016bf10c9e',
-      _post : '5634d4760066be016bf10a8r', // how to play basketball => author: Kyle@begin.com
-      _author : '5634d4760066be016bf10c9a', // commenter: bruce wayne
-      text: 'Thanks Kyle for the great post, I will now master the court like Dwayne Wade',
-    });
-    return comment.save();
-  })
 
   .then(() => {
     let comment = new Comment({
