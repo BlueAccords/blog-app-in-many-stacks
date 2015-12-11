@@ -3,260 +3,49 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import config from '../../config';
-
 import User from './../models/User';
-import Post from './../models/Post';
-import Comment from './../models/Comment';
-import Tag from './../models/Tag';
 
 module.exports.authenticate = (req, res) => {
   User.findOne({
     email: req.body.email.toLowerCase(),
   })
-  .then( (user) => {
-    if (user === null) {
-      res.json({
-        msg: 'Err. No user found.',
-      });
-    } else {
-      if (bcrypt.compareSync(req.body.password, user.password)) {
-        let token = jwt.sign(user, config.app.secret, { expiresIn: 1440 * 60 });
-
-        res.json({
-          token,
-        });
-      } else {
-        res.json({
-          msg: 'Err. Failed to authenticate.',
-        });
-      }
-    }
-  });
-};
-
-module.exports.createNewUser = (req, res) => {
-  User.findOne({
-    email: req.body.email.toLowerCase(),
-  })
   .then(user => {
-    if (user !== null) {
-      res.json({
-        msg: 'Err. This user already exists.',
-      });
-    } else {
-      bcrypt.hash(req.body.password, 8, (err, hash) => {
-        if (err) {
-          res.send(err);
-        } else {
-          let newUser = new User({
-            name: req.body.name,
-            email: req.body.email.toLowerCase(),
-            password: hash,
-          });
-          newUser.save();
-
-          res.json({'user': newUser});
-        }
-      });
-    }
+    console.log(user);
   });
 };
 
-module.exports.currentUser = (req, res) => {
-  User.findOne({
-    email: req.user.email,
-  })
-  .then(user => {
-    res.json({
-      'user': user,
-    });
-  });
-};
-
-module.exports.showUser = (req, res) => {
-  User.findOne({
-    email: req.params.email.toLowerCase(),
-  })
-  .then(user => {
-    if (user === null) {
-      res.json({
-        msg: 'Err. No user found.',
+module.exports.create = (req, res) => {
+  User.find({$or: [
+    {username: req.body.username.toLowerCase()},
+    {email: req.body.email.toLowerCase()}
+  ]})
+  .then(users => {
+    if (users.length === 0) {
+      let user = new User({
+        name: req.body.name,
+        email: req.body.email,
+        username: req.body.username,
+        password: bcrypt.hashSync(req.body.password, 8),
       });
-    }
-    else {
-      res.json(user);
-    }
-  });
-};
 
-module.exports.updateUser = (req, res) => {
-  if (req.user.email === req.params.email.toLowerCase()) {
-    User.findOne({
-      email: req.params.email.toLowerCase(),
-    })
-    .then(user => {
-      if (user === null) {
-        res.json({
-          msg: 'Err. No user found.',
-        });
-      } else {
-        user.name = req.body.name;
-        user.email = req.body.email.toLowerCase();
-        user.password = bcrypt.hashSync(req.body.password, 8);
-
-        user.save();
-        res.json(user);
-      }
-    });
-  } else {
-    res.json({
-      msg: 'You are not authorized to do that.',
-    });
-  }
-};
-
-module.exports.deleteUser = (req, res) => {
-  if (req.user.email === req.params.email.toLowerCase()) {
-    User.findOne({
-      email: req.params.email.toLowerCase(),
-    })
-    .then(user => {
-      user.remove();
-      res.json({
-        deleted_id: user._id,
-      });
-    });
-  } else {
-    res.json({
-      msg: 'You are not authorized to do that.',
-    });
-  }
-};
-
-module.exports.listUserPosts = (req, res) => {
-  Post.find({
-    user: req.params.email.toLowerCase(),
-  })
-  .then(posts => {
-    res.json(posts);
-  });
-};
-
-module.exports.createNewPost = (req, res) => {
-  if (req.user.email === req.params.email.toLowerCase()) {
-    let tagArr = req.body.tags.split(', ');
-
-    let newPost = new Post({
-      title: req.body.title.toLowerCase(),
-      body: req.body.body,
-      user: req.user._id,
-      tags: tagArr,
-    });
-    newPost.save()
-    .then( (post) => {
-      post.tags.forEach( (tag) => {
-        Tag.create({
-          text: tag.toLowerCase(),
-          post: post.title,
-          post_id: post._id,
-        });
-      });
-    });
-
-    res.json(newPost);
-  } else {
-    res.json({
-      msg: 'You are not authorized to do that.',
-    });
-  }
-};
-
-module.exports.readUserPost = (req, res) => {
-  // Single Post URL (The title. Words seperated by a "-") to string
-  let urlTitle = req.params.postname.split('-');
-  let fixedTitle = urlTitle.join(' ');
-
-  Post.findOne({
-    title: fixedTitle,
-    user: req.user._id,
-  }).then( post => {
-    if (post) {
-      res.json(post);
+      user.save();
+      return user
     } else {
       res.json({
-        msg: 'This post does not exist',
+        msg: 'This Username or Email is already taken.',
       });
     }
-  });
-};
-
-module.exports.commentOnPost = (req, res) => {
-  Comment.create({
-    post: req.params.postname,
-    user: req.user.username,
-    text: req.body.text,
-  }).then(comment => {
-    res.json(comment);
-  });
-};
-
-module.exports.listAllComments = (req, res) => {
-  Comment.find({ post: req.params.postname})
-  .then(list => {
-    res.json(list);
-  });
-};
-
-module.exports.updatePost = (req, res) => {
-  let urlTitle = req.params.postname.split('-');
-  let fixedTitle = urlTitle.join(' ');
-  // Tags in the post body (comman seperated) go in an array.
-  let tagArr = req.body.tags.split(', ');
-
-  if (req.user.username === req.params.username.toLowerCase()) {
-    // Lowercase for consistent search.
-    Post.findOne({
-      title: fixedTitle,
-      user: req.params.username.toLowerCase(),
-    }).then(post => {
-      post.title = req.body.title.toLowerCase();
-      post.body = req.body.body;
-      post.user = req.params.username.toLowerCase();
-      post.tags = tagArr;
-
-      post.save();
-      res.json(post);
+  })
+  .then(user => {
+    let token = jwt.sign(user, config.jwt.secret, {
+      expiresIn: 1440 * 60
     });
-  } else {
+
     res.json({
-      msg: 'You are not authorized to do that.',
+      user: user,
+      token: 'Bearer ' + token,
     });
-  }
+  })
 };
 
-module.exports.deletePost = (req, res) => {
-  let urlTitle = req.params.postname.split('-');
-  let fixedTitle = urlTitle.join(' ');
-
-  if (req.user.username === req.params.username.toLowerCase()) {
-    Post.findOne({ title: fixedTitle })
-    .then(post => {
-      post.remove();
-
-      Tag.find({post_id: post._id})
-      .then(tags => {
-        tags.forEach(tag => {
-          tag.remove();
-        });
-      });
-
-      res.json({
-        deleted_id: post._id,
-      });
-    });
-  } else {
-    res.json({
-      msg: 'You are not authorized to do that.',
-    });
-  }
-};
+module.exports.test = (req, res) => {}

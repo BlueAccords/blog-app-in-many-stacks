@@ -60,7 +60,7 @@ app.use(express.static(__dirname + '/../api-resources/rest/build'));
 app.get('/api-documentation', (req, res) => {
   res.sendfile(path.resolve(__dirname + '/../api-resources/rest/build/index.html'));
 });
-// app.use(require('./app/routes'));
+app.use(require('./app/routes'));
 
 app.get('*', (req, res) => {
   res.sendStatus(404);
