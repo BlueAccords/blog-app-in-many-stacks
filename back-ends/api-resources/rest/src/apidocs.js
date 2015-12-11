@@ -121,6 +121,7 @@
  * @apiSuccess (Success Response 200) {string} post.url_path
  * @apiSuccess (Success Response 200) {string} post.title
  * @apiSuccess (Success Response 200) {string} post.body
+ * @apiSuccess (Success Response 200) {Integer} post.user_id
  * @apiSuccess (Success Response 200) {string} post.date_created
  * @apiSuccess (Success Response 200) {string} post.date_modified
  */
@@ -130,8 +131,10 @@
  *
  * @apiSuccess (Success Response 200) {Object[]} posts
  * @apiSuccess (Success Response 200) {Integer} posts.id
+ * @apiSuccess (Success Response 200) {string} post.url_path
  * @apiSuccess (Success Response 200) {string} posts.title
  * @apiSuccess (Success Response 200) {string} posts.body
+ * @apiSuccess (Success Response 200) {Integer} post.user_id
  * @apiSuccess (Success Response 200) {string} posts.date_created
  * @apiSuccess (Success Response 200) {string} posts.date_modified
  */
