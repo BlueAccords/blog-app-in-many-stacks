@@ -2,20 +2,25 @@
 /**
  * @apiDefine protected
  * @apiHeader (Authentication Headers) {String} Authorization Value will be in the following format 'Bearer: tokenvalue'. This token will be used to ensure the user has permissions to access a requested resource. A user must be the owner of the resource or the most top-level parent of the resource to have permissions.
+ * @apiError (Authorization Errors 401) errors
+ * @apiError (Authorization Errors 401) {String[]} [errors.unauthorized] You are not authorized
+ *
+ * @apiError (Permissions Errors 403) errors
+ * @apiError (Permissions Errors 403) {String[]} [errors.permissions] You do not have permissions to perform this action
  */
 
 /**
  * @apiDefine successfulDeletion
  *
- * @apiSuccess {Integer} deleted_id The ID of the deleted resource.
+ * @apiSuccess (Success Response 200) {Integer} deleted_id The ID of the deleted resource.
  */
 
 /**
- * @apiDefine permissionErrors
- *
- * @apiError (Permissions Errors) errors Returns all of the applicable errors
- * @apiError (Permissions Errors) {String[]} [errors.permissions] You do not have permissions to perform this action
+ * @apiDefine generalErrors
+ * @apiError (General Errors 400) errors
+ * @apiError (General Errors 400) {String[]} [errors.general] General errors that can be used for any purpose.
  */
+
 
 /****************************************************** Authentication ***********************************/
 /**
@@ -33,22 +38,22 @@
 /**
  * @apiDefine userResponse
  *
- * @apiSuccess {Object} user
- * @apiSuccess {Integer} user.id
- * @apiSuccess {string} user.name
- * @apiSuccess {string} user.email
- * @apiSuccess {string} user.username
- * @apiSuccess {string} user.date_created
- * @apiSuccess {string} user.date_modified
- * @apiSuccess {String} token The user's jwt token
+ * @apiSuccess (Success Response 200) {Object} user
+ * @apiSuccess (Success Response 200) {Integer} user.id
+ * @apiSuccess (Success Response 200) {string} user.name
+ * @apiSuccess (Success Response 200) {string} user.email
+ * @apiSuccess (Success Response 200) {string} user.username
+ * @apiSuccess (Success Response 200) {string} user.date_created
+ * @apiSuccess (Success Response 200) {string} user.date_modified
+ * @apiSuccess (Success Response 200) {String} token The user's jwt token
  */
 /**
  * @apiDefine userFieldErrors
  *
- * @apiError (Field Errors) errors Returns all of the applicable errors
- * @apiError (Field Errors) {String[]} [errors.name] Errors related to the name field
- * @apiError (Field Errors) {String[]} [errors.email] Errors related to the email field
- * @apiError (Field Errors) {String[]} [errors.password] Errors related to the password field
+ * @apiError (Field Errors 400) {Object} errors
+ * @apiError (Field Errors 400) {String[]} [errors.name] Errors related to the name field
+ * @apiError (Field Errors 400) {String[]} [errors.email] Errors related to the email field
+ * @apiError (Field Errors 400) {String[]} [errors.password] Errors related to the password field
  */
 
 /**
@@ -58,7 +63,7 @@
  *
  * @apiUse userResponse
  * @apiUse userFieldErrors
- * @apiUse permissionErrors
+ * @apiUse generalErrors
  *
  * @apiParam {Object} user
  * @apiParam {String} user.name
@@ -72,8 +77,9 @@
  * @apiName Get user
  * @apiGroup User
  *
- * @apiUse protected
  * @apiUse userResponse
+ * @apiUse generalErrors
+ * @apiUse protected
  *
  * @apiParam {String} id The user ID
  */
@@ -83,9 +89,10 @@
  * @apiName updateUser
  * @apiGroup User
  * @apiUse userFieldErrors
+ * @apiUse generalErrors
  *
- * @apiUse protected
  * @apiUse userResponse
+ * @apiUse protected
  *
  * @apiParam {String} id The user ID
  * @apiParam {Object} user
@@ -99,8 +106,8 @@
  * @apiName Delete user
  * @apiGroup User
  *
- * @apiUse protected
  * @apiUse successfulDeletion
+ * @apiUse protected
  *
  * @apiParam {String} id The user's id
  */
@@ -109,24 +116,32 @@
 /**
  * @apiDefine postResponse
  *
- * @apiSuccess {Object} post
- * @apiSuccess {Integer} post.id
- * @apiSuccess {string} post.url_path
- * @apiSuccess {string} post.title
- * @apiSuccess {string} post.body
- * @apiSuccess {string} post.date_created
- * @apiSuccess {string} post.date_modified
+ * @apiSuccess (Success Response 200) {Object} post
+ * @apiSuccess (Success Response 200) {Integer} post.id
+ * @apiSuccess (Success Response 200) {string} post.url_path
+ * @apiSuccess (Success Response 200) {string} post.title
+ * @apiSuccess (Success Response 200) {string} post.body
+ * @apiSuccess (Success Response 200) {string} post.date_created
+ * @apiSuccess (Success Response 200) {string} post.date_modified
  */
 
 /**
  * @apiDefine postsResponse
  *
- * @apiSuccess {Object[]} posts
- * @apiSuccess {Integer} posts.id
- * @apiSuccess {string} posts.title
- * @apiSuccess {string} posts.body
- * @apiSuccess {string} posts.date_created
- * @apiSuccess {string} posts.date_modified
+ * @apiSuccess (Success Response 200) {Object[]} posts
+ * @apiSuccess (Success Response 200) {Integer} posts.id
+ * @apiSuccess (Success Response 200) {string} posts.title
+ * @apiSuccess (Success Response 200) {string} posts.body
+ * @apiSuccess (Success Response 200) {string} posts.date_created
+ * @apiSuccess (Success Response 200) {string} posts.date_modified
+ */
+
+/**
+ * @apiDefine postFieldErrors
+ *
+ * @apiError (Field Errors 400) {Object}  errors
+ * @apiError (Field Errors 400) {String[]} [errors.title] Errors related to the title field.
+ * @apiError (Field Errors 400) {String[]} [errors.body] Errors related to the body field.
  */
 
 /**
@@ -135,6 +150,7 @@
  * @apiGroup Posts
  *
  * @apiUse postsResponse
+ * @apiUse generalErrors
  */
 
 /**
@@ -143,6 +159,7 @@
  * @apiGroup Posts
  *
  * @apiUse postsResponse
+ * @apiUse generalErrors
  *
  * @apiParam {String} user_id The user's id
  */
@@ -153,6 +170,7 @@
  * @apiGroup Posts
  *
  * @apiUse postsResponse
+ * @apiUse generalErrors
  *
  * @apiParam {String} tag_id The tag's id
  */
@@ -163,7 +181,8 @@
  * @apiGroup Posts
  *
  * @apiUse postResponse
- *
+ * @apiUse postFieldErrors
+ * @apiUse generalErrors
  * @apiUse protected
  *
  * @apiParam {Object} post
@@ -178,6 +197,7 @@
  * @apiGroup Posts
  *
  * @apiUse postResponse
+ * @apiUse generalErrors
  *
  * @apiParam {String} id The post id
  */
@@ -187,8 +207,10 @@
  * @apiName Update post
  * @apiGroup Posts
  *
- * @apiUse protected
  * @apiUse postResponse
+ * @apiUse postFieldErrors
+ * @apiUse generalErrors
+ * @apiUse protected
  *
  * @apiParam {String} id The post ID
  * @apiParam {Object} post
@@ -211,32 +233,41 @@
 /**
  * @apiDefine commentResponse
  *
- * @apiSuccess {Object} comment
- * @apiSuccess {Integer} comment.id
- * @apiSuccess {string} comment.text
- * @apiSuccess {string} comment.date_created
- * @apiSuccess {string} comment.date_modified
+ * @apiSuccess (Success Response 200) {Object} comment
+ * @apiSuccess (Success Response 200) {Integer} comment.id
+ * @apiSuccess (Success Response 200) {string} comment.text
+ * @apiSuccess (Success Response 200) {string} comment.date_created
+ * @apiSuccess (Success Response 200) {string} comment.date_modified
  */
 
 /**
  * @apiDefine commentsResponse
  *
- * @apiSuccess {Object[]} comments
- * @apiSuccess {Object} comments
- * @apiSuccess {Integer} comments.id
- * @apiSuccess {string} comments.text
- * @apiSuccess {string} comments.date_created
- * @apiSuccess {string} comments.date_modified
+ * @apiSuccess (Success Response 200) {Object[]} comments
+ * @apiSuccess (Success Response 200) {Object} comments
+ * @apiSuccess (Success Response 200) {Integer} comments.id
+ * @apiSuccess (Success Response 200) {string} comments.text
+ * @apiSuccess (Success Response 200) {string} comments.date_created
+ * @apiSuccess (Success Response 200) {string} comments.date_modified
+ */
+
+/**
+ * @apiDefine commentFieldErrors
+ *
+ * @apiError (Field Errors 400) {Object} errors
+ * @apiError (Field Errors 400) {String[]} [errors.text] Errors related to the text field.
  */
 
 /**
  * @api {post} /posts/:post_id/comments Create a comment
  * @apiName Create a comment
  * @apiGroup Comments
- *
- * @apiUse protected
- * @apiUse commentResponse
  * @apiDescription - Any user that is logged in can create a comment
+ *
+ * @apiUse commentResponse
+ * @apiUse commentFieldErrors
+ * @apiUse generalErrors
+ * @apiUse protected
  *
  * @apiParam {String} post_id The post id
  * @apiParam {Object} comment
@@ -249,6 +280,7 @@
  * @apiGroup Comments
  *
  * @apiUse commentsResponse
+ * @apiUse generalErrors
  *
  * @apiParam {String} post_id The post id
  */
@@ -258,8 +290,9 @@
  * @apiName Delete comment
  * @apiGroup Comments
  *
- * @apiUse protected
  * @apiUse successfulDeletion
+ * @apiUse generalErrors
+ * @apiUse protected
  *
  * @apiParam {String} id The comment id
  */
@@ -267,40 +300,53 @@
 /**
  * @api {put} /comments/:id Update comment
  * @apiName Update comment
- * @apiUse protected
- * @apiUse commentResponse
+ *
  * @apiGroup Comments
+ *
+ * @apiUse commentResponse
+ * @apiUse commentFieldErrors
+ * @apiUse generalErrors
+ * @apiUse protected
  *
  * @apiParam {String} id The comment id
  * @apiParam {Object} comment
  * @apiParam {String} comment.text
 */
-/****************************************************** COMMENTS ***********************************/
+/****************************************************** TAGS ***********************************/
 /**
  * @apiDefine tagResponse
  *
- * @apiSuccess {Object} tag
- * @apiSuccess {Integer} tag.id
- * @apiSuccess {string} tag.text
+ * @apiSuccess (Success Response 200) {Object} tag
+ * @apiSuccess (Success Response 200) {Integer} tag.id
+ * @apiSuccess (Success Response 200) {string} tag.text
  */
 
 /**
  * @apiDefine tagsResponse
  *
- * @apiSuccess {Object[]} tags
- * @apiSuccess {Object} tags
- * @apiSuccess {Integer} tags.id
- * @apiSuccess {string} tags.text
+ * @apiSuccess (Success Response 200) {Object[]} tags
+ * @apiSuccess (Success Response 200) {Object} tags
+ * @apiSuccess (Success Response 200) {Integer} tags.id
+ * @apiSuccess (Success Response 200) {string} tags.text
+ */
+
+/**
+ * @apiDefine tagFieldErrors
+ *
+ * @apiError (Field Errors 400) {Object} errors
+ * @apiError (Field Errors 400) {String[]} [errors.text] Errors related to the text field.
  */
 
 /**
  * @api {post} /posts/:post_id/tags Create a tag
  * @apiName Create a tag
  * @apiGroup Tags
- *
- * @apiUse protected
- * @apiUse tagResponse
  * @apiDescription - Any user that is logged in can create a tag
+ *
+ * @apiUse tagResponse
+ * @apiUse tagFieldErrors
+ * @apiUse generalErrors
+ * @apiUse protected
  *
  * @apiParam {String} post_id The post id
  * @apiParam {Object} tag
@@ -313,6 +359,7 @@
  * @apiGroup Tags
  *
  * @apiUse tagsResponse
+ * @apiUse generalErrors
  */
 
 /**
@@ -321,6 +368,7 @@
  * @apiGroup Tags
  *
  * @apiUse tagsResponse
+ * @apiUse generalErrors
  *
  * @apiParam {String} post_id The post id
  */
@@ -330,8 +378,9 @@
  * @apiName Delete tag
  * @apiGroup Tags
  *
- * @apiUse protected
  * @apiUse successfulDeletion
+ * @apiUse generalErrors
+ * @apiUse protected
  *
  * @apiParam {String} id The tag id
  */
@@ -339,9 +388,12 @@
 /**
  * @api {put} /tags/:id Update tag
  * @apiName Update tag
- * @apiUse protected
- * @apiUse tagResponse
  * @apiGroup Tags
+ *
+ * @apiUse tagResponse
+ * @apiUse tagFieldErrors
+ * @apiUse generalErrors
+ * @apiUse protected
  *
  * @apiParam {String} id The tag id
  * @apiParam {Object} tag
@@ -358,6 +410,7 @@
  * @apiParam {String} path_url The unique path_url for the post you want to find
  *
  * @apiUse postResponse
+ * @apiUse generalErrors
  */
 
 /**
@@ -368,6 +421,7 @@
  * @apiParam {String} text The text
  *
  * @apiUse tagResponse
+ * @apiUse generalErrors
  */
 
 /**
@@ -377,6 +431,8 @@
  *
  * @apiParam {String} username The username
  *
- * @apiSuccess {Object} user
- * @apiSuccess {Integer} user.id
+ * @apiSuccess (Success Response 200) {Object} user
+ * @apiSuccess (Success Response 200) {Integer} user.id
+ *
+ * @apiUse generalErrors
  */
