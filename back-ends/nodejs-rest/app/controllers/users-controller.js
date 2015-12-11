@@ -10,7 +10,27 @@ module.exports.authenticate = (req, res) => {
     email: req.body.email.toLowerCase(),
   })
   .then(user => {
-    console.log(user);
+    if (user === null) {
+      res.json({
+        msg: 'That user does not exist'
+      });
+    } else {
+      bcrypt.compare(req.body.password, user.password, (err, result) => {
+        if (result) {
+          let token = jwt.sign(user, config.jwt.secret, {
+            expiresIn: 1440 * 60
+          });
+
+          res.json({
+            token: 'Bearer ' + token,
+          });
+        } else {
+          res.json({
+            msg: 'Incorrect password'
+          });
+        }
+      });
+    }
   });
 };
 
@@ -52,6 +72,50 @@ module.exports.create = (req, res) => {
   })
 };
 
+module.exports.get = (req, res) => {
+  let the_id = req.params.id;
 
+  User.findById(the_id)
+  .then(user => {
+    res.json({
+      user: {
+        name: user.name,
+        email: user.email,
+        username: user.username,
+      },
+    });
+  })
+};
 
-module.exports.test = (req, res) => {}
+module.exports.update = (req, res) => {
+  let the_id = req.params.id;
+
+  User.findById(the_id)
+  .then(user => {
+    if (req.user._id === user._id) {
+      user.name = req.body.name || user.name,
+      user.email = req.body.email || user.email,
+      user.username = req.body.username || user.username,
+      user.password = req.body.password || user.password,
+
+      user.save()
+      return user;
+    } else {
+      res.json({
+        msg: 'You are not authorized to do that.'
+      });
+    }
+  })
+  .then(user => {
+    res.json({
+      user: {
+        name: user.name,
+        email: user.email,
+        username: user.username,
+      },
+    })
+  });
+};
+
+module.exports.test = (req, res) => {
+}
