@@ -32,16 +32,16 @@ router.route('/users/:id')
 // List All Posts By A User
 router.route('/users/:user_id/posts')
   .get(user.postsWritten);
-//
-// /***
-// * Post Routes
-// **/
-//
-// // Create & List Posts
-// router.route('/posts')
-//   .post(post.create)
-//   .get(post.all);
-//
+
+/**
+* Post Routes
+**/
+
+// Create & List Posts
+router.route('/posts')
+  .post(post.create);
+  // .get(post.all);
+
 // // Read, Update, & Delete Post
 // router.route('/posts/:id')
 //   .get(post.read)

@@ -3,6 +3,11 @@
 import mongoose from 'mongoose';
 
 let PostSchema = new mongoose.Schema({
+  url_path: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   title: {
     type: String,
     required: true,
@@ -16,6 +21,17 @@ let PostSchema = new mongoose.Schema({
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
+    required: true,
+  },
+  date_created: {
+    type: Date,
+    required: true,
+    trim: true,
+  },
+  date_modified: {
+    type: Date,
+    required: true,
+    trim: true,
   },
 });
 
