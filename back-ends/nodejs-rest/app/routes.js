@@ -13,7 +13,7 @@ router.route('/sign-in')
   .post(user.authenticate);
 
 // Create A New User
-router.route('/user')
+router.route('/users')
   .put(user.test)
   .post(user.create);
 
