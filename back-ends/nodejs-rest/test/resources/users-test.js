@@ -53,7 +53,7 @@ describe('User requests', () => {
       .expect(200)
       .end((err, res) => {
         expect(err).to.equal(null);
-        expect(res.body.message).to.equal('Error: That user already exits.');
+        expect(res.body.msg).to.equal('This Username or Email is already taken.');
         expect(res.body).to.be.an('object');
         done();
       });
