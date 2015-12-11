@@ -29,9 +29,9 @@ router.route('/users/:id')
   .put(user.update)
   .delete(user.delete);
 
-// // List All Posts By A User
-// router.route('/users/:user_id/posts')
-//   .get(user.postsWritten);
+// List All Posts By A User
+router.route('/users/:user_id/posts')
+  .get(user.postsWritten);
 //
 // /***
 // * Post Routes

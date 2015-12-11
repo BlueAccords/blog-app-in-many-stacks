@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import config from '../../config';
 import User from './../models/User';
+import Post from './../models/Post';
 
 module.exports.authenticate = (req, res) => {
   User.findOne({
@@ -12,13 +13,13 @@ module.exports.authenticate = (req, res) => {
   .then(user => {
     if (user === null) {
       res.json({
-        msg: 'That user does not exist'
+        msg: 'That user does not exist',
       });
     } else {
       bcrypt.compare(req.body.password, user.password, (err, result) => {
         if (result) {
           let token = jwt.sign(user, config.jwt.secret, {
-            expiresIn: 1440 * 60
+            expiresIn: 1440 * 60,
           });
 
           res.json({
@@ -26,7 +27,7 @@ module.exports.authenticate = (req, res) => {
           });
         } else {
           res.json({
-            msg: 'Incorrect password'
+            msg: 'Incorrect password',
           });
         }
       });
@@ -37,7 +38,7 @@ module.exports.authenticate = (req, res) => {
 module.exports.create = (req, res) => {
   User.find({$or: [
     {username: req.body.username.toLowerCase()},
-    {email: req.body.email.toLowerCase()}
+    {email: req.body.email.toLowerCase()},
   ]})
   .then(users => {
     if (users.length === 0) {
@@ -49,7 +50,7 @@ module.exports.create = (req, res) => {
       });
 
       user.save();
-      return user
+      return user;
     } else {
       res.json({
         msg: 'This Username or Email is already taken.',
@@ -58,7 +59,7 @@ module.exports.create = (req, res) => {
   })
   .then(user => {
     let token = jwt.sign(user, config.jwt.secret, {
-      expiresIn: 1440 * 60
+      expiresIn: 1440 * 60,
     });
 
     res.json({
@@ -69,7 +70,7 @@ module.exports.create = (req, res) => {
       },
       token: 'Bearer ' + token,
     });
-  })
+  });
 };
 
 module.exports.get = (req, res) => {
@@ -82,8 +83,8 @@ module.exports.get = (req, res) => {
   .then(user => {
     if (user === null) {
       res.json({
-        msg: 'This user does not exist'
-      })
+        msg: 'This user does not exist',
+      });
     } else {
       res.json({
         user: {
@@ -107,11 +108,11 @@ module.exports.update = (req, res) => {
       user.username = req.body.username || user.username,
       user.password = req.body.password || user.password,
 
-      user.save()
+      user.save();
       return user;
     } else {
       res.json({
-        msg: 'You are not authorized to do that.'
+        msg: 'You are not authorized to do that.',
       });
     }
   })
@@ -122,7 +123,7 @@ module.exports.update = (req, res) => {
         email: user.email,
         username: user.username,
       },
-    })
+    });
   });
 };
 
@@ -132,15 +133,26 @@ module.exports.delete = (req, res) => {
   User.findById(the_id)
   .then(user => {
     if (req.user._id === the_id) {
-      user.remove()
+      user.remove();
 
       res.json({
         deleted_id: the_id,
       });
     } else {
       res.json({
-        msg: 'You are not authorized to do that.'
+        msg: 'You are not authorized to do that.',
       });
     }
+  });
+};
+
+module.exports.postsWritten = (req, res) => {
+  Post.find({
+    user_id: req.params.user_id,
+  })
+  .then(list => {
+    res.json({
+      posts: list,
+    });
   });
 };
