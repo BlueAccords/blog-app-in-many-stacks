@@ -42,10 +42,16 @@ module.exports.create = (req, res) => {
     });
 
     res.json({
-      user: user,
+      user: {
+        name: user.name,
+        email: user.email,
+        username: user.username,
+      },
       token: 'Bearer ' + token,
     });
   })
 };
+
+
 
 module.exports.test = (req, res) => {}
