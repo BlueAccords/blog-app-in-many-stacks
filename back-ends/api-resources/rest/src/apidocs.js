@@ -37,7 +37,7 @@
  */
 
 /**
- * @api {post} /user Create user
+ * @api {post} /users Create user
  * @apiName Create user
  * @apiGroup User
  *
@@ -51,7 +51,7 @@
  */
 
 /**
- * @api {get} /user/:id Get user
+ * @api {get} /users/:id Get user
  * @apiName Get user
  * @apiGroup User
  *
@@ -62,7 +62,7 @@
  */
 
 /**
- * @api {put} /user/:id Update user
+ * @api {put} /users/:id Update user
  * @apiName updateUser
  * @apiGroup User
  *
@@ -77,7 +77,7 @@
  */
 
 /**
- * @api {delete} /user/:id Delete user
+ * @api {delete} /users/:id Delete user
  * @apiName Delete user
  * @apiGroup User
  *
@@ -120,7 +120,7 @@
  */
 
 /**
- * @api {get} /user/:user_id/posts Get posts by user
+ * @api {get} /users/:user_id/posts Get posts by user
  * @apiName Get all posts by user
  * @apiGroup Posts
  *
@@ -130,7 +130,7 @@
  */
 
 /**
- * @api {get} /tag/:tag_id/posts Get posts by tag
+ * @api {get} /tags/:tag_id/posts Get posts by tag
  * @apiName Get all posts by tag
  * @apiGroup Posts
  *

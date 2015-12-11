@@ -26,7 +26,7 @@ describe('User requests', () => {
     };
 
     request(app)
-    .post('/sign-up')
+    .post('/users')
     .set('Accept', /json/)
     .send(user)
     .expect(200)
@@ -42,7 +42,7 @@ describe('User requests', () => {
     factory.create('user')
     .then((user) => {
       request(app)
-      .post('/sign-up')
+      .post('/users')
       .set('Accept', /json/)
       .send({
         name: user.name,
