@@ -10,6 +10,13 @@
  * @apiSuccess {Integer} deleted_id The ID of the deleted resource.
  */
 
+/**
+ * @apiDefine permissionErrors
+ *
+ * @apiError (Permissions Errors) errors Returns all of the applicable errors
+ * @apiError (Permissions Errors) {String[]} [errors.permissions] You do not have permissions to perform this action
+ */
+
 /****************************************************** Authentication ***********************************/
 /**
  * @api {post} /sign-in Authenticate a user
@@ -36,7 +43,7 @@
  * @apiSuccess {String} token The user's jwt token
  */
 /**
- * @apiDefine userErrors
+ * @apiDefine userFieldErrors
  *
  * @apiError (Field Errors) errors Returns all of the applicable errors
  * @apiError (Field Errors) {String[]} [errors.name] Errors related to the name field
@@ -50,7 +57,8 @@
  * @apiGroup User
  *
  * @apiUse userResponse
- * @apiUse userErrors
+ * @apiUse userFieldErrors
+ * @apiUse permissionErrors
  *
  * @apiParam {Object} user
  * @apiParam {String} user.name
@@ -74,7 +82,7 @@
  * @api {put} /users/:id Update user
  * @apiName updateUser
  * @apiGroup User
- * @apiUse userErrors
+ * @apiUse userFieldErrors
  *
  * @apiUse protected
  * @apiUse userResponse
