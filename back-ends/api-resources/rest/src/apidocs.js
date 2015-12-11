@@ -35,6 +35,15 @@
  * @apiSuccess {string} user.date_modified
  * @apiSuccess {String} token The user's jwt token
  */
+/**
+ * @apiDefine userErrors
+ *
+ * @apiError errors Returns all of the applicable errors
+ * @apiError {String[]} [errors.general] General errors not related to a particular field
+ * @apiError {String[]} [errors.name] Errors related to the name field
+ * @apiError {String[]} [errors.email] Errors related to the email field
+ * @apiError {String[]} [errors.password] Errors related to the password field
+ */
 
 /**
  * @api {post} /users Create user
@@ -42,6 +51,7 @@
  * @apiGroup User
  *
  * @apiUse userResponse
+ * @apiUse userErrors
  *
  * @apiParam {Object} user
  * @apiParam {String} user.name
@@ -65,6 +75,7 @@
  * @api {put} /users/:id Update user
  * @apiName updateUser
  * @apiGroup User
+ * @apiUse userErrors
  *
  * @apiUse protected
  * @apiUse userResponse
