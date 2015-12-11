@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
   let token;
   try {
     // token is assigned to any token passed through the body, head, or query
-    token = req.body.token || req.query.token || req.headers['authorization'];
+    token = req.body.token || req.query.token || req.headers['authorization'].split(' ')[1];
   } catch(err) {
     token = null;
   }

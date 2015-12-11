@@ -4,20 +4,41 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import config from '../../config';
 import User from './../models/User';
+import Post from './../models/Post';
 
 module.exports.authenticate = (req, res) => {
   User.findOne({
     email: req.body.email.toLowerCase(),
   })
   .then(user => {
-    console.log(user);
+    if (user === null) {
+      res.json({
+        msg: 'That user does not exist',
+      });
+    } else {
+      bcrypt.compare(req.body.password, user.password, (err, result) => {
+        if (result) {
+          let token = jwt.sign(user, config.jwt.secret, {
+            expiresIn: 1440 * 60,
+          });
+
+          res.json({
+            token: 'Bearer ' + token,
+          });
+        } else {
+          res.json({
+            msg: 'Incorrect password',
+          });
+        }
+      });
+    }
   });
 };
 
 module.exports.create = (req, res) => {
   User.find({$or: [
     {username: req.body.username.toLowerCase()},
-    {email: req.body.email.toLowerCase()}
+    {email: req.body.email.toLowerCase()},
   ]})
   .then(users => {
     if (users.length === 0) {
@@ -29,7 +50,7 @@ module.exports.create = (req, res) => {
       });
 
       user.save();
-      return user
+      return user;
     } else {
       res.json({
         msg: 'This Username or Email is already taken.',
@@ -38,7 +59,7 @@ module.exports.create = (req, res) => {
   })
   .then(user => {
     let token = jwt.sign(user, config.jwt.secret, {
-      expiresIn: 1440 * 60
+      expiresIn: 1440 * 60,
     });
 
     res.json({
@@ -49,9 +70,89 @@ module.exports.create = (req, res) => {
       },
       token: 'Bearer ' + token,
     });
-  })
+  });
 };
 
+module.exports.get = (req, res) => {
+  let the_id = req.params.id;
 
+  console.log(the_id);
+  console.log(req.user._id);
 
-module.exports.test = (req, res) => {}
+  User.findById(the_id)
+  .then(user => {
+    if (user === null) {
+      res.json({
+        msg: 'This user does not exist',
+      });
+    } else {
+      res.json({
+        user: {
+          name: user.name,
+          email: user.email,
+          username: user.username,
+        },
+      });
+    }
+  });
+};
+
+module.exports.update = (req, res) => {
+  let the_id = req.params.id;
+
+  User.findById(the_id)
+  .then(user => {
+    if (req.user._id === the_id) {
+      user.name = req.body.name || user.name,
+      user.email = req.body.email || user.email,
+      user.username = req.body.username || user.username,
+      user.password = req.body.password || user.password,
+
+      user.save();
+      return user;
+    } else {
+      res.json({
+        msg: 'You are not authorized to do that.',
+      });
+    }
+  })
+  .then(user => {
+    res.json({
+      user: {
+        name: user.name,
+        email: user.email,
+        username: user.username,
+      },
+    });
+  });
+};
+
+module.exports.delete = (req, res) => {
+  let the_id = req.params.id;
+
+  User.findById(the_id)
+  .then(user => {
+    if (req.user._id === the_id) {
+      user.remove();
+
+      res.json({
+        deleted_id: the_id,
+      });
+    } else {
+      res.json({
+        msg: 'You are not authorized to do that.',
+      });
+    }
+  });
+};
+
+module.exports.postsWritten = (req, res) => {
+  Post.find({
+    user_id: req.params.user_id,
+  })
+  .then(list => {
+    res.json({
+      posts: list,
+    });
+  });
+};

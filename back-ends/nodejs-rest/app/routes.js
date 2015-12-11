@@ -14,25 +14,24 @@ router.route('/sign-in')
 
 // Create A New User
 router.route('/users')
-  .put(user.test)
   .post(user.create);
 
-// // Auth/ JWT middleware.
-// router.use(jwtMiddleware);
-//
-// /***
-// * User Routes
-// **/
-//
-// // Read, Update & Delete User
-// router.route('/user/:id')
-//   .get(user.get)
-//   .put(user.update)
-//   .delete(user.delete);
-//
-// // List All Posts By A User
-// router.route('/user/:user_id/posts')
-//   .get(post.getByUser);
+// Auth/ JWT middleware.
+router.use(jwtMiddleware);
+
+/**
+* User Routes
+**/
+
+// Read, Update & Delete User
+router.route('/users/:id')
+  .get(user.get)
+  .put(user.update)
+  .delete(user.delete);
+
+// List All Posts By A User
+router.route('/users/:user_id/posts')
+  .get(user.postsWritten);
 //
 // /***
 // * Post Routes
