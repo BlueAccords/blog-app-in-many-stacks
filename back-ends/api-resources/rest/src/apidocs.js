@@ -38,11 +38,10 @@
 /**
  * @apiDefine userErrors
  *
- * @apiError errors Returns all of the applicable errors
- * @apiError {String[]} [errors.general] General errors not related to a particular field
- * @apiError {String[]} [errors.name] Errors related to the name field
- * @apiError {String[]} [errors.email] Errors related to the email field
- * @apiError {String[]} [errors.password] Errors related to the password field
+ * @apiError (Field Errors) errors Returns all of the applicable errors
+ * @apiError (Field Errors) {String[]} [errors.name] Errors related to the name field
+ * @apiError (Field Errors) {String[]} [errors.email] Errors related to the email field
+ * @apiError (Field Errors) {String[]} [errors.password] Errors related to the password field
  */
 
 /**
