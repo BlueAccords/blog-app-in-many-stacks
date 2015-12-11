@@ -190,7 +190,6 @@
  *
  * @apiParam {Object} post
  * @apiParam {String} post.title The title of the post
- * @apiParam {string} post.url_path The unique url path for the post (eg. blog.com/:url-path). Must be hiphenated.
  * @apiParam {string} post.body The post content
  */
 
