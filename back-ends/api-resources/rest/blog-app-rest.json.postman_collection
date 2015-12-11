@@ -476,7 +476,7 @@
 		{
 			"id": "ef7cf783-6e2c-a300-284f-18caede3505b",
 			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
-			"url": "http://localhost:8000/tag/1",
+			"url": "http://localhost:8000/tags/1",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "DELETE",
@@ -486,7 +486,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449764454526,
+			"time": 1449851807746,
 			"name": "Delete tag",
 			"description": "",
 			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
