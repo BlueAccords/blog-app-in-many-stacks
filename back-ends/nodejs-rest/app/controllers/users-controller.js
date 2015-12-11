@@ -75,16 +75,25 @@ module.exports.create = (req, res) => {
 module.exports.get = (req, res) => {
   let the_id = req.params.id;
 
+  console.log(the_id);
+  console.log(req.user._id);
+
   User.findById(the_id)
   .then(user => {
-    res.json({
-      user: {
-        name: user.name,
-        email: user.email,
-        username: user.username,
-      },
-    });
-  })
+    if (user === null) {
+      res.json({
+        msg: 'This user does not exist'
+      })
+    } else {
+      res.json({
+        user: {
+          name: user.name,
+          email: user.email,
+          username: user.username,
+        },
+      });
+    }
+  });
 };
 
 module.exports.update = (req, res) => {
@@ -92,7 +101,7 @@ module.exports.update = (req, res) => {
 
   User.findById(the_id)
   .then(user => {
-    if (req.user._id === user._id) {
+    if (req.user._id === the_id) {
       user.name = req.body.name || user.name,
       user.email = req.body.email || user.email,
       user.username = req.body.username || user.username,
@@ -117,5 +126,21 @@ module.exports.update = (req, res) => {
   });
 };
 
-module.exports.test = (req, res) => {
-}
+module.exports.delete = (req, res) => {
+  let the_id = req.params.id;
+
+  User.findById(the_id)
+  .then(user => {
+    if (req.user._id === the_id) {
+      user.remove()
+
+      res.json({
+        deleted_id: the_id,
+      });
+    } else {
+      res.json({
+        msg: 'You are not authorized to do that.'
+      });
+    }
+  });
+};
