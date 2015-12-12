@@ -21,3 +21,12 @@ module.exports.create = (req, res) => {
     });
   });
 };
+
+module.exports.all = (req, res) => {
+  Post.find()
+  .then(posts => {
+    res.json({
+      posts: posts,
+    });
+  });
+};

@@ -39,8 +39,8 @@ router.route('/users/:user_id/posts')
 
 // Create & List Posts
 router.route('/posts')
-  .post(post.create);
-  // .get(post.all);
+  .post(post.create)
+  .get(post.all);
 
 // // Read, Update, & Delete Post
 // router.route('/posts/:id')
