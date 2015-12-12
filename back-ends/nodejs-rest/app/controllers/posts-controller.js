@@ -76,3 +76,24 @@ module.exports.update = (req, res) => {
     });
   });
 };
+
+module.exports.delete = (req, res) => {
+  Post.findById(req.params.id)
+  .then(post => {
+    if(String(post.user_id) === req.user._id) {
+      let post_id = post._id;
+
+      post.remove();
+      return post_id;
+    } else {
+      res.json({
+        msg: 'No... No... You no do that.',
+      });
+    }
+  })
+  .then(deleted_id => {
+    res.json({
+      deleted_id: deleted_id,
+    });
+  });
+};
