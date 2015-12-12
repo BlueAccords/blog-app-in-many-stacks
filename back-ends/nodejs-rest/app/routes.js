@@ -48,6 +48,10 @@ router.route('/posts/:id')
   .put(post.update)
   .delete(post.delete);
 
+// TODO comments and tags/ search refactor
+// TODO figure out whether a comment controller is cool or na
+//
+
 // Create and list comments.
 // router.route('/posts/:post_id/comments')
 //   .post(post.newComment)
