@@ -44,8 +44,8 @@ router.route('/posts')
 
 // Read, Update, & Delete Post
 router.route('/posts/:id')
-  .get(post.read);
-//   .put(post.update)
+  .get(post.read)
+  .put(post.update);
 //   .delete(post.delete);
 //
 // /***

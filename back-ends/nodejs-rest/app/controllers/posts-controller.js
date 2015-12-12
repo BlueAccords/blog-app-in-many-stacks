@@ -32,9 +32,7 @@ module.exports.all = (req, res) => {
 };
 
 module.exports.read = (req, res) => {
-  Post.findOne({
-    _id: req.params.id,
-  })
+  Post.findById(req.params.id)
   .then(post => {
     res.json({
       post: post,
@@ -43,6 +41,38 @@ module.exports.read = (req, res) => {
   err => {
     res.json({
       error: err,
+    });
+  });
+};
+
+module.exports.update = (req, res) => {
+  let author = req.user.username;
+  let path = req.body.title ?
+  req.body.title.toLowerCase().split(' ').join('-') + '-' + author : '';
+  // TODO Make less clever.
+
+  Post.findById(req.params.id)
+  .then(post => {
+
+    if (String(post.user_id) === req.user._id) {
+      post.url_path = path || post.url_path;
+      post.title = req.body.title || post.title;
+      post.body = req.body.body || post.body;
+      post.user_id = post.user_id;
+      post.date_created = post.date_created;
+      post.date_modified = new Date();
+
+      post.save();
+      return post;
+    } else {
+      res.json({
+        msg: 'You can\'t sit with us.',
+      });
+    }
+  })
+  .then(post => {
+    res.json({
+      updated_post: post,
     });
   });
 };
