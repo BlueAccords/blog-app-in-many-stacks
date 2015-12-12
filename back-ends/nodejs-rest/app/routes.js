@@ -42,9 +42,9 @@ router.route('/posts')
   .post(post.create)
   .get(post.all);
 
-// // Read, Update, & Delete Post
-// router.route('/posts/:id')
-//   .get(post.read)
+// Read, Update, & Delete Post
+router.route('/posts/:id')
+  .get(post.read);
 //   .put(post.update)
 //   .delete(post.delete);
 //

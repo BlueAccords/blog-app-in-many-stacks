@@ -30,3 +30,19 @@ module.exports.all = (req, res) => {
     });
   });
 };
+
+module.exports.read = (req, res) => {
+  Post.findOne({
+    _id: req.params.id,
+  })
+  .then(post => {
+    if (post === null) {
+      res.json({
+        msg: 'No post found',
+      });
+    }
+    res.json({
+      post: post,
+    });
+  });
+};
