@@ -2,6 +2,7 @@
 
 import Post from './../models/Post';
 
+// Create a new post
 module.exports.create = (req, res) => {
   let now = new Date();
   let path = req.body.title.toLowerCase().split(' ').join('-');
@@ -22,6 +23,7 @@ module.exports.create = (req, res) => {
   });
 };
 
+// View a list of all posts
 module.exports.all = (req, res) => {
   Post.find()
   .then(posts => {
@@ -31,6 +33,7 @@ module.exports.all = (req, res) => {
   });
 };
 
+// Read a post
 module.exports.read = (req, res) => {
   Post.findById(req.params.id)
   .then(post => {
@@ -45,6 +48,7 @@ module.exports.read = (req, res) => {
   });
 };
 
+// Update a post
 module.exports.update = (req, res) => {
   let author = req.user.username;
   let path = req.body.title ?
@@ -77,6 +81,7 @@ module.exports.update = (req, res) => {
   });
 };
 
+// Delete a post
 module.exports.delete = (req, res) => {
   Post.findById(req.params.id)
   .then(post => {

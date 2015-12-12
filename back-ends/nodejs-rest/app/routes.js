@@ -8,95 +8,83 @@ import tag from './controllers/tags-controller';
 import user from './controllers/users-controller';
 import post from './controllers/posts-controller';
 
-// Authenticate A User.
+/**
+* PUBLIC ROUTES
+**/
+
+// Authenticate a user.
 router.route('/sign-in')
   .post(user.authenticate);
 
-// Create A New User
+// Create a new user
 router.route('/users')
   .post(user.create);
 
-// Auth/ JWT middleware.
-router.use(jwtMiddleware);
-
 /**
-* User Routes
+* PRIVATE ROUTES
 **/
 
-// Read, Update & Delete User
+// Jwt auth middleware
+router.use(jwtMiddleware);
+
+// Read/Update/Delete a user
 router.route('/users/:id')
   .get(user.get)
   .put(user.update)
   .delete(user.delete);
 
-// List All Posts By A User
+// List all posts by user
 router.route('/users/:user_id/posts')
   .get(user.postsWritten);
 
-/**
-* Post Routes
-**/
-
-// Create & List Posts
+// Create and list posts
 router.route('/posts')
   .post(post.create)
   .get(post.all);
 
-// Read, Update, & Delete Post
+// Read/Update/Delete post
 router.route('/posts/:id')
   .get(post.read)
   .put(post.update)
   .delete(post.delete);
-//
-// /***
-// * Comment Routes
-// **/
-//
-// // Create & List Comments.
+
+// Create and list comments.
 // router.route('/posts/:post_id/comments')
 //   .post(post.newComment)
 //   .get(post.allComments);
-//
-// // Update & Delete Comment.
+
+// Update/Delete comment.
 // router.route('/comments/:id')
 //   .put(post.updateComment)
 //   .delete(post.deleteComment);
-//
-// /***
-// * Tag Routes
-// **/
-//
-// // Create & Read Tags
+
+// Create/Read tags
 // router.route('/posts/:post_id/tags')
 //   .post(tag.createTag)
 //   .get(tag.onPost);
-//
-// // Get Posts By Tag
+
+// Get posts by tag
 // router.route('/tag/:tag_id/posts')
 //   .get(tag.getPosts);
-//
-// // Update & Delete Tags
+
+// Update/Delete tags
 // router.route('/tags/:id')
 //   .put(tag.update)
 //   .delete(tag.delete);
-//
-// // List All Tags
+
+// List all tags
 // router.route('/tags')
 //   .get(tag.all);
-//
-// /***
-// * Search Routes
-// **/
-//
-// // Post Search via URL Path
+
+// Post search via url_path
 // router.route('/posts?path_url=:path_url')
 //   .get(post.search)
-//
-// // Tag Search via Text
+
+// Tag search via text
 // router.route('/tags/?text=:text')
 //   .get(tag.search)
-//
-// // User Search via Username
+
+// User search via username
 // router.route('/users/?username=:username')
 //   .get(user.search)
 
