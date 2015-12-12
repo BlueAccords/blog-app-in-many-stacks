@@ -36,13 +36,13 @@ module.exports.read = (req, res) => {
     _id: req.params.id,
   })
   .then(post => {
-    if (post === null) {
-      res.json({
-        msg: 'No post found',
-      });
-    }
     res.json({
       post: post,
+    });
+  },
+  err => {
+    res.json({
+      error: err,
     });
   });
 };
