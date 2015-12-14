@@ -3,12 +3,12 @@
 import mongoose from 'mongoose';
 
 let CommentSchema = new mongoose.Schema({
-  post: {
+  post_id: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     trim: true,
   },
-  user: {
+  user_id: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     trim: true,

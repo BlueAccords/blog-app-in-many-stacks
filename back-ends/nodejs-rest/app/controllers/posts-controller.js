@@ -1,6 +1,7 @@
 'use strict';
 
 import Post from './../models/Post';
+import Comment from './../models/Comment';
 
 // Create a new post
 module.exports.create = (req, res) => {
@@ -104,5 +105,14 @@ module.exports.delete = (req, res) => {
 };
 
 module.exports.newComment = (req, res) => {
-  
+  Comment.create({
+    user_id: req.user._id,
+    post_id: req.params.post_id,
+    text: req.body.text,
+  })
+  .then(comment => {
+    res.json({
+      comment: comment,
+    });
+  });
 };
