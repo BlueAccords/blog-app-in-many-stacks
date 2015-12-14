@@ -116,3 +116,14 @@ module.exports.newComment = (req, res) => {
     });
   });
 };
+
+module.exports.allComments = (req, res) => {
+  Comment.find({
+    post_id: req.params.post_id,
+  })
+  .then(comments => {
+    res.json({
+      comments: comments,
+    });
+  });
+};

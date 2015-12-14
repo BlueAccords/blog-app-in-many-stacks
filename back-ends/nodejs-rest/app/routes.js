@@ -52,8 +52,8 @@ router.route('/posts/:id')
 
 // Create and list comments.
 router.route('/posts/:post_id/comments')
-  .post(post.newComment);
-//   .get(post.allComments);
+  .post(post.newComment)
+  .get(post.allComments);
 
 // Update/Delete comment.
 // router.route('/comments/:id')
