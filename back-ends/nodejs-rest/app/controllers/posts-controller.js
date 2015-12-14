@@ -2,6 +2,7 @@
 
 import Post from './../models/Post';
 import Comment from './../models/Comment';
+import Tag from './../models/Tag';
 
 // Create a new post
 module.exports.create = (req, res) => {
@@ -14,6 +15,7 @@ module.exports.create = (req, res) => {
     title: req.body.title,
     body: req.body.body,
     user_id: req.user._id,
+    tags: [],
     date_created: now,
     date_modified: now,
   })
@@ -54,7 +56,6 @@ module.exports.update = (req, res) => {
   let author = req.user.username;
   let path = req.body.title ?
   req.body.title.toLowerCase().split(' ').join('-') + '-' + author : '';
-  // TODO Make less clever.
 
   Post.findById(req.params.id)
   .then(post => {
@@ -64,6 +65,7 @@ module.exports.update = (req, res) => {
       post.title = req.body.title || post.title;
       post.body = req.body.body || post.body;
       post.user_id = post.user_id;
+      post.tags = post.tags || [];
       post.date_created = post.date_created;
       post.date_modified = new Date();
 

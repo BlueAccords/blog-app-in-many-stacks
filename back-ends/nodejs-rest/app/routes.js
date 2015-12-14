@@ -62,9 +62,9 @@ router.route('/comments/:id')
   .delete(comment.delete);
 
 // Create/Read tags
-// router.route('/posts/:post_id/tags')
-//   .post(tag.createTag)
-//   .get(tag.onPost);
+router.route('/posts/:post_id/tags')
+  .post(tag.create)
+  .get(tag.list);
 
 // Get posts by tag
 // router.route('/tag/:tag_id/posts')

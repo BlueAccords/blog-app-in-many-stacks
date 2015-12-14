@@ -23,6 +23,10 @@ let PostSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
+  tags: [{
+    tag_id: mongoose.Schema.Types.ObjectId,
+    text: String,
+  }],
   date_created: {
     type: Date,
     required: true,
