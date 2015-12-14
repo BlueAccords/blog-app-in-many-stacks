@@ -49,7 +49,7 @@ router.route('/posts/:id')
   .put(post.update)
   .delete(post.delete);
 
-// TODO comments and tags/ search refactor
+// TODO tags and search refactor
 
 // Create and list comments.
 router.route('/posts/:post_id/comments')
@@ -58,8 +58,8 @@ router.route('/posts/:post_id/comments')
 
 // Update/Delete comment.
 router.route('/comments/:id')
-  .put(comment.update);
-//   .delete(comment.delete);
+  .put(comment.update)
+  .delete(comment.delete);
 
 // Create/Read tags
 // router.route('/posts/:post_id/tags')

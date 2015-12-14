@@ -22,3 +22,22 @@ module.exports.update = (req, res) => {
     });
   });
 };
+
+module.exports.delete = (req, res) => {
+  Comment.findById(req.params.id)
+  .then(comment => {
+    if (String(comment.user_id) === req.user._id) {
+      let commentID = comment._id;
+
+      comment.remove();
+      return commentID;
+    } else {
+      res.json('no');
+    }
+  })
+  .then(deletedID => {
+    res.json({
+      deleted_id: deletedID,
+    });
+  });
+};
