@@ -7,6 +7,7 @@ import jwtMiddleware from './middlewares/jwt';
 import tag from './controllers/tags-controller';
 import user from './controllers/users-controller';
 import post from './controllers/posts-controller';
+import comment from './controllers/comments-controller';
 
 /**
 * PUBLIC ROUTES
@@ -56,9 +57,9 @@ router.route('/posts/:post_id/comments')
   .get(post.allComments);
 
 // Update/Delete comment.
-// router.route('/comments/:id')
-//   .put(post.updateComment)
-//   .delete(post.deleteComment);
+router.route('/comments/:id')
+  .put(comment.update);
+//   .delete(comment.delete);
 
 // Create/Read tags
 // router.route('/posts/:post_id/tags')
