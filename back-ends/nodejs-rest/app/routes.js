@@ -67,8 +67,8 @@ router.route('/posts/:post_id/tags')
   .get(tag.list);
 
 // Get posts by tag
-// router.route('/tag/:tag_id/posts')
-//   .get(tag.getPosts);
+router.route('/tag/:tag_id/posts')
+  .get(tag.getPosts);
 
 // Update/Delete tags
 // router.route('/tags/:id')

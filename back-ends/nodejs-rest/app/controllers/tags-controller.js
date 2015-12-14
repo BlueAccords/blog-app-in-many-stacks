@@ -22,6 +22,17 @@ module.exports.create = (req, res) => {
   .then(tag => {
     Post.findById(req.params.post_id)
     .then(post => {
+      tag.posts.push({
+        _id: post._id,
+        url_path: post.url_path,
+        title: post.title,
+        body: post.body,
+        user_id: post.user_id,
+        date_modified: post.date_modified,
+        date_created: post.date_created,
+      });
+      tag.save();
+
       post.tags.push(tag);
       post.save();
 
@@ -37,6 +48,16 @@ module.exports.list = (req, res) => {
   .then(post => {
     res.json({
       post_tags: post.tags,
+    });
+  });
+};
+
+module.exports.getPosts = (req, res) => {
+  Tag.findById(req.params.tag_id)
+  .then(tag => {
+    console.log(tag);
+    res.json({
+      posts: tag.posts,
     });
   });
 };

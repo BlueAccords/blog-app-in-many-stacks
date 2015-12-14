@@ -24,8 +24,8 @@ let PostSchema = new mongoose.Schema({
     required: true,
   },
   tags: [{
-    tag_id: mongoose.Schema.Types.ObjectId,
     text: String,
+    tag_id: mongoose.Schema.Types.ObjectId,
   }],
   date_created: {
     type: Date,
