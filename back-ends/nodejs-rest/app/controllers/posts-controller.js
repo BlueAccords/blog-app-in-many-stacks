@@ -102,3 +102,7 @@ module.exports.delete = (req, res) => {
     });
   });
 };
+
+module.exports.newComment = (req, res) => {
+  
+};
