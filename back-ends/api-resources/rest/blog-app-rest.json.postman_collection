@@ -1,32 +1,32 @@
 {
-	"id": "c7682a49-583a-d08e-8949-2cbe5369996d",
+	"id": "c1042447-359c-bb03-3c09-75519f520182",
 	"name": "blog-app-rest",
 	"description": "The postman collection for the blog app with many stacks app.\nNote that you will likely need to update the authorization headers in each request to have valid tokens which\nyou can get from the 'Sign in' resource.",
 	"order": [
-		"51768850-88c9-e1de-e705-e04994ecc31c",
-		"f9b8d380-25b3-5f1a-038b-a1e4e8f12a17",
-		"a5f3d38e-e8ab-f5ad-1e58-5d67549bd64c",
-		"62860aeb-0e15-ce07-74e1-f75c91afb73f",
-		"137c86c4-8594-02ab-0c3a-1da8b18de0be",
-		"5c94495b-8092-3eea-27eb-7a498c59c5e2",
-		"f3ee1f38-fd2c-d97e-2dca-24a2163512da",
-		"9cf5a250-c98e-9bab-dced-e6a98f657adb",
-		"a700f7ad-e847-7ca5-eccd-f060ca65d787",
-		"9ff89824-637a-4447-dbe0-cd0885ed923e",
-		"d38d9662-a44f-5d51-6c02-0e888c27e6c1",
-		"6b4bdcb1-5792-c973-1981-72dafcb0d338",
-		"d1c8fe25-8b9c-eaf3-8cd2-2edf4490e2c5",
-		"6182b03f-0fe5-a2e3-13e9-70ee9fbeb6b5",
-		"2bb84b54-621f-b80b-31b8-dfb2d8295528",
-		"c2a8ab9d-e103-b080-14e7-55d10b8ee2a0",
-		"aa8ca643-f1b5-8783-4ec9-f5a607004595",
-		"23ed7c2f-4014-22c2-0cfd-cc46eda6b986",
-		"b67c8f1c-583c-7927-d108-22c4c1ba237c",
-		"bdb0dceb-6329-0e65-e8ae-92b9e18153cb",
-		"ef7cf783-6e2c-a300-284f-18caede3505b",
-		"bbc8651f-20fb-e9ac-78fa-97b5cf0ef5c0",
-		"f8ccd3c5-2118-0293-5645-f05b40d55ba6",
-		"2ad2ecb9-5945-7ac6-fda3-afd0b127f920"
+		"4d2ecc6b-2d35-2303-e9ba-538db4e3e286",
+		"76d6c821-24df-08e1-60d3-4f1b7a3d49f9",
+		"879bbdd2-218a-5985-de60-e5e0436d0614",
+		"fae3f636-d439-0a3a-7b4f-98c2d148c6f6",
+		"5db1a878-4d56-ed4d-1a5c-bcd14f0efff6",
+		"2b57a7b4-5344-8d5b-b602-e7bf0024273a",
+		"68ffe42b-e95c-ac4d-5749-a6c59ea9907f",
+		"b6b23208-e1b3-faad-426d-9dcdee5cbef1",
+		"2725f192-c380-4375-300f-d301fda69b60",
+		"332132b6-9c45-1199-90bc-9d9f5c235467",
+		"0bb2f4a9-59d5-1ad5-de3d-3397b20630c5",
+		"fb47993e-11c5-aacf-03d5-12840dc6142c",
+		"b437b486-6728-74da-ee0d-f7bbd5d7f089",
+		"b6f6ec7e-4479-c30e-b6da-63551ed4526c",
+		"fe5895a0-50b9-6ea8-9265-a3d758a83543",
+		"79e7caf0-f4a9-8e72-a44b-416a44bfd611",
+		"4908bc2f-ca49-1523-deb1-1bdeeaa8cbda",
+		"55736fd5-6308-dc34-f196-0f08e7e7d364",
+		"743a0501-8c68-c610-a180-9b7d2a241e3f",
+		"96e30b98-b4d3-67da-6d6b-628cbe42e778",
+		"03a05c2b-5d79-5959-d3f5-29dad1fc2dcb",
+		"44aa055e-1548-d66a-2366-54d1a18b830f",
+		"fc38d7d0-e0c3-2129-b374-dcf7ad80c9ca",
+		"6cc48e60-8b2c-fc13-a873-18c32422d96c"
 	],
 	"folders": [],
 	"timestamp": 1449255627034,
@@ -35,138 +35,9 @@
 	"public": false,
 	"requests": [
 		{
-			"id": "137c86c4-8594-02ab-0c3a-1da8b18de0be",
+			"id": "03a05c2b-5d79-5959-d3f5-29dad1fc2dcb",
 			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
-			"url": "http://localhost:8000/users/1",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "PUT",
-			"data": [
-				{
-					"key": "name",
-					"value": "Updated Name",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "email",
-					"value": "new@new.com",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "username",
-					"value": "updatedname",
-					"type": "text",
-					"enabled": true
-				}
-			],
-			"dataMode": "urlencoded",
-			"version": 2,
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1449765422915,
-			"name": "Update User",
-			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
-		},
-		{
-			"id": "23ed7c2f-4014-22c2-0cfd-cc46eda6b986",
-			"headers": "",
-			"url": "http://localhost:8000/posts/1/comments",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "params",
-			"version": 2,
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1449762144570,
-			"name": "Get comments by post",
-			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
-		},
-		{
-			"id": "2ad2ecb9-5945-7ac6-fda3-afd0b127f920",
-			"headers": "",
-			"url": "http://localhost:8000/tags/?text=test",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "params",
-			"version": 2,
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1449766514270,
-			"name": "Get tag by tag text",
-			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
-		},
-		{
-			"id": "2bb84b54-621f-b80b-31b8-dfb2d8295528",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
-			"url": "http://localhost:8000/posts/1/comments",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [
-				{
-					"key": "text",
-					"value": "this is a comment on this post",
-					"type": "text",
-					"enabled": true
-				}
-			],
-			"dataMode": "urlencoded",
-			"version": 2,
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1449762297621,
-			"name": "Create comment",
-			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
-		},
-		{
-			"id": "51768850-88c9-e1de-e705-e04994ecc31c",
-			"headers": "",
-			"url": "http://localhost:8000/sign-in",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [
-				{
-					"key": "email",
-					"value": "test@test.com",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "password",
-					"value": "testtest",
-					"type": "text",
-					"enabled": true
-				}
-			],
-			"dataMode": "urlencoded",
-			"version": 2,
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1449765534118,
-			"name": "Sign In",
-			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
-		},
-		{
-			"id": "5c94495b-8092-3eea-27eb-7a498c59c5e2",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
-			"url": "http://localhost:8000/users/1",
+			"url": "http://localhost:8000/tags/1",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "DELETE",
@@ -176,33 +47,15 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449765233118,
-			"name": "Delete user",
+			"time": 1449851807746,
+			"name": "Delete tag",
 			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
 		},
 		{
-			"id": "6182b03f-0fe5-a2e3-13e9-70ee9fbeb6b5",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
-			"url": "http://localhost:8000/posts/1",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "DELETE",
-			"data": [],
-			"dataMode": "params",
-			"version": 2,
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1449762094515,
-			"name": "Delete post",
-			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
-		},
-		{
-			"id": "62860aeb-0e15-ce07-74e1-f75c91afb73f",
+			"id": "0bb2f4a9-59d5-1ad5-de3d-3397b20630c5",
 			"headers": "",
-			"url": "http://localhost:8000/users?username=testtest",
+			"url": "http://localhost:8000/tags/1/posts",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "GET",
@@ -212,85 +65,13 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449766910600,
-			"name": "Get User by username",
+			"time": 1449765205054,
+			"name": "Get posts by tag",
 			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
 		},
 		{
-			"id": "6b4bdcb1-5792-c973-1981-72dafcb0d338",
-			"headers": "",
-			"url": "http://localhost:8000/posts?path_url=test-url",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "params",
-			"version": 2,
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1449766558740,
-			"name": "Get post by path_url",
-			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
-		},
-		{
-			"id": "9cf5a250-c98e-9bab-dced-e6a98f657adb",
-			"headers": "",
-			"url": "http://localhost:8000/posts/1",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "params",
-			"version": 2,
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1449762050094,
-			"name": "Get post",
-			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
-		},
-		{
-			"id": "9ff89824-637a-4447-dbe0-cd0885ed923e",
-			"headers": "",
-			"url": "http://localhost:8000/users/1/posts",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "params",
-			"version": 2,
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1449765216389,
-			"name": "Get posts by user",
-			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
-		},
-		{
-			"id": "a5f3d38e-e8ab-f5ad-1e58-5d67549bd64c",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
-			"url": "http://localhost:8000/users/1",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "params",
-			"version": 2,
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1449765223536,
-			"name": "Get User",
-			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
-		},
-		{
-			"id": "a700f7ad-e847-7ca5-eccd-f060ca65d787",
+			"id": "2725f192-c380-4375-300f-d301fda69b60",
 			"headers": "",
 			"url": "http://localhost:8000/posts/",
 			"preRequestScript": "",
@@ -305,12 +86,12 @@
 			"time": 1449762243310,
 			"name": "Get all posts",
 			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
 		},
 		{
-			"id": "aa8ca643-f1b5-8783-4ec9-f5a607004595",
+			"id": "2b57a7b4-5344-8d5b-b602-e7bf0024273a",
 			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
-			"url": "http://localhost:8000/comments/1",
+			"url": "http://localhost:8000/users/1",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "DELETE",
@@ -320,38 +101,31 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449762288845,
-			"name": "Delete comment",
+			"time": 1449765233118,
+			"name": "Delete user",
 			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
 		},
 		{
-			"id": "b67c8f1c-583c-7927-d108-22c4c1ba237c",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
-			"url": "http://localhost:8000/tags",
+			"id": "332132b6-9c45-1199-90bc-9d9f5c235467",
+			"headers": "",
+			"url": "http://localhost:8000/users/1/posts",
 			"preRequestScript": "",
 			"pathVariables": {},
-			"method": "POST",
-			"data": [
-				{
-					"key": "text",
-					"value": "this is a comment on this post",
-					"type": "text",
-					"enabled": true
-				}
-			],
-			"dataMode": "urlencoded",
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
 			"version": 2,
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449764432159,
-			"name": "Create tag",
+			"time": 1449765216389,
+			"name": "Get posts by user",
 			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
 		},
 		{
-			"id": "bbc8651f-20fb-e9ac-78fa-97b5cf0ef5c0",
+			"id": "44aa055e-1548-d66a-2366-54d1a18b830f",
 			"headers": "",
 			"url": "http://localhost:8000/posts/1/tags",
 			"preRequestScript": "",
@@ -366,10 +140,282 @@
 			"time": 1449764475653,
 			"name": "Get tags by post",
 			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
 		},
 		{
-			"id": "bdb0dceb-6329-0e65-e8ae-92b9e18153cb",
+			"id": "4908bc2f-ca49-1523-deb1-1bdeeaa8cbda",
+			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"url": "http://localhost:8000/comments/1",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1449762288845,
+			"name": "Delete comment",
+			"description": "",
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
+		},
+		{
+			"id": "4d2ecc6b-2d35-2303-e9ba-538db4e3e286",
+			"headers": "",
+			"url": "http://localhost:8000/sign-in",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "user[email]",
+					"value": "test@test.com",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "user[password]",
+					"value": "testtest",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1450204214229,
+			"name": "Sign In",
+			"description": "",
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
+		},
+		{
+			"id": "55736fd5-6308-dc34-f196-0f08e7e7d364",
+			"headers": "",
+			"url": "http://localhost:8000/posts/1/comments",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1449762144570,
+			"name": "Get comments by post",
+			"description": "",
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
+		},
+		{
+			"id": "5db1a878-4d56-ed4d-1a5c-bcd14f0efff6",
+			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"url": "http://localhost:8000/users/1",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [
+				{
+					"key": "user[name]",
+					"value": "Updated Name",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "user[email]",
+					"value": "new@new.com",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "user[username]",
+					"value": "updatedname",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1450206246656,
+			"name": "Update User",
+			"description": "",
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
+		},
+		{
+			"id": "68ffe42b-e95c-ac4d-5749-a6c59ea9907f",
+			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"url": "http://localhost:8000/posts",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "post[title]",
+					"value": "test post man",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "post[body]",
+					"value": "this is the body of the post",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "post[path_url]",
+					"value": "test-url",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1450206284729,
+			"name": "Create post",
+			"description": "",
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
+		},
+		{
+			"id": "6cc48e60-8b2c-fc13-a873-18c32422d96c",
+			"headers": "",
+			"url": "http://localhost:8000/tags/?text=test",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1449766514270,
+			"name": "Get tag by tag text",
+			"description": "",
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
+		},
+		{
+			"id": "743a0501-8c68-c610-a180-9b7d2a241e3f",
+			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"url": "http://localhost:8000/tags",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "tag[text]",
+					"value": "this is a comment on this post",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1450206353214,
+			"name": "Create tag",
+			"description": "",
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
+		},
+		{
+			"id": "76d6c821-24df-08e1-60d3-4f1b7a3d49f9",
+			"headers": "",
+			"url": "http://localhost:8000/users",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "POST",
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182",
+			"data": [
+				{
+					"key": "user[name]",
+					"value": "Test Account",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "user[email]",
+					"value": "test2@test.com",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "user[password]",
+					"value": "testtest",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "user[username]",
+					"value": "testtest",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "Sign Up",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1450206175758,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "79e7caf0-f4a9-8e72-a44b-416a44bfd611",
+			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"url": "http://localhost:8000/comments/1",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [
+				{
+					"key": "comment[text]",
+					"value": "Updated comment",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1450206335945,
+			"name": "Update comment",
+			"description": "",
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
+		},
+		{
+			"id": "879bbdd2-218a-5985-de60-e5e0436d0614",
+			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"url": "http://localhost:8000/users/1",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1449765223536,
+			"name": "Get User",
+			"description": "",
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
+		},
+		{
+			"id": "96e30b98-b4d3-67da-6d6b-628cbe42e778",
 			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
 			"url": "http://localhost:8000/tags/1",
 			"preRequestScript": "",
@@ -391,35 +437,10 @@
 			"time": 1449764429759,
 			"name": "Update tag",
 			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
 		},
 		{
-			"id": "c2a8ab9d-e103-b080-14e7-55d10b8ee2a0",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
-			"url": "http://localhost:8000/comments/1",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "PUT",
-			"data": [
-				{
-					"key": "text",
-					"value": "Updated comment",
-					"type": "text",
-					"enabled": true
-				}
-			],
-			"dataMode": "params",
-			"version": 2,
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1449762335860,
-			"name": "Update comment",
-			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
-		},
-		{
-			"id": "d1c8fe25-8b9c-eaf3-8cd2-2edf4490e2c5",
+			"id": "b437b486-6728-74da-ee0d-f7bbd5d7f089",
 			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
 			"url": "http://localhost:8000/posts/1",
 			"preRequestScript": "",
@@ -427,19 +448,19 @@
 			"method": "PUT",
 			"data": [
 				{
-					"key": "title",
+					"key": "post[title]",
 					"value": "test post man update",
 					"type": "text",
 					"enabled": true
 				},
 				{
-					"key": "body",
+					"key": "post[body]",
 					"value": "this is the body of the post",
 					"type": "text",
 					"enabled": true
 				},
 				{
-					"key": "path_url",
+					"key": "post[path_url]",
 					"value": "new-post-url",
 					"type": "text",
 					"enabled": true
@@ -450,15 +471,15 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449766583838,
+			"time": 1450206308596,
 			"name": "Update post",
 			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
 		},
 		{
-			"id": "d38d9662-a44f-5d51-6c02-0e888c27e6c1",
+			"id": "b6b23208-e1b3-faad-426d-9dcdee5cbef1",
 			"headers": "",
-			"url": "http://localhost:8000/tags/1/posts",
+			"url": "http://localhost:8000/posts/1",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "GET",
@@ -468,15 +489,15 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449765205054,
-			"name": "Get posts by tag",
+			"time": 1449762050094,
+			"name": "Get post",
 			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
 		},
 		{
-			"id": "ef7cf783-6e2c-a300-284f-18caede3505b",
+			"id": "b6f6ec7e-4479-c30e-b6da-63551ed4526c",
 			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
-			"url": "http://localhost:8000/tags/1",
+			"url": "http://localhost:8000/posts/1",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "DELETE",
@@ -486,50 +507,49 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449851807746,
-			"name": "Delete tag",
+			"time": 1449762094515,
+			"name": "Delete post",
 			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
 		},
 		{
-			"id": "f3ee1f38-fd2c-d97e-2dca-24a2163512da",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
-			"url": "http://localhost:8000/posts",
+			"id": "fae3f636-d439-0a3a-7b4f-98c2d148c6f6",
+			"headers": "",
+			"url": "http://localhost:8000/users?username=testtest",
 			"preRequestScript": "",
 			"pathVariables": {},
-			"method": "POST",
-			"data": [
-				{
-					"key": "title",
-					"value": "test post man",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "body",
-					"value": "this is the body of the post",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "path_url",
-					"value": "test-url",
-					"type": "text",
-					"enabled": true
-				}
-			],
-			"dataMode": "urlencoded",
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
 			"version": 2,
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449766568700,
-			"name": "Create post",
+			"time": 1449766910600,
+			"name": "Get User by username",
 			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
 		},
 		{
-			"id": "f8ccd3c5-2118-0293-5645-f05b40d55ba6",
+			"id": "fb47993e-11c5-aacf-03d5-12840dc6142c",
+			"headers": "",
+			"url": "http://localhost:8000/posts?path_url=test-url",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1449766558740,
+			"name": "Get post by path_url",
+			"description": "",
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
+		},
+		{
+			"id": "fc38d7d0-e0c3-2129-b374-dcf7ad80c9ca",
 			"headers": "",
 			"url": "http://localhost:8000/tags",
 			"preRequestScript": "",
@@ -544,37 +564,19 @@
 			"time": 1449766484877,
 			"name": "Get all tags",
 			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
 		},
 		{
-			"id": "f9b8d380-25b3-5f1a-038b-a1e4e8f12a17",
-			"headers": "",
-			"url": "http://localhost:8000/users",
+			"id": "fe5895a0-50b9-6ea8-9265-a3d758a83543",
+			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjYxZGYzZDkwNmU1NjA5ODM1Njg3YzgiLCJmTmFtZSI6IlJlYWxGaW5hbCIsImxOYW1lIjoiVGVzdCIsImVtYWlsIjoicmVhbGZpbmFsdGVzdEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6InJlYWxmaW5hbCIsInBhc3N3b3JkIjoiJDJhJDA4JFRQM0lScXVWRkdSa0cyUDZ6ZFBJVS5OcUpwM2QyOWJuMGlINEJKSC90QXpORTVvcnhaUUNxIiwiX192IjowfQ.QLQ1vsMfzEcAamfDQ_gHfVAL361agIno4BwmSbTG60Y\n",
+			"url": "http://localhost:8000/posts/1/comments",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "POST",
 			"data": [
 				{
-					"key": "name",
-					"value": "Test Account",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "email",
-					"value": "test2@test.com",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "password",
-					"value": "testtest",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "username",
-					"value": "testtest",
+					"key": "comment[text]",
+					"value": "this is a comment on this post",
 					"type": "text",
 					"enabled": true
 				}
@@ -584,10 +586,10 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449765436634,
-			"name": "Sign up",
+			"time": 1450206324707,
+			"name": "Create comment",
 			"description": "",
-			"collectionId": "c7682a49-583a-d08e-8949-2cbe5369996d"
+			"collectionId": "c1042447-359c-bb03-3c09-75519f520182"
 		}
 	]
 }
