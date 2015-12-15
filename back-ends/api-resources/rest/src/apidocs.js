@@ -405,11 +405,11 @@
 
 /****************************************************** SEARCH ***********************************/
 /**
- * @api {get} /posts?path_url=:path_url Get post by path_url
- * @apiName Get post by path_url
+ * @api {get} /posts?url_path=:url_path Get post by url_path
+ * @apiName Get post by url_path
  * @apiGroup Search
  *
- * @apiParam {String} path_url The unique path_url for the post you want to find
+ * @apiParam {String} url_path The unique url_path for the post you want to find
  *
  * @apiUse postResponse
  * @apiUse generalErrors
