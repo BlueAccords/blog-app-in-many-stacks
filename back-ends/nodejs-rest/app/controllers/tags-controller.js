@@ -2,6 +2,7 @@
 
 import Tag from './../models/Tag';
 import Post from './../models/Post';
+import * as _ from 'lodash';
 
 module.exports.all = (req, res) => {
   Tag.find()
@@ -42,7 +43,7 @@ module.exports.create = (req, res) => {
       });
       tag.save();
 
-      post.tags.push(tag);
+      post.tags = _.unique([...post.tags, tag], (x) => x.text);
       post.save();
 
       res.json({
