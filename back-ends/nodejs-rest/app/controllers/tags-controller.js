@@ -3,6 +3,15 @@
 import Tag from './../models/Tag';
 import Post from './../models/Post';
 
+module.exports.all = (req, res) => {
+  Tag.find()
+  .then(tags => {
+    res.json({
+      tags: tags,
+    });
+  });
+};
+
 module.exports.create = (req, res) => {
   Tag.findOne({
     text: req.body.text,
@@ -58,6 +67,38 @@ module.exports.getPosts = (req, res) => {
     console.log(tag);
     res.json({
       posts: tag.posts,
+    });
+  });
+};
+
+// since tags don't have author id's, should anyone be able to update them?
+module.exports.update = (req, res) => {
+  Tag.findById(req.params.tag_id)
+  .then(tag => {
+    tag.text = req.body.text;
+    tag.save();
+
+    return tag;
+  })
+  .then(tag => {
+    res.json({
+      updated_tag: tag,
+    });
+  });
+};
+
+// since tags don't have author id's, should anyone be able to delete them?
+module.exports.delete = (req, res) => {
+  Tag.findById(req.params.tag_id)
+  .then(tag => {
+    let tagID  = tag._id;
+
+    tag.remove();
+    return tagID;
+  })
+  .then(tagID => {
+    res.json({
+      deleted_id: tagID,
     });
   });
 };

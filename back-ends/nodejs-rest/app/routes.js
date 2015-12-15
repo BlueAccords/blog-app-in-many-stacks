@@ -71,17 +71,13 @@ router.route('/tag/:tag_id/posts')
   .get(tag.getPosts);
 
 // Update/Delete tags
-// router.route('/tags/:id')
-//   .put(tag.update)
-//   .delete(tag.delete);
+router.route('/tags/:id')
+  .put(tag.update)
+  .delete(tag.delete);
 
 // List all tags
-// router.route('/tags')
-//   .get(tag.all);
-
-// Post search via url_path
-// router.route('/posts?path_url=:path_url')
-//   .get(post.search)
+router.route('/tags')
+  .get(tag.all);
 
 // Tag search via text
 // router.route('/tags/?text=:text')

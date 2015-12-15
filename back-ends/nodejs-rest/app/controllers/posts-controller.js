@@ -28,12 +28,23 @@ module.exports.create = (req, res) => {
 
 // View a list of all posts
 module.exports.all = (req, res) => {
-  Post.find()
-  .then(posts => {
-    res.json({
-      posts: posts,
+  if(req.query.url_path) {
+    Post.findOne({
+      'url_path': req.query.url_path,
+    })
+    .then(post => {
+      res.json({
+        post: post,
+      });
     });
-  });
+  } else {
+    Post.find()
+    .then(posts => {
+      res.json({
+        posts: posts,
+      });
+    });
+  }
 };
 
 // Read a post
@@ -120,6 +131,7 @@ module.exports.newComment = (req, res) => {
 };
 
 module.exports.allComments = (req, res) => {
+  console.log('works');
   Comment.find({
     post_id: req.params.post_id,
   })
@@ -128,4 +140,7 @@ module.exports.allComments = (req, res) => {
       comments: comments,
     });
   });
+};
+
+module.exports.search = (req, res) => {
 };
