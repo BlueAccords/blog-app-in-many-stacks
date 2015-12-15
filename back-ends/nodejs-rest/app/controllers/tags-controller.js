@@ -32,7 +32,7 @@ module.exports.create = (req, res) => {
   .then(tag => {
     Post.findById(req.params.post_id)
     .then(post => {
-      tag.posts.push({
+      tag.posts = _.unique([...tag.posts, {
         _id: post._id,
         url_path: post.url_path,
         title: post.title,
@@ -40,7 +40,7 @@ module.exports.create = (req, res) => {
         user_id: post.user_id,
         date_modified: post.date_modified,
         date_created: post.date_created,
-      });
+      }], (x) => x.url_path);
       tag.save();
 
       post.tags = _.unique([...post.tags, tag], (x) => x.text);
