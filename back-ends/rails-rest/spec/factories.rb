@@ -1,17 +1,12 @@
 require 'faker'
 
 FactoryGirl.define do
-  # Define a basic car
-  factory :car do
-    name Faker::Name.name
-    description  Faker::Lorem.paragraph
-    price  Faker::Commerce.price
+
+  factory :user do
+    before(:create, :custom) { fake_email = Faker::Internet.email }
+    email { Faker::Internet.email }
+    username { Faker::Internet.email }
+    password { Devise.friendly_token.first(8) } 
   end
 
-  # Define a basic devise user.
-  factory :user do
-    email "test@test.com"
-    password "testtest"
-    password_confirmation "testtest"
-  end
 end
