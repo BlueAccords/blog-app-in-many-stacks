@@ -375,12 +375,12 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1450291652774,
+			"time": 1450293575861,
 			"name": "Get all data",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
 			"responses": [],
-			"rawModeData": "query {\n        viewer {\n          id,\n          name,\n          email,\n          username,\n          posts {\n            edges {\n                node {\n                    id,\n                    title,\n                    body,\n                    tags {\n                     text\n                    },\n                    comments {\n                      edges {\n                        node {\n                          text\n                          author\n                        }\n                      }\n                    }\n                }\n            }\n          }\n\n       }\n}"
+			"rawModeData": "query {\n    viewer {\n        id,\n        name,\n        email,\n        username,\n        tags {\n            id,\n            text,\n        },\n        posts {\n            edges {\n                node {\n                    id,\n                    title,\n                    body,\n                    tags {\n                     text\n                    },\n                    comments {\n                      edges {\n                        node {\n                          text\n                          author\n                        }\n                      }\n                    }\n                }\n            }\n        }\n    }\n}"
 		}
 	]
 }
