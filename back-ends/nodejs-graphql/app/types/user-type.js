@@ -1,4 +1,5 @@
 import Post from '../models/Post';
+import Tag from '../models/Tag';
 import postConnectionDefinitions from '../connection-definitions/post-connection-definitions';
 
 import {
@@ -35,9 +36,18 @@ let userType = new GraphQLObjectType({
       args: postConnectionArgs,
       description: 'The posts',
       resolve: function(user, args) {
-        return Post.find()
-        .populate('tags')
-        .then((posts) => connectionFromArray(posts, args));
+        if(args.tag) {
+          return Tag.findOne({'text': args.tag })
+          .then((tag) => {
+            return Post.find({'tags': tag._id })
+            .populate('tags');
+          })
+          .then((posts) => connectionFromArray(posts, args));
+        } else {
+          return Post.find()
+          .populate('tags')
+          .then((posts) => connectionFromArray(posts, args));
+        }
       },
     },
   },
