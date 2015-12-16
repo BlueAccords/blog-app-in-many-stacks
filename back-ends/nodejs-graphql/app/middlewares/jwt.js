@@ -16,21 +16,25 @@ module.exports = function(req, res, next) {
   }
   // decode token
   // verifies secret and checks exp
-  jwt.verify(token, config.jwt.secret, (err, decoded) => {
-    if('graphql' === url.parse(req.url).pathname.replace('/','')) {
-      // We want the graphql endpoint to still be accessed but just with no data.
-      User.findOne({'_id': decoded._id})
-      .then((user) => {
-        req.user = user;
+  if(token) {
+    jwt.verify(token, config.jwt.secret, (err, decoded) => {
+      if('graphql' === url.parse(req.url).pathname.replace('/','')) {
+        // We want the graphql endpoint to still be accessed but just with no data.
+        User.findOne({'_id': decoded._id})
+        .then((user) => {
+          req.user = user;
+          next();
+        });
+      } else if (err) {
+        return res.json({ success: false, message: 'Failed to authenticate token.' });
+      } else {
+        // if everything is good, attach the decoded user data to the request so it can be
+        // used later on.
+        req.user = decoded;
         next();
-      });
-    } else if (err) {
-      return res.json({ success: false, message: 'Failed to authenticate token.' });
-    } else {
-      // if everything is good, attach the decoded user data to the request so it can be
-      // used later on.
-      req.user = decoded;
-      next();
-    }
-  });
+      }
+    });
+  } else {
+    next();
+  }
 };
