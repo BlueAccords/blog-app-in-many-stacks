@@ -1,0 +1,32 @@
+/Users/ricardo/.rvm/rubies/ruby-2.1.2/bin/ruby extconf.rb 
+>>>>> Creating Makefile for ruby version 2.1.2 on x86_64-darwin13.0 <<<<<
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling cache8.c
+compiling circarray.c
+compiling compat.c
+compiling dump.c
+compiling err.c
+compiling fast.c
+compiling hash.c
+compiling hash_test.c
+compiling object.c
+compiling odd.c
+compiling oj.c
+compiling parse.c
+compiling reader.c
+compiling resolve.c
+compiling saj.c
+compiling scp.c
+compiling sparse.c
+compiling strict.c
+compiling val_stack.c
+linking shared-object oj/oj.bundle
+ld: warning: directory not found for option '-L/Users/travis/.sm/pkg/active/lib'
+
+make "DESTDIR=" install
+/usr/bin/install -m 0755 oj.bundle ./.gem.20151215-47308-1br0e3z/oj
+installing default oj libraries

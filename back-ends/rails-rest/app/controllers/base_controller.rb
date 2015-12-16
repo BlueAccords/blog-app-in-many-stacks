@@ -97,18 +97,16 @@ class BaseController < ActionController::Base
   # # Permission functions
   # #
 
-  # # Makes sure the current user has edit access to the current manufacturer
-  # #
-  # # @params {integer} id The manufacturer ID
-  # def block_manufacturer_non_editors(id)
-  #   begin
-  #     current_user.manufacturers.find(id)
-  #   rescue
-  #     render_unauthorized errors: {
-  #       permissions: ["You do not have permission to update this resource"]
-  #     }
-  #   end
-  # end
+  # Makes sure the current user has edit access to the user requested
+  #
+  # @params {integer} id The manufacturer ID
+  def block_if_not_current_user(id)
+
+    render_unauthorized errors: {
+      permissions: ["You do not have permission to view/edit this user"]
+    } unless current_user.id == id
+
+  end
 
   # # Makes sure the current user has edit access to the editorship
   # #

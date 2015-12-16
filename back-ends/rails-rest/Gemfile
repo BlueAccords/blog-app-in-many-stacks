@@ -19,6 +19,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # Uniquely identifies a model instance
 gem 'globalid', '~> 0.3.3'
+# Easily build JSON exactly how you want to to be viewed: 
+  # Added to make JSON responses to look exactly like Other Stacks
+gem 'rabl'
+# gem 'oj'
 
 # User authentication
 gem 'devise', '~> 3.4.1'

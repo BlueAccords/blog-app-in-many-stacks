@@ -1,8 +1,5 @@
 Rails-starter
-=========
-<img src="https://travis-ci.org/chiedojohn/rails-starter.svg?branch=master" />
-
-A framework for a new rails 4.2.0/ruby 2.2 project for setting up the development environment.
+=============
 
 ##Local Setup
 - Make sure you have an environment variable set up on your host machine which sets RAILS_ENV to development.
@@ -16,13 +13,12 @@ A framework for a new rails 4.2.0/ruby 2.2 project for setting up the developmen
         MYSQL_PORT=8889
         SECRET_KEY_BASE=MAKE_SOMETHING_UP
 
-- Be sure to include 'bundle exec' before any rails commands, etc.
-
-- Be sure to run `bundle exec rake db:create` and `bundle exec rake db:migrate`
+##LOCAL API DOCS
+- blog-app-in-many-stacks/back-ends/api-resources/rest/build/index.html 
 
 ##Running the rails server
 
-`bundle exec rails s`
+`bundle exec rails s -p 8000`
 
-##Testing
-- See https://github.com/rspec/rspec-rails for the basics.
+##Important Dependencies
+- RABL (Creates JSON views)
