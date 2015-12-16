@@ -289,12 +289,12 @@
 			"pathVariables": {},
 			"method": "DELETE",
 			"data": [],
-			"dataMode": "params",
+			"dataMode": "urlencoded",
 			"version": 2,
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449762288845,
+			"time": 1450283088450,
 			"name": "Delete comment",
 			"description": "",
 			"collectionId": "ae28de97-1ecb-fa77-319a-b1149c3d00ed"
@@ -405,12 +405,12 @@
 			"pathVariables": {},
 			"method": "DELETE",
 			"data": [],
-			"dataMode": "params",
+			"dataMode": "urlencoded",
 			"version": 2,
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449765233118,
+			"time": 1450283107962,
 			"name": "Delete user",
 			"description": "",
 			"collectionId": "ae28de97-1ecb-fa77-319a-b1149c3d00ed"
@@ -497,17 +497,17 @@
 			"data": [
 				{
 					"key": "comment[text]",
-					"value": "Updated comment",
+					"value": "this is a comment on this post",
 					"type": "text",
 					"enabled": true
 				}
 			],
-			"dataMode": "params",
+			"dataMode": "urlencoded",
 			"version": 2,
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1450206335945,
+			"time": 1450283061773,
 			"name": "Update comment",
 			"description": "",
 			"collectionId": "ae28de97-1ecb-fa77-319a-b1149c3d00ed"
@@ -520,12 +520,12 @@
 			"pathVariables": {},
 			"method": "DELETE",
 			"data": [],
-			"dataMode": "params",
+			"dataMode": "urlencoded",
 			"version": 2,
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449762094515,
+			"time": 1450283096370,
 			"name": "Delete post",
 			"description": "",
 			"collectionId": "ae28de97-1ecb-fa77-319a-b1149c3d00ed"
@@ -540,17 +540,17 @@
 			"data": [
 				{
 					"key": "tag[text]",
-					"value": "Updated comment",
+					"value": "this is a comment on this post",
 					"type": "text",
 					"enabled": true
 				}
 			],
-			"dataMode": "params",
+			"dataMode": "urlencoded",
 			"version": 2,
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1450209496658,
+			"time": 1450283069540,
 			"name": "Update tag",
 			"description": "",
 			"collectionId": "ae28de97-1ecb-fa77-319a-b1149c3d00ed"
