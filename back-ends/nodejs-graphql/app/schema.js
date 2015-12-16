@@ -1,5 +1,5 @@
 'use strict';
-
+import User from './models/User';
 import userType from './types/user-type';
 
 import createPostMutation from './mutations/create-post-mutation';
@@ -31,7 +31,8 @@ let queryType = new GraphQLObjectType({
       type: userType,
       resolve: (root) => {
         if(root.user) {
-          return root.user;
+          return User.findOne(root.user._id)
+          .then((user) => user);
         } else {
           return {
             name: null,
