@@ -5,12 +5,23 @@ import Post from './../models/Post';
 import * as _ from 'lodash';
 
 module.exports.all = (req, res) => {
-  Tag.find()
-  .then(tags => {
-    res.json({
-      tags: tags,
+  if (req.query.text) {
+    Tag.findOne({
+      text: req.query.text,
+    })
+    .then(tag => {
+      res.json({
+        tag: tag,
+      });
     });
-  });
+  } else {
+    Tag.find()
+    .then(tags => {
+      res.json({
+        tags: tags,
+      });
+    });
+  }
 };
 
 module.exports.create = (req, res) => {
