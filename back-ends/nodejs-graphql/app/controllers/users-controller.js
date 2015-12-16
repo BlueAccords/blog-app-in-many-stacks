@@ -5,7 +5,7 @@ import User from '../models/User';
 import config from '../../config/application';
 
 module.exports.create = function(req, res) {
-  bcrypt.hash(req.body.password, 8, (err, hash) => {
+  bcrypt.hash(req.body.user.password, 8, (err, hash) => {
     let user = new User({
       name: req.body.user.name,
       email: req.body.user.email,
@@ -18,8 +18,10 @@ module.exports.create = function(req, res) {
         res.json(401, {error: 'A user with this email address already exists'});
       } else {
         res.send({
-          name: user.user.name,
-          email: user.user.email,
+          user: {
+            name: user.name,
+            email: user.email,
+          },
         });
       }
     });
@@ -53,8 +55,10 @@ module.exports.authenticate = function(req, res) {
 
           // return the information including token as JSON
           res.json({
-            success: true,
-            message: 'Enjoy your token!',
+            user: {
+              email: user.email,
+              name: user.name,
+            },
             token,
           });
         }
