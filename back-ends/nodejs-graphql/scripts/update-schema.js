@@ -3,11 +3,11 @@ import path from 'path';
 import { graphql }  from 'graphql';
 import { introspectionQuery, printSchema } from 'graphql/utilities';
 
-var Schema = require('../app/schema.js');
+let Schema = require('../app/schema.js');
 
 // Save JSON of full schema introspection for Babel Relay Plugin to use
 async () => {
-  var result = await (graphql(Schema, introspectionQuery));
+  let result = await (graphql(Schema, introspectionQuery));
   if (result.errors) {
     console.error(
       'ERROR introspecting schema: ',

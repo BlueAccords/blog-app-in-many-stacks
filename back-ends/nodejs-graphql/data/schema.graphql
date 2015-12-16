@@ -1,5 +1,48 @@
+type Comment implements Node {
+  id: ID!
+  text: String
+  author: String
+  post: String
+}
+
+type CommentConnection {
+  pageInfo: PageInfo!
+  edges: [CommentEdge]
+}
+
+type CommentEdge {
+  node: Comment
+  cursor: String!
+}
+
 interface Node {
   id: ID!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Post implements Node {
+  id: ID!
+  title: String
+  body: String
+  tags: [Tag]
+  comments(after: String, first: Int, before: String, last: Int): CommentConnection
+  author: String
+}
+
+type PostConnection {
+  pageInfo: PageInfo!
+  edges: [PostEdge]
+}
+
+type PostEdge {
+  node: Post
+  cursor: String!
 }
 
 type Query {
@@ -7,8 +50,14 @@ type Query {
   viewer: User
 }
 
+type Tag implements Node {
+  id: ID!
+  text: String
+}
+
 type User implements Node {
   id: ID!
   email: String
   name: String
+  posts(after: String, first: Int, before: String, last: Int): PostConnection
 }
