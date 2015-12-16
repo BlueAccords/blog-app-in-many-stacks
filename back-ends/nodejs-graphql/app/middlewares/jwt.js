@@ -3,6 +3,7 @@
 import config from '../../config/application';
 import jwt from 'jsonwebtoken';
 import url from 'url';
+import User from '../models/User';
 
 module.exports = function(req, res, next) {
   let token;
@@ -18,8 +19,11 @@ module.exports = function(req, res, next) {
   jwt.verify(token, config.jwt.secret, (err, decoded) => {
     if('graphql' === url.parse(req.url).pathname.replace('/','')) {
       // We want the graphql endpoint to still be accessed but just with no data.
-      req.user = decoded;
-      next();
+      User.findOne({'_id': decoded._id})
+      .then((user) => {
+        req.user = user;
+        next();
+      });
     } else if (err) {
       return res.json({ success: false, message: 'Failed to authenticate token.' });
     } else {
