@@ -1,17 +1,4 @@
-/Users/ricardo/.rvm/rubies/ruby-2.1.2/bin/ruby extconf.rb 
-creating Makefile
+/Users/ricardo/.rvm/rubies/ruby-2.1.2/bin/ruby extconf.rb
+/Users/ricardo/.rvm/rubies/ruby-2.1.2/bin/ruby: No such file or directory -- extconf.rb (LoadError)
 
-make "DESTDIR=" clean
-
-make "DESTDIR="
-compiling bcrypt_ext.c
-compiling crypt.c
-compiling crypt_blowfish.c
-compiling crypt_gensalt.c
-compiling wrapper.c
-linking shared-object bcrypt_ext.bundle
-ld: warning: directory not found for option '-L/Users/travis/.sm/pkg/active/lib'
-
-make "DESTDIR=" install
-/usr/bin/install -m 0755 bcrypt_ext.bundle ./.gem.20151215-15267-12r821b
-installing default bcrypt_ext libraries
+extconf failed, exit code 1
