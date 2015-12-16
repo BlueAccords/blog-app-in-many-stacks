@@ -14,7 +14,11 @@
 		"251df238-6e45-8249-0fb4-1b30d2f2d776",
 		"ce35198e-07bf-951a-2f4d-8a1bc69d6b74",
 		"33e1f077-eb67-9269-dfe1-e0f5e4dd02d9",
-		"35ed320e-64da-ff71-c44c-66ee8445cff7"
+		"35ed320e-64da-ff71-c44c-66ee8445cff7",
+		"1d9f5d5b-0740-b72f-9230-2305925ea206",
+		"161011cc-73ba-9ad1-cba4-830fa278c39e",
+		"5ace9341-24e9-baa1-4155-83de6f5d6c3d",
+		"f813dfec-03a7-795d-94f7-ad851621b7eb"
 	],
 	"folders": [],
 	"timestamp": 1445873636180,
@@ -95,6 +99,26 @@
 			"responses": []
 		},
 		{
+			"id": "161011cc-73ba-9ad1-cba4-830fa278c39e",
+			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJuYW1lIjoiQnJ1Y2UgV2F5bmUiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRQSHNDZzloc1A0MFA1dXR6WXQzYmJ1LldPem8wWlduTk81YVFiWXlwbDZiRS9tck1ZdUh4NiIsIl9fdiI6MH0.Qebro4fsubT61jNVuwtE3DlJs0Np0KerbTwXvV2r0-w\n",
+			"url": "http://localhost:8000/graphql",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1450282807664,
+			"name": "Remove tag from post",
+			"description": "",
+			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
+			"responses": [],
+			"rawModeData": "mutation {\n    toggleTagOnPost (\n        input: {clientMutationId: \"abc\", tagId: \"VGFnOjU2NzE4YmJlYzcyYWMxNmM0NWEwMTY4Mg==\", postId: \"UG9zdDo1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjMDk=\", status: false}\n    ) {\n        clientMutationId,\n            post {\n                id,\n                title,\n                body,\n                tags {\n                    id,\n                    text\n                }\n            }\n        }\n}"
+		},
+		{
 			"id": "1a7c66d8-4819-ed09-63b3-0a20352e708d",
 			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjY5Y2E0YjI2ZWNhYWNjM2YzMjZhNmMiLCJ1cGRhdGVkQXQiOiIyMDE1LTEyLTEwVDE4OjU0OjAzLjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEyLTEwVDE4OjU0OjAzLjAwMFoiLCJuYW1lIjoiUm9uIFN3YW5zb24iLCJlbWFpbCI6InJvbkBzd2Fuc29uLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JC9ZeWUxQkZudkZjTmlWLzFDMWwwYS4xc094RnhDUUdlUFc5YXJkd3lpUWx6TnpIWmxBVFFxIiwiX192IjowfQ.mnRGu2edBRFE83QWufveGnvREspgk2nqqDOp_CvDoeA\n",
 			"url": "http://localhost:8000/graphql",
@@ -113,6 +137,26 @@
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
 			"responses": [],
 			"rawModeData": "mutation {\n    createComment (\n        input: {clientMutationId: \"abc\", postId:\"UG9zdDo1NjY5Y2M3OGZmOWYyMTJjNDgxZTIwOGQ=\", text: \"The dog was at the door\"}\n    ) {\n        clientMutationId,\n        comment{\n        id,\n        text\n}       \n        }\n}"
+		},
+		{
+			"id": "1d9f5d5b-0740-b72f-9230-2305925ea206",
+			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJuYW1lIjoiQnJ1Y2UgV2F5bmUiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRQSHNDZzloc1A0MFA1dXR6WXQzYmJ1LldPem8wWlduTk81YVFiWXlwbDZiRS9tck1ZdUh4NiIsIl9fdiI6MH0.Qebro4fsubT61jNVuwtE3DlJs0Np0KerbTwXvV2r0-w\n",
+			"url": "http://localhost:8000/graphql",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1450282810878,
+			"name": "Add tag to post",
+			"description": "",
+			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
+			"responses": [],
+			"rawModeData": "mutation {\n    toggleTagOnPost (\n        input: {clientMutationId: \"abc\", tagId: \"VGFnOjU2NzE4YmJlYzcyYWMxNmM0NWEwMTY4Mg==\", postId: \"UG9zdDo1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjMDk=\", status: true}\n    ) {\n        clientMutationId,\n            post {\n                id,\n                title,\n                body,\n                tags {\n                    id,\n                    text\n                }\n            }\n        }\n}"
 		},
 		{
 			"id": "251df238-6e45-8249-0fb4-1b30d2f2d776",
@@ -175,6 +219,26 @@
 			"rawModeData": "mutation {\n    deleteTag(\n        input: {clientMutationId: \"abc\", id: \"VGFnOjU2NjljZDY4ZmY5ZjIxMmM0ODFlMjA5MQ==\"}\n    ) {\n        clientMutationId,\n        id,\n        viewer {\n         email\n        }\n    }\n}"
 		},
 		{
+			"id": "5ace9341-24e9-baa1-4155-83de6f5d6c3d",
+			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjcxNjZjNDk4M2I2NzJmZTdjMjgzZGEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEyLTE2VDEzOjI3OjMyLjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEyLTE2VDEzOjI3OjMyLjAwMFoiLCJuYW1lIjoiUm9uIFN3YW5zb24iLCJlbWFpbCI6InJvbkBzd2Fuc29uLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JHRzdHVkMUdGOE93MTU4YUhCNHIwSy5ZeGNOcXlLaFNNOEc5T1hsaTJ4VWY5UEc3dWM4UEJPIiwiX192IjowfQ.jwiCOQy2vBljGIRQCX3NyMTfJI8Y4mAy2riEhnfzQOk\n",
+			"url": "http://localhost:8000/graphql",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1450274578078,
+			"name": "Get tags by post",
+			"description": "",
+			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
+			"responses": [],
+			"rawModeData": "query {\n        viewer {\n          id,\n          name,\n          email,\n          posts {\n            edges {\n                node {\n                    title\n                    body\n                    tags {\n                     text\n                    }\n                    comments {\n                      edges {\n                        node {\n                          text\n                          author\n                        }\n                      }\n                    }\n                }\n            }\n          }\n\n       }\n}"
+		},
+		{
 			"id": "764dfa6f-163d-811c-2826-c7d94049cc59",
 			"headers": "",
 			"url": "http://localhost:8000/user",
@@ -234,7 +298,7 @@
 		},
 		{
 			"id": "ce35198e-07bf-951a-2f4d-8a1bc69d6b74",
-			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjY5Y2E0YjI2ZWNhYWNjM2YzMjZhNmMiLCJ1cGRhdGVkQXQiOiIyMDE1LTEyLTEwVDE4OjU0OjAzLjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEyLTEwVDE4OjU0OjAzLjAwMFoiLCJuYW1lIjoiUm9uIFN3YW5zb24iLCJlbWFpbCI6InJvbkBzd2Fuc29uLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JC9ZeWUxQkZudkZjTmlWLzFDMWwwYS4xc094RnhDUUdlUFc5YXJkd3lpUWx6TnpIWmxBVFFxIiwiX192IjowfQ.mnRGu2edBRFE83QWufveGnvREspgk2nqqDOp_CvDoeA\n",
+			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJuYW1lIjoiQnJ1Y2UgV2F5bmUiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRQSHNDZzloc1A0MFA1dXR6WXQzYmJ1LldPem8wWlduTk81YVFiWXlwbDZiRS9tck1ZdUh4NiIsIl9fdiI6MH0.Qebro4fsubT61jNVuwtE3DlJs0Np0KerbTwXvV2r0-w\n",
 			"url": "http://localhost:8000/graphql",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -245,12 +309,12 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449774440108,
+			"time": 1450280055868,
 			"name": "Create tag",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
 			"responses": [],
-			"rawModeData": "mutation {\n    createTag (\n        input: {clientMutationId: \"abc\", postId: \"UG9zdDo1NjY5Y2M3OGZmOWYyMTJjNDgxZTIwOGQ=\", text: \"testing\"}\n    ) {\n        clientMutationId,\n        tag{\n        id,\n        text\n}       \n        }\n}"
+			"rawModeData": "mutation {\n    createTag (\n        input: {clientMutationId: \"abc\", text: \"testing\"}\n    ) {\n        clientMutationId,\n        tag{\n        id,\n        text\n}       \n        }\n}"
 		},
 		{
 			"id": "d285fd51-38b8-f4c1-0088-adc6cf39d04c",
@@ -273,7 +337,7 @@
 			"rawModeData": "mutation {\n    updatePost(\n        input: {clientMutationId: \"abc\", id: \"UG9zdDo1NjY5Y2M3OGZmOWYyMTJjNDgxZTIwOGQ=\", title: \"update post\", body: \"It worked\"}\n    ) {\n        clientMutationId,\n        post {\n            id,\n            title,\n            body\n        }\n    }\n}"
 		},
 		{
-			"id": "f9373e98-b9e0-2f78-68b3-fbf977cb408c",
+			"id": "f813dfec-03a7-795d-94f7-ad851621b7eb",
 			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjcxNjZjNDk4M2I2NzJmZTdjMjgzZGEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEyLTE2VDEzOjI3OjMyLjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEyLTE2VDEzOjI3OjMyLjAwMFoiLCJuYW1lIjoiUm9uIFN3YW5zb24iLCJlbWFpbCI6InJvbkBzd2Fuc29uLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JHRzdHVkMUdGOE93MTU4YUhCNHIwSy5ZeGNOcXlLaFNNOEc5T1hsaTJ4VWY5UEc3dWM4UEJPIiwiX192IjowfQ.jwiCOQy2vBljGIRQCX3NyMTfJI8Y4mAy2riEhnfzQOk\n",
 			"url": "http://localhost:8000/graphql",
 			"preRequestScript": "",
@@ -286,11 +350,31 @@
 			"currentHelper": "normal",
 			"helperAttributes": {},
 			"time": 1450274578078,
-			"name": "Get all data",
+			"name": "Get posts by tag",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
 			"responses": [],
 			"rawModeData": "query {\n        viewer {\n          id,\n          name,\n          email,\n          posts {\n            edges {\n                node {\n                    title\n                    body\n                    tags {\n                     text\n                    }\n                    comments {\n                      edges {\n                        node {\n                          text\n                          author\n                        }\n                      }\n                    }\n                }\n            }\n          }\n\n       }\n}"
+		},
+		{
+			"id": "f9373e98-b9e0-2f78-68b3-fbf977cb408c",
+			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjcxNjZjNDk4M2I2NzJmZTdjMjgzZGEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEyLTE2VDEzOjI3OjMyLjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEyLTE2VDEzOjI3OjMyLjAwMFoiLCJuYW1lIjoiUm9uIFN3YW5zb24iLCJlbWFpbCI6InJvbkBzd2Fuc29uLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JHRzdHVkMUdGOE93MTU4YUhCNHIwSy5ZeGNOcXlLaFNNOEc5T1hsaTJ4VWY5UEc3dWM4UEJPIiwiX192IjowfQ.jwiCOQy2vBljGIRQCX3NyMTfJI8Y4mAy2riEhnfzQOk\n",
+			"url": "http://localhost:8000/graphql",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1450280385605,
+			"name": "Get all data",
+			"description": "",
+			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
+			"responses": [],
+			"rawModeData": "query {\n        viewer {\n          id,\n          name,\n          email,\n          posts {\n            edges {\n                node {\n                    id,\n                    title,\n                    body,\n                    tags {\n                     text\n                    },\n                    comments {\n                      edges {\n                        node {\n                          text\n                          author\n                        }\n                      }\n                    }\n                }\n            }\n          }\n\n       }\n}"
 		}
 	]
 }
