@@ -1,11 +1,13 @@
 import Post from '../models/Post';
 import Tag from '../models/Tag';
 import User from '../models/User';
+import tagType from './tag-type';
 import postConnectionDefinitions from '../connection-definitions/post-connection-definitions';
 
 import {
   GraphQLObjectType,
   GraphQLString,
+  GraphQLList,
 } from 'graphql';
 
 import {
@@ -36,6 +38,13 @@ let userType = new GraphQLObjectType({
     username: {
       type: GraphQLString,
       resolve: (user) => user.username,
+    },
+    tags: {
+      type: new GraphQLList(tagType),
+      resolve: (user) => {
+        return Tag.find()
+        .then((tag) => tag);
+      },
     },
     posts: {
       type: postConnectionDefinitions.postConnection,
