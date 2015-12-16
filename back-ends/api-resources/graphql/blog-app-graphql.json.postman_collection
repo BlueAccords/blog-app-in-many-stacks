@@ -17,7 +17,6 @@
 		"35ed320e-64da-ff71-c44c-66ee8445cff7",
 		"1d9f5d5b-0740-b72f-9230-2305925ea206",
 		"161011cc-73ba-9ad1-cba4-830fa278c39e",
-		"5ace9341-24e9-baa1-4155-83de6f5d6c3d",
 		"f813dfec-03a7-795d-94f7-ad851621b7eb"
 	],
 	"folders": [],
@@ -151,12 +150,12 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1450282810878,
+			"time": 1450283925032,
 			"name": "Add tag to post",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
 			"responses": [],
-			"rawModeData": "mutation {\n    toggleTagOnPost (\n        input: {clientMutationId: \"abc\", tagId: \"VGFnOjU2NzE4YmJlYzcyYWMxNmM0NWEwMTY4Mg==\", postId: \"UG9zdDo1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjMDk=\", status: true}\n    ) {\n        clientMutationId,\n            post {\n                id,\n                title,\n                body,\n                tags {\n                    id,\n                    text\n                }\n            }\n        }\n}"
+			"rawModeData": "mutation {\n    toggleTagOnPost (\n        input: {clientMutationId: \"abc\", tagId: \"VGFnOjU2NzE4YmJlYzcyYWMxNmM0NWEwMTY4Mg==\", postId: \"UG9zdDo1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBhMDg=\", status: true}\n    ) {\n        clientMutationId,\n            post {\n                id,\n                title,\n                body,\n                tags {\n                    id,\n                    text\n                }\n            }\n        }\n}"
 		},
 		{
 			"id": "251df238-6e45-8249-0fb4-1b30d2f2d776",
@@ -217,26 +216,6 @@
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
 			"responses": [],
 			"rawModeData": "mutation {\n    deleteTag(\n        input: {clientMutationId: \"abc\", id: \"VGFnOjU2NjljZDY4ZmY5ZjIxMmM0ODFlMjA5MQ==\"}\n    ) {\n        clientMutationId,\n        id,\n        viewer {\n         email\n        }\n    }\n}"
-		},
-		{
-			"id": "5ace9341-24e9-baa1-4155-83de6f5d6c3d",
-			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjcxNjZjNDk4M2I2NzJmZTdjMjgzZGEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEyLTE2VDEzOjI3OjMyLjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEyLTE2VDEzOjI3OjMyLjAwMFoiLCJuYW1lIjoiUm9uIFN3YW5zb24iLCJlbWFpbCI6InJvbkBzd2Fuc29uLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JHRzdHVkMUdGOE93MTU4YUhCNHIwSy5ZeGNOcXlLaFNNOEc5T1hsaTJ4VWY5UEc3dWM4UEJPIiwiX192IjowfQ.jwiCOQy2vBljGIRQCX3NyMTfJI8Y4mAy2riEhnfzQOk\n",
-			"url": "http://localhost:8000/graphql",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1450274578078,
-			"name": "Get tags by post",
-			"description": "",
-			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
-			"responses": [],
-			"rawModeData": "query {\n        viewer {\n          id,\n          name,\n          email,\n          posts {\n            edges {\n                node {\n                    title\n                    body\n                    tags {\n                     text\n                    }\n                    comments {\n                      edges {\n                        node {\n                          text\n                          author\n                        }\n                      }\n                    }\n                }\n            }\n          }\n\n       }\n}"
 		},
 		{
 			"id": "764dfa6f-163d-811c-2826-c7d94049cc59",
@@ -349,12 +328,12 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1450274578078,
+			"time": 1450283901624,
 			"name": "Get posts by tag",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
 			"responses": [],
-			"rawModeData": "query {\n        viewer {\n          id,\n          name,\n          email,\n          posts {\n            edges {\n                node {\n                    title\n                    body\n                    tags {\n                     text\n                    }\n                    comments {\n                      edges {\n                        node {\n                          text\n                          author\n                        }\n                      }\n                    }\n                }\n            }\n          }\n\n       }\n}"
+			"rawModeData": "query {\n        viewer {\n          id,\n          name,\n          email,\n          posts(tag: \"testing2\") {\n            edges {\n                node {\n                    id,\n                    title,\n                    body,\n                    tags {\n                     text\n                    },\n                    comments {\n                      edges {\n                        node {\n                          text\n                          author\n                        }\n                      }\n                    }\n                }\n            }\n          }\n\n       }\n}"
 		},
 		{
 			"id": "f9373e98-b9e0-2f78-68b3-fbf977cb408c",
