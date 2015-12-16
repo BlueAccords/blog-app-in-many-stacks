@@ -1,12 +1,11 @@
 import Tag from '../models/Tag';
 import Post from '../models/Post';
 import postType from '../types/post-type';
-import { Promise } from 'es6-promise';
 import * as _ from 'lodash';
 
 import {
-  GraphQLNonNull,
   GraphQLString,
+  GraphQLBoolean,
 } from 'graphql';
 
 import {
@@ -15,9 +14,10 @@ import {
 } from 'graphql-relay';
 
 let addTagToPostMutation = new mutationWithClientMutationId({
-  name: 'AddTagToPost',
-  description: 'Add a tag to a post',
+  name: 'ToggleTagOnPost',
+  description: 'Add or remove a tag from a post',
   inputFields: {
+    status: {type: GraphQLBoolean},
     tagId: {type: GraphQLString},
     postId: {type: GraphQLString},
   },
@@ -42,7 +42,11 @@ let addTagToPostMutation = new mutationWithClientMutationId({
       return Post.findOne({ _id: postId })
       .then((post) => {
         return Tag.findOne({_id: tagId}).then((tag) => {
-          post.tags = _.unique([...post.tags, tag._id], (x) => x.id);
+          if(args.status) {
+            post.tags = _.unique([...post.tags, tag._id], (x) => x.id);
+          } else {
+            post.tags = _.filter(post.tags, (x) => x.id === tagId);
+          }
 
           return post.save();
         })
