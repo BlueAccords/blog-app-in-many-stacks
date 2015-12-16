@@ -13,6 +13,8 @@ import {
 } from 'graphql-relay';
 
 import { nodeInterface } from '../node-definitions';
+let postConnectionArgs = connectionArgs;
+postConnectionArgs['tag'] =  {type: GraphQLString};
 
 
 let userType = new GraphQLObjectType({
@@ -30,7 +32,7 @@ let userType = new GraphQLObjectType({
     },
     posts: {
       type: postConnectionDefinitions.postConnection,
-      args: connectionArgs,
+      args: postConnectionArgs,
       description: 'The posts',
       resolve: function(user, args) {
         return Post.find()
