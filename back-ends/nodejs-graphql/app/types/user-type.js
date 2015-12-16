@@ -36,6 +36,7 @@ let userType = new GraphQLObjectType({
       description: 'The posts',
       resolve: function(user, args) {
         return Post.find()
+        .populate('tags')
         .then((posts) => connectionFromArray(posts, args));
       },
     },

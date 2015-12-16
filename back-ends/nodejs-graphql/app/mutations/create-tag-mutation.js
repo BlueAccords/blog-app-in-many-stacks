@@ -1,8 +1,6 @@
 import Tag from '../models/Tag';
-import Post from '../models/Post';
 import tagType from '../types/tag-type';
 import { Promise } from 'es6-promise';
-import * as _ from 'lodash';
 
 import {
   GraphQLNonNull,
@@ -11,7 +9,6 @@ import {
 
 import {
   mutationWithClientMutationId,
-  fromGlobalId,
 } from 'graphql-relay';
 
 let createTagMutation = new mutationWithClientMutationId({
@@ -19,7 +16,6 @@ let createTagMutation = new mutationWithClientMutationId({
   description: 'Create a tag',
   inputFields: {
     text: {type: new GraphQLNonNull(GraphQLString)},
-    postId: {type: GraphQLString},
   },
   outputFields: {
     tag: {
@@ -33,11 +29,6 @@ let createTagMutation = new mutationWithClientMutationId({
   mutateAndGetPayload: (args, root) => {
 
     let user = root.rootValue.user;
-    let postId;
-    if (args.postId) {
-      postId  = fromGlobalId(args.postId).id;
-      args['_post'] = postId;
-    }
 
     if (user) {
       let tagParams = {text: args.text};
@@ -52,14 +43,7 @@ let createTagMutation = new mutationWithClientMutationId({
         }
       })
       .then((tag) => {
-        // Now find the post and add the tag
-        return Post.findOne({ _id: postId })
-        .then((post) => {
-          post.tags = _.unique([...post.tags, {_tag: tag._id}], (x) => x._tag.id);
-
-          return post.save();
-        })
-        .then((post) => { return {tagId: tag._id, user: root.rootValue.user}; });
+        return {tagId: tag._id, user: root.rootValue.user};
       });
 
     } else {

@@ -14,6 +14,8 @@ import createTagMutation from './mutations/create-tag-mutation';
 import updateTagMutation from './mutations/update-tag-mutation';
 import deleteTagMutation from './mutations/delete-tag-mutation';
 
+import addTagToPostMutation from './mutations/add-tag-to-post-mutation';
+
 import {
   GraphQLObjectType,
   GraphQLSchema,
@@ -53,6 +55,7 @@ let mutationType = new GraphQLObjectType({
     createTag: createTagMutation,
     updateTag: updateTagMutation,
     deleteTag: deleteTagMutation,
+    addTagToPost: addTagToPostMutation,
   }),
 });
 

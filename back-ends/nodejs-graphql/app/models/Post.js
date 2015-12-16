@@ -7,9 +7,7 @@ let schema = new mongoose.Schema({
   _author: { type: ObjectId, ref: 'User', required: true },
   title: { type: String, required: true },
   body: { type: String, required: true },
-  tags: [{
-    _tag: { type: ObjectId, ref: 'Tag' },
-  }],
+  tags: [{ type: ObjectId, ref: 'Tag' }],
 },{
   timestamps: true,
 });
