@@ -27,6 +27,8 @@ router.route('/users')
 
 // Jwt auth middleware
 router.use(jwtMiddleware);
+router.route('/users')
+  .get(user.search);
 
 // Read/Update/Delete a user
 router.route('/users/:id')
@@ -49,8 +51,6 @@ router.route('/posts/:id')
   .put(post.update)
   .delete(post.delete);
 
-// TODO tags and search refactor
-
 // Create and list comments.
 router.route('/posts/:post_id/comments')
   .post(post.newComment)
@@ -71,24 +71,12 @@ router.route('/tag/:tag_id/posts')
   .get(tag.getPosts);
 
 // Update/Delete tags
-// router.route('/tags/:id')
-//   .put(tag.update)
-//   .delete(tag.delete);
+router.route('/tags/:id')
+  .put(tag.update)
+  .delete(tag.delete);
 
 // List all tags
-// router.route('/tags')
-//   .get(tag.all);
-
-// Post search via url_path
-// router.route('/posts?path_url=:path_url')
-//   .get(post.search)
-
-// Tag search via text
-// router.route('/tags/?text=:text')
-//   .get(tag.search)
-
-// User search via username
-// router.route('/users/?username=:username')
-//   .get(user.search)
+router.route('/tags')
+  .get(tag.all);
 
 module.exports = router;
