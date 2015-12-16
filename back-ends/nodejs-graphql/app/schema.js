@@ -31,13 +31,9 @@ let queryType = new GraphQLObjectType({
       type: userType,
       resolve: (root) => {
         if(root.user) {
-          return User.findOne(root.user._id)
-          .then((user) => user);
+          return root.user;
         } else {
-          return {
-            name: null,
-            email: null,
-          };
+          return {};
         }
       },
     },

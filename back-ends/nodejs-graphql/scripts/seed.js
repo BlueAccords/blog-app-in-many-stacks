@@ -25,6 +25,7 @@ if(process.env.NODE_ENV === 'development') {
         _id: '5634d4760066be016bf10c9a',
         name: 'Bruce Wayne',
         email: 'test@test.com',
+        username: 'test',
         password: hash,
       });
 
@@ -37,6 +38,7 @@ if(process.env.NODE_ENV === 'development') {
         _id: '5634d4750066be016bf10c9a',
         name: 'Kyle Townsbeginning',
         email: 'kyle@begin.com',
+        username: 'kyle',
         password: hash,
       });
 
@@ -49,6 +51,7 @@ if(process.env.NODE_ENV === 'development') {
         _id: '5634d4750066be016bf10c9r',
         name: 'King Bobby',
         email: 'bobby@googly.com',
+        username: 'bobby',
         password: hash,
       });
 
@@ -97,7 +100,7 @@ if(process.env.NODE_ENV === 'development') {
     });
     return comment.save();
   })
-  
+
   .then(() => {
     let comment = new Comment({
       _id: '5634d4760066be016bf10c9e',

@@ -1,5 +1,6 @@
 import Post from '../models/Post';
 import Tag from '../models/Tag';
+import User from '../models/User';
 import postConnectionDefinitions from '../connection-definitions/post-connection-definitions';
 
 import {
@@ -16,6 +17,7 @@ import {
 import { nodeInterface } from '../node-definitions';
 let postConnectionArgs = connectionArgs;
 postConnectionArgs['tag'] =  {type: GraphQLString};
+postConnectionArgs['username'] =  {type: GraphQLString};
 
 
 let userType = new GraphQLObjectType({
@@ -31,6 +33,10 @@ let userType = new GraphQLObjectType({
       type: GraphQLString,
       resolve: (user) => user.name,
     },
+    username: {
+      type: GraphQLString,
+      resolve: (user) => user.username,
+    },
     posts: {
       type: postConnectionDefinitions.postConnection,
       args: postConnectionArgs,
@@ -41,6 +47,12 @@ let userType = new GraphQLObjectType({
           .then((tag) => {
             return Post.find({'tags': tag._id })
             .populate('tags');
+          })
+          .then((posts) => connectionFromArray(posts, args));
+        } else if(args.username) {
+          return User.findOne({'username': args.username })
+          .then((author) => {
+            return Post.find({'_author': author._id });
           })
           .then((posts) => connectionFromArray(posts, args));
         } else {

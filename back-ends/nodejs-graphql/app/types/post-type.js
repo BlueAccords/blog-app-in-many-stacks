@@ -1,5 +1,4 @@
 import User from '../models/User';
-import Tag from '../models/Tag';
 import tagType from './tag-type';
 import commentConnectionDefinitions from '../connection-definitions/comment-connection-definitions';
 import Comment from '../models/Comment';
@@ -56,8 +55,7 @@ let postType = new GraphQLObjectType({
       resolve: function(post) {
         return User.findOne({_id: post._author})
 				.exec((err, user) => { return user; })
-				.then((user) => { return user.email;
-				});
+				.then((user) => { return user.username; });
       },
     },
   },

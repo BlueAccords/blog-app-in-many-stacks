@@ -17,7 +17,8 @@
 		"35ed320e-64da-ff71-c44c-66ee8445cff7",
 		"1d9f5d5b-0740-b72f-9230-2305925ea206",
 		"161011cc-73ba-9ad1-cba4-830fa278c39e",
-		"f813dfec-03a7-795d-94f7-ad851621b7eb"
+		"f813dfec-03a7-795d-94f7-ad851621b7eb",
+		"d3d6b45b-9b61-7b4c-ed67-4e2d26a614d6"
 	],
 	"folders": [],
 	"timestamp": 1445873636180,
@@ -242,6 +243,12 @@
 					"value": "Ron Swanson",
 					"type": "text",
 					"enabled": true
+				},
+				{
+					"key": "user[username]",
+					"value": "ron",
+					"type": "text",
+					"enabled": true
 				}
 			],
 			"dataMode": "urlencoded",
@@ -249,7 +256,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1450274450705,
+			"time": 1450292498931,
 			"name": "Sign up",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
@@ -316,6 +323,26 @@
 			"rawModeData": "mutation {\n    updatePost(\n        input: {clientMutationId: \"abc\", id: \"UG9zdDo1NjY5Y2M3OGZmOWYyMTJjNDgxZTIwOGQ=\", title: \"update post\", body: \"It worked\"}\n    ) {\n        clientMutationId,\n        post {\n            id,\n            title,\n            body\n        }\n    }\n}"
 		},
 		{
+			"id": "d3d6b45b-9b61-7b4c-ed67-4e2d26a614d6",
+			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjcxNjZjNDk4M2I2NzJmZTdjMjgzZGEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEyLTE2VDEzOjI3OjMyLjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEyLTE2VDEzOjI3OjMyLjAwMFoiLCJuYW1lIjoiUm9uIFN3YW5zb24iLCJlbWFpbCI6InJvbkBzd2Fuc29uLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JHRzdHVkMUdGOE93MTU4YUhCNHIwSy5ZeGNOcXlLaFNNOEc5T1hsaTJ4VWY5UEc3dWM4UEJPIiwiX192IjowfQ.jwiCOQy2vBljGIRQCX3NyMTfJI8Y4mAy2riEhnfzQOk\n",
+			"url": "http://localhost:8000/graphql",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1450283901624,
+			"name": "Get posts by username",
+			"description": "",
+			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
+			"responses": [],
+			"rawModeData": "query {\n        viewer {\n          id,\n          name,\n          email,\n          posts(tag: \"testing2\") {\n            edges {\n                node {\n                    id,\n                    title,\n                    body,\n                    tags {\n                     text\n                    },\n                    comments {\n                      edges {\n                        node {\n                          text\n                          author\n                        }\n                      }\n                    }\n                }\n            }\n          }\n\n       }\n}"
+		},
+		{
 			"id": "f813dfec-03a7-795d-94f7-ad851621b7eb",
 			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjcxNjZjNDk4M2I2NzJmZTdjMjgzZGEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEyLTE2VDEzOjI3OjMyLjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEyLTE2VDEzOjI3OjMyLjAwMFoiLCJuYW1lIjoiUm9uIFN3YW5zb24iLCJlbWFpbCI6InJvbkBzd2Fuc29uLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JHRzdHVkMUdGOE93MTU4YUhCNHIwSy5ZeGNOcXlLaFNNOEc5T1hsaTJ4VWY5UEc3dWM4UEJPIiwiX192IjowfQ.jwiCOQy2vBljGIRQCX3NyMTfJI8Y4mAy2riEhnfzQOk\n",
 			"url": "http://localhost:8000/graphql",
@@ -337,7 +364,7 @@
 		},
 		{
 			"id": "f9373e98-b9e0-2f78-68b3-fbf977cb408c",
-			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjcxNjZjNDk4M2I2NzJmZTdjMjgzZGEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEyLTE2VDEzOjI3OjMyLjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEyLTE2VDEzOjI3OjMyLjAwMFoiLCJuYW1lIjoiUm9uIFN3YW5zb24iLCJlbWFpbCI6InJvbkBzd2Fuc29uLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JHRzdHVkMUdGOE93MTU4YUhCNHIwSy5ZeGNOcXlLaFNNOEc5T1hsaTJ4VWY5UEc3dWM4UEJPIiwiX192IjowfQ.jwiCOQy2vBljGIRQCX3NyMTfJI8Y4mAy2riEhnfzQOk\n",
+			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJuYW1lIjoiQnJ1Y2UgV2F5bmUiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJwYXNzd29yZCI6IiQyYSQwOCRKaGQzYWVDL252bmF1a0RrdmVqWWlPLkxkTlhMR01hWGd3YWtMM2tmQk9zLnl2a2lCUlpsMiIsIl9fdiI6MH0.PUYjfwG_ciPRfVCOFyOyuZrOrSYOsjNC6IEr3VzAUCc\n",
 			"url": "http://localhost:8000/graphql",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -348,12 +375,12 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1450280385605,
+			"time": 1450291652774,
 			"name": "Get all data",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
 			"responses": [],
-			"rawModeData": "query {\n        viewer {\n          id,\n          name,\n          email,\n          posts {\n            edges {\n                node {\n                    id,\n                    title,\n                    body,\n                    tags {\n                     text\n                    },\n                    comments {\n                      edges {\n                        node {\n                          text\n                          author\n                        }\n                      }\n                    }\n                }\n            }\n          }\n\n       }\n}"
+			"rawModeData": "query {\n        viewer {\n          id,\n          name,\n          email,\n          username,\n          posts {\n            edges {\n                node {\n                    id,\n                    title,\n                    body,\n                    tags {\n                     text\n                    },\n                    comments {\n                      edges {\n                        node {\n                          text\n                          author\n                        }\n                      }\n                    }\n                }\n            }\n          }\n\n       }\n}"
 		}
 	]
 }

@@ -9,6 +9,7 @@ module.exports.create = function(req, res) {
     let user = new User({
       name: req.body.user.name,
       email: req.body.user.email,
+      username: req.body.user.username,
       password: hash,
     });
 
@@ -20,6 +21,7 @@ module.exports.create = function(req, res) {
         res.send({
           user: {
             name: user.name,
+            username: user.username,
             email: user.email,
           },
         });
