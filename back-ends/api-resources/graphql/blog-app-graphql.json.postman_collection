@@ -335,16 +335,16 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1450283901624,
+			"time": 1450292947022,
 			"name": "Get posts by username",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
 			"responses": [],
-			"rawModeData": "query {\n        viewer {\n          id,\n          name,\n          email,\n          posts(tag: \"testing2\") {\n            edges {\n                node {\n                    id,\n                    title,\n                    body,\n                    tags {\n                     text\n                    },\n                    comments {\n                      edges {\n                        node {\n                          text\n                          author\n                        }\n                      }\n                    }\n                }\n            }\n          }\n\n       }\n}"
+			"rawModeData": "query {\n        viewer {\n          id,\n          name,\n          email,\n          posts(username: \"test\") {\n            edges {\n                node {\n                    id,\n                    title,\n                    body,\n                    tags {\n                     text\n                    },\n                    comments {\n                      edges {\n                        node {\n                          text\n                          author\n                        }\n                      }\n                    }\n                }\n            }\n          }\n\n       }\n}"
 		},
 		{
 			"id": "f813dfec-03a7-795d-94f7-ad851621b7eb",
-			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjcxNjZjNDk4M2I2NzJmZTdjMjgzZGEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEyLTE2VDEzOjI3OjMyLjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEyLTE2VDEzOjI3OjMyLjAwMFoiLCJuYW1lIjoiUm9uIFN3YW5zb24iLCJlbWFpbCI6InJvbkBzd2Fuc29uLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JHRzdHVkMUdGOE93MTU4YUhCNHIwSy5ZeGNOcXlLaFNNOEc5T1hsaTJ4VWY5UEc3dWM4UEJPIiwiX192IjowfQ.jwiCOQy2vBljGIRQCX3NyMTfJI8Y4mAy2riEhnfzQOk\n",
+			"headers": "Content-Type: application/graphql\n",
 			"url": "http://localhost:8000/graphql",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -355,12 +355,12 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1450283901624,
+			"time": 1450292937234,
 			"name": "Get posts by tag",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
 			"responses": [],
-			"rawModeData": "query {\n        viewer {\n          id,\n          name,\n          email,\n          posts(tag: \"testing2\") {\n            edges {\n                node {\n                    id,\n                    title,\n                    body,\n                    tags {\n                     text\n                    },\n                    comments {\n                      edges {\n                        node {\n                          text\n                          author\n                        }\n                      }\n                    }\n                }\n            }\n          }\n\n       }\n}"
+			"rawModeData": "query {\n        viewer {\n          id,\n          name,\n          email,\n          username,\n          posts(tag: \"testing2\") {\n            edges {\n                node {\n                    id,\n                    title,\n                    body,\n                    tags {\n                     text\n                    },\n                    comments {\n                      edges {\n                        node {\n                          text\n                          author\n                        }\n                      }\n                    }\n                }\n            }\n          }\n\n       }\n}"
 		},
 		{
 			"id": "f9373e98-b9e0-2f78-68b3-fbf977cb408c",
