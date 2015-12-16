@@ -71,24 +71,24 @@
 			"method": "POST",
 			"data": [
 				{
-					"key": "email",
+					"key": "user[email]",
 					"value": "ron@swanson.com",
 					"type": "text",
 					"enabled": true
 				},
 				{
-					"key": "password",
+					"key": "user[password]",
 					"value": "testtest",
 					"type": "text",
 					"enabled": true
 				}
 			],
-			"dataMode": "urlencoded",
+			"dataMode": "params",
 			"version": 2,
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449773657201,
+			"time": 1450273289944,
 			"name": "Authenticate",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
@@ -176,26 +176,26 @@
 		},
 		{
 			"id": "764dfa6f-163d-811c-2826-c7d94049cc59",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaXNzIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwMDBcL2F1dGhcL2xvZ2luIiwiaWF0IjoiMTQ0NTU0MDg3NiIsImV4cCI6IjE0NDY3NTA0NzYiLCJuYmYiOiIxNDQ1NTQwODc2IiwianRpIjoiYThhY2I2MmRjN2YxMzQyMGE3NTYyZjZmOWNlNDEzM2QifQ.QcS8qDTeK8xI9TUDQO3MpYXb9cKJmJvFVMWIGhWKwu4\n",
+			"headers": "",
 			"url": "http://localhost:8000/user",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "POST",
 			"data": [
 				{
-					"key": "email",
+					"key": "user[email]",
 					"value": "ron@swanson.com",
 					"type": "text",
 					"enabled": true
 				},
 				{
-					"key": "password",
+					"key": "user[password]",
 					"value": "testtest",
 					"type": "text",
 					"enabled": true
 				},
 				{
-					"key": "name",
+					"key": "user[name]",
 					"value": "Ron Swanson",
 					"type": "text",
 					"enabled": true
@@ -206,7 +206,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449773642165,
+			"time": 1450274450705,
 			"name": "Sign up",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
@@ -274,7 +274,7 @@
 		},
 		{
 			"id": "f9373e98-b9e0-2f78-68b3-fbf977cb408c",
-			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjY5Y2E0YjI2ZWNhYWNjM2YzMjZhNmMiLCJ1cGRhdGVkQXQiOiIyMDE1LTEyLTEwVDE4OjU0OjAzLjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEyLTEwVDE4OjU0OjAzLjAwMFoiLCJuYW1lIjoiUm9uIFN3YW5zb24iLCJlbWFpbCI6InJvbkBzd2Fuc29uLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JC9ZeWUxQkZudkZjTmlWLzFDMWwwYS4xc094RnhDUUdlUFc5YXJkd3lpUWx6TnpIWmxBVFFxIiwiX192IjowfQ.mnRGu2edBRFE83QWufveGnvREspgk2nqqDOp_CvDoeA\n",
+			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjcxNjZjNDk4M2I2NzJmZTdjMjgzZGEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEyLTE2VDEzOjI3OjMyLjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEyLTE2VDEzOjI3OjMyLjAwMFoiLCJuYW1lIjoiUm9uIFN3YW5zb24iLCJlbWFpbCI6InJvbkBzd2Fuc29uLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JHRzdHVkMUdGOE93MTU4YUhCNHIwSy5ZeGNOcXlLaFNNOEc5T1hsaTJ4VWY5UEc3dWM4UEJPIiwiX192IjowfQ.jwiCOQy2vBljGIRQCX3NyMTfJI8Y4mAy2riEhnfzQOk\n",
 			"url": "http://localhost:8000/graphql",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -285,7 +285,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449773726424,
+			"time": 1450274578078,
 			"name": "Get all data",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
