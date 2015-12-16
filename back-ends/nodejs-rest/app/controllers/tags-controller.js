@@ -1,0 +1,63 @@
+'use strict';
+
+import Tag from './../models/Tag';
+import Post from './../models/Post';
+
+module.exports.create = (req, res) => {
+  Tag.findOne({
+    text: req.body.text,
+  })
+  .then(tag => {
+    if (tag === null) {
+      let newtag = new Tag({
+        text: req.body.text,
+      });
+      newtag.save();
+
+      return newtag;
+    } else {
+      return tag;
+    }
+  })
+  .then(tag => {
+    Post.findById(req.params.post_id)
+    .then(post => {
+      tag.posts.push({
+        _id: post._id,
+        url_path: post.url_path,
+        title: post.title,
+        body: post.body,
+        user_id: post.user_id,
+        date_modified: post.date_modified,
+        date_created: post.date_created,
+      });
+      tag.save();
+
+      post.tags.push(tag);
+      post.save();
+
+      res.json({
+        post: post,
+      });
+    });
+  });
+};
+
+module.exports.list = (req, res) => {
+  Post.findById(req.params.post_id)
+  .then(post => {
+    res.json({
+      post_tags: post.tags,
+    });
+  });
+};
+
+module.exports.getPosts = (req, res) => {
+  Tag.findById(req.params.tag_id)
+  .then(tag => {
+    console.log(tag);
+    res.json({
+      posts: tag.posts,
+    });
+  });
+};

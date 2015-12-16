@@ -46,7 +46,6 @@
     }],
     "prefer-arrow-callback": 1,
     "arrow-spacing": 1,
-    "object-shorthand": [1, "always"],
     "no-console": 0,
     "comma-dangle": [1, "always-multiline"],
     "radix": 1,
