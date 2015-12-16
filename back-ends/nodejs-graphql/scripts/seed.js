@@ -123,21 +123,18 @@ if(process.env.NODE_ENV === 'development') {
   .then(() => Tag.remove({}))
   .then(() => {
     let tag = new Tag({
-      _post: '5634d4760066be016bf10c9r', // how to boil an egg
       text: 'cooking-skills',
     });
     return tag.save();
   })
   .then(() => {
     let tag = new Tag({
-      _post: '5634d4760066be016bf10a8r', // how to play basketball
       text: 'outdoor-skills',
     });
     return tag.save();
   })
   .then(() => {
     let tag = new Tag({
-      _post: '5624d4760066be016bf10a8r', // how to unclog a drain
       text: 'plumbing-skills',
     });
     return tag.save();

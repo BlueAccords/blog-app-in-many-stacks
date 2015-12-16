@@ -37,7 +37,7 @@ let postType = new GraphQLObjectType({
     tags: {
       type: new GraphQLList(tagType),
       description: 'The tags',
-      resolve: function(post) { return Tag.find({_post: post._id}); },
+      resolve: function(post) { return post.tags; },
     },
     comments: {
       type: commentConnectionDefinitions.commentConnection,
