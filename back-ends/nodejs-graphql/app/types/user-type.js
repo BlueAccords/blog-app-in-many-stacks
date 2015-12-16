@@ -3,6 +3,7 @@ import Tag from '../models/Tag';
 import User from '../models/User';
 import tagType from './tag-type';
 import postConnectionDefinitions from '../connection-definitions/post-connection-definitions';
+import { Promise } from 'es6-promise';
 
 import {
   GraphQLObjectType,
@@ -54,14 +55,22 @@ let userType = new GraphQLObjectType({
         if(args.tag) {
           return Tag.findOne({'text': args.tag })
           .then((tag) => {
-            return Post.find({'tags': tag._id })
-            .populate('tags');
+            if(tag) {
+              return Post.find({'tags': tag._id })
+              .populate('tags');
+            } else {
+              return Promise.resolve([]);
+            }
           })
           .then((posts) => connectionFromArray(posts, args));
         } else if(args.username) {
           return User.findOne({'username': args.username })
           .then((author) => {
-            return Post.find({'_author': author._id });
+            if(author) {
+              return Post.find({'_author': author._id });
+            } else {
+              return Promise.resolve([]);
+            }
           })
           .then((posts) => connectionFromArray(posts, args));
         } else {
