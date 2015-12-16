@@ -156,3 +156,26 @@ module.exports.postsWritten = (req, res) => {
     });
   });
 };
+
+module.exports.search = (req, res) => {
+  if(req.query.username) {
+    User.findOne({
+      username: req.query.username,
+    })
+    .then(user => {
+      res.json({
+        user: {
+          name: user.name,
+          email: user.email,
+          username: user.username,
+        },
+      });
+    });
+  } else {
+    res.json({
+      user: {
+        msg: 'no user found fam',
+      },
+    });
+  }
+};
