@@ -17,7 +17,7 @@ let addTagToPostMutation = new mutationWithClientMutationId({
   name: 'ToggleTagOnPost',
   description: 'Add or remove a tag from a post',
   inputFields: {
-    status: {type: GraphQLBoolean},
+    status: {type: GraphQLBoolean}, // The desired state of a tag being on a post or not
     tagId: {type: GraphQLString},
     postId: {type: GraphQLString},
   },
