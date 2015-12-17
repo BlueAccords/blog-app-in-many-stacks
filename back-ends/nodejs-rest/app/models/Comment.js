@@ -29,6 +29,7 @@ let CommentSchema = new mongoose.Schema({
   toJSON: { virtuals: true },
 });
 
+// Setting up virtuals to match the API spec
 CommentSchema.virtual('post_id').get(function() {
   return this._post;
 });
