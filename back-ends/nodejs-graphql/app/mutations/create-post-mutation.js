@@ -33,12 +33,13 @@ let createPostMutation = new mutationWithClientMutationId({
     if (user) {
       let x = {_author: user._id};
       let postParams = Object.assign(x, args);
+      postParams['url_path'] = args.title.replace(/\s/g, '-') + Date.now();
       let post = new Post(postParams);
 
       return post.save()
       .then((post) => ({postId: post._id, user: root.rootValue.user}));
     } else {
-      throw "You must be logged in to create a post";
+      throw 'You must be logged in to create a post';
     }
   },
 });
