@@ -50,6 +50,7 @@ module.exports.create = (req, res) => {
       });
 
       user.save();
+      // TODO - Fix this. It is currently optimistic and assumes saving is successful
       return user;
     } else {
       res.json({
@@ -106,6 +107,7 @@ module.exports.update = (req, res) => {
       user.password = req.body.user.password || user.password,
 
       user.save();
+      // TODO - Fix this. It is currently optimistic and assumes saving is successful
       return user;
     } else {
       res.json({

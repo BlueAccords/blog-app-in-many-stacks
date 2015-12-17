@@ -35,6 +35,7 @@ module.exports.create = (req, res) => {
       });
       newtag.save();
 
+      // TODO - Fix this. It is currently optimistic and assumes saving is successful
       return newtag;
     } else {
       return tag;
@@ -82,6 +83,7 @@ module.exports.update = (req, res) => {
     tag.text = req.body.tag.text;
     tag.save();
 
+    // TODO - Fix this. It is currently optimistic and assumes saving is successful
     return tag;
   })
   .then(tag => {
@@ -98,6 +100,7 @@ module.exports.delete = (req, res) => {
     let tagID  = tag._id;
 
     tag.remove();
+    // TODO - Fix this. It is currently optimistic and assumes saving is successful
     return tagID;
   })
   .then(tagID => {

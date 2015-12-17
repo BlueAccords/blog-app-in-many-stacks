@@ -79,6 +79,7 @@ module.exports.update = (req, res) => {
       post.date_modified = new Date();
 
       post.save();
+      // TODO - Fix this. It is currently optimistic and assumes saving is successful
       return { post: post};
     } else {
       res.json({
@@ -101,6 +102,7 @@ module.exports.delete = (req, res) => {
       let post_id = post._id;
 
       post.remove();
+      // TODO - Fix this. It is currently optimistic and assumes saving is successful
       return post_id;
     } else {
       res.json({

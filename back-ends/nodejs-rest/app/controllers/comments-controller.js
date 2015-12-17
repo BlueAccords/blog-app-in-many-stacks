@@ -10,6 +10,7 @@ module.exports.update = (req, res) => {
       comment.post_id = comment.post_id;
       comment.text = req.body.comment.text;
 
+      // TODO - Fix this. It is currently optimistic and assumes saving is successful
       comment.save();
       return comment;
     } else {
@@ -30,6 +31,7 @@ module.exports.delete = (req, res) => {
       let commentID = comment._id;
 
       comment.remove();
+      // TODO - Fix this. It is currently optimistic and assumes saving is successful
       return commentID;
     } else {
       res.json('no');
