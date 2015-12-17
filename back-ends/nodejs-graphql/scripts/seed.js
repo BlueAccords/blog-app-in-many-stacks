@@ -6,7 +6,7 @@ require('babel/register');
  */
 require('dotenv').load();
 if(process.env.NODE_ENV === 'development') {
-  let config   = require('../config/application');
+  let config   = require('../config');
   let mongoose = require('mongoose');
   let bcrypt     = require('bcrypt');
 
@@ -59,6 +59,37 @@ if(process.env.NODE_ENV === 'development') {
     });
   })
 
+  // Tag seeds
+  .then(() => Tag.remove({}))
+  .then(() => {
+    let tag = new Tag({
+      _id: '5672c893dfad0d9fc16ae47f',
+      text: 'cooking-skills',
+    });
+    return tag.save();
+  })
+  .then(() => {
+    let tag = new Tag({
+      _id: '5672c893dfad0d9fc16ae480',
+      text: 'outdoor-skills',
+    });
+    return tag.save();
+  })
+  .then(() => {
+    let tag = new Tag({
+      _id: '5672c893dfad0d9fc16ae481',
+      text: 'plumbing-skills',
+    });
+    return tag.save();
+  })
+  .then(() => {
+    let tag = new Tag({
+      _id: '5672c823dfad0d9fc16ae481',
+      text: 'swag',
+    });
+    return tag.save();
+  })
+
   //Post seeds
   .then(() => Post.remove({}))
   .then(() => {
@@ -67,6 +98,8 @@ if(process.env.NODE_ENV === 'development') {
       title: 'How to boil an egg',
       body: 'Step 1: heat up water, step 2: put the eggs in the water, step 3: boil for 10 minutes, step 4: run cold water over them',
       _author: '5634d4760066be016bf10c9a', // bruce wayne
+      url_path:'how-to-boil-an-egg',
+      tags: ['5672c893dfad0d9fc16ae481', '5672c893dfad0d9fc16ae47f']
     });
     return post.save();
   })
@@ -76,6 +109,7 @@ if(process.env.NODE_ENV === 'development') {
       title: 'How to play basketball',
       body: 'Step 1: Dribble, step 2: Pass, step 3: Shoot, step 4: Score!',
       _author: '5634d4750066be016bf10c9a', // kyle@begin.com
+      url_path:'how-to-play-basketball',
     });
     return post.save();
   })
@@ -85,6 +119,7 @@ if(process.env.NODE_ENV === 'development') {
       title: 'How to fix a clogged drain',
       body: 'Step 1: Buy some draino, step 2: pour it down the drain, step 3: Voila!',
       _author: '5634d4750066be016bf10c9r', // King bobby
+      url_path:'how-to-fix-a-clogged-drain',
     });
     return post.save();
   })
@@ -122,29 +157,9 @@ if(process.env.NODE_ENV === 'development') {
     return comment.save();
   })
 
-  // Tag seeds
-  .then(() => Tag.remove({}))
-  .then(() => {
-    let tag = new Tag({
-      text: 'cooking-skills',
-    });
-    return tag.save();
-  })
-  .then(() => {
-    let tag = new Tag({
-      text: 'outdoor-skills',
-    });
-    return tag.save();
-  })
-  .then(() => {
-    let tag = new Tag({
-      text: 'plumbing-skills',
-    });
-    return tag.save();
-  })
-
   .then(() => {
     console.log('Consider the seeds planted!');
     process.exit();
   });
 }
+
