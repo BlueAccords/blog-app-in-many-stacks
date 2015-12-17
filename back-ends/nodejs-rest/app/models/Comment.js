@@ -34,7 +34,7 @@ CommentSchema.virtual('post_id').get(function() {
   return this._post;
 });
 
-CommentSchema.virtual('author_id').get(function() {
+CommentSchema.virtual('user_id').get(function() {
   return this._author;
 });
 
