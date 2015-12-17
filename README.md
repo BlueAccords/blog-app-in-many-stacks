@@ -26,3 +26,12 @@ All of these apps are example apps and are works in progress. They may or may no
 ###Contributing:
 
 Contributions are welcome. More details coming soon.
+
+
+### Patrons
+
+The development of these examples have been [funded by the Chiedo Labs](https://labs.chie.do).  
+
+### License
+
+MIT
