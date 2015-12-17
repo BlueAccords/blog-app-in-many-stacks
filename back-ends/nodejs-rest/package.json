@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=development nodemon app.js",
+    "seed": "NODE_ENV=development node ./scripts/seed.js",
     "test": "NODE_ENV=test mocha test --recursive --compilers js:babel/register --reporter spec "
   },
   "repository": {
@@ -38,7 +39,8 @@
     "jsonwebtoken": "^5.4.1",
     "lodash": "^3.10.1",
     "mongoose": "^4.2.7",
-    "morgan": "^1.6.1"
+    "morgan": "^1.6.1",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "babel-eslint": "^3.1.9",

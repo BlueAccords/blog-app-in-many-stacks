@@ -1,6 +1,9 @@
 'use strict';
 
 import mongoose from 'mongoose';
+import Promise from 'bluebird';
+
+mongoose.Promise = Promise;
 
 let PostSchema = new mongoose.Schema({
   url_path: {
@@ -18,25 +21,25 @@ let PostSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  user_id: {
+  _author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-  tags: [{
-    text: String,
-    tag_id: mongoose.Schema.Types.ObjectId,
-  }],
-  date_created: {
-    type: Date,
-    required: true,
-    trim: true,
-  },
-  date_modified: {
-    type: Date,
-    required: true,
-    trim: true,
-  },
+  tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
+}, {
+  timestamps: true,
+  toObject: { virtuals: true },
+  toJSON: { virtuals: true },
+});
+
+// Setting up virtuals to match the API spec
+PostSchema.virtual('user_id').get(function() {
+  return this._author;
+});
+
+PostSchema.virtual('id').get(function() {
+  return this._id;
 });
 
 module.exports = mongoose.model('Post', PostSchema);

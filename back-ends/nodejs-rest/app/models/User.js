@@ -1,6 +1,9 @@
 'use strict';
 
 import mongoose from 'mongoose';
+import Promise from 'bluebird';
+
+mongoose.Promise = Promise;
 
 let UserSchema = new mongoose.Schema({
   name: {
@@ -27,6 +30,13 @@ let UserSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+}, {
+  toObject: { virtuals: true },
+  toJSON: { virtuals: true },
+});
+
+UserSchema.virtual('id').get(function() {
+  return this._id;
 });
 
 module.exports = mongoose.model('User', UserSchema);

@@ -1,43 +1,77 @@
 'use strict';
 
 import Comment from './../models/Comment';
+import { generalErrorResponse, permissionsErrorResponse } from '../utils/error-factory';
 
 module.exports.update = (req, res) => {
-  Comment.findById(req.params.id)
+  return Comment.findById(req.params.id)
   .then(comment => {
-    if (String(comment.user_id) === req.user._id) {
-      comment.user_id = comment.user_id;
-      comment.post_id = comment.post_id;
-      comment.text = req.body.text;
+    if (String(comment._author) === req.user._id) {
+      comment._author = comment._author;
+      comment._post = comment._post;
+      comment.text = req.body.comment.text;
 
-      comment.save();
-      return comment;
+      return comment.save();
     } else {
-      res.send('no');
+      permissionsErrorResponse(res);
     }
   })
   .then(updatedComment => {
-    res.json({
-      updated_comment: updatedComment,
+    return res.json({
+      comment: updatedComment,
     });
+  })
+  .catch((err) => {
+    return generalErrorResponse(res);
   });
 };
 
 module.exports.delete = (req, res) => {
-  Comment.findById(req.params.id)
+  return Comment.findById(req.params.id)
   .then(comment => {
-    if (String(comment.user_id) === req.user._id) {
-      let commentID = comment._id;
-
-      comment.remove();
-      return commentID;
+    if (String(comment._author) === req.user._id) {
+      return comment.remove();
     } else {
-      res.json('no');
+      permissionsErrorResponse(res);
     }
   })
-  .then(deletedID => {
+  .then(() => {
     res.json({
-      deleted_id: deletedID,
+      deleted_id: req.params.id,
     });
+  })
+  .catch((err) => {
+    generalErrorResponse(res);
   });
 };
+
+module.exports.commentsByPost = (req, res) => {
+  return Comment.find({
+    _post: req.params.post_id,
+  })
+  .then(comments => {
+    return res.json({
+      comments: comments,
+    });
+  })
+  .catch((err) => {
+    return generalErrorResponse(res);
+  });
+};
+
+module.exports.create = (req, res) => {
+  return Comment.create({
+    _author: req.user._id,
+    _post: req.params.post_id,
+    text: req.body.post.text,
+  })
+  .then(comment => {
+    return res.json({
+      comment: comment,
+    });
+  })
+  .catch((err) => {
+    return generalErrorResponse(res);
+  });
+};
+

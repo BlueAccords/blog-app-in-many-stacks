@@ -1,24 +1,27 @@
 'use strict';
 
 import mongoose from 'mongoose';
+import Promise from 'bluebird';
+
+mongoose.Promise = Promise;
 
 let TagSchema = new mongoose.Schema({
   text: {
     type: String,
     required: true,
-    unique: true,
     lowercase: true,
     trim: true,
   },
-  posts: [{
-    _id: mongoose.Schema.Types.ObjectId,
-    url_path: String,
-    title: String,
-    body: String,
-    user_id: mongoose.Schema.Types.ObjectId,
-    date_modified: String,
-    date_created: String,
-  }],
+}, {
+  toObject: { virtuals: true },
+  toJSON: { virtuals: true },
+});
+
+TagSchema.index({text: 1}, { unique: true });
+
+// Setting up virtuals to match the API spec
+TagSchema.virtual('id').get(function() {
+  return this._id;
 });
 
 module.exports = mongoose.model('Tag', TagSchema);

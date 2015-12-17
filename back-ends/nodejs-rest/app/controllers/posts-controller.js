@@ -1,131 +1,151 @@
 'use strict';
 
 import Post from './../models/Post';
-import Comment from './../models/Comment';
-import Tag from './../models/Tag';
+import { generalErrorResponse, permissionsErrorResponse } from '../utils/error-factory';
 
 // Create a new post
 module.exports.create = (req, res) => {
   let now = new Date();
-  let path = req.body.title.toLowerCase().split(' ').join('-');
+  let path = req.body.post.title.toLowerCase().split(' ').join('-');
   let author = req.user.username;
 
-  Post.create({
+  return Post.create({
     url_path: path + '-' + author,
-    title: req.body.title,
-    body: req.body.body,
-    user_id: req.user._id,
+    title: req.body.post.title,
+    body: req.body.post.body,
+    _author: req.user._id,
     tags: [],
     date_created: now,
     date_modified: now,
   })
   .then(post => {
-    res.json({
-      post_created: post,
+    return res.json({
+      post: post,
     });
+  })
+  .catch((err) => {
+    return generalErrorResponse(res);
   });
 };
 
 // View a list of all posts
-module.exports.all = (req, res) => {
-  Post.find()
-  .then(posts => {
-    res.json({
-      posts: posts,
+module.exports.index = (req, res) => {
+  if(req.query.url_path) {
+    return Post.findOne({
+      'url_path': req.query.url_path,
+    })
+    .populate('tags')
+    .then(post => {
+      if(post) {
+        return res.json({
+          post: post,
+        });
+      } else {
+        return res.sendStatus(404);
+      }
     });
-  });
+  } else {
+    return Post.find()
+    .populate('tags')
+    .then(posts => {
+      return res.json({
+        posts: posts,
+      });
+    })
+    .catch((err) => {
+      return generalErrorResponse(res);
+    });
+  }
 };
 
 // Read a post
-module.exports.read = (req, res) => {
-  Post.findById(req.params.id)
+module.exports.show = (req, res) => {
+  return Post.findById(req.params.id)
+  .populate('tags')
   .then(post => {
-    res.json({
+    return res.json({
       post: post,
     });
-  },
-  err => {
-    res.json({
-      error: err,
-    });
+  })
+  .catch((err) => {
+    return generalErrorResponse(res);
   });
 };
 
 // Update a post
 module.exports.update = (req, res) => {
   let author = req.user.username;
-  let path = req.body.title ?
-  req.body.title.toLowerCase().split(' ').join('-') + '-' + author : '';
+  let path = req.body.post.title ?
+  req.body.post.title.toLowerCase().split(' ').join('-') + '-' + author : '';
 
-  Post.findById(req.params.id)
+  return Post.findById(req.params.id)
+  .populate('tags')
   .then(post => {
-
-    if (String(post.user_id) === req.user._id) {
+    if (String(post._author) === req.user._id) {
       post.url_path = path || post.url_path;
-      post.title = req.body.title || post.title;
-      post.body = req.body.body || post.body;
-      post.user_id = post.user_id;
-      post.tags = post.tags || [];
+      post.title = req.body.post.title || post.title;
+      post.body = req.body.post.body || post.body;
+      post._author = post.user_id;
       post.date_created = post.date_created;
       post.date_modified = new Date();
 
-      post.save();
-      return post;
+      return post.save();
     } else {
-      res.json({
-        msg: 'You can\'t sit with us.',
-      });
+      return permissionsErrorResponse(res);
     }
   })
   .then(post => {
-    res.json({
-      updated_post: post,
+    return res.json({
+      post: post,
     });
+  })
+  .catch((err) => {
+    return generalErrorResponse(res);
   });
 };
 
 // Delete a post
 module.exports.delete = (req, res) => {
-  Post.findById(req.params.id)
+  return Post.findById(req.params.id)
   .then(post => {
-    if(String(post.user_id) === req.user._id) {
-      let post_id = post._id;
-
-      post.remove();
-      return post_id;
+    if(String(post._author) === req.user._id) {
+      return post.remove();
     } else {
-      res.json({
-        msg: 'No... No... You no do that.',
-      });
+      return permissionsErrorResponse(res);
     }
   })
-  .then(deleted_id => {
-    res.json({
-      deleted_id: deleted_id,
+  .then(() => {
+    return res.json({
+      deleted_id: req.params.id,
     });
+  })
+  .catch((err) => {
+    return generalErrorResponse(res);
   });
 };
 
-module.exports.newComment = (req, res) => {
-  Comment.create({
-    user_id: req.user._id,
-    post_id: req.params.post_id,
-    text: req.body.text,
-  })
-  .then(comment => {
-    res.json({
-      comment: comment,
+module.exports.getPostsByTag = (req, res) => {
+  return Post.find({'tags': req.params.tag_id})
+  .then(posts => {
+    return res.json({
+      posts: posts,
     });
+  })
+  .catch((err) => {
+    return generalErrorResponse(res);
   });
 };
 
-module.exports.allComments = (req, res) => {
-  Comment.find({
-    post_id: req.params.post_id,
+module.exports.postsByUser = (req, res) => {
+  return Post.find({
+    _author: req.params.user_id,
   })
-  .then(comments => {
-    res.json({
-      comments: comments,
+  .then(list => {
+    return res.json({
+      posts: list,
     });
+  })
+  .catch((err) => {
+    return generalErrorResponse(res);
   });
 };

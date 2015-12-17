@@ -21,40 +21,43 @@ router.route('/sign-in')
 router.route('/users')
   .post(user.create);
 
+// Read a user
+router.route('/users/:id')
+  .get(user.get);
+
 /**
 * PRIVATE ROUTES
 **/
 
 // Jwt auth middleware
 router.use(jwtMiddleware);
+router.route('/users')
+  .get(user.index);
 
-// Read/Update/Delete a user
+// Update/Delete a user
 router.route('/users/:id')
-  .get(user.get)
   .put(user.update)
   .delete(user.delete);
 
 // List all posts by user
 router.route('/users/:user_id/posts')
-  .get(user.postsWritten);
+  .get(post.postsByUser);
 
 // Create and list posts
 router.route('/posts')
   .post(post.create)
-  .get(post.all);
+  .get(post.index);
 
 // Read/Update/Delete post
 router.route('/posts/:id')
-  .get(post.read)
+  .get(post.show)
   .put(post.update)
   .delete(post.delete);
 
-// TODO tags and search refactor
-
 // Create and list comments.
 router.route('/posts/:post_id/comments')
-  .post(post.newComment)
-  .get(post.allComments);
+  .post(comment.create)
+  .get(comment.commentsByPost);
 
 // Update/Delete comment.
 router.route('/comments/:id')
@@ -64,31 +67,23 @@ router.route('/comments/:id')
 // Create/Read tags
 router.route('/posts/:post_id/tags')
   .post(tag.create)
-  .get(tag.list);
+  .get(tag.getTagsByPost);
 
 // Get posts by tag
-router.route('/tag/:tag_id/posts')
-  .get(tag.getPosts);
+router.route('/tags/:tag_id/posts')
+  .get(post.getPostsByTag);
 
 // Update/Delete tags
-// router.route('/tags/:id')
-//   .put(tag.update)
-//   .delete(tag.delete);
+router.route('/tags/:id')
+  .put(tag.update)
+  .delete(tag.delete);
 
 // List all tags
-// router.route('/tags')
-//   .get(tag.all);
+router.route('/tags')
+  .get(tag.index);
 
-// Post search via url_path
-// router.route('/posts?path_url=:path_url')
-//   .get(post.search)
-
-// Tag search via text
-// router.route('/tags/?text=:text')
-//   .get(tag.search)
-
-// User search via username
-// router.route('/users/?username=:username')
-//   .get(user.search)
+// Toggle tag on a post
+router.route('/toggle-tag-on-post')
+  .post(tag.toggleTagOnPost);
 
 module.exports = router;
