@@ -20,6 +20,7 @@ let updatePostMutation = new mutationWithClientMutationId({
     id: {type: new GraphQLNonNull(GraphQLString)},
     title: {type: GraphQLString},
     body: {type: GraphQLString},
+    url_path: {type: GraphQLString},
   },
   outputFields: {
     post: {
@@ -38,6 +39,9 @@ let updatePostMutation = new mutationWithClientMutationId({
 
     return blockPostNonEditors(user._id, _id)
     .then(() => {
+      if(args['url_path']) {
+        args['url_path'] = args.url_path.replace(/\s/g, '-');
+      }
       return Post.update({_id: _id}, args, {});
     })
     .then((numAffected) => {

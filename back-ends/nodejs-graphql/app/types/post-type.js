@@ -29,6 +29,10 @@ let postType = new GraphQLObjectType({
       type: GraphQLString,
       resolve: (post) => post.title,
     },
+    url_path: {
+      type: GraphQLString,
+      resolve: (post) => post.url_path,
+    },
     body: {
       type: GraphQLString,
       resolve: (post) => post.body,

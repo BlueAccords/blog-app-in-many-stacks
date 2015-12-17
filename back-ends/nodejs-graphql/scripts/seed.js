@@ -6,7 +6,7 @@ require('babel/register');
  */
 require('dotenv').load();
 if(process.env.NODE_ENV === 'development') {
-  let config   = require('../config');
+  let config   = require('../config/application');
   let mongoose = require('mongoose');
   let bcrypt     = require('bcrypt');
 
