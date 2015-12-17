@@ -393,6 +393,7 @@
  * @api {get} /tags/:id Delete tag
  * @apiName Delete tag
  * @apiGroup Tags
+ * @apiDescription - Only a site admin can delete a tag once it's been created. No need to implement now.
  *
  * @apiUse successfulDeletion
  * @apiUse generalErrors
@@ -405,6 +406,7 @@
  * @api {put} /tags/:id Update tag
  * @apiName Update tag
  * @apiGroup Tags
+ * @apiDescription - Only a site admin can update a tag once it's been created. No need to implement now.
  *
  * @apiUse tagResponse
  * @apiUse tagFieldErrors
