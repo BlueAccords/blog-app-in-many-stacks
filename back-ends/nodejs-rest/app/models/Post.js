@@ -38,4 +38,8 @@ PostSchema.virtual('user_id').get(function() {
   return this._author;
 });
 
+PostSchema.virtual('id').get(function() {
+  return this._id;
+});
+
 module.exports = mongoose.model('Post', PostSchema);

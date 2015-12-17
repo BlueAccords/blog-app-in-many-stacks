@@ -30,6 +30,13 @@ let UserSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+}, {
+  toObject: { virtuals: true },
+  toJSON: { virtuals: true },
+});
+
+UserSchema.virtual('id').get(function() {
+  return this._id;
 });
 
 module.exports = mongoose.model('User', UserSchema);
