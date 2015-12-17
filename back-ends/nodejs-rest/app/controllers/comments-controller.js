@@ -1,7 +1,7 @@
 'use strict';
 
 import Comment from './../models/Comment';
-import { generalErrorResponse } from '../utils/error-factory';
+import { generalErrorResponse, permissionsErrorResponse } from '../utils/error-factory';
 
 module.exports.update = (req, res) => {
   Comment.findById(req.params.id)
@@ -15,7 +15,7 @@ module.exports.update = (req, res) => {
       comment.save();
       return comment;
     } else {
-      res.send('no');
+      permissionsErrorResponse(res);
     }
   })
   .then(updatedComment => {
@@ -38,7 +38,7 @@ module.exports.delete = (req, res) => {
       // TODO - Fix this. It is currently optimistic and assumes saving is successful
       return commentID;
     } else {
-      res.json('no');
+      permissionsErrorResponse(res);
     }
   })
   .then(deletedID => {

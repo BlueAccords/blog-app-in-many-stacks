@@ -2,7 +2,7 @@
 
 import Post from './../models/Post';
 import Tag from './../models/Tag';
-import { generalErrorResponse } from '../utils/error-factory';
+import { generalErrorResponse, permissionsErrorResponse } from '../utils/error-factory';
 
 // Create a new post
 module.exports.create = (req, res) => {
@@ -87,9 +87,7 @@ module.exports.update = (req, res) => {
       // TODO - Fix this. It is currently optimistic and assumes saving is successful
       return { post: post};
     } else {
-      res.json({
-        msg: 'You can\'t sit with us.',
-      });
+      permissionsErrorResponse(res);
     }
   })
   .then(post => {
@@ -113,9 +111,7 @@ module.exports.delete = (req, res) => {
       // TODO - Fix this. It is currently optimistic and assumes saving is successful
       return post_id;
     } else {
-      res.json({
-        msg: 'No... No... You no do that.',
-      });
+      permissionsErrorResponse(res);
     }
   })
   .then(deleted_id => {

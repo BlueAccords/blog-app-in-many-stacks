@@ -3,7 +3,7 @@
 import Tag from './../models/Tag';
 import Post from './../models/Post';
 import * as _ from 'lodash';
-import { generalErrorResponse } from '../utils/error-factory';
+import { generalErrorResponse, permissionsErrorResponse } from '../utils/error-factory';
 
 module.exports.index = (req, res) => {
   if (req.query.text) {

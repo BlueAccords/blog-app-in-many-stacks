@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import config from '../../config';
 import User from './../models/User';
-import { generalErrorResponse } from '../utils/error-factory';
+import { generalErrorResponse, permissionsErrorResponse } from '../utils/error-factory';
 
 module.exports.authenticate = (req, res) => {
   User.findOne({
@@ -59,8 +59,10 @@ module.exports.create = (req, res) => {
       // TODO - Fix this. It is currently optimistic and assumes saving is successful
       return user;
     } else {
-      res.json({
-        msg: 'This Username or Email is already taken.',
+      res.status(400).json({
+        errors: {
+          email: 'This Username or Email is already taken.',
+        },
       });
     }
   })
@@ -119,9 +121,7 @@ module.exports.update = (req, res) => {
       // TODO - Fix this. It is currently optimistic and assumes saving is successful
       return user;
     } else {
-      res.json({
-        msg: 'You are not authorized to do that.',
-      });
+      permissionsErrorResponse(res);
     }
   })
   .then(user => {
@@ -150,9 +150,7 @@ module.exports.delete = (req, res) => {
         deleted_id: the_id,
       });
     } else {
-      res.json({
-        msg: 'You are not authorized to do that.',
-      });
+      permissionsErrorResponse(res);
     }
   })
   .catch((err) => {
@@ -178,10 +176,6 @@ module.exports.index = (req, res) => {
       generalErrorResponse(res);
     });
   } else {
-    res.json({
-      user: {
-        msg: 'no user found fam',
-      },
-    });
+    generalErrorResponse(res, 'No user found');
   }
 };
