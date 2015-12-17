@@ -1,0 +1,199 @@
+type Author {
+  id: ID!
+  email: String
+  name: String
+  username: String
+}
+
+type Comment implements Node {
+  id: ID!
+  text: String
+  author: Author
+  post: String
+}
+
+type CommentConnection {
+  pageInfo: PageInfo!
+  edges: [CommentEdge]
+}
+
+type CommentEdge {
+  node: Comment
+  cursor: String!
+}
+
+input CreateCommentInput {
+  postId: String!
+  text: String!
+  clientMutationId: String!
+}
+
+type CreateCommentPayload {
+  comment: Comment
+  post: Post
+  clientMutationId: String!
+}
+
+input CreatePostInput {
+  title: String!
+  body: String!
+  clientMutationId: String!
+}
+
+type CreatePostPayload {
+  post: Post
+  clientMutationId: String!
+}
+
+input CreateTagInput {
+  text: String!
+  clientMutationId: String!
+}
+
+type CreateTagPayload {
+  tag: Tag
+  clientMutationId: String!
+}
+
+input DeleteCommentInput {
+  id: String!
+  clientMutationId: String!
+}
+
+type DeleteCommentPayload {
+  id: String
+  viewer: User
+  clientMutationId: String!
+}
+
+input DeletePostInput {
+  id: String!
+  clientMutationId: String!
+}
+
+type DeletePostPayload {
+  id: String
+  viewer: User
+  clientMutationId: String!
+}
+
+input DeleteTagInput {
+  id: String!
+  clientMutationId: String!
+}
+
+type DeleteTagPayload {
+  id: String
+  viewer: User
+  clientMutationId: String!
+}
+
+type Mutation {
+  createPost(input: CreatePostInput!): CreatePostPayload
+  updatePost(input: UpdatePostInput!): UpdatePostPayload
+  deletePost(input: DeletePostInput!): DeletePostPayload
+  createComment(input: CreateCommentInput!): CreateCommentPayload
+  updateComment(input: UpdateCommentInput!): UpdateCommentPayload
+  deleteComment(input: DeleteCommentInput!): DeleteCommentPayload
+  createTag(input: CreateTagInput!): CreateTagPayload
+  updateTag(input: UpdateTagInput!): UpdateTagPayload
+  deleteTag(input: DeleteTagInput!): DeleteTagPayload
+  toggleTagOnPost(input: ToggleTagOnPostInput!): ToggleTagOnPostPayload
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Post implements Node {
+  id: ID!
+  title: String
+  url_path: String
+  body: String
+  tags: [Tag]
+  comments(after: String, first: Int, before: String, last: Int, tag: String, username: String): CommentConnection
+  author: Author
+}
+
+type PostConnection {
+  pageInfo: PageInfo!
+  edges: [PostEdge]
+}
+
+type PostEdge {
+  node: Post
+  cursor: String!
+}
+
+type Query {
+  node(id: ID!): Node
+  viewer: User
+}
+
+type Tag implements Node {
+  id: ID!
+  text: String
+}
+
+input ToggleTagOnPostInput {
+  status: Boolean
+  tagId: String
+  postId: String
+  clientMutationId: String!
+}
+
+type ToggleTagOnPostPayload {
+  post: Post
+  clientMutationId: String!
+}
+
+input UpdateCommentInput {
+  id: String!
+  text: String
+  clientMutationId: String!
+}
+
+type UpdateCommentPayload {
+  comment: Comment
+  clientMutationId: String!
+}
+
+input UpdatePostInput {
+  id: String!
+  title: String
+  body: String
+  url_path: String
+  clientMutationId: String!
+}
+
+type UpdatePostPayload {
+  post: Post
+  clientMutationId: String!
+}
+
+input UpdateTagInput {
+  id: String!
+  text: String
+  clientMutationId: String!
+}
+
+type UpdateTagPayload {
+  tag: Tag
+  clientMutationId: String!
+}
+
+type User implements Node {
+  id: ID!
+  email: String
+  name: String
+  username: String
+  tags: [Tag]
+  posts(after: String, first: Int, before: String, last: Int, tag: String, username: String): PostConnection
+}
