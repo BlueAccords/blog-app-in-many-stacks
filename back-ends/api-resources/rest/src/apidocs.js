@@ -21,7 +21,6 @@
  * @apiError (General Errors 400) {String[]} [errors.general] General errors that can be used for any purpose.
  */
 
-
 /****************************************************** Authentication ***********************************/
 /**
  * @api {post} /sign-in Authenticate a user
@@ -77,10 +76,14 @@
  * @api {get} /users/:id Get user
  * @apiName Get user
  * @apiGroup User
+ * @apiDescription - Returns a 404 error if a user with <code>id</code> does not exist
  *
- * @apiUse userResponse
  * @apiUse generalErrors
- * @apiUse protected
+ *
+ * @apiSuccess (Success Response 200) {Object} user
+ * @apiSuccess (Success Response 200) {Integer} user.id
+ * @apiSuccess (Success Response 200) {string} user.name
+ * @apiSuccess (Success Response 200) {string} user.username
  *
  * @apiParam {String} id The user ID
  */
@@ -161,6 +164,7 @@
  * @api {get} /users/:user_id/posts Get posts by user
  * @apiName Get all posts by user
  * @apiGroup Posts
+ * @apiDescription - Returns a 404 error if a user with <code>user_id</code> does not exist
  *
  * @apiUse postsResponse
  * @apiUse generalErrors
@@ -172,6 +176,7 @@
  * @api {get} /tags/:tag_id/posts Get posts by tag
  * @apiName Get all posts by tag
  * @apiGroup Posts
+ * @apiDescription - Returns a 404 error if a tag with <code>tag_id</code> doesn't exist
  *
  * @apiUse postsResponse
  * @apiUse generalErrors
@@ -198,6 +203,7 @@
  * @api {get} /posts/:id Get post
  * @apiName Get post
  * @apiGroup Posts
+ * @apiDescription - Returns a 404 error if a post with <code>id</code> is not found
  *
  * @apiUse postResponse
  * @apiUse generalErrors
@@ -238,6 +244,8 @@
  *
  * @apiSuccess (Success Response 200) {Object} comment
  * @apiSuccess (Success Response 200) {Integer} comment.id
+ * @apiSuccess (Success Response 200) {Integer} comment.user_id
+ * @apiSuccess (Success Response 200) {Integer} comment.post_id
  * @apiSuccess (Success Response 200) {string} comment.text
  * @apiSuccess (Success Response 200) {string} comment.date_created
  * @apiSuccess (Success Response 200) {string} comment.date_modified
@@ -248,6 +256,8 @@
  *
  * @apiSuccess (Success Response 200) {Object[]} comments
  * @apiSuccess (Success Response 200) {Object} comments
+ * @apiSuccess (Success Response 200) {Integer} comments.user_id
+ * @apiSuccess (Success Response 200) {Integer} comments.post_id
  * @apiSuccess (Success Response 200) {Integer} comments.id
  * @apiSuccess (Success Response 200) {string} comments.text
  * @apiSuccess (Success Response 200) {string} comments.date_created
@@ -286,6 +296,8 @@
  * @apiUse generalErrors
  *
  * @apiParam {String} post_id The post id
+ *
+ * @apiDescription - Returns a 404 error if a post with <code>post_id</code> is not found
  */
 
 /**
@@ -369,6 +381,7 @@
  * @api {get} /posts/:post_id/tags Get tags by post
  * @apiName Get tags by post
  * @apiGroup Tags
+ * @apiDescription - Returns a 404 error if a post with <code>post_id</code> is not found
  *
  * @apiUse tagsResponse
  * @apiUse generalErrors
@@ -380,6 +393,7 @@
  * @api {get} /tags/:id Delete tag
  * @apiName Delete tag
  * @apiGroup Tags
+ * @apiDescription - Only a site admin can delete a tag once it's been created. No need to implement now.
  *
  * @apiUse successfulDeletion
  * @apiUse generalErrors
@@ -392,6 +406,7 @@
  * @api {put} /tags/:id Update tag
  * @apiName Update tag
  * @apiGroup Tags
+ * @apiDescription - Only a site admin can update a tag once it's been created. No need to implement now.
  *
  * @apiUse tagResponse
  * @apiUse tagFieldErrors
@@ -409,6 +424,7 @@
  * @api {get} /posts?url_path=:url_path Get post by url_path
  * @apiName Get post by url_path
  * @apiGroup Search
+ * @apiDescription - Returns a 404 error if a post with the url_path is not found
  *
  * @apiParam {String} url_path The unique url_path for the post you want to find
  *
@@ -420,6 +436,7 @@
  * @api {get} /tags/?text=:text Get tag by text
  * @apiName Get tag by text
  * @apiGroup Search
+ * @apiDescription - Returns a 404 error if a tag wit the tag text is not found.
  *
  * @apiParam {String} text The text
  *
@@ -431,11 +448,26 @@
  * @api {get} /users/?username=:username Get user by username
  * @apiName Get user by username
  * @apiGroup Search
+ * @apiDescription - Returns a 404 error if a user with the username is not found
  *
  * @apiParam {String} username The username
  *
  * @apiSuccess (Success Response 200) {Object} user
  * @apiSuccess (Success Response 200) {Integer} user.id
  *
+ * @apiUse generalErrors
+ */
+
+/****************************************************** ADHOC ***********************************/
+/**
+ * @api {get} /toggle-tag-on-post Toggle tag on post
+ * @apiName Get post by url_path
+ * @apiGroup Adhoc
+ *
+ * @apiParam {integer} post_id The ID of the post
+ * @apiParam {integer} tag_id The ID of the tag
+ * @apiParam {boolean} status The desired end result for the tag being or not being on a post
+ *
+ * @apiUse postResponse
  * @apiUse generalErrors
  */
