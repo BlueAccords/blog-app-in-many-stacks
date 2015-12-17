@@ -1,12 +1,12 @@
 import User from '../models/User';
 import tagType from './tag-type';
+import authorType from './author-type';
 import commentConnectionDefinitions from '../connection-definitions/comment-connection-definitions';
 import Comment from '../models/Comment';
 
 
 import {
   GraphQLObjectType,
-  GraphQLObject,
   GraphQLString,
   GraphQLList,
 } from 'graphql';
@@ -56,11 +56,11 @@ let postType = new GraphQLObjectType({
       },
     },
     author: {
-      type: GraphQLString,
+      type: authorType,
       resolve: function(post) {
         return User.findOne({_id: post._author})
-				.exec((err, user) => { return user; })
-				.then((user) => { return user._id; });
+        //.exec((err, user) => { return user; })
+				.then((user) => { return user; });
       },
     },
   },

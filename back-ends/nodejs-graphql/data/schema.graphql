@@ -1,7 +1,14 @@
+type Author {
+  id: ID!
+  email: String
+  name: String
+  username: String
+}
+
 type Comment implements Node {
   id: ID!
   text: String
-  author: String
+  author: Author
   post: String
 }
 
@@ -108,10 +115,11 @@ type PageInfo {
 type Post implements Node {
   id: ID!
   title: String
+  url_path: String
   body: String
   tags: [Tag]
   comments(after: String, first: Int, before: String, last: Int, tag: String, username: String): CommentConnection
-  author: String
+  author: Author
 }
 
 type PostConnection {
@@ -161,6 +169,7 @@ input UpdatePostInput {
   id: String!
   title: String
   body: String
+  url_path: String
   clientMutationId: String!
 }
 
