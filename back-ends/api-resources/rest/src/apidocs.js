@@ -76,6 +76,7 @@
  * @api {get} /users/:id Get user
  * @apiName Get user
  * @apiGroup User
+ * @apiDescription - Returns a 404 error if a user with <code>id</code> does not exist
  *
  * @apiUse generalErrors
  *
