@@ -34,7 +34,7 @@ let PostSchema = new mongoose.Schema({
 });
 
 // Setting up virtuals to match the API spec
-PostSchema.virtual('author_id').get(function() {
+PostSchema.virtual('user_id').get(function() {
   return this._author;
 });
 
