@@ -104,18 +104,8 @@ module.exports.update = (req, res) => {
   return permissionsErrorResponse(res);
 };
 
-// since tags don't have author id's, should anyone be able to delete them?
+// Only admins can delete tags.
+// TODO: Implement this later once we actually have a notion of site admins
 module.exports.delete = (req, res) => {
-  return Tag.findById(req.params.tag_id)
-  .then(tag => {
-    return tag.remove();
-  })
-  .then(tagID => {
-    res.json({
-      deleted_id: req.params.tag_id,
-    });
-  })
-  .catch((err) => {
-    generalErrorResponse(res);
-  });
+  return permissionsErrorResponse(res);
 };
