@@ -2,7 +2,7 @@
 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import config from '../../config';
+import config from '../../config/application';
 import User from './../models/User';
 import { generalErrorResponse, permissionsErrorResponse } from '../utils/error-factory';
 
