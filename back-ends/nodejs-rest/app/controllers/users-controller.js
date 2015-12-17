@@ -4,7 +4,6 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import config from '../../config';
 import User from './../models/User';
-import Post from './../models/Post';
 
 module.exports.authenticate = (req, res) => {
   User.findOne({
@@ -23,6 +22,11 @@ module.exports.authenticate = (req, res) => {
           });
 
           res.json({
+            user: {
+              name: user.name,
+              email: user.email,
+              username: user.username,
+            },
             token: token,
           });
         } else {
