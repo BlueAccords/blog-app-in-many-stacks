@@ -32,6 +32,12 @@ let PostSchema = new mongoose.Schema({
   }],
 }, {
   timestamps: true,
+  toObject: { virtuals: true },
+  toJSON: { virtuals: true },
 });
 
+// Setting up virtuals to match the API spec
+PostSchema.virtual('author_id').get(function() {
+  return this._author;
+});
 module.exports = mongoose.model('Post', PostSchema);

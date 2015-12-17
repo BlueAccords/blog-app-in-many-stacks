@@ -25,7 +25,16 @@ let CommentSchema = new mongoose.Schema({
   },
 },{
   timestamps: true,
-}
-);
+  toObject: { virtuals: true },
+  toJSON: { virtuals: true },
+});
+
+CommentSchema.virtual('post_id').get(function() {
+  return this._post;
+});
+
+CommentSchema.virtual('author_id').get(function() {
+  return this._author;
+});
 
 module.exports = mongoose.model('Comment', CommentSchema);
