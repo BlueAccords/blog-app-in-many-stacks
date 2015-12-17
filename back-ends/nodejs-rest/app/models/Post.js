@@ -26,10 +26,7 @@ let PostSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  tags: [{
-    text: String,
-    tag_id: mongoose.Schema.Types.ObjectId,
-  }],
+  _tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
 }, {
   timestamps: true,
   toObject: { virtuals: true },
@@ -39,5 +36,9 @@ let PostSchema = new mongoose.Schema({
 // Setting up virtuals to match the API spec
 PostSchema.virtual('author_id').get(function() {
   return this._author;
+});
+
+PostSchema.virtual('tags').get(function() {
+  return this._tags;
 });
 module.exports = mongoose.model('Post', PostSchema);

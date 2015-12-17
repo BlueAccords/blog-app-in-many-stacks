@@ -15,7 +15,7 @@ module.exports.create = (req, res) => {
     title: req.body.post.title,
     body: req.body.post.body,
     _author: req.user._id,
-    tags: [],
+    _tags: [],
     date_created: now,
     date_modified: now,
   })
@@ -79,7 +79,6 @@ module.exports.update = (req, res) => {
       post.title = req.body.post.title || post.title;
       post.body = req.body.post.body || post.body;
       post._author = post.user_id;
-      post.tags = post.tags || [];
       post.date_created = post.date_created;
       post.date_modified = new Date();
 
