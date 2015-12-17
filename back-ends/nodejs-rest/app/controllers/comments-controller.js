@@ -1,6 +1,7 @@
 'use strict';
 
 import Comment from './../models/Comment';
+import { generalErrorResponse } from '../utils/error-factory';
 
 module.exports.update = (req, res) => {
   Comment.findById(req.params.id)
@@ -21,6 +22,9 @@ module.exports.update = (req, res) => {
     res.json({
       comment: updatedComment,
     });
+  })
+  .catch((err) => {
+    generalErrorResponse(res, 'Something went wrong');
   });
 };
 
@@ -41,6 +45,9 @@ module.exports.delete = (req, res) => {
     res.json({
       deleted_id: deletedID,
     });
+  })
+  .catch((err) => {
+    generalErrorResponse(res, 'Something went wrong');
   });
 };
 
@@ -52,6 +59,9 @@ module.exports.commentsByPost = (req, res) => {
     res.json({
       comments: comments,
     });
+  })
+  .catch((err) => {
+    generalErrorResponse(res, 'Something went wrong');
   });
 };
 
@@ -65,6 +75,9 @@ module.exports.create = (req, res) => {
     res.json({
       comment: comment,
     });
+  })
+  .catch((err) => {
+    generalErrorResponse(res, 'Something went wrong');
   });
 };
 

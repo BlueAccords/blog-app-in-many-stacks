@@ -3,6 +3,7 @@
 import Tag from './../models/Tag';
 import Post from './../models/Post';
 import * as _ from 'lodash';
+import { generalErrorResponse } from '../utils/error-factory';
 
 module.exports.index = (req, res) => {
   if (req.query.text) {
@@ -13,6 +14,9 @@ module.exports.index = (req, res) => {
       res.json({
         tag: tag,
       });
+    })
+    .catch((err) => {
+      generalErrorResponse(res, 'Something went wrong');
     });
   } else {
     Tag.find()
@@ -20,6 +24,9 @@ module.exports.index = (req, res) => {
       res.json({
         tags: tags,
       });
+    })
+    .catch((err) => {
+      generalErrorResponse(res, 'Something went wrong');
     });
   }
 };
@@ -62,6 +69,9 @@ module.exports.create = (req, res) => {
         post: post,
       });
     });
+  })
+  .catch((err) => {
+    generalErrorResponse(res, 'Something went wrong');
   });
 };
 
@@ -71,6 +81,9 @@ module.exports.getTagsByPost = (req, res) => {
     res.json({
       tags: post.tags,
     });
+  })
+  .catch((err) => {
+    generalErrorResponse(res, 'Something went wrong');
   });
 };
 
@@ -90,6 +103,9 @@ module.exports.update = (req, res) => {
     res.json({
       tag: tag,
     });
+  })
+  .catch((err) => {
+    generalErrorResponse(res, 'Something went wrong');
   });
 };
 
@@ -107,5 +123,8 @@ module.exports.delete = (req, res) => {
     res.json({
       deleted_id: tagID,
     });
+  })
+  .catch((err) => {
+    generalErrorResponse(res, 'Something went wrong');
   });
 };

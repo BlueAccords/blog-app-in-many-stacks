@@ -154,6 +154,9 @@ module.exports.delete = (req, res) => {
         msg: 'You are not authorized to do that.',
       });
     }
+  })
+  .catch((err) => {
+    generalErrorResponse(res, 'Something went wrong');
   });
 };
 
@@ -170,6 +173,9 @@ module.exports.index = (req, res) => {
           username: user.username,
         },
       });
+    })
+    .catch((err) => {
+      generalErrorResponse(res, 'Something went wrong');
     });
   } else {
     res.json({

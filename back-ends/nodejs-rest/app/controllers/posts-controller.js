@@ -2,6 +2,7 @@
 
 import Post from './../models/Post';
 import Tag from './../models/Tag';
+import { generalErrorResponse } from '../utils/error-factory';
 
 // Create a new post
 module.exports.create = (req, res) => {
@@ -22,6 +23,9 @@ module.exports.create = (req, res) => {
     res.json({
       post: post,
     });
+  })
+  .catch((err) => {
+    generalErrorResponse(res, 'Something went wrong');
   });
 };
 
@@ -42,6 +46,9 @@ module.exports.index = (req, res) => {
       res.json({
         posts: posts,
       });
+    })
+    .catch((err) => {
+      generalErrorResponse(res, 'Something went wrong');
     });
   }
 };
@@ -53,11 +60,9 @@ module.exports.show = (req, res) => {
     res.json({
       post: post,
     });
-  },
-  err => {
-    res.json({
-      error: err,
-    });
+  })
+  .catch((err) => {
+    generalErrorResponse(res, 'Something went wrong');
   });
 };
 
@@ -91,6 +96,9 @@ module.exports.update = (req, res) => {
     res.json({
       post: post,
     });
+  })
+  .catch((err) => {
+    generalErrorResponse(res, 'Something went wrong');
   });
 };
 
@@ -114,6 +122,9 @@ module.exports.delete = (req, res) => {
     res.json({
       deleted_id: deleted_id,
     });
+  })
+  .catch((err) => {
+    generalErrorResponse(res, 'Something went wrong');
   });
 };
 
@@ -123,6 +134,9 @@ module.exports.getPostsByTag = (req, res) => {
     res.json({
       posts: tag.posts,
     });
+  })
+  .catch((err) => {
+    generalErrorResponse(res, 'Something went wrong');
   });
 };
 
@@ -134,5 +148,8 @@ module.exports.postsByUser = (req, res) => {
     res.json({
       posts: list,
     });
+  })
+  .catch((err) => {
+    generalErrorResponse(res, 'Something went wrong');
   });
 };
