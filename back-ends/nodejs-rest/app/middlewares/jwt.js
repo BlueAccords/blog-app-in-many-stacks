@@ -1,6 +1,6 @@
 'use strict';
 
-import config from '../../config';
+import config from '../../config/application';
 import jwt from 'jsonwebtoken';
 import url from 'url';
 import User from '../models/User';
