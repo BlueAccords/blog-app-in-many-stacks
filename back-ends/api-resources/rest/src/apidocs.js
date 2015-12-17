@@ -238,6 +238,8 @@
  *
  * @apiSuccess (Success Response 200) {Object} comment
  * @apiSuccess (Success Response 200) {Integer} comment.id
+ * @apiSuccess (Success Response 200) {Integer} comment.user_id
+ * @apiSuccess (Success Response 200) {Integer} comment.post_id
  * @apiSuccess (Success Response 200) {string} comment.text
  * @apiSuccess (Success Response 200) {string} comment.date_created
  * @apiSuccess (Success Response 200) {string} comment.date_modified
@@ -248,6 +250,8 @@
  *
  * @apiSuccess (Success Response 200) {Object[]} comments
  * @apiSuccess (Success Response 200) {Object} comments
+ * @apiSuccess (Success Response 200) {Integer} comments.user_id
+ * @apiSuccess (Success Response 200) {Integer} comments.post_id
  * @apiSuccess (Success Response 200) {Integer} comments.id
  * @apiSuccess (Success Response 200) {string} comments.text
  * @apiSuccess (Success Response 200) {string} comments.date_created
