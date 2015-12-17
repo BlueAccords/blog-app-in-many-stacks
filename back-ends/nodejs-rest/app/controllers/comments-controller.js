@@ -24,7 +24,7 @@ module.exports.update = (req, res) => {
     });
   })
   .catch((err) => {
-    generalErrorResponse(res, 'Something went wrong');
+    generalErrorResponse(res);
   });
 };
 
@@ -47,7 +47,7 @@ module.exports.delete = (req, res) => {
     });
   })
   .catch((err) => {
-    generalErrorResponse(res, 'Something went wrong');
+    generalErrorResponse(res);
   });
 };
 
@@ -61,7 +61,7 @@ module.exports.commentsByPost = (req, res) => {
     });
   })
   .catch((err) => {
-    generalErrorResponse(res, 'Something went wrong');
+    generalErrorResponse(res);
   });
 };
 
@@ -77,7 +77,7 @@ module.exports.create = (req, res) => {
     });
   })
   .catch((err) => {
-    generalErrorResponse(res, 'Something went wrong');
+    generalErrorResponse(res);
   });
 };
 

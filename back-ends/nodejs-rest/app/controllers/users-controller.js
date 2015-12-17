@@ -38,7 +38,7 @@ module.exports.authenticate = (req, res) => {
         }
       });
     }
-  })
+  });
 };
 
 module.exports.create = (req, res) => {
@@ -101,7 +101,7 @@ module.exports.get = (req, res, next) => {
     }
   })
   .catch((err) => {
-    generalErrorResponse(res, 'Something went wrong');
+    generalErrorResponse(res);
   });
 };
 
@@ -134,7 +134,7 @@ module.exports.update = (req, res) => {
     });
   })
   .catch((err) => {
-    generalErrorResponse(res, 'Something went wrong');
+    generalErrorResponse(res);
   });
 };
 
@@ -156,7 +156,7 @@ module.exports.delete = (req, res) => {
     }
   })
   .catch((err) => {
-    generalErrorResponse(res, 'Something went wrong');
+    generalErrorResponse(res);
   });
 };
 
@@ -175,7 +175,7 @@ module.exports.index = (req, res) => {
       });
     })
     .catch((err) => {
-      generalErrorResponse(res, 'Something went wrong');
+      generalErrorResponse(res);
     });
   } else {
     res.json({

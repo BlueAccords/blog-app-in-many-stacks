@@ -25,7 +25,7 @@ module.exports.create = (req, res) => {
     });
   })
   .catch((err) => {
-    generalErrorResponse(res, 'Something went wrong');
+    generalErrorResponse(res);
   });
 };
 
@@ -48,7 +48,7 @@ module.exports.index = (req, res) => {
       });
     })
     .catch((err) => {
-      generalErrorResponse(res, 'Something went wrong');
+      generalErrorResponse(res);
     });
   }
 };
@@ -62,7 +62,7 @@ module.exports.show = (req, res) => {
     });
   })
   .catch((err) => {
-    generalErrorResponse(res, 'Something went wrong');
+    generalErrorResponse(res);
   });
 };
 
@@ -98,7 +98,7 @@ module.exports.update = (req, res) => {
     });
   })
   .catch((err) => {
-    generalErrorResponse(res, 'Something went wrong');
+    generalErrorResponse(res);
   });
 };
 
@@ -124,7 +124,7 @@ module.exports.delete = (req, res) => {
     });
   })
   .catch((err) => {
-    generalErrorResponse(res, 'Something went wrong');
+    generalErrorResponse(res);
   });
 };
 
@@ -136,7 +136,7 @@ module.exports.getPostsByTag = (req, res) => {
     });
   })
   .catch((err) => {
-    generalErrorResponse(res, 'Something went wrong');
+    generalErrorResponse(res);
   });
 };
 
@@ -150,6 +150,6 @@ module.exports.postsByUser = (req, res) => {
     });
   })
   .catch((err) => {
-    generalErrorResponse(res, 'Something went wrong');
+    generalErrorResponse(res);
   });
 };
