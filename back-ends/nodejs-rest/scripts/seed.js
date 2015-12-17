@@ -59,6 +59,37 @@ if(process.env.NODE_ENV === 'development') {
     });
   })
 
+  // Tag seeds
+  .then(() => Tag.remove({}))
+  .then(() => {
+    let tag = new Tag({
+      _id: '5672c893dfad0d9fc16ae47f',
+      text: 'cooking-skills',
+    });
+    return tag.save();
+  })
+  .then(() => {
+    let tag = new Tag({
+      _id: '5672c893dfad0d9fc16ae480',
+      text: 'outdoor-skills',
+    });
+    return tag.save();
+  })
+  .then(() => {
+    let tag = new Tag({
+      _id: '5672c893dfad0d9fc16ae481',
+      text: 'plumbing-skills',
+    });
+    return tag.save();
+  })
+  .then(() => {
+    let tag = new Tag({
+      _id: '5672c823dfad0d9fc16ae481',
+      text: 'swag',
+    });
+    return tag.save();
+  })
+
   //Post seeds
   .then(() => Post.remove({}))
   .then(() => {
@@ -68,6 +99,7 @@ if(process.env.NODE_ENV === 'development') {
       body: 'Step 1: heat up water, step 2: put the eggs in the water, step 3: boil for 10 minutes, step 4: run cold water over them',
       _author: '5634d4760066be016bf10c9a', // bruce wayne
       url_path:'how-to-boil-an-egg',
+      tags: ['5672c893dfad0d9fc16ae481', '5672c893dfad0d9fc16ae47f']
     });
     return post.save();
   })
@@ -123,27 +155,6 @@ if(process.env.NODE_ENV === 'development') {
       text: 'Thanks King Bobby, my drain is now flowing like the river Nile',
     });
     return comment.save();
-  })
-
-  // Tag seeds
-  .then(() => Tag.remove({}))
-  .then(() => {
-    let tag = new Tag({
-      text: 'cooking-skills',
-    });
-    return tag.save();
-  })
-  .then(() => {
-    let tag = new Tag({
-      text: 'outdoor-skills',
-    });
-    return tag.save();
-  })
-  .then(() => {
-    let tag = new Tag({
-      text: 'plumbing-skills',
-    });
-    return tag.save();
   })
 
   .then(() => {
