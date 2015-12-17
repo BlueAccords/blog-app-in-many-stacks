@@ -29,6 +29,7 @@
  * @apiGroup Authentication
  *
  * @apiParam {Object} user
+ * @apiParam {integer} user.id
  * @apiParam {string} user.email
  * @apiParam {string} user.password
  */

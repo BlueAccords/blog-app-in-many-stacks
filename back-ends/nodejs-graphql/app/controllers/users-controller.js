@@ -5,10 +5,11 @@ import User from '../models/User';
 import config from '../../config/application';
 
 module.exports.create = function(req, res) {
-  bcrypt.hash(req.body.password, 8, (err, hash) => {
+  bcrypt.hash(req.body.user.password, 8, (err, hash) => {
     let user = new User({
-      name: req.body.name,
-      email: req.body.email,
+      name: req.body.user.name,
+      email: req.body.user.email,
+      username: req.body.user.username,
       password: hash,
     });
 
@@ -18,8 +19,11 @@ module.exports.create = function(req, res) {
         res.json(401, {error: 'A user with this email address already exists'});
       } else {
         res.send({
-          name: user.name,
-          email: user.email,
+          user: {
+            name: user.name,
+            username: user.username,
+            email: user.email,
+          },
         });
       }
     });
@@ -29,7 +33,7 @@ module.exports.create = function(req, res) {
 module.exports.authenticate = function(req, res) {
   // find the user
   User.findOne({
-    email: req.body.email,
+    email: req.body.user.email,
   }, (err, user) => {
 
     if (err) {
@@ -39,7 +43,7 @@ module.exports.authenticate = function(req, res) {
     if (!user) {
       res.json(401, { success: false, message: 'Authentication failed. User not found.' });
     } else if (user) {
-      bcrypt.compare(req.body.password, user.password, (err, result) => {
+      bcrypt.compare(req.body.user.password, user.password, (err, result) => {
         // check if password matches
         if (result !== true) {
           res.json(401, { success: false, message: 'Authentication failed. Wrong password.' });
@@ -53,8 +57,10 @@ module.exports.authenticate = function(req, res) {
 
           // return the information including token as JSON
           res.json({
-            success: true,
-            message: 'Enjoy your token!',
+            user: {
+              email: user.email,
+              name: user.name,
+            },
             token,
           });
         }

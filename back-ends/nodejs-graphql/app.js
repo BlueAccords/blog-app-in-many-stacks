@@ -32,7 +32,7 @@ if(env === 'development') {
 app.use(cors());
 
 // use body parser so we can get info from POST and/or URL parameters
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // This may need to go but allows for better postman usage of graphql requests
 app.use(bodyParser.text({ type: 'application/graphql' }));
@@ -43,7 +43,7 @@ app.use(morgan('dev'));
 app.use('/media', express.static(__dirname + '/media'));
 app.use(require('./app/routes'));
 
-let server = app.listen(process.env.WEB_PORT, function () {
+let server = app.listen(process.env.WEB_PORT, () => {
   let host = server.address().address;
   let port = server.address().port;
 

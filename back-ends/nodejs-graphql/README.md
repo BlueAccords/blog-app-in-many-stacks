@@ -29,3 +29,5 @@ You will need to have mongodb installed.
     npm run seed
 
   If you have issues, drop your database first.
+
+A sample Postman collection is provided at the `blog-app-in-many-stacks/back-ends/api-resources/graphql` directory.
