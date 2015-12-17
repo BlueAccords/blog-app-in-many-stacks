@@ -1,5 +1,6 @@
 import User from '../models/User';
 import Post from '../models/Post';
+import authorType from './author-type';
 
 import {
   GraphQLObjectType,
@@ -23,11 +24,11 @@ let commentType = new GraphQLObjectType({
       resolve: (comment) => comment.text,
     },
     author: {
-      type: GraphQLString,
-      resolve: function(comment) {
-        return User.findOne({_id: comment._author})
-        .exec((err, user) => { return user; })
-        .then((user) => { return user.email; });
+      type: authorType,
+      resolve: function(post) {
+        return User.findOne({_id: post._author})
+        //.exec((err, user) => { return user; })
+				.then((user) => { return user; });
       },
     },
     post: {

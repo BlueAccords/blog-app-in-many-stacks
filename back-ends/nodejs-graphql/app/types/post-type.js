@@ -1,5 +1,6 @@
 import User from '../models/User';
 import tagType from './tag-type';
+import authorType from './author-type';
 import commentConnectionDefinitions from '../connection-definitions/comment-connection-definitions';
 import Comment from '../models/Comment';
 
@@ -55,11 +56,11 @@ let postType = new GraphQLObjectType({
       },
     },
     author: {
-      type: GraphQLString,
+      type: authorType,
       resolve: function(post) {
         return User.findOne({_id: post._author})
-				.exec((err, user) => { return user; })
-				.then((user) => { return user.username; });
+        //.exec((err, user) => { return user; })
+				.then((user) => { return user; });
       },
     },
   },
