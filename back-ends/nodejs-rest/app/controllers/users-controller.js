@@ -12,8 +12,10 @@ module.exports.authenticate = (req, res) => {
   })
   .then(user => {
     if (user === null) {
-      res.json({
-        msg: 'That user does not exist',
+      res.send({
+        errors: {
+          email: 'Invalid email address',
+        },
       });
     } else {
       bcrypt.compare(req.body.user.password, user.password, (err, result) => {
@@ -33,7 +35,9 @@ module.exports.authenticate = (req, res) => {
           });
         } else {
           res.json({
-            msg: 'Incorrect password',
+            errors: {
+              password: 'Incorrect password',
+            },
           });
         }
       });
@@ -88,9 +92,7 @@ module.exports.get = (req, res, next) => {
   return User.findById(the_id)
   .then(user => {
     if (user === null) {
-      res.json({
-        msg: 'This user does not exist',
-      });
+      res.sendStatus(404);
     } else {
       res.json({
         user: {

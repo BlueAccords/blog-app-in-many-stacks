@@ -21,6 +21,10 @@ router.route('/sign-in')
 router.route('/users')
   .post(user.create);
 
+// Read a user
+router.route('/users/:id')
+  .get(user.get);
+
 /**
 * PRIVATE ROUTES
 **/
@@ -30,9 +34,8 @@ router.use(jwtMiddleware);
 router.route('/users')
   .get(user.index);
 
-// Read/Update/Delete a user
+// Update/Delete a user
 router.route('/users/:id')
-  .get(user.get)
   .put(user.update)
   .delete(user.delete);
 

@@ -83,7 +83,7 @@
 		{
 			"id": "0f6d6f1d-b0b4-43e9-14bb-1d09f59278b8",
 			"headers": "",
-			"url": "http://localhost:8000/tags/1/posts",
+			"url": "http://localhost:8000/tags/5672c893dfad0d9fc16ae481/posts",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "GET",
@@ -93,7 +93,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449765205054,
+			"time": 1450370820426,
 			"name": "Get posts by tag",
 			"description": "",
 			"collectionId": "ae28de97-1ecb-fa77-319a-b1149c3d00ed"
@@ -493,8 +493,8 @@
 		},
 		{
 			"id": "b0d6a9f9-4fa4-3f3b-6343-0a2f5581063b",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjcyYTg4ZGU0ZWJiOGQ2N2VlY2Q1NDIiLCJuYW1lIjoiVGVzdCBBY2NvdW50IiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwidXNlcm5hbWUiOiJ0ZXN0dGVzdCIsInBhc3N3b3JkIjoiJDJhJDA4JHMuTjJPYi9RRVFKVmNTSzlYTGhubk91OEpvTnNUYURPanpYZGRLZWhSODNTTmhvTFE0dzllIiwiX192IjowfQ.lwqBWcaQG9MxuOXhPp1g2UgfTXj-yacIJOGm9HWdSWs\n",
-			"url": "http://localhost:8000/users/5672a88de4ebb8d67eecd542",
+			"headers": "",
+			"url": "http://localhost:8000/users/5634d4750066be016bf10c09",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "GET",
@@ -504,7 +504,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1450357504413,
+			"time": 1450372658780,
 			"name": "Get User",
 			"description": "",
 			"collectionId": "ae28de97-1ecb-fa77-319a-b1149c3d00ed"
