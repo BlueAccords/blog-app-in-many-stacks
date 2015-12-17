@@ -9,7 +9,7 @@ module.exports.create = (req, res) => {
   let path = req.body.post.title.toLowerCase().split(' ').join('-');
   let author = req.user.username;
 
-  Post.create({
+  return Post.create({
     url_path: path + '-' + author,
     title: req.body.post.title,
     body: req.body.post.body,
@@ -19,56 +19,56 @@ module.exports.create = (req, res) => {
     date_modified: now,
   })
   .then(post => {
-    res.json({
+    return res.json({
       post: post,
     });
   })
   .catch((err) => {
-    generalErrorResponse(res);
+    return generalErrorResponse(res);
   });
 };
 
 // View a list of all posts
 module.exports.index = (req, res) => {
   if(req.query.url_path) {
-    Post.findOne({
+    return Post.findOne({
       'url_path': req.query.url_path,
     })
     .populate('tags')
     .then(post => {
       if(post) {
-        res.json({
+        return res.json({
           post: post,
         });
       } else {
-        res.sendStatus(404);
+        return res.sendStatus(404);
       }
     });
   } else {
-    Post.find()
+    return Post.find()
     .populate('tags')
     .then(posts => {
-      res.json({
+      return res.json({
         posts: posts,
       });
     })
     .catch((err) => {
-      generalErrorResponse(res);
+      return generalErrorResponse(res);
     });
   }
 };
 
 // Read a post
 module.exports.show = (req, res) => {
-  Post.findById(req.params.id)
+  return Post.findById(req.params.id)
   .populate('tags')
   .then(post => {
-    res.json({
+    return res.json({
       post: post,
     });
   })
   .catch((err) => {
-    generalErrorResponse(res);
+    return generalErrorResponse(res);
   });
 };
 
@@ -78,7 +78,7 @@ module.exports.update = (req, res) => {
   let path = req.body.post.title ?
   req.body.post.title.toLowerCase().split(' ').join('-') + '-' + author : '';
 
-  Post.findById(req.params.id)
+  return Post.findById(req.params.id)
   .populate('tags')
   .then(post => {
     if (String(post._author) === req.user._id) {
@@ -89,69 +89,63 @@ module.exports.update = (req, res) => {
       post.date_created = post.date_created;
       post.date_modified = new Date();
 
-      post.save();
-      // TODO - Fix this. It is currently optimistic and assumes saving is successful
-      return { post: post};
+      return post.save();
     } else {
-      permissionsErrorResponse(res);
+      return permissionsErrorResponse(res);
     }
   })
   .then(post => {
-    res.json({
+    return res.json({
       post: post,
     });
   })
   .catch((err) => {
-    generalErrorResponse(res);
+    return generalErrorResponse(res);
   });
 };
 
 // Delete a post
 module.exports.delete = (req, res) => {
-  Post.findById(req.params.id)
+  return Post.findById(req.params.id)
   .then(post => {
     if(String(post._author) === req.user._id) {
-      let post_id = post._id;
-
-      post.remove();
-      // TODO - Fix this. It is currently optimistic and assumes saving is successful
-      return post_id;
+      return post.remove();
     } else {
-      permissionsErrorResponse(res);
+      return permissionsErrorResponse(res);
     }
   })
-  .then(deleted_id => {
-    res.json({
-      deleted_id: deleted_id,
+  .then(() => {
+    return res.json({
+      deleted_id: req.params.id,
     });
   })
   .catch((err) => {
-    generalErrorResponse(res);
+    return generalErrorResponse(res);
   });
 };
 
 module.exports.getPostsByTag = (req, res) => {
-  Post.find({'tags': req.params.tag_id})
+  return Post.find({'tags': req.params.tag_id})
   .then(posts => {
-    res.json({
+    return res.json({
       posts: posts,
     });
   })
   .catch((err) => {
-    generalErrorResponse(res);
+    return generalErrorResponse(res);
   });
 };
 
 module.exports.postsByUser = (req, res) => {
-  Post.find({
+  return Post.find({
     _author: req.params.user_id,
   })
   .then(list => {
-    res.json({
+    return res.json({
       posts: list,
     });
   })
   .catch((err) => {
-    generalErrorResponse(res);
+    return generalErrorResponse(res);
   });
 };

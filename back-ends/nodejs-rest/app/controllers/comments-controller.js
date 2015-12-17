@@ -4,46 +4,40 @@ import Comment from './../models/Comment';
 import { generalErrorResponse, permissionsErrorResponse } from '../utils/error-factory';
 
 module.exports.update = (req, res) => {
-  Comment.findById(req.params.id)
+  return Comment.findById(req.params.id)
   .then(comment => {
     if (String(comment._author) === req.user._id) {
       comment._author = comment._author;
       comment._post = comment._post;
       comment.text = req.body.comment.text;
 
-      // TODO - Fix this. It is currently optimistic and assumes saving is successful
-      comment.save();
-      return comment;
+      return comment.save();
     } else {
       permissionsErrorResponse(res);
     }
   })
   .then(updatedComment => {
-    res.json({
+    return res.json({
       comment: updatedComment,
     });
   })
   .catch((err) => {
-    generalErrorResponse(res);
+    return generalErrorResponse(res);
   });
 };
 
 module.exports.delete = (req, res) => {
-  Comment.findById(req.params.id)
+  return Comment.findById(req.params.id)
   .then(comment => {
     if (String(comment._author) === req.user._id) {
-      let commentID = comment._author;
-
-      comment.remove();
-      // TODO - Fix this. It is currently optimistic and assumes saving is successful
-      return commentID;
+      return comment.remove();
     } else {
       permissionsErrorResponse(res);
     }
   })
-  .then(deletedID => {
+  .then(() => {
     res.json({
-      deleted_id: deletedID,
+      deleted_id: req.params.id,
     });
   })
   .catch((err) => {
@@ -52,32 +46,32 @@ module.exports.delete = (req, res) => {
 };
 
 module.exports.commentsByPost = (req, res) => {
-  Comment.find({
+  return Comment.find({
     _post: req.params.post_id,
   })
   .then(comments => {
-    res.json({
+    return res.json({
       comments: comments,
     });
   })
   .catch((err) => {
-    generalErrorResponse(res);
+    return generalErrorResponse(res);
   });
 };
 
 module.exports.create = (req, res) => {
-  Comment.create({
+  return Comment.create({
     _author: req.user._id,
     _post: req.params.post_id,
     text: req.body.post.text,
   })
   .then(comment => {
-    res.json({
+    return res.json({
       comment: comment,
     });
   })
   .catch((err) => {
-    generalErrorResponse(res);
+    return generalErrorResponse(res);
   });
 };
 

@@ -7,24 +7,24 @@ import User from './../models/User';
 import { generalErrorResponse, permissionsErrorResponse } from '../utils/error-factory';
 
 module.exports.authenticate = (req, res) => {
-  User.findOne({
+  return User.findOne({
     email: req.body.user.email.toLowerCase(),
   })
   .then(user => {
     if (user === null) {
-      res.send({
+      return res.send({
         errors: {
           email: 'Invalid email address',
         },
       });
     } else {
-      bcrypt.compare(req.body.user.password, user.password, (err, result) => {
+      return bcrypt.compare(req.body.user.password, user.password, (err, result) => {
         if (result) {
           let token = jwt.sign(user, config.jwt.secret, {
             expiresIn: 1440 * 60,
           });
 
-          res.json({
+          return res.json({
             user: {
               id: user.id,
               name: user.name,
@@ -34,7 +34,7 @@ module.exports.authenticate = (req, res) => {
             token: token,
           });
         } else {
-          res.json({
+          return res.json({
             errors: {
               password: 'Incorrect password',
             },
@@ -46,7 +46,7 @@ module.exports.authenticate = (req, res) => {
 };
 
 module.exports.create = (req, res) => {
-  User.find({$or: [
+  return User.find({$or: [
     {username: req.body.user.username.toLowerCase()},
     {email: req.body.user.email.toLowerCase()},
   ]})
@@ -59,11 +59,9 @@ module.exports.create = (req, res) => {
         password: bcrypt.hashSync(req.body.user.password, 8),
       });
 
-      user.save();
-      // TODO - Fix this. It is currently optimistic and assumes saving is successful
-      return user;
+      return user.save();
     } else {
-      res.status(400).json({
+      return res.status(400).json({
         errors: {
           email: 'This Username or Email is already taken.',
         },
@@ -75,7 +73,7 @@ module.exports.create = (req, res) => {
       expiresIn: 1440 * 60,
     });
 
-    res.json({
+    return res.json({
       user: {
         id: user.id,
         name: user.name,
@@ -92,9 +90,9 @@ module.exports.get = (req, res, next) => {
   return User.findById(the_id)
   .then(user => {
     if (user === null) {
-      res.sendStatus(404);
+      return res.sendStatus(404);
     } else {
-      res.json({
+      return res.json({
         user: {
           id: user.id,
           name: user.name,
@@ -105,13 +103,13 @@ module.exports.get = (req, res, next) => {
     }
   })
   .catch((err) => {
-    generalErrorResponse(res);
+    return generalErrorResponse(res);
   });
 };
 
 module.exports.update = (req, res) => {
   let the_id = req.params.id;
-  User.findOne({'_id': the_id})
+  return User.findOne({'_id': the_id})
   .then((user) => {
     if (req.user._id === the_id) {
       user.name = req.body.user.name || user.name;
@@ -119,15 +117,13 @@ module.exports.update = (req, res) => {
       user.username = req.body.user.username || user.username;
       user.password = req.body.user.password || user.password;
 
-      user.save();
-      // TODO - Fix this. It is currently optimistic and assumes saving is successful
-      return user;
+      return user.save();
     } else {
-      permissionsErrorResponse(res);
+      return permissionsErrorResponse(res);
     }
   })
   .then(user => {
-    res.json({
+    return res.json({
       user: {
         name: user.name,
         email: user.email,
@@ -136,48 +132,53 @@ module.exports.update = (req, res) => {
     });
   })
   .catch((err) => {
-    generalErrorResponse(res);
+    return generalErrorResponse(res);
   });
 };
 
 module.exports.delete = (req, res) => {
   let the_id = req.params.id;
 
-  User.findById(the_id)
+  return User.findById(the_id)
   .then(user => {
     if (req.user._id === the_id) {
-      user.remove();
-
-      res.json({
-        deleted_id: the_id,
-      });
+      return user.remove();
     } else {
       permissionsErrorResponse(res);
     }
   })
+  .then(() => {
+    return res.json({
+      deleted_id: the_id,
+    });
+  })
   .catch((err) => {
-    generalErrorResponse(res);
+    return generalErrorResponse(res);
   });
 };
 
 module.exports.index = (req, res) => {
   if(req.query.username) {
-    User.findOne({
+    return User.findOne({
       username: req.query.username,
     })
     .then(user => {
-      res.json({
-        user: {
-          name: user.name,
-          email: user.email,
-          username: user.username,
-        },
-      });
+      if(user) {
+        return res.json({
+          user: {
+            name: user.name,
+            email: user.email,
+            username: user.username,
+          },
+        });
+      } else {
+        return res.sendStatus(400);
+      }
     })
     .catch((err) => {
-      generalErrorResponse(res);
+      return generalErrorResponse(res);
     });
   } else {
-    generalErrorResponse(res, 'No user found');
+    return res.sendStatus(400);
   }
 };

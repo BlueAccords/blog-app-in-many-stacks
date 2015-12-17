@@ -4,37 +4,38 @@ import Tag from './../models/Tag';
 import Post from './../models/Post';
 import * as _ from 'lodash';
 import { generalErrorResponse, permissionsErrorResponse } from '../utils/error-factory';
+import { Promise } from 'es6-promise';
 
 module.exports.index = (req, res) => {
   if (req.query.text) {
     // Responding to search queries
-    Tag.findOne({
+    return Tag.findOne({
       text: req.query.text,
     })
     .then(tag => {
-      res.json({
+      return res.json({
         tag: tag,
       });
     })
     .catch((err) => {
-      generalErrorResponse(res);
+      return generalErrorResponse(res);
     });
   } else {
     // Responding to no search query
-    Tag.find()
+    return Tag.find()
     .then(tags => {
-      res.json({
+      return res.json({
         tags: tags,
       });
     })
     .catch((err) => {
-      generalErrorResponse(res);
+      return generalErrorResponse(res);
     });
   }
 };
 
 module.exports.create = (req, res) => {
-  Tag.findOne({
+  return Tag.findOne({
     text: req.body.tag.text,
   })
   .then(tag => {
@@ -42,16 +43,16 @@ module.exports.create = (req, res) => {
       let newtag = new Tag({
         text: req.body.tag.text,
       });
-      newtag.save();
-
-      // TODO - Fix this. It is currently optimistic and assumes saving is successful
-      return newtag;
+      return newtag.save();
     } else {
-      return tag;
+      return Promise.resolve(tag);
     }
   })
+  .then(tag => {
+    return res.json({tag: tag});
+  })
   .catch((err) => {
-    generalErrorResponse(res);
+    return generalErrorResponse(res);
   });
 };
 
@@ -86,52 +87,32 @@ module.exports.toggleTagOnPost = (req, res) => {
 };
 
 module.exports.getTagsByPost = (req, res) => {
-  Post.findById(req.params.post_id)
+  return Post.findById(req.params.post_id)
   .then(post => {
-    res.json({
+    return res.json({
       tags: post.tags,
     });
   })
   .catch((err) => {
-    generalErrorResponse(res);
+    return generalErrorResponse(res);
   });
 };
 
-// since tags don't have author id's, should anyone be able to update them?
-// TODO - Think through this. Thinking only admins of a site will be able
-// To update tags. For everyone else, tags shouldn't be updatable. Just removable.
+// Only admins can update tags.
+// TODO: Implement this later once we actually have a notion of site admins
 module.exports.update = (req, res) => {
-  Tag.findById(req.params.tag_id)
-  .then(tag => {
-    tag.text = req.body.tag.text;
-    tag.save();
-
-    // TODO - Fix this. It is currently optimistic and assumes saving is successful
-    return tag;
-  })
-  .then(tag => {
-    res.json({
-      tag: tag,
-    });
-  })
-  .catch((err) => {
-    generalErrorResponse(res);
-  });
+  return permissionsErrorResponse(res);
 };
 
 // since tags don't have author id's, should anyone be able to delete them?
 module.exports.delete = (req, res) => {
-  Tag.findById(req.params.tag_id)
+  return Tag.findById(req.params.tag_id)
   .then(tag => {
-    let tagID  = tag._id;
-
-    tag.remove();
-    // TODO - Fix this. It is currently optimistic and assumes saving is successful
-    return tagID;
+    return tag.remove();
   })
   .then(tagID => {
     res.json({
-      deleted_id: tagID,
+      deleted_id: req.params.tag_id,
     });
   })
   .catch((err) => {
