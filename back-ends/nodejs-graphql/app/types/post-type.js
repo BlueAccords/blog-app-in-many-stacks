@@ -6,6 +6,7 @@ import Comment from '../models/Comment';
 
 import {
   GraphQLObjectType,
+  GraphQLObject,
   GraphQLString,
   GraphQLList,
 } from 'graphql';
@@ -59,7 +60,7 @@ let postType = new GraphQLObjectType({
       resolve: function(post) {
         return User.findOne({_id: post._author})
 				.exec((err, user) => { return user; })
-				.then((user) => { return user.username; });
+				.then((user) => { return user._id; });
       },
     },
   },
