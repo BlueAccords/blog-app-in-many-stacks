@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import config from '../../config';
 import User from './../models/User';
+import { filterBadObjectId } from '../utils/functions';
 
 module.exports.authenticate = (req, res) => {
   User.findOne({
@@ -37,7 +38,7 @@ module.exports.authenticate = (req, res) => {
         }
       });
     }
-  });
+  })
 };
 
 module.exports.create = (req, res) => {
@@ -82,8 +83,10 @@ module.exports.create = (req, res) => {
 
 module.exports.get = (req, res) => {
   let the_id = req.params.id;
-
-  User.findById(the_id)
+  filterBadObjectId(the_id)
+  .then(() => {
+    return User.findById(the_id);
+  })
   .then(user => {
     if (user === null) {
       res.json({
@@ -99,7 +102,8 @@ module.exports.get = (req, res) => {
         },
       });
     }
-  });
+  })
+  .end();
 };
 
 module.exports.update = (req, res) => {
