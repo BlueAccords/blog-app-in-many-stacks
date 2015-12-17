@@ -30,7 +30,7 @@ Contributions are welcome. More details coming soon.
 
 ### Patrons
 
-The development of these examples have been [funded by Chiedo Labs](https://labs.chie.do).  
+The development of these examples has been funded primarily by [Chiedo Labs](https://labs.chie.do) with support from the following [patrons](PATRONS.md).
 
 ### License
 
