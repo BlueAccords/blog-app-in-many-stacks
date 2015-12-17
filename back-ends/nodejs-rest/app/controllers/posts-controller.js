@@ -43,6 +43,7 @@ module.exports.index = (req, res) => {
     });
   } else {
     Post.find()
+    .populate('tags')
     .then(posts => {
       res.json({
         posts: posts,
