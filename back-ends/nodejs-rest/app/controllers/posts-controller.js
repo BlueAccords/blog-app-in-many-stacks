@@ -1,7 +1,6 @@
 'use strict';
 
 import Post from './../models/Post';
-import Tag from './../models/Tag';
 import { generalErrorResponse, permissionsErrorResponse } from '../utils/error-factory';
 
 // Create a new post
@@ -37,9 +36,13 @@ module.exports.index = (req, res) => {
     })
     .populate('tags')
     .then(post => {
-      res.json({
-        post: post,
-      });
+      if(post) {
+        res.json({
+          post: post,
+        });
+      } else {
+        res.sendStatus(404);
+      }
     });
   } else {
     Post.find()
@@ -128,10 +131,10 @@ module.exports.delete = (req, res) => {
 };
 
 module.exports.getPostsByTag = (req, res) => {
-  Tag.findById(req.params.tag_id)
-  .then(tag => {
+  Post.find({'tags': req.params.tag_id})
+  .then(posts => {
     res.json({
-      posts: tag.posts,
+      posts: posts,
     });
   })
   .catch((err) => {
