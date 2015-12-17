@@ -439,3 +439,17 @@
  *
  * @apiUse generalErrors
  */
+
+/****************************************************** ADHOC ***********************************/
+/**
+ * @api {get} /toggle-tag-on-post Toggle tag on post
+ * @apiName Get post by url_path
+ * @apiGroup Adhoc
+ *
+ * @apiParam {integer} post_id The ID of the post
+ * @apiParam {integer} tag_id The ID of the tag
+ * @apiParam {boolean} status The desired end result for the tag being or not being on a post
+ *
+ * @apiUse postResponse
+ * @apiUse generalErrors
+ */
