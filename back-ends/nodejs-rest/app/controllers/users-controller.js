@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import config from '../../config';
 import User from './../models/User';
-import { filterBadObjectId } from '../utils/functions';
+import { generalErrorResponse } from '../utils/error-factory';
 
 module.exports.authenticate = (req, res) => {
   User.findOne({
@@ -99,6 +99,9 @@ module.exports.get = (req, res, next) => {
         },
       });
     }
+  })
+  .catch((err) => {
+    generalErrorResponse(res, 'Something went wrong');
   });
 };
 
@@ -129,6 +132,9 @@ module.exports.update = (req, res) => {
         username: user.username,
       },
     });
+  })
+  .catch((err) => {
+    generalErrorResponse(res, 'Something went wrong');
   });
 };
 
