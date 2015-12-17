@@ -4,15 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # Easy API JSON responces
-  # acts_as_api 
-
   # We don't want blank spaces in our Usernames since they are not URL friendly 
-  validates :username, format: { without: /\s/, :message=>"can not contain blank spaces." }  
-
-  # api_accessible :name_only do |template|
-  #   template.add :name
-  # end
-
-
+  validates :username, format: { without: /\s/, :message=>"can not contain blank spaces." } 
+  validates :username, presence: true
+  validates :email, presence: true
+  validates_uniqueness_of :username 
 end
