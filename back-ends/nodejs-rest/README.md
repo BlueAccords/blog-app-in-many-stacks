@@ -23,6 +23,8 @@ Check the console for errors.
 
 A sample Postman collection is provided at the `blog-app-in-many-stacks/back-ends/api-resources/rest` directory.
 
+To get seed data run. `npm run seed`
+
 ### Documentation
 
 To view the api documentation, start the app and visit /api-documentation.
