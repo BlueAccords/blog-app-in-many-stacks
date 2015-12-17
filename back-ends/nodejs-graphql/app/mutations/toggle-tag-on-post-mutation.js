@@ -43,9 +43,9 @@ let addTagToPostMutation = new mutationWithClientMutationId({
       .then((post) => {
         return Tag.findOne({_id: tagId}).then((tag) => {
           if(args.status) {
-            post.tags = _.unique([...post.tags, tag._id], (x) => x.id);
+            post.tags = _.unique([...post.tags, tag._id], (x) => x._id);
           } else {
-            post.tags = _.filter(post.tags, (x) => x.id === tagId);
+            post.tags = _.filter(post.tags, (x) => x._id === tagId);
           }
 
           return post.save();
