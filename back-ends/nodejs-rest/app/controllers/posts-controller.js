@@ -15,7 +15,7 @@ module.exports.create = (req, res) => {
     title: req.body.post.title,
     body: req.body.post.body,
     _author: req.user._id,
-    _tags: [],
+    tags: [],
     date_created: now,
     date_modified: now,
   })
@@ -35,6 +35,7 @@ module.exports.index = (req, res) => {
     Post.findOne({
       'url_path': req.query.url_path,
     })
+    .populate('tags')
     .then(post => {
       res.json({
         post: post,
@@ -56,6 +57,7 @@ module.exports.index = (req, res) => {
 // Read a post
 module.exports.show = (req, res) => {
   Post.findById(req.params.id)
+  .populate('tags')
   .then(post => {
     res.json({
       post: post,
@@ -73,6 +75,7 @@ module.exports.update = (req, res) => {
   req.body.post.title.toLowerCase().split(' ').join('-') + '-' + author : '';
 
   Post.findById(req.params.id)
+  .populate('tags')
   .then(post => {
     if (String(post._author) === req.user._id) {
       post.url_path = path || post.url_path;

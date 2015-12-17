@@ -79,4 +79,8 @@ router.route('/tags/:id')
 router.route('/tags')
   .get(tag.index);
 
+// Toggle tag on a post
+router.route('/toggle-tag-on-post')
+  .post(tag.toggleTagOnPost);
+
 module.exports = router;

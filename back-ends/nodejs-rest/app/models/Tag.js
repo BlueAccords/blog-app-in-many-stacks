@@ -12,8 +12,16 @@ let TagSchema = new mongoose.Schema({
     lowercase: true,
     trim: true,
   },
+}, {
+  toObject: { virtuals: true },
+  toJSON: { virtuals: true },
 });
 
 TagSchema.index({text: 1}, { unique: true });
+
+// Setting up virtuals to match the API spec
+TagSchema.virtual('id').get(function() {
+  return this._id;
+});
 
 module.exports = mongoose.model('Tag', TagSchema);

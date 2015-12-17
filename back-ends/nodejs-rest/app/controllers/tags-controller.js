@@ -7,6 +7,7 @@ import { generalErrorResponse, permissionsErrorResponse } from '../utils/error-f
 
 module.exports.index = (req, res) => {
   if (req.query.text) {
+    // Responding to search queries
     Tag.findOne({
       text: req.query.text,
     })
@@ -19,6 +20,7 @@ module.exports.index = (req, res) => {
       generalErrorResponse(res);
     });
   } else {
+    // Responding to no search query
     Tag.find()
     .then(tags => {
       res.json({
@@ -48,24 +50,32 @@ module.exports.create = (req, res) => {
       return tag;
     }
   })
+  .catch((err) => {
+    generalErrorResponse(res);
+  });
+};
+
+module.exports.toggleTagOnPost = (req, res) => {
+  return Tag.findOne({
+    _id: req.body.tag_id,
+  })
   .then(tag => {
-    Post.findById(req.params.post_id)
+    return Post.findById(req.body.post_id)
     .then(post => {
-      tag.posts = _.unique([...tag.posts, {
-        _id: post._id,
-        url_path: post.url_path,
-        title: post.title,
-        body: post.body,
-        user_id: post.user_id,
-        date_modified: post.date_modified,
-        date_created: post.date_created,
-      }], (x) => x.url_path);
-      tag.save();
+      if(req.user._id === String(post._author)) {
+        if(req.body.status) {
+          post.tags = _.unique([...post.tags, tag._id], (x) => String(x));
+        } else {
+          post.tags = _.filter(post.tags, (x) => x.id === req.body.tag_id);
+        }
+        return post.save();
 
-      post.tags = _.unique([...post.tags, tag], (x) => x.text);
-      post.save();
-
-      res.json({
+      } else {
+        return permissionsErrorResponse(res);
+      }
+    })
+    .then((post) => {
+      return res.json({
         post: post,
       });
     });
