@@ -1,6 +1,9 @@
 'use strict';
 
 import mongoose from 'mongoose';
+import Promise from 'bluebird';
+
+mongoose.Promise = Promise;
 
 let TagSchema = new mongoose.Schema({
   text: {

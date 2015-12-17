@@ -81,12 +81,9 @@ module.exports.create = (req, res) => {
   });
 };
 
-module.exports.get = (req, res) => {
+module.exports.get = (req, res, next) => {
   let the_id = req.params.id;
-  filterBadObjectId(the_id)
-  .then(() => {
-    return User.findById(the_id);
-  })
+  return User.findById(the_id)
   .then(user => {
     if (user === null) {
       res.json({
@@ -102,8 +99,7 @@ module.exports.get = (req, res) => {
         },
       });
     }
-  })
-  .end();
+  });
 };
 
 module.exports.update = (req, res) => {
