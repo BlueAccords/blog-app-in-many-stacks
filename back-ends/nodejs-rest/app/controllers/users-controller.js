@@ -8,7 +8,7 @@ import Post from './../models/Post';
 
 module.exports.authenticate = (req, res) => {
   User.findOne({
-    email: req.body.email.toLowerCase(),
+    email: req.body.user.email.toLowerCase(),
   })
   .then(user => {
     if (user === null) {
@@ -16,14 +16,14 @@ module.exports.authenticate = (req, res) => {
         msg: 'That user does not exist',
       });
     } else {
-      bcrypt.compare(req.body.password, user.password, (err, result) => {
+      bcrypt.compare(req.body.user.password, user.password, (err, result) => {
         if (result) {
           let token = jwt.sign(user, config.jwt.secret, {
             expiresIn: 1440 * 60,
           });
 
           res.json({
-            token: 'Bearer ' + token,
+            token: token,
           });
         } else {
           res.json({
@@ -37,16 +37,16 @@ module.exports.authenticate = (req, res) => {
 
 module.exports.create = (req, res) => {
   User.find({$or: [
-    {username: req.body.username.toLowerCase()},
-    {email: req.body.email.toLowerCase()},
+    {username: req.body.user.username.toLowerCase()},
+    {email: req.body.user.email.toLowerCase()},
   ]})
   .then(users => {
     if (users.length === 0) {
       let user = new User({
-        name: req.body.name,
-        email: req.body.email,
-        username: req.body.username,
-        password: bcrypt.hashSync(req.body.password, 8),
+        name: req.body.user.name,
+        email: req.body.user.email,
+        username: req.body.user.username,
+        password: bcrypt.hashSync(req.body.user.password, 8),
       });
 
       user.save();
@@ -68,16 +68,13 @@ module.exports.create = (req, res) => {
         email: user.email,
         username: user.username,
       },
-      token: 'Bearer ' + token,
+      token: token,
     });
   });
 };
 
 module.exports.get = (req, res) => {
   let the_id = req.params.id;
-
-  console.log(the_id);
-  console.log(req.user._id);
 
   User.findById(the_id)
   .then(user => {
@@ -103,10 +100,10 @@ module.exports.update = (req, res) => {
   User.findById(the_id)
   .then(user => {
     if (req.user._id === the_id) {
-      user.name = req.body.name || user.name,
-      user.email = req.body.email || user.email,
-      user.username = req.body.username || user.username,
-      user.password = req.body.password || user.password,
+      user.name = req.body.user.name || user.name,
+      user.email = req.body.user.email || user.email,
+      user.username = req.body.user.username || user.username,
+      user.password = req.body.user.password || user.password,
 
       user.save();
       return user;
@@ -146,18 +143,7 @@ module.exports.delete = (req, res) => {
   });
 };
 
-module.exports.postsWritten = (req, res) => {
-  Post.find({
-    user_id: req.params.user_id,
-  })
-  .then(list => {
-    res.json({
-      posts: list,
-    });
-  });
-};
-
-module.exports.search = (req, res) => {
+module.exports.index = (req, res) => {
   if(req.query.username) {
     User.findOne({
       username: req.query.username,

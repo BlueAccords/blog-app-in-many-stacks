@@ -8,7 +8,7 @@ module.exports.update = (req, res) => {
     if (String(comment.user_id) === req.user._id) {
       comment.user_id = comment.user_id;
       comment.post_id = comment.post_id;
-      comment.text = req.body.text;
+      comment.text = req.body.comment.text;
 
       comment.save();
       return comment;
@@ -18,7 +18,7 @@ module.exports.update = (req, res) => {
   })
   .then(updatedComment => {
     res.json({
-      updated_comment: updatedComment,
+      comment: updatedComment,
     });
   });
 };
@@ -41,3 +41,28 @@ module.exports.delete = (req, res) => {
     });
   });
 };
+
+module.exports.commentsByPost = (req, res) => {
+  Comment.find({
+    post_id: req.params.post_id,
+  })
+  .then(comments => {
+    res.json({
+      comments: comments,
+    });
+  });
+};
+
+module.exports.create = (req, res) => {
+  Comment.create({
+    user_id: req.user._id,
+    post_id: req.params.post_id,
+    text: req.body.post.text,
+  })
+  .then(comment => {
+    res.json({
+      comment: comment,
+    });
+  });
+};
+

@@ -28,7 +28,7 @@ router.route('/users')
 // Jwt auth middleware
 router.use(jwtMiddleware);
 router.route('/users')
-  .get(user.search);
+  .get(user.index);
 
 // Read/Update/Delete a user
 router.route('/users/:id')
@@ -38,23 +38,23 @@ router.route('/users/:id')
 
 // List all posts by user
 router.route('/users/:user_id/posts')
-  .get(user.postsWritten);
+  .get(post.postsByUser);
 
 // Create and list posts
 router.route('/posts')
   .post(post.create)
-  .get(post.all);
+  .get(post.index);
 
 // Read/Update/Delete post
 router.route('/posts/:id')
-  .get(post.read)
+  .get(post.show)
   .put(post.update)
   .delete(post.delete);
 
 // Create and list comments.
 router.route('/posts/:post_id/comments')
-  .post(post.newComment)
-  .get(post.allComments);
+  .post(comment.create)
+  .get(comment.commentsByPost);
 
 // Update/Delete comment.
 router.route('/comments/:id')
@@ -64,11 +64,11 @@ router.route('/comments/:id')
 // Create/Read tags
 router.route('/posts/:post_id/tags')
   .post(tag.create)
-  .get(tag.list);
+  .get(tag.getTagsByPost);
 
 // Get posts by tag
 router.route('/tag/:tag_id/posts')
-  .get(tag.getPosts);
+  .get(post.getPostsByTag);
 
 // Update/Delete tags
 router.route('/tags/:id')
@@ -77,6 +77,6 @@ router.route('/tags/:id')
 
 // List all tags
 router.route('/tags')
-  .get(tag.all);
+  .get(tag.index);
 
 module.exports = router;

@@ -4,7 +4,7 @@ import Tag from './../models/Tag';
 import Post from './../models/Post';
 import * as _ from 'lodash';
 
-module.exports.all = (req, res) => {
+module.exports.index = (req, res) => {
   if (req.query.text) {
     Tag.findOne({
       text: req.query.text,
@@ -26,12 +26,12 @@ module.exports.all = (req, res) => {
 
 module.exports.create = (req, res) => {
   Tag.findOne({
-    text: req.body.text,
+    text: req.body.tag.text,
   })
   .then(tag => {
     if (tag === null) {
       let newtag = new Tag({
-        text: req.body.text,
+        text: req.body.tag.text,
       });
       newtag.save();
 
@@ -64,37 +64,29 @@ module.exports.create = (req, res) => {
   });
 };
 
-module.exports.list = (req, res) => {
+module.exports.getTagsByPost = (req, res) => {
   Post.findById(req.params.post_id)
   .then(post => {
     res.json({
-      post_tags: post.tags,
-    });
-  });
-};
-
-module.exports.getPosts = (req, res) => {
-  Tag.findById(req.params.tag_id)
-  .then(tag => {
-    console.log(tag);
-    res.json({
-      posts: tag.posts,
+      tags: post.tags,
     });
   });
 };
 
 // since tags don't have author id's, should anyone be able to update them?
+// TODO - Think through this. Thinking only admins of a site will be able
+// To update tags. For everyone else, tags shouldn't be updatable. Just removable.
 module.exports.update = (req, res) => {
   Tag.findById(req.params.tag_id)
   .then(tag => {
-    tag.text = req.body.text;
+    tag.text = req.body.tag.text;
     tag.save();
 
     return tag;
   })
   .then(tag => {
     res.json({
-      updated_tag: tag,
+      tag: tag,
     });
   });
 };
