@@ -23,6 +23,7 @@ module.exports.authenticate = (req, res) => {
 
           res.json({
             user: {
+              id: user.id,
               name: user.name,
               email: user.email,
               username: user.username,
@@ -69,6 +70,7 @@ module.exports.create = (req, res) => {
 
     res.json({
       user: {
+        id: user.id,
         name: user.name,
         email: user.email,
         username: user.username,
@@ -90,6 +92,7 @@ module.exports.get = (req, res) => {
     } else {
       res.json({
         user: {
+          id: user.id,
           name: user.name,
           email: user.email,
           username: user.username,
@@ -101,14 +104,13 @@ module.exports.get = (req, res) => {
 
 module.exports.update = (req, res) => {
   let the_id = req.params.id;
-
-  User.findById(the_id)
-  .then(user => {
+  User.findOne({'_id': the_id})
+  .then((user) => {
     if (req.user._id === the_id) {
-      user.name = req.body.user.name || user.name,
-      user.email = req.body.user.email || user.email,
-      user.username = req.body.user.username || user.username,
-      user.password = req.body.user.password || user.password,
+      user.name = req.body.user.name || user.name;
+      user.email = req.body.user.email || user.email;
+      user.username = req.body.user.username || user.username;
+      user.password = req.body.user.password || user.password;
 
       user.save();
       // TODO - Fix this. It is currently optimistic and assumes saving is successful
