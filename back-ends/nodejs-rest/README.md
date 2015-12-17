@@ -27,8 +27,4 @@ To get seed data run. `npm run seed`
 
 ### Documentation
 
-To view the api documentation, start the app and visit /api-documentation.
-
-The api documentation style is with apidocs.js. Please be sure to follow the apidocs.js standards when editing controllers.
-
-To update the documentation run `npm run update-docs`
+You may view the REST API documentation that this back-end should conform to [Here](https://rawgit.com/chiedolabs/blog-app-in-many-stacks/master/back-ends/api-resources/rest/build/index.html).
