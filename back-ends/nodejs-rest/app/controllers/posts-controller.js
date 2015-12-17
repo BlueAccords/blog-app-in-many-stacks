@@ -14,7 +14,7 @@ module.exports.create = (req, res) => {
     url_path: path + '-' + author,
     title: req.body.post.title,
     body: req.body.post.body,
-    user_id: req.user._id,
+    _author: req.user._id,
     tags: [],
     date_created: now,
     date_modified: now,
@@ -74,11 +74,11 @@ module.exports.update = (req, res) => {
 
   Post.findById(req.params.id)
   .then(post => {
-    if (String(post.user_id) === req.user._id) {
+    if (String(post._author) === req.user._id) {
       post.url_path = path || post.url_path;
       post.title = req.body.post.title || post.title;
       post.body = req.body.post.body || post.body;
-      post.user_id = post.user_id;
+      post._author = post.user_id;
       post.tags = post.tags || [];
       post.date_created = post.date_created;
       post.date_modified = new Date();
@@ -104,7 +104,7 @@ module.exports.update = (req, res) => {
 module.exports.delete = (req, res) => {
   Post.findById(req.params.id)
   .then(post => {
-    if(String(post.user_id) === req.user._id) {
+    if(String(post._author) === req.user._id) {
       let post_id = post._id;
 
       post.remove();
@@ -138,7 +138,7 @@ module.exports.getPostsByTag = (req, res) => {
 
 module.exports.postsByUser = (req, res) => {
   Post.find({
-    user_id: req.params.user_id,
+    _author: req.params.user_id,
   })
   .then(list => {
     res.json({

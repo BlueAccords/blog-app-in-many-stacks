@@ -21,7 +21,7 @@ let PostSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  user_id: {
+  _author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
@@ -30,16 +30,8 @@ let PostSchema = new mongoose.Schema({
     text: String,
     tag_id: mongoose.Schema.Types.ObjectId,
   }],
-  date_created: {
-    type: Date,
-    required: true,
-    trim: true,
-  },
-  date_modified: {
-    type: Date,
-    required: true,
-    trim: true,
-  },
+}, {
+  timestamps: true,
 });
 
 module.exports = mongoose.model('Post', PostSchema);

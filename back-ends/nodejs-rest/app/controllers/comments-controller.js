@@ -6,9 +6,9 @@ import { generalErrorResponse, permissionsErrorResponse } from '../utils/error-f
 module.exports.update = (req, res) => {
   Comment.findById(req.params.id)
   .then(comment => {
-    if (String(comment.user_id) === req.user._id) {
-      comment.user_id = comment.user_id;
-      comment.post_id = comment.post_id;
+    if (String(comment._author) === req.user._id) {
+      comment._author = comment._author;
+      comment._post = comment._post;
       comment.text = req.body.comment.text;
 
       // TODO - Fix this. It is currently optimistic and assumes saving is successful
@@ -31,8 +31,8 @@ module.exports.update = (req, res) => {
 module.exports.delete = (req, res) => {
   Comment.findById(req.params.id)
   .then(comment => {
-    if (String(comment.user_id) === req.user._id) {
-      let commentID = comment._id;
+    if (String(comment._author) === req.user._id) {
+      let commentID = comment._author;
 
       comment.remove();
       // TODO - Fix this. It is currently optimistic and assumes saving is successful
@@ -53,7 +53,7 @@ module.exports.delete = (req, res) => {
 
 module.exports.commentsByPost = (req, res) => {
   Comment.find({
-    post_id: req.params.post_id,
+    _post: req.params.post_id,
   })
   .then(comments => {
     res.json({
@@ -67,8 +67,8 @@ module.exports.commentsByPost = (req, res) => {
 
 module.exports.create = (req, res) => {
   Comment.create({
-    user_id: req.user._id,
-    post_id: req.params.post_id,
+    _author: req.user._id,
+    _post: req.params.post_id,
     text: req.body.post.text,
   })
   .then(comment => {
