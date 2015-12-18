@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import config from '../../config/application';
 import User from './../models/User';
-import { generalErrorResponse, permissionsErrorResponse } from '../utils/error-factory';
+import { generalErrorResponse, permissionsErrorResponse, unauthorizedErrorResponse } from '../utils/error-factory';
 
 module.exports.authenticate = (req, res) => {
   return User.findOne({
@@ -109,18 +109,23 @@ module.exports.get = (req, res, next) => {
 
 module.exports.update = (req, res) => {
   let the_id = req.params.id;
+
+  if (!req.currentUser) {
+    return unauthorizedErrorResponse(res);
+  }
+
+  if (String(req.currentUser._id) !== the_id) {
+    return permissionsErrorResponse(res);
+  }
+
   return User.findOne({'_id': the_id})
   .then((user) => {
-    if (req.user._id === the_id) {
-      user.name = req.body.user.name || user.name;
-      user.email = req.body.user.email || user.email;
-      user.username = req.body.user.username || user.username;
-      user.password = req.body.user.password || user.password;
+    user.name = req.body.user.name || user.name;
+    user.email = req.body.user.email || user.email;
+    user.username = req.body.user.username || user.username;
+    user.password = req.body.user.password || user.password;
 
-      return user.save();
-    } else {
-      return permissionsErrorResponse(res);
-    }
+    return user.save();
   })
   .then(user => {
     return res.json({
@@ -139,9 +144,17 @@ module.exports.update = (req, res) => {
 module.exports.delete = (req, res) => {
   let the_id = req.params.id;
 
+  if (!req.currentUser) {
+    return unauthorizedErrorResponse(res);
+  }
+
+  if (String(req.currentUser._id) !== the_id) {
+    return permissionsErrorResponse(res);
+  }
+
   return User.findById(the_id)
   .then(user => {
-    if (req.user._id === the_id) {
+    if (String(req.currentUser._id) === the_id) {
       return user.remove();
     } else {
       permissionsErrorResponse(res);

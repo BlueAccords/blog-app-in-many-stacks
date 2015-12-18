@@ -1,12 +1,16 @@
 'use strict';
 
 import Comment from './../models/Comment';
-import { generalErrorResponse, permissionsErrorResponse } from '../utils/error-factory';
+import { generalErrorResponse, permissionsErrorResponse, unauthorizedErrorResponse } from '../utils/error-factory';
 
 module.exports.update = (req, res) => {
+  if (!req.currentUser) {
+    return unauthorizedErrorResponse(res);
+  }
+
   return Comment.findById(req.params.id)
   .then(comment => {
-    if (String(comment._author) === req.user._id) {
+    if (String(comment._author) === String(req.currentUser._id)) {
       comment._author = comment._author;
       comment._post = comment._post;
       comment.text = req.body.comment.text;
@@ -27,9 +31,13 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.delete = (req, res) => {
+  if (!req.currentUser) {
+    return unauthorizedErrorResponse(res);
+  }
+
   return Comment.findById(req.params.id)
   .then(comment => {
-    if (String(comment._author) === req.user._id) {
+    if (String(comment._author) === String(req.currentUser._id)) {
       return comment.remove();
     } else {
       permissionsErrorResponse(res);
@@ -60,8 +68,12 @@ module.exports.commentsByPost = (req, res) => {
 };
 
 module.exports.create = (req, res) => {
+  if (!req.currentUser) {
+    return unauthorizedErrorResponse(res);
+  }
+
   return Comment.create({
-    _author: req.user._id,
+    _author: String(req.currentUser._id),
     _post: req.params.post_id,
     text: req.body.comment.text,
   })

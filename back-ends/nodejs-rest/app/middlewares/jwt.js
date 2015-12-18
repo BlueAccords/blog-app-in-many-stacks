@@ -2,47 +2,38 @@
 
 import config from '../../config/application';
 import jwt from 'jsonwebtoken';
-import url from 'url';
 import User from '../models/User';
 
 module.exports = function(req, res, next) {
-  let token;
-  // check header or url parameters or post parameters for token
-  try {
-    token = req.query.token || req.headers['authorization'].split(' ')[1];
+  let token = null;
 
-  } catch(err) {
-    token = null;
+  // check header or url parameters or post parameters for token
+  if(req.query.token) {
+    token = req.query.token;
+  } else if(req.headers['authorization']) {
+    let x = req.headers['authorization'].split(' ');
+    if(x[0] === 'Bearer:') {
+      token = x[1];
+    }
   }
   // decode token
-  // verifies secret and checks exp
   if(token) {
     // Turn off expiration of tokens if development
     let ignoreExpiration;
     process.env.NODE_ENV === 'development' ? ignoreExpiration = true : ignoreExpiration = false;
-    jwt.verify(token, config.jwt.secret, {ignoreExpiration: ignoreExpiration}, (err, decoded) => {
-      if('graphql' === url.parse(req.url).pathname.replace('/','')) {
-        // We want the graphql endpoint to still be accessed but just with no data.
-        User.findOne({'_id': decoded._id})
+
+    return jwt.verify(token, config.jwt.secret, {ignoreExpiration: ignoreExpiration}, (err, decoded) => {
+      if(decoded) {
+        return User.findOne({'_id': decoded._id})
         .then((user) => {
-          req.user = user;
-          next();
-        });
-      } else if (err) {
-        return res.status(401).json({
-          errors: {
-            unauthorized: ['Failed to authenticate token.'],
-          },
+          req.currentUser = user;
+          return next();
         });
       } else {
-        // if everything is good, attach the decoded user data to the request so it can be
-        // used later on.
-        req.user = decoded;
-        next();
+        return next();
       }
     });
   } else {
-    next();
+    return next();
   }
 };
-

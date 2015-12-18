@@ -1,19 +1,23 @@
 'use strict';
 
 import Post from './../models/Post';
-import { generalErrorResponse, permissionsErrorResponse } from '../utils/error-factory';
+import { generalErrorResponse, permissionsErrorResponse, unauthorizedErrorResponse } from '../utils/error-factory';
 
 // Create a new post
 module.exports.create = (req, res) => {
+  if (!req.currentUser) {
+    return unauthorizedErrorResponse(res);
+  }
+
   let now = new Date();
   let path = req.body.post.title.toLowerCase().split(' ').join('-');
-  let author = req.user.username;
+  let author = req.currentUser.username;
 
   return Post.create({
     url_path: path + '-' + author,
     title: req.body.post.title,
     body: req.body.post.body,
-    _author: req.user._id,
+    _author: req.currentUser._id,
     tags: [],
     date_created: now,
     date_modified: now,
@@ -77,14 +81,18 @@ module.exports.show = (req, res) => {
 
 // Update a post
 module.exports.update = (req, res) => {
-  let author = req.user.username;
+  if (!req.currentUser) {
+    return unauthorizedErrorResponse(res);
+  }
+
+  let author = req.currentUser.username;
   let path = req.body.post.url_path ?
   req.body.post.url_path.toLowerCase().split(' ').join('-') + '-' + author : '';
 
   return Post.findById(req.params.id)
   .populate('tags')
   .then(post => {
-    if (String(post._author) === req.user._id) {
+    if (String(post._author) === req.currentUser._id) {
       post.url_path = path || post.url_path;
       post.title = req.body.post.title || post.title;
       post.body = req.body.post.body || post.body;
@@ -109,9 +117,13 @@ module.exports.update = (req, res) => {
 
 // Delete a post
 module.exports.delete = (req, res) => {
+  if (!req.currentUser) {
+    return unauthorizedErrorResponse(res);
+  }
+
   return Post.findById(req.params.id)
   .then(post => {
-    if(String(post._author) === req.user._id) {
+    if(String(post._author) === String(req.currentUser._id)) {
       return post.remove();
     } else {
       return permissionsErrorResponse(res);

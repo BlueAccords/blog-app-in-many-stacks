@@ -3,7 +3,7 @@
 import Tag from './../models/Tag';
 import Post from './../models/Post';
 import * as _ from 'lodash';
-import { generalErrorResponse, permissionsErrorResponse } from '../utils/error-factory';
+import { generalErrorResponse, permissionsErrorResponse, unauthorizedErrorResponse } from '../utils/error-factory';
 import { Promise } from 'es6-promise';
 
 module.exports.index = (req, res) => {
@@ -35,6 +35,10 @@ module.exports.index = (req, res) => {
 };
 
 module.exports.create = (req, res) => {
+  if (!req.currentUser) {
+    return unauthorizedErrorResponse(res);
+  }
+
   return Tag.findOne({
     text: req.body.tag.text,
   })
@@ -57,13 +61,17 @@ module.exports.create = (req, res) => {
 };
 
 module.exports.toggleTagOnPost = (req, res) => {
+  if (!req.currentUser) {
+    return unauthorizedErrorResponse(res);
+  }
+
   return Tag.findOne({
     _id: req.body.tag_id,
   })
   .then(tag => {
     return Post.findById(req.body.post_id)
     .then(post => {
-      if(req.user._id === String(post._author)) {
+      if(String(req.currentUser._id) === String(post._author)) {
         if(req.body.status) {
           post.tags = _.unique([...post.tags, tag._id], (x) => String(x));
         } else {
