@@ -1,8 +1,8 @@
-import postType from '../types/post-type';
 import Post from '../models/Post';
 import Comment from '../models/Comment';
-import commentType from '../types/comment-type';
+import postType from '../types/post-type';
 import {Promise} from 'es6-promise';
+import { commentEdge } from '../connection-definitions/comment-connection-definitions';
 
 import {
   GraphQLNonNull,
@@ -11,6 +11,7 @@ import {
 
 import {
   mutationWithClientMutationId,
+  cursorForObjectInConnection,
   fromGlobalId,
 } from 'graphql-relay';
 
@@ -22,20 +23,32 @@ let createCommentMutation = new mutationWithClientMutationId({
     text: {type: new GraphQLNonNull(GraphQLString)},
   },
   outputFields: {
-    comment: {
-      type: commentType,
-      resolve: (data) => {
-        return Comment.findOne({'_id': data.commentId})
-        .then((comment) => comment);
-      },
-    },
     post: {
       type: postType,
       resolve: (data) => {
         return Post.findOne({'_id': data.postId})
-          .then((post) => {
-            return post;
+        .then((post) => post);
+      },
+    },
+    commentEdge: {
+      type: commentEdge,
+      resolve: (data) => {
+        let commentId = data.commentId;
+
+        return Comment.find({'_post': data.postId})
+        .then((comments) => {
+          let comment;
+          comments.forEach((tmpComment) => {
+            if(tmpComment._id.toString() === commentId.toString()) {
+              comment = tmpComment;
+            }
           });
+
+          return {
+            cursor: cursorForObjectInConnection(comments, comment),
+            node: comment,
+          };
+        });
       },
     },
   },

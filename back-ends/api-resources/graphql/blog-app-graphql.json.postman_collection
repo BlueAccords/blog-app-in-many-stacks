@@ -120,7 +120,7 @@
 		},
 		{
 			"id": "1a7c66d8-4819-ed09-63b3-0a20352e708d",
-			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJuYW1lIjoiQnJ1Y2UgV2F5bmUiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJwYXNzd29yZCI6IiQyYSQwOCQ1UFBSMi9CTlptNUVpaWNSN01YM2ZPQlRpOC9LLktVU1lxUU4wdlJEd1ZSYlgzMHdrM1BwcSIsIl9fdiI6MH0.HB1FEcA2KJEzO7OYZM0MbGiZbTqOLGi5YpGrPkkJDQ4\n",
+			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJuYW1lIjoiQnJ1Y2UgV2F5bmUiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJwYXNzd29yZCI6IiQyYSQwOCRxbHQxOG1YZFgvaUZUeXlDOTVBRU4uRXRRbEl4R25OdDNIdXVjbjhEeDBYSjRPcmhLaEhCVyIsIl9fdiI6MH0.EG67JKfOiHfvKQpgIfbSWWmnbzIxLVyaPwV090ciIFg\n",
 			"url": "http://localhost:8000/graphql",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -131,12 +131,12 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1450450655692,
+			"time": 1450466412951,
 			"name": "Create comment",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
 			"responses": [],
-			"rawModeData": "mutation {\n    createComment (\n        input: {clientMutationId: \"abc\", postId:\"UG9zdDo1NjY5Y2M3OGZmOWYyMTJjNDgxZTIwOGQ=\", text: \"The dog was at the door\"}\n    ) {\n        clientMutationId,\n        comment{\n        id,\n        text\n}       \n        }\n}"
+			"rawModeData": "mutation {\n    createComment (\n        input: {clientMutationId: \"abc\", postId:\"UG9zdDo1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjMDk=\", text: \"The dog was at the door\"}\n    ) {\n        clientMutationId,\n        post{\n            id,\n            title\n        },\n        commentEdge {\n            cursor,\n            node {\n                id,\n                text,\n            }\n        }\n    }\n}"
 		},
 		{
 			"id": "1d9f5d5b-0740-b72f-9230-2305925ea206",
@@ -180,7 +180,7 @@
 		},
 		{
 			"id": "5ad83a93-7628-c54d-f597-07298d2f862a",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJuYW1lIjoiQnJ1Y2UgV2F5bmUiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJwYXNzd29yZCI6IiQyYSQwOCQ1UFBSMi9CTlptNUVpaWNSN01YM2ZPQlRpOC9LLktVU1lxUU4wdlJEd1ZSYlgzMHdrM1BwcSIsIl9fdiI6MH0.HB1FEcA2KJEzO7OYZM0MbGiZbTqOLGi5YpGrPkkJDQ4\nContent-Type: application/graphql\n",
+			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEyLTE4VDE4OjIyOjQxLjI5NloiLCJjcmVhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJuYW1lIjoiQm9iIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwidXNlcm5hbWUiOiJ0ZXN0IiwicGFzc3dvcmQiOiIkMmEkMDgkNkhxN1lidUllT1ExMU1xV2NRT0U4T0VnQmw1cVc4ZHRWTVRRc2oxTTZXNEFHUUJyNlVaV0siLCJfX3YiOjB9.iF7jDFyAnw-rzfpPdMit2GXs1BAjyb8RGy0GNJ34_zM\nContent-Type: application/graphql\n",
 			"url": "http://localhost:8000/graphql",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -191,7 +191,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1450462879943,
+			"time": 1450463665127,
 			"name": "Delete user",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
@@ -284,7 +284,7 @@
 		},
 		{
 			"id": "bb5e55f3-93f6-ef59-56f2-c9d50f71c015",
-			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJuYW1lIjoiQnJ1Y2UgV2F5bmUiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJwYXNzd29yZCI6IiQyYSQwOCRZODBvUHlBUTZGdE1URTJFY2REcXZPVGV0VnFQTThka0Faa001b3EydG1SNUFna2V1N0ZqNiIsIl9fdiI6MH0.lLFiVl_A3O24NMs5DIf9S_HyxM69KEWNkJ3qpWYz-EQ\n",
+			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEyLTE4VDE4OjIyOjQxLjI5NloiLCJjcmVhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJuYW1lIjoiQm9iIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwidXNlcm5hbWUiOiJ0ZXN0IiwicGFzc3dvcmQiOiIkMmEkMDgkNkhxN1lidUllT1ExMU1xV2NRT0U4T0VnQmw1cVc4ZHRWTVRRc2oxTTZXNEFHUUJyNlVaV0siLCJfX3YiOjB9.iF7jDFyAnw-rzfpPdMit2GXs1BAjyb8RGy0GNJ34_zM\n",
 			"url": "http://localhost:8000/graphql",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -295,7 +295,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1450462303634,
+			"time": 1450463657202,
 			"name": "Update user",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
