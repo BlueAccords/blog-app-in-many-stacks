@@ -171,12 +171,12 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1450450812317,
+			"time": 1450466729913,
 			"name": "Delete comment",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
 			"responses": [],
-			"rawModeData": "mutation {\n    deleteComment(\n        input: {clientMutationId: \"abc\", id: \"Q29tbWVudDo1NjM0ZDQ3NjAwNjdiZTAxNmJmMTljOWU=\"}\n    ) {\n        clientMutationId,\n        id,\n        viewer {\n         email\n        }\n    }\n}"
+			"rawModeData": "mutation {\n    deleteComment(\n        input: {clientMutationId: \"abc\", id: \"Q29tbWVudDo1Njc0NWQ4ZTBhOGIwOWQ4MDQzOGZkYmQ=\"}\n    ) {\n        clientMutationId,\n        id,\n        post {\n         title\n        }\n    }\n}"
 		},
 		{
 			"id": "5ad83a93-7628-c54d-f597-07298d2f862a",
