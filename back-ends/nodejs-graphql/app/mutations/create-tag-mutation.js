@@ -1,5 +1,5 @@
 import Tag from '../models/Tag';
-import tagType from '../types/tag-type';
+import userType from '../types/user-type';
 import { Promise } from 'es6-promise';
 
 import {
@@ -18,11 +18,10 @@ let createTagMutation = new mutationWithClientMutationId({
     text: {type: new GraphQLNonNull(GraphQLString)},
   },
   outputFields: {
-    tag: {
-      type: tagType,
+    viewer: {
+      type: userType,
       resolve: (data) => {
-        return Tag.findOne({'_id': data.tagId})
-        .then((tag) => tag);
+        return data.user;
       },
     },
   },

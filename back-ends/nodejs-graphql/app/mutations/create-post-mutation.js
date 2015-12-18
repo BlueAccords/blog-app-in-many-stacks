@@ -31,7 +31,7 @@ let createPostMutation = new mutationWithClientMutationId({
       type: postEdge,
       resolve: (data) => {
         let postId = data.postId;
-        return Post.find({'_id': data.postId})
+        return Post.find()
         .then((posts) => {
           let post;
           posts.forEach((tmpPost) => {
