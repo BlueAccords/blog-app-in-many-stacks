@@ -29,6 +29,8 @@ ESLint will handle most of the style and conventions of the project.
 
 A sample Postman collection is provided [here](../api-resources/rest/blog-app-rest.json.postman_collection) that you can import and use for testing the API.
 
+If you get errors with the Postman requests, you will likely need to sign in via postman and use the token you recieve in the headers of the requests you are attempting to make.
+
 ### Documentation
 
 You may view the REST API documentation that this back-end should conform to [here](https://rawgit.com/chiedolabs/blog-app-in-many-stacks/master/back-ends/api-resources/rest/build/index.html).
