@@ -8,10 +8,16 @@ class PostsController < BaseController
 
   # @description GET /posts   
   # @return {Object} posts - JSON Object of the Post 
-  # @param {string} Authorization - Authentication token. Format is'Bearer: tokenvalue' and is required.
+  # @param {String} url_path - Searches for a particular post with url_path
+  # @param {String} Authorization - Authentication token. Format is'Bearer: tokenvalue' and is required.
   def index
-    @posts = Post.all 
-    'posts/index'
+    if !params[:url_path].blank?
+      @post = Post.where(:url_path => params[:url_path])
+      render 'posts/show'
+    else 
+      @posts = Post.all 
+      'posts/index'
+    end 
   end
 
   # @description POST /posts   
@@ -46,6 +52,7 @@ class PostsController < BaseController
   # @return {Object} posts - JSON Object of the Post 
   # @param {String} user_id - The user's id  
   def get_post_by_user
+    puts params[:user_id]
     @posts = Post.where(:user_id => params[:user_id])
     render 'posts/index'
   end

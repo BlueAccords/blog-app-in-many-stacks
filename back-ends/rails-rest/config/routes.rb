@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}
     devise_scope :user do
       post 'sign-in', to: 'sessions#create'
+    #  get '/users/?username=:username', to: 'registrations#get_user_by_username'
       # SIGN OUT # This should be done with Front-End / Simply remove the token from the client
       delete 'users/:id', to: 'registrations#destroy'
       put 'users/:id', to: 'registrations#update'
@@ -25,7 +26,6 @@ Rails.application.routes.draw do
     match '/users/:user_id/posts', :to => 'posts#get_post_by_user', via: :get  
     match '/posts/:id', :to => 'posts#update', via: :put
     match '/posts/:id', :to => 'posts#destroy', via: :delete
-    
   end 
 
 end
