@@ -32,3 +32,5 @@ In a isolated project outside of this Blog app repo though, the schema.json and 
 
 ## Testing
 A sample Postman collection is provided [here](../api-resources/graphql/blog-app-graphql.json.postman_collection) that you can use to test the API.
+
+If you get errors with the Postman requests, you will likely need to sign in via postman and use the token you recieve in the headers of the requests you are attempting to make.
