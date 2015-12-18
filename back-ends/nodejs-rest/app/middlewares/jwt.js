@@ -29,7 +29,11 @@ module.exports = function(req, res, next) {
           next();
         });
       } else if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token.' });
+        return res.status(401).json({
+          errors: {
+            unauthorized: ['Failed to authenticate token.'],
+          },
+        });
       } else {
         // if everything is good, attach the decoded user data to the request so it can be
         // used later on.
