@@ -22,7 +22,7 @@ module.exports = function(req, res, next) {
     let ignoreExpiration;
     process.env.NODE_ENV === 'development' ? ignoreExpiration = true : ignoreExpiration = false;
 
-    jwt.verify(token, config.jwt.secret, {ignoreExpiration: ignoreExpiration}, (err, decoded) => {
+    return jwt.verify(token, config.jwt.secret, {ignoreExpiration: ignoreExpiration}, (err, decoded) => {
       if(decoded) {
         return User.findOne({'_id': decoded._id})
         .then((user) => {
@@ -37,3 +37,4 @@ module.exports = function(req, res, next) {
     return next();
   }
 };
+
