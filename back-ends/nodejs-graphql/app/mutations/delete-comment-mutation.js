@@ -1,5 +1,6 @@
 import Comment from '../models/Comment';
-import userType from '../types/user-type';
+import Post from '../models/Post';
+import postType from '../types/post-type';
 import { blockCommentNonEditors } from '../utils/model-filters';
 
 import {
@@ -23,9 +24,12 @@ let deleteCommentMutation = new mutationWithClientMutationId({
       type: GraphQLString,
       resolve: (data) => data.id,
     },
-    viewer: {
-      type: userType,
-      resolve: (data) => data.user,
+    post: {
+      type: postType,
+      resolve: (data) => {
+        return Post.findOne({'_id': data.postId})
+        .then((post) => post);
+      },
     },
   },
   mutateAndGetPayload: (args, root) => {
@@ -37,10 +41,9 @@ let deleteCommentMutation = new mutationWithClientMutationId({
       return Comment.findOne({'_id': _id});
     })
     .then((comment) => {
-      return comment.remove((err, comment) => root);
-    })
-    .then(() => ({id: args.id, user: user}));
-
+      return comment.remove((err, comment) => root)
+      .then(() => ({id: args.id, postId: comment._post.toString()}));
+    });
   },
 
 });
