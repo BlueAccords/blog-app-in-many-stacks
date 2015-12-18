@@ -18,11 +18,7 @@ module.exports = function(req, res, next) {
   }
   // decode token
   if(token) {
-    // Turn off expiration of tokens if development
-    let ignoreExpiration;
-    process.env.NODE_ENV === 'development' ? ignoreExpiration = true : ignoreExpiration = false;
-
-    return jwt.verify(token, config.jwt.secret, {ignoreExpiration: ignoreExpiration}, (err, decoded) => {
+    return jwt.verify(token, config.jwt.secret, (err, decoded) => {
       if(decoded) {
         return User.findOne({'_id': decoded._id, 'password': decoded.password, 'email': decoded.email })
         .then((user) => {
