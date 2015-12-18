@@ -1,5 +1,6 @@
 import tagType from '../types/tag-type';
 import Tag from '../models/Tag';
+import { Promise } from 'es6-promise';
 
 import {
   GraphQLNonNull,
@@ -41,11 +42,11 @@ let updateTagMutation = new mutationWithClientMutationId({
         if (numAffected.nModified > 0) {
           return {tagId: _id, user: root.rootValue.user};
         } else {
-          throw 'Something went wrong';
+          return Promise.resolve('Something went wrong');
         }
       });
     } else {
-      throw 'You must be logged in to create a tag';
+      return Promise.resolve('You must be logged in to create a tag');
     }
 
   },

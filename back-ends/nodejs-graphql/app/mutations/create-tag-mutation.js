@@ -47,7 +47,7 @@ let createTagMutation = new mutationWithClientMutationId({
       });
 
     } else {
-      throw 'You must be logged in to create a tag';
+      return Promise.reject('You must be logged in to create a tag');
     }
   },
 });

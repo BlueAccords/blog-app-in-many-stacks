@@ -2,6 +2,7 @@ import postType from '../types/post-type';
 import Post from '../models/Post';
 import Comment from '../models/Comment';
 import commentType from '../types/comment-type';
+import {Promise} from 'es6-promise';
 
 import {
   GraphQLNonNull,
@@ -55,7 +56,7 @@ let createCommentMutation = new mutationWithClientMutationId({
       .then((comment) => { return {commentId: comment._id, postId: postId, user: root.rootValue.user}; });
 
     } else {
-      throw 'You must be logged in to create a comment';
+      return Promise.reject('You must be logged in to create a comment');
     }
   },
 });
