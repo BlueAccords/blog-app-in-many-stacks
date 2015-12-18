@@ -2,13 +2,13 @@
  * Responds with a general error
  *
  * @param {object} res The response object
- * @param {string} message The error message
+ * @param {string[]} messages Array of error message strings
  * @returns {void}
  */
-module.exports.generalErrorResponse = (res, message ='Something went wrong') => {
+module.exports.generalErrorResponse = (res, messages =['Something went wrong']) => {
   res.status(400).json({
     errors: {
-      general: message,
+      general: messages,
     },
   });
 };
@@ -17,13 +17,13 @@ module.exports.generalErrorResponse = (res, message ='Something went wrong') => 
  * Responds with a permissions error
  *
  * @param {object} res The response object
- * @param {string} message The error message
+ * @param {string[]} messages Array of error message strings
  * @returns {void}
  */
-module.exports.permissionsErrorResponse = (res, message ='You do not have permissions to perform this action') => {
+module.exports.permissionsErrorResponse = (res, messages =['You do not have permissions to perform this action']) => {
   res.status(403).json({
     errors: {
-      permissions: message,
+      permissions: messages,
     },
   });
 };
