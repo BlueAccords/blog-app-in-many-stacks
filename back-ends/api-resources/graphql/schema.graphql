@@ -29,8 +29,8 @@ input CreateCommentInput {
 }
 
 type CreateCommentPayload {
-  comment: Comment
   post: Post
+  commentEdge: CommentEdge
   clientMutationId: String!
 }
 
@@ -41,7 +41,8 @@ input CreatePostInput {
 }
 
 type CreatePostPayload {
-  post: Post
+  viewer: User
+  postEdge: PostEdge
   clientMutationId: String!
 }
 
@@ -51,7 +52,7 @@ input CreateTagInput {
 }
 
 type CreateTagPayload {
-  tag: Tag
+  viewer: User
   clientMutationId: String!
 }
 
@@ -62,7 +63,7 @@ input DeleteCommentInput {
 
 type DeleteCommentPayload {
   id: String
-  viewer: User
+  post: Post
   clientMutationId: String!
 }
 
@@ -77,6 +78,17 @@ type DeletePostPayload {
   clientMutationId: String!
 }
 
+input DeleteUserInput {
+  id: String!
+  clientMutationId: String!
+}
+
+type DeleteUserPayload {
+  id: String
+  viewer: User
+  clientMutationId: String!
+}
+
 type Mutation {
   createPost(input: CreatePostInput!): CreatePostPayload
   updatePost(input: UpdatePostInput!): UpdatePostPayload
@@ -86,6 +98,8 @@ type Mutation {
   deleteComment(input: DeleteCommentInput!): DeleteCommentPayload
   createTag(input: CreateTagInput!): CreateTagPayload
   toggleTagOnPost(input: ToggleTagOnPostInput!): ToggleTagOnPostPayload
+  updateUser(input: UpdateUserInput!): UpdateUserPayload
+  deleteUser(input: DeleteUserInput!): DeleteUserPayload
 }
 
 interface Node {
@@ -162,6 +176,19 @@ input UpdatePostInput {
 
 type UpdatePostPayload {
   post: Post
+  clientMutationId: String!
+}
+
+input UpdateUserInput {
+  id: String!
+  name: String
+  email: String
+  username: String
+  clientMutationId: String!
+}
+
+type UpdateUserPayload {
+  user: User
   clientMutationId: String!
 }
 
