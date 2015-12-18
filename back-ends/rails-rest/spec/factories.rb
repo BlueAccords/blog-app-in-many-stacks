@@ -8,5 +8,11 @@ FactoryGirl.define do
     username { Faker::Internet.email }
     password { Devise.friendly_token.first(8) } 
   end
+  
+  factory :post do
+    title { Faker::Company.name }
+    body { Faker::Lorem.paragraph }
+    user_id { 1 }
+  end
 
 end

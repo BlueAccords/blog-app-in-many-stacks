@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150224164448) do
+ActiveRecord::Schema.define(version: 20151217210652) do
+
+  create_table "posts", force: :cascade do |t|
+    t.string   "url_path",   limit: 255
+    t.string   "title",      limit: 255
+    t.string   "body",       limit: 255
+    t.integer  "user_id",    limit: 4,   null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",               limit: 255, default: "", null: false

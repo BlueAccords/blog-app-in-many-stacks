@@ -153,7 +153,7 @@ RSpec.describe "User API", :type => :request do
   end
 
   #
-  # CREATE USER
+  # UPDATE USER
   #
   describe "PUT /users/:id" do
 

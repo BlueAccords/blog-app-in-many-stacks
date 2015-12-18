@@ -1,7 +1,6 @@
 # app/controllers/api/registrations_controller.rb
 class RegistrationsController < BaseController
- skip_before_filter :authenticate_user_from_token!, :only => :create
- # before_filter :block_if_not_current_user(params[:id]), :only => :show
+  skip_before_filter :authenticate_user_from_token!, :only => :create
   before_action only: [:show, :update] do
     block_if_not_current_user(params[:id].to_i)
   end
@@ -23,7 +22,7 @@ class RegistrationsController < BaseController
       @data = @user.as_json
       @data['token'] = @auth_token
 
-      # Successful JSON in /views/registrations
+    # Successful JSON in /views/registrations
     else
       respond_with @user do 
         'registrations/error'
@@ -43,6 +42,12 @@ class RegistrationsController < BaseController
     @auth_token = token_from_request
   end
 
+  # @description PUT /users/:id
+  # @param {string} id - User's id. Implicit Paramater. Is required.  
+  # @param {string} Authorization - Authentication token. Format is'Bearer: tokenvalue' and is required.
+  #      
+  # @returns JSON Object of User 
+  # @throws JSON Object of Errors
   def update
     @user = User.find(current_user.id)
 
@@ -63,12 +68,11 @@ class RegistrationsController < BaseController
     end
   end
 
-  # DESTROY METHOD
   # @description DELETE /users/:id 
   # @param {string} id - User's id. Implicit Paramater. Is required.  
   # @param {string} Authorization - Authentication token. Format is'Bearer: tokenvalue' and is required.
   #      
-  # @returns JSON Object of User 
+  # @returns JSON Object  
   # @throws JSON Object of Errors
   def destroy 
     @user = User.find(params[:id])
@@ -81,8 +85,8 @@ class RegistrationsController < BaseController
 
   private
 
-  def user_params
-    params.require(:user).permit(:email, :name, :username, :password, :password_confirmation)
-  end
+    def user_params
+      params.require(:user).permit(:email, :name, :username, :password, :password_confirmation)
+    end
 
 end

@@ -1,2 +1,2 @@
-object @user
+object @post
 attribute :errors

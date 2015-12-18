@@ -14,7 +14,17 @@ Rails.application.routes.draw do
       delete 'users/:id', to: 'registrations#destroy'
       put 'users/:id', to: 'registrations#update'
       get 'users/:id', to: 'registrations#show'
-    end    
+    end  
+
+    #
+    # Posts Routes
+    #
+    match '/posts', :to => 'posts#create', via: :post
+    match '/posts', :to => 'posts#index', via: :get
+    match '/posts/:id', :to => 'posts#show', via: :get  
+    match '/users/:user_id/posts', :to => 'posts#get_post_by_user', via: :get  
+    match '/posts/:id', :to => 'posts#update', via: :put
+    match '/posts/:id', :to => 'posts#destroy', via: :delete
     
   end 
 
