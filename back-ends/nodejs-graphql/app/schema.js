@@ -1,5 +1,4 @@
 'use strict';
-import User from './models/User';
 import userType from './types/user-type';
 
 import createPostMutation from './mutations/create-post-mutation';
@@ -11,8 +10,9 @@ import updateCommentMutation from './mutations/update-comment-mutation';
 import deleteCommentMutation from './mutations/delete-comment-mutation';
 
 import createTagMutation from './mutations/create-tag-mutation';
-import updateTagMutation from './mutations/update-tag-mutation';
-import deleteTagMutation from './mutations/delete-tag-mutation';
+//In the future, we will add these but will only allow admins to update and delete tags
+//import updateTagMutation from './mutations/update-tag-mutation';
+//import deleteTagMutation from './mutations/delete-tag-mutation';
 
 import toggleTagOnPostMutation from './mutations/toggle-tag-on-post-mutation';
 
@@ -50,8 +50,8 @@ let mutationType = new GraphQLObjectType({
     updateComment: updateCommentMutation,
     deleteComment: deleteCommentMutation,
     createTag: createTagMutation,
-    updateTag: updateTagMutation,
-    deleteTag: deleteTagMutation,
+    //updateTag: updateTagMutation,
+    //deleteTag: deleteTagMutation,
     toggleTagOnPost: toggleTagOnPostMutation,
   }),
 });

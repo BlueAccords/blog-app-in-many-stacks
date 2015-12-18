@@ -77,17 +77,6 @@ type DeletePostPayload {
   clientMutationId: String!
 }
 
-input DeleteTagInput {
-  id: String!
-  clientMutationId: String!
-}
-
-type DeleteTagPayload {
-  id: String
-  viewer: User
-  clientMutationId: String!
-}
-
 type Mutation {
   createPost(input: CreatePostInput!): CreatePostPayload
   updatePost(input: UpdatePostInput!): UpdatePostPayload
@@ -96,8 +85,6 @@ type Mutation {
   updateComment(input: UpdateCommentInput!): UpdateCommentPayload
   deleteComment(input: DeleteCommentInput!): DeleteCommentPayload
   createTag(input: CreateTagInput!): CreateTagPayload
-  updateTag(input: UpdateTagInput!): UpdateTagPayload
-  deleteTag(input: DeleteTagInput!): DeleteTagPayload
   toggleTagOnPost(input: ToggleTagOnPostInput!): ToggleTagOnPostPayload
 }
 
@@ -175,17 +162,6 @@ input UpdatePostInput {
 
 type UpdatePostPayload {
   post: Post
-  clientMutationId: String!
-}
-
-input UpdateTagInput {
-  id: String!
-  text: String
-  clientMutationId: String!
-}
-
-type UpdateTagPayload {
-  tag: Tag
   clientMutationId: String!
 }
 

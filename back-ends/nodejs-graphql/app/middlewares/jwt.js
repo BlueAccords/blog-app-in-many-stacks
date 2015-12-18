@@ -17,7 +17,10 @@ module.exports = function(req, res, next) {
   // decode token
   // verifies secret and checks exp
   if(token) {
-    jwt.verify(token, config.jwt.secret, (err, decoded) => {
+    // Turn off expiration of tokens if development
+    let ignoreExpiration;
+    process.env.NODE_ENV === 'development' ? ignoreExpiration = true : ignoreExpiration = false;
+    jwt.verify(token, config.jwt.secret, {ignoreExpiration: ignoreExpiration}, (err, decoded) => {
       if('graphql' === url.parse(req.url).pathname.replace('/','')) {
         // We want the graphql endpoint to still be accessed but just with no data.
         User.findOne({'_id': decoded._id})
@@ -26,7 +29,11 @@ module.exports = function(req, res, next) {
           next();
         });
       } else if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token.' });
+        return res.status(401).json({
+          errors: {
+            unauthorized: ['Failed to authenticate token.'],
+          },
+        });
       } else {
         // if everything is good, attach the decoded user data to the request so it can be
         // used later on.
