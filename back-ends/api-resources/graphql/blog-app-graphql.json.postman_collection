@@ -264,7 +264,7 @@
 		},
 		{
 			"id": "81aa6c5a-4e58-d79f-35df-5b24104a54df",
-			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJuYW1lIjoiQnJ1Y2UgV2F5bmUiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJwYXNzd29yZCI6IiQyYSQwOCQ1UFBSMi9CTlptNUVpaWNSN01YM2ZPQlRpOC9LLktVU1lxUU4wdlJEd1ZSYlgzMHdrM1BwcSIsIl9fdiI6MH0.HB1FEcA2KJEzO7OYZM0MbGiZbTqOLGi5YpGrPkkJDQ4\n",
+			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJuYW1lIjoiQnJ1Y2UgV2F5bmUiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJwYXNzd29yZCI6IiQyYSQwOCRxbHQxOG1YZFgvaUZUeXlDOTVBRU4uRXRRbEl4R25OdDNIdXVjbjhEeDBYSjRPcmhLaEhCVyIsIl9fdiI6MH0.EG67JKfOiHfvKQpgIfbSWWmnbzIxLVyaPwV090ciIFg\n",
 			"url": "http://localhost:8000/graphql",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -275,12 +275,12 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1450450192335,
+			"time": 1450467307120,
 			"name": "Create post",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
 			"responses": [],
-			"rawModeData": "mutation {\n\n    createPost(\n        input: {clientMutationId: \"abc\", title: \"first post\", body: \"this is my first post\"}\n    )\n    {\n        clientMutationId,\n        post {\n            id,\n            title,\n            url_path,\n            body,\n        }\n    }\n\n}"
+			"rawModeData": "mutation {\n\n    createPost(\n        input: {clientMutationId: \"abc\", title: \"first post\", body: \"this is my first post\"}\n    )\n    {\n        clientMutationId,\n        user {\n            name,\n            email,\n        },\n        postEdge {\n            cursor,\n            node {\n                id,\n                title,\n                url_path,\n                body,\n            }\n        }\n    }\n\n}"
 		},
 		{
 			"id": "bb5e55f3-93f6-ef59-56f2-c9d50f71c015",
