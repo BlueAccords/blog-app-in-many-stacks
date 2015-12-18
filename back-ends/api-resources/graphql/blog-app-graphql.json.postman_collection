@@ -5,6 +5,8 @@
 	"order": [
 		"764dfa6f-163d-811c-2826-c7d94049cc59",
 		"11061f7e-00d3-1554-2252-311a3e9de2f8",
+		"bb5e55f3-93f6-ef59-56f2-c9d50f71c015",
+		"5ad83a93-7628-c54d-f597-07298d2f862a",
 		"f9373e98-b9e0-2f78-68b3-fbf977cb408c",
 		"72e37d18-6feb-7b64-7bc2-5b4eb190c4fe",
 		"c66fd972-d193-7afc-f9f0-26f500098496",
@@ -177,6 +179,26 @@
 			"rawModeData": "mutation {\n    deleteComment(\n        input: {clientMutationId: \"abc\", id: \"Q29tbWVudDo1NjM0ZDQ3NjAwNjdiZTAxNmJmMTljOWU=\"}\n    ) {\n        clientMutationId,\n        id,\n        viewer {\n         email\n        }\n    }\n}"
 		},
 		{
+			"id": "5ad83a93-7628-c54d-f597-07298d2f862a",
+			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJuYW1lIjoiQnJ1Y2UgV2F5bmUiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJwYXNzd29yZCI6IiQyYSQwOCQ1UFBSMi9CTlptNUVpaWNSN01YM2ZPQlRpOC9LLktVU1lxUU4wdlJEd1ZSYlgzMHdrM1BwcSIsIl9fdiI6MH0.HB1FEcA2KJEzO7OYZM0MbGiZbTqOLGi5YpGrPkkJDQ4\nContent-Type: application/graphql\n",
+			"url": "http://localhost:8000/graphql",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1450462879943,
+			"name": "Delete user",
+			"description": "",
+			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
+			"responses": [],
+			"rawModeData": "mutation {\n    deleteUser(\n        input: {clientMutationId: \"abc\", id: \"VXNlcjo1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWE=\"}\n    ) {\n        clientMutationId,\n        id,\n        viewer {\n           name,\n            email\n        }\n    }\n}"
+		},
+		{
 			"id": "72e37d18-6feb-7b64-7bc2-5b4eb190c4fe",
 			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJuYW1lIjoiQnJ1Y2UgV2F5bmUiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJwYXNzd29yZCI6IiQyYSQwOCQ1UFBSMi9CTlptNUVpaWNSN01YM2ZPQlRpOC9LLktVU1lxUU4wdlJEd1ZSYlgzMHdrM1BwcSIsIl9fdiI6MH0.HB1FEcA2KJEzO7OYZM0MbGiZbTqOLGi5YpGrPkkJDQ4\n",
 			"url": "http://localhost:8000/graphql",
@@ -259,6 +281,26 @@
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
 			"responses": [],
 			"rawModeData": "mutation {\n\n    createPost(\n        input: {clientMutationId: \"abc\", title: \"first post\", body: \"this is my first post\"}\n    )\n    {\n        clientMutationId,\n        post {\n            id,\n            title,\n            url_path,\n            body,\n        }\n    }\n\n}"
+		},
+		{
+			"id": "bb5e55f3-93f6-ef59-56f2-c9d50f71c015",
+			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJuYW1lIjoiQnJ1Y2UgV2F5bmUiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJwYXNzd29yZCI6IiQyYSQwOCRZODBvUHlBUTZGdE1URTJFY2REcXZPVGV0VnFQTThka0Faa001b3EydG1SNUFna2V1N0ZqNiIsIl9fdiI6MH0.lLFiVl_A3O24NMs5DIf9S_HyxM69KEWNkJ3qpWYz-EQ\n",
+			"url": "http://localhost:8000/graphql",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1450462303634,
+			"name": "Update user",
+			"description": "",
+			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
+			"responses": [],
+			"rawModeData": "mutation {\n    updateUser (\n        input: {clientMutationId: \"abc\", id: \"VXNlcjo1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWE=\", name: \"Bob\"}\n    ) {\n      clientMutationId,\n      user {\n        id,\n        name\n        }\n    }\n}"
 		},
 		{
 			"id": "c66fd972-d193-7afc-f9f0-26f500098496",
