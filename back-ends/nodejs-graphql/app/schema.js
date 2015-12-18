@@ -9,6 +9,8 @@ import createCommentMutation from './mutations/create-comment-mutation';
 import updateCommentMutation from './mutations/update-comment-mutation';
 import deleteCommentMutation from './mutations/delete-comment-mutation';
 
+import updateUserMutation from './mutations/update-user-mutation';
+
 import createTagMutation from './mutations/create-tag-mutation';
 //In the future, we will add these but will only allow admins to update and delete tags
 //import updateTagMutation from './mutations/update-tag-mutation';
@@ -53,6 +55,7 @@ let mutationType = new GraphQLObjectType({
     //updateTag: updateTagMutation,
     //deleteTag: deleteTagMutation,
     toggleTagOnPost: toggleTagOnPostMutation,
+    updateUser: updateUserMutation,
   }),
 });
 
