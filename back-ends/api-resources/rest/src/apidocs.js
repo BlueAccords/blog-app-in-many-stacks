@@ -446,6 +446,8 @@
  *
  * @apiSuccess (Success Response 200) {Object} user
  * @apiSuccess (Success Response 200) {string} user.id
+ * @apiSuccess (Success Response 200) {string} user.email
+ * @apiSuccess (Success Response 200) {string} user.username
  *
  * @apiUse generalErrors
  */
