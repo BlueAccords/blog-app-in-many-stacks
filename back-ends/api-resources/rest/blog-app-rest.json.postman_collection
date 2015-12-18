@@ -445,7 +445,7 @@
 		{
 			"id": "a44035d9-a66e-a614-0261-b95fa179aafd",
 			"headers": "",
-			"url": "http://localhost:8000/posts/567406cfb1d9b9372b404a3a",
+			"url": "http://localhost:8000/posts/5634d4760066be016bf10c09",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "GET",
@@ -455,7 +455,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1450445052984,
+			"time": 1450445789759,
 			"name": "Get post",
 			"description": "",
 			"collectionId": "ae28de97-1ecb-fa77-319a-b1149c3d00ed"

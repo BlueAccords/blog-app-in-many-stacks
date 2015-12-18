@@ -63,9 +63,13 @@ module.exports.show = (req, res) => {
   return Post.findById(req.params.id)
   .populate('tags')
   .then(post => {
-    return res.json({
-      post: post,
-    });
+    if(post) {
+      return res.json({
+        post: post,
+      });
+    } else {
+      res.sendStatus(404);
+    }
   })
   .catch((err) => {
     return generalErrorResponse(res);
