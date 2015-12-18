@@ -36,7 +36,7 @@ module.exports.authenticate = (req, res) => {
         } else {
           return res.json({
             errors: {
-              password: 'Incorrect password',
+              password: ['Incorrect password'],
             },
           });
         }
@@ -63,7 +63,7 @@ module.exports.create = (req, res) => {
     } else {
       return res.status(400).json({
         errors: {
-          email: 'This Username or Email is already taken.',
+          email: ['This Username or Email is already taken.'],
         },
       });
     }
