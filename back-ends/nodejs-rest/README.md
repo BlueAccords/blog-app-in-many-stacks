@@ -2,29 +2,33 @@
 
 ### Setup
 
-Make sure you have an `NODE_ENV` environment variable set on your machine and have it set to 'development'.
+1. Make sure you have an `NODE_ENV` environment variable set on your machine and have it set to 'development'.
 
-Copy `.env.example` to `.env` and populate all necessary values.
+2. Copy `.env.example` to `.env` and populate all necessary values.
 
-Install your packages by running `npm install`.
+3. Install your packages by running `npm install`.
 
-You will need to have MongoDB installed.
+4. Make sure you will need to have MongoDB installed.
+
+5. To get seed data run. `npm run seed`
 
 ### Conventions
 ESLint will handle most of the style and conventions of the project.
 
 ### Development
 
-use `npm start` to run the server.
+1. Start your mongodb server
 
-Nodemon will update changes automatically.
+2. use `npm start` to run the server.
 
-Check the console for errors.
+	- Nodemon will update changes automatically.
 
-A sample Postman collection is provided at the `blog-app-in-many-stacks/back-ends/api-resources/rest` directory.
+	- Check the console for errors.
 
-To get seed data run. `npm run seed`
+### Testing:
+
+A sample Postman collection is provided [here](../api-resources/rest/blog-app-rest.json.postman_collection) that you can import and use for testing the API.
 
 ### Documentation
 
-You may view the REST API documentation that this back-end should conform to [Here](https://rawgit.com/chiedolabs/blog-app-in-many-stacks/master/back-ends/api-resources/rest/build/index.html).
+You may view the REST API documentation that this back-end should conform to [here](https://rawgit.com/chiedolabs/blog-app-in-many-stacks/master/back-ends/api-resources/rest/build/index.html).

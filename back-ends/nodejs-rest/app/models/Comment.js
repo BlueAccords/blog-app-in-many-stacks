@@ -42,4 +42,12 @@ CommentSchema.virtual('user_id').get(function() {
   return this._author;
 });
 
+CommentSchema.virtual('date_created').get(function() {
+  return this.createdAt;
+});
+
+CommentSchema.virtual('date_modified').get(function() {
+  return this.updatedAt;
+});
+
 module.exports = mongoose.model('Comment', CommentSchema);

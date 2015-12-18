@@ -34,7 +34,6 @@ module.exports.index = (req, res) => {
     return Post.findOne({
       'url_path': req.query.url_path,
     })
-    .populate('tags')
     .then(post => {
       if(post) {
         return res.json({
@@ -63,9 +62,13 @@ module.exports.show = (req, res) => {
   return Post.findById(req.params.id)
   .populate('tags')
   .then(post => {
-    return res.json({
-      post: post,
-    });
+    if(post) {
+      return res.json({
+        post: post,
+      });
+    } else {
+      res.sendStatus(404);
+    }
   })
   .catch((err) => {
     return generalErrorResponse(res);
@@ -75,8 +78,8 @@ module.exports.show = (req, res) => {
 // Update a post
 module.exports.update = (req, res) => {
   let author = req.user.username;
-  let path = req.body.post.title ?
-  req.body.post.title.toLowerCase().split(' ').join('-') + '-' + author : '';
+  let path = req.body.post.url_path ?
+  req.body.post.url_path.toLowerCase().split(' ').join('-') + '-' + author : '';
 
   return Post.findById(req.params.id)
   .populate('tags')

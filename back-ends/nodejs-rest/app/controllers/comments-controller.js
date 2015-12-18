@@ -63,7 +63,7 @@ module.exports.create = (req, res) => {
   return Comment.create({
     _author: req.user._id,
     _post: req.params.post_id,
-    text: req.body.post.text,
+    text: req.body.comment.text,
   })
   .then(comment => {
     return res.json({

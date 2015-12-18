@@ -172,13 +172,13 @@ module.exports.index = (req, res) => {
           },
         });
       } else {
-        return res.sendStatus(400);
+        return res.sendStatus(404);
       }
     })
     .catch((err) => {
       return generalErrorResponse(res);
     });
   } else {
-    return res.sendStatus(400);
+    return res.sendStatus(404);
   }
 };

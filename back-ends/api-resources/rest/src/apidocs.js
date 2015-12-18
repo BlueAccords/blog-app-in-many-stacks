@@ -12,7 +12,7 @@
 /**
  * @apiDefine successfulDeletion
  *
- * @apiSuccess (Success Response 200) {Integer} deleted_id The ID of the deleted resource.
+ * @apiSuccess (Success Response 200) {string} deleted_id The ID of the deleted resource.
  */
 
 /**
@@ -28,7 +28,7 @@
  * @apiGroup Authentication
  *
  * @apiParam {Object} user
- * @apiParam {integer} user.id
+ * @apiParam {string} user.id
  * @apiParam {string} user.email
  * @apiParam {string} user.password
  */
@@ -39,7 +39,7 @@
  * @apiDefine userResponse
  *
  * @apiSuccess (Success Response 200) {Object} user
- * @apiSuccess (Success Response 200) {Integer} user.id
+ * @apiSuccess (Success Response 200) {string} user.id
  * @apiSuccess (Success Response 200) {string} user.name
  * @apiSuccess (Success Response 200) {string} user.email
  * @apiSuccess (Success Response 200) {string} user.username
@@ -81,7 +81,7 @@
  * @apiUse generalErrors
  *
  * @apiSuccess (Success Response 200) {Object} user
- * @apiSuccess (Success Response 200) {Integer} user.id
+ * @apiSuccess (Success Response 200) {string} user.id
  * @apiSuccess (Success Response 200) {string} user.name
  * @apiSuccess (Success Response 200) {string} user.username
  *
@@ -121,11 +121,14 @@
  * @apiDefine postResponse
  *
  * @apiSuccess (Success Response 200) {Object} post
- * @apiSuccess (Success Response 200) {Integer} post.id
+ * @apiSuccess (Success Response 200) {string} post.id
  * @apiSuccess (Success Response 200) {string} post.url_path
  * @apiSuccess (Success Response 200) {string} post.title
  * @apiSuccess (Success Response 200) {string} post.body
- * @apiSuccess (Success Response 200) {Integer} post.user_id
+ * @apiSuccess (Success Response 200) {string} post.user_id
+ * @apiSuccess (Success Response 200) {Object[]} post.tags
+ * @apiSuccess (Success Response 200) {string} post.tags.id
+ * @apiSuccess (Success Response 200) {String} post.tags.text
  * @apiSuccess (Success Response 200) {string} post.date_created
  * @apiSuccess (Success Response 200) {string} post.date_modified
  */
@@ -134,11 +137,12 @@
  * @apiDefine postsResponse
  *
  * @apiSuccess (Success Response 200) {Object[]} posts
- * @apiSuccess (Success Response 200) {Integer} posts.id
+ * @apiSuccess (Success Response 200) {string} posts.id
  * @apiSuccess (Success Response 200) {string} post.url_path
  * @apiSuccess (Success Response 200) {string} posts.title
  * @apiSuccess (Success Response 200) {string} posts.body
- * @apiSuccess (Success Response 200) {Integer} post.user_id
+ * @apiSuccess (Success Response 200) {string} post.user_id
+ * @apiSuccess (Success Response 200) {String[]} post.tags The tag IDs
  * @apiSuccess (Success Response 200) {string} posts.date_created
  * @apiSuccess (Success Response 200) {string} posts.date_modified
  */
@@ -243,9 +247,9 @@
  * @apiDefine commentResponse
  *
  * @apiSuccess (Success Response 200) {Object} comment
- * @apiSuccess (Success Response 200) {Integer} comment.id
- * @apiSuccess (Success Response 200) {Integer} comment.user_id
- * @apiSuccess (Success Response 200) {Integer} comment.post_id
+ * @apiSuccess (Success Response 200) {string} comment.id
+ * @apiSuccess (Success Response 200) {string} comment.user_id
+ * @apiSuccess (Success Response 200) {string} comment.post_id
  * @apiSuccess (Success Response 200) {string} comment.text
  * @apiSuccess (Success Response 200) {string} comment.date_created
  * @apiSuccess (Success Response 200) {string} comment.date_modified
@@ -256,9 +260,9 @@
  *
  * @apiSuccess (Success Response 200) {Object[]} comments
  * @apiSuccess (Success Response 200) {Object} comments
- * @apiSuccess (Success Response 200) {Integer} comments.user_id
- * @apiSuccess (Success Response 200) {Integer} comments.post_id
- * @apiSuccess (Success Response 200) {Integer} comments.id
+ * @apiSuccess (Success Response 200) {string} comments.user_id
+ * @apiSuccess (Success Response 200) {string} comments.post_id
+ * @apiSuccess (Success Response 200) {string} comments.id
  * @apiSuccess (Success Response 200) {string} comments.text
  * @apiSuccess (Success Response 200) {string} comments.date_created
  * @apiSuccess (Success Response 200) {string} comments.date_modified
@@ -332,7 +336,7 @@
  * @apiDefine tagResponse
  *
  * @apiSuccess (Success Response 200) {Object} tag
- * @apiSuccess (Success Response 200) {Integer} tag.id
+ * @apiSuccess (Success Response 200) {string} tag.id
  * @apiSuccess (Success Response 200) {string} tag.text
  */
 
@@ -341,7 +345,7 @@
  *
  * @apiSuccess (Success Response 200) {Object[]} tags
  * @apiSuccess (Success Response 200) {Object} tags
- * @apiSuccess (Success Response 200) {Integer} tags.id
+ * @apiSuccess (Success Response 200) {string} tags.id
  * @apiSuccess (Success Response 200) {string} tags.text
  */
 
@@ -375,18 +379,6 @@
  *
  * @apiUse tagsResponse
  * @apiUse generalErrors
- */
-
-/**
- * @api {get} /posts/:post_id/tags Get tags by post
- * @apiName Get tags by post
- * @apiGroup Tags
- * @apiDescription - Returns a 404 error if a post with <code>post_id</code> is not found
- *
- * @apiUse tagsResponse
- * @apiUse generalErrors
- *
- * @apiParam {String} post_id The post id
  */
 
 /**
@@ -453,7 +445,7 @@
  * @apiParam {String} username The username
  *
  * @apiSuccess (Success Response 200) {Object} user
- * @apiSuccess (Success Response 200) {Integer} user.id
+ * @apiSuccess (Success Response 200) {string} user.id
  *
  * @apiUse generalErrors
  */

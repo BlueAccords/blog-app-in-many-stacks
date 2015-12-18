@@ -10,7 +10,7 @@ let PostSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    uniqu: true,
+    unique: true,
   },
   title: {
     type: String,
@@ -41,6 +41,14 @@ PostSchema.virtual('user_id').get(function() {
 
 PostSchema.virtual('id').get(function() {
   return this._id;
+});
+
+PostSchema.virtual('date_created').get(function() {
+  return this.createdAt;
+});
+
+PostSchema.virtual('date_modified').get(function() {
+  return this.updatedAt;
 });
 
 module.exports = mongoose.model('Post', PostSchema);
