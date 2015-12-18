@@ -2,6 +2,7 @@ import Tag from '../models/Tag';
 import Post from '../models/Post';
 import postType from '../types/post-type';
 import * as _ from 'lodash';
+import { Promise } from 'es6-promise';
 
 import {
   GraphQLString,
@@ -53,7 +54,7 @@ let addTagToPostMutation = new mutationWithClientMutationId({
         .then((tag) => { return {postId: post._id, user: root.rootValue.user}; });
       });
     } else {
-      throw 'You must be logged in to add a tag to a post';
+      return Promise.reject('You must be logged in to add a tag to a post');
     }
   },
 });

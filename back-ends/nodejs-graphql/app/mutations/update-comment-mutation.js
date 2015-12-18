@@ -1,6 +1,7 @@
 import commentType from '../types/comment-type';
 import Comment from '../models/Comment';
 import { blockCommentNonEditors } from '../utils/model-filters';
+import { Promise } from 'es6-promise';
 
 import {
   GraphQLNonNull,
@@ -43,7 +44,7 @@ let updateCommentMutation = new mutationWithClientMutationId({
       if (numAffected.nModified > 0) {
         return {commentId: _id, user: root.rootValue.user};
       } else {
-        throw 'Something went wrong';
+        return Promise.reject('Something went wrong');
       }
     });
 

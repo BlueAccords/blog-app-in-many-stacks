@@ -3,6 +3,9 @@
 import mongoose from 'mongoose';
 let ObjectId = mongoose.Schema.Types.ObjectId;
 
+import Promise from 'bluebird';
+mongoose.Promise = Promise;
+
 let schema = new mongoose.Schema({
   _author: { type: ObjectId, ref: 'User', required: true },
   title: { type: String, required: true },

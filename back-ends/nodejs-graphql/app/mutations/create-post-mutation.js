@@ -1,5 +1,6 @@
 import Post from '../models/Post';
 import postType from '../types/post-type.js';
+import { Promise } from 'es6-promise';
 
 import {
   GraphQLNonNull,
@@ -39,7 +40,7 @@ let createPostMutation = new mutationWithClientMutationId({
       return post.save()
       .then((post) => ({postId: post._id, user: root.rootValue.user}));
     } else {
-      throw 'You must be logged in to create a post';
+      return Promise.reject('You must be logged in to create a post');
     }
   },
 });

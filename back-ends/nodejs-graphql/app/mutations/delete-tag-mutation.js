@@ -1,5 +1,6 @@
 import Tag from '../models/Tag';
 import userType from '../types/user-type';
+import { Promise } from 'es6-promise';
 
 import {
   GraphQLNonNull,
@@ -40,7 +41,7 @@ let deleteTagMutation = new mutationWithClientMutationId({
       .then(() => ({id: args.id, user: user}));
     }
     else {
-      throw 'You must be logged in to delete a tag';
+      return Promise.rejectt('You must be logged in to delete a tag');
     }
   },
 

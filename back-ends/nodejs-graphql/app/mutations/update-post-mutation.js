@@ -1,6 +1,7 @@
 import postType from '../types/post-type';
 import Post from '../models/Post';
 import { blockPostNonEditors } from '../utils/model-filters';
+import { Promise } from 'es6-promise';
 
 import {
   GraphQLNonNull,
@@ -48,7 +49,7 @@ let updatePostMutation = new mutationWithClientMutationId({
       if (numAffected.nModified > 0) {
         return {postId: _id, user: root.rootValue.user};
       } else {
-        throw 'Something went wrong';
+        return Promise.reject('Something went wrong');
       }
     });
 

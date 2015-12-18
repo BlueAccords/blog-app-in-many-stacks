@@ -2,6 +2,9 @@
 
 import mongoose from 'mongoose';
 
+import Promise from 'bluebird';
+mongoose.Promise = Promise;
+
 let schema = new mongoose.Schema({
   text: { type: String, required: true },
 }, {
