@@ -34,7 +34,6 @@ module.exports.index = (req, res) => {
     return Post.findOne({
       'url_path': req.query.url_path,
     })
-    .populate('tags')
     .then(post => {
       if(post) {
         return res.json({
