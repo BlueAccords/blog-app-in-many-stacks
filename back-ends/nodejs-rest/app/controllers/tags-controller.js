@@ -67,7 +67,7 @@ module.exports.toggleTagOnPost = (req, res) => {
         if(req.body.status) {
           post.tags = _.unique([...post.tags, tag._id], (x) => String(x));
         } else {
-          post.tags = _.filter(post.tags, (x) => x.id === req.body.tag_id);
+          post.tags = _.filter(post.tags, (x) => String(x) !== req.body.tag_id);
         }
         return post.save();
 
