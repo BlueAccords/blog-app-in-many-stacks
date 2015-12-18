@@ -10,7 +10,7 @@ let PostSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    uniqu: true,
+    unique: true,
   },
   title: {
     type: String,
