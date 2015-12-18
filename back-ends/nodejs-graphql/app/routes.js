@@ -22,7 +22,7 @@ router.use(jwtMiddleware);
 
 router.post('/graphql', graphqlHTTP((req) => ({
   schema,
-  rootValue: {user: req.user},
+  rootValue: {user: req.currentUser},
   graphql: true,
 })));
 
