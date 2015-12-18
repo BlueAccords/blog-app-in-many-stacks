@@ -64,9 +64,8 @@ router.route('/comments/:id')
   .put(comment.update)
   .delete(comment.delete);
 
-// Create/Read tags
+// Read tags
 router.route('/posts/:post_id/tags')
-  .post(tag.create)
   .get(tag.getTagsByPost);
 
 // Get posts by tag
@@ -78,8 +77,9 @@ router.route('/tags/:id')
   .put(tag.update)
   .delete(tag.delete);
 
-// List all tags
+// List tags or create a tag
 router.route('/tags')
+  .post(tag.create)
   .get(tag.index);
 
 // Toggle tag on a post
