@@ -160,7 +160,7 @@
 		},
 		{
 			"id": "251df238-6e45-8249-0fb4-1b30d2f2d776",
-			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJuYW1lIjoiQnJ1Y2UgV2F5bmUiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJwYXNzd29yZCI6IiQyYSQwOCQ1UFBSMi9CTlptNUVpaWNSN01YM2ZPQlRpOC9LLktVU1lxUU4wdlJEd1ZSYlgzMHdrM1BwcSIsIl9fdiI6MH0.HB1FEcA2KJEzO7OYZM0MbGiZbTqOLGi5YpGrPkkJDQ4\n",
+			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJuYW1lIjoiQnJ1Y2UgV2F5bmUiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJwYXNzd29yZCI6IiQyYSQwOCRxbHQxOG1YZFgvaUZUeXlDOTVBRU4uRXRRbEl4R25OdDNIdXVjbjhEeDBYSjRPcmhLaEhCVyIsIl9fdiI6MH0.EG67JKfOiHfvKQpgIfbSWWmnbzIxLVyaPwV090ciIFg\n",
 			"url": "http://localhost:8000/graphql",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -171,12 +171,12 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1450466729913,
+			"time": 1450468175587,
 			"name": "Delete comment",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
 			"responses": [],
-			"rawModeData": "mutation {\n    deleteComment(\n        input: {clientMutationId: \"abc\", id: \"Q29tbWVudDo1Njc0NWQ4ZTBhOGIwOWQ4MDQzOGZkYmQ=\"}\n    ) {\n        clientMutationId,\n        id,\n        post {\n         title\n        }\n    }\n}"
+			"rawModeData": "mutation {\n    deleteComment(\n        input: {clientMutationId: \"abc\", id: \"Q29tbWVudDo1Njc0NjM0NDczODYzMTg3MTIwYTY1ZWE=\"}\n    ) {\n        clientMutationId,\n        id,\n        post {\n         title\n        }\n    }\n}"
 		},
 		{
 			"id": "5ad83a93-7628-c54d-f597-07298d2f862a",
@@ -324,7 +324,7 @@
 		},
 		{
 			"id": "ce35198e-07bf-951a-2f4d-8a1bc69d6b74",
-			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJuYW1lIjoiQnJ1Y2UgV2F5bmUiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRQSHNDZzloc1A0MFA1dXR6WXQzYmJ1LldPem8wWlduTk81YVFiWXlwbDZiRS9tck1ZdUh4NiIsIl9fdiI6MH0.Qebro4fsubT61jNVuwtE3DlJs0Np0KerbTwXvV2r0-w\n",
+			"headers": "Content-Type: application/graphql\nAuthorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1cGRhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJjcmVhdGVkQXQiOiIyMDE1LTEwLTMxVDE0OjQ3OjE4LjAwMFoiLCJuYW1lIjoiQnJ1Y2UgV2F5bmUiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJwYXNzd29yZCI6IiQyYSQwOCRxbHQxOG1YZFgvaUZUeXlDOTVBRU4uRXRRbEl4R25OdDNIdXVjbjhEeDBYSjRPcmhLaEhCVyIsIl9fdiI6MH0.EG67JKfOiHfvKQpgIfbSWWmnbzIxLVyaPwV090ciIFg\n",
 			"url": "http://localhost:8000/graphql",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -335,12 +335,12 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1450280055868,
+			"time": 1450468104694,
 			"name": "Create tag",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
 			"responses": [],
-			"rawModeData": "mutation {\n    createTag (\n        input: {clientMutationId: \"abc\", text: \"testing\"}\n    ) {\n        clientMutationId,\n        tag{\n        id,\n        text\n}       \n        }\n}"
+			"rawModeData": "mutation {\n    createTag (\n        input: {clientMutationId: \"abc\", text: \"testing\"}\n    ) {\n        clientMutationId,\n        viewer {\n            tags {\n                id,\n            }\n        }\n    }\n}"
 		},
 		{
 			"id": "d285fd51-38b8-f4c1-0088-adc6cf39d04c",
