@@ -199,7 +199,7 @@
 		{
 			"id": "4ad44fb6-18ca-f8ba-c2bd-9fa35f9d2f61",
 			"headers": "",
-			"url": "http://localhost:8000/users?username=testtest",
+			"url": "http://localhost:8000/users?username=test",
 			"preRequestScript": "",
 			"pathVariables": {},
 			"method": "GET",
@@ -209,7 +209,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1449766910600,
+			"time": 1450446682498,
 			"name": "Get User by username",
 			"description": "",
 			"collectionId": "ae28de97-1ecb-fa77-319a-b1149c3d00ed"
