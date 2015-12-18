@@ -275,12 +275,12 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1450467307120,
+			"time": 1450467560759,
 			"name": "Create post",
 			"description": "",
 			"collectionId": "38c56c3b-b2f8-d456-f230-6b0afced9948",
 			"responses": [],
-			"rawModeData": "mutation {\n\n    createPost(\n        input: {clientMutationId: \"abc\", title: \"first post\", body: \"this is my first post\"}\n    )\n    {\n        clientMutationId,\n        user {\n            name,\n            email,\n        },\n        postEdge {\n            cursor,\n            node {\n                id,\n                title,\n                url_path,\n                body,\n            }\n        }\n    }\n\n}"
+			"rawModeData": "mutation {\n\n    createPost(\n        input: {clientMutationId: \"abc\", title: \"first post\", body: \"this is my first post\"}\n    )\n    {\n        clientMutationId,\n        viewer {\n            name,\n            email,\n        },\n        postEdge {\n            cursor,\n            node {\n                id,\n                title,\n                url_path,\n                body,\n            }\n        }\n    }\n\n}"
 		},
 		{
 			"id": "bb5e55f3-93f6-ef59-56f2-c9d50f71c015",

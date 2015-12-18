@@ -21,7 +21,7 @@ let createPostMutation = new mutationWithClientMutationId({
     body: {type: new GraphQLNonNull(GraphQLString)},
   },
   outputFields: {
-    user: {
+    viewer: {
       type: userType,
       resolve: (data) => {
         return data.user;
