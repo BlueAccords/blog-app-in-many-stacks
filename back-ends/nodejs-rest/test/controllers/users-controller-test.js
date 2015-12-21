@@ -2,9 +2,9 @@
 /* eslint no-undef: 0*/
 import { expect } from 'chai';
 import request from 'supertest';
-import { createDB } from '../test-helper';
 import factory from '../factory.js';
 import app from '../../app';
+import { createDB, destroyDB } from '../test-helper';
 
 describe('User requests', () => {
   before((done) => {
@@ -12,7 +12,10 @@ describe('User requests', () => {
   });
 
   after(() => {
-    app.close();
+    destroyDB()
+    .then(() => {
+      app.close();
+    });
   });
 
   it('should register a user when given the correct credentials', (done) => {

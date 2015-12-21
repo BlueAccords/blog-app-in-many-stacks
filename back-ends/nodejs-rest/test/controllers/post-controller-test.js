@@ -1,8 +1,19 @@
 /* eslint no-undef: 0*/
 import { createDB, destroyDB } from '../test-helper';
-//import app from '../../app';
+import app from '../../app';
 
 describe('Posts:', () => {
+  before((done) => {
+    createDB(done);
+  });
+
+  after(() => {
+    destroyDB()
+    .then(() => {
+      app.close();
+    });
+  });
+
   describe('Create', () => {
     xit('should allow a user to create a post');
     xit('should not allow someone with no account to create a post');
