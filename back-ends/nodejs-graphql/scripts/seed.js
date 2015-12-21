@@ -20,17 +20,16 @@ if(process.env.NODE_ENV === 'development') {
   // User seeds
   User.remove({})
   .then(() => {
-    bcrypt.hash('testtest', 8, (err, hash) => {
-      let user = new User({
-        _id: '5634d4760066be016bf10c9a',
-        name: 'Bruce Wayne',
-        email: 'test@test.com',
-        username: 'test',
-        password: hash,
-      });
-
-      return user.save();
+    let user = new User({
+      _id: '5634d4760066be016bf10c9a',
+      name: 'Bruce Wayne',
+      email: 'test@test.com',
+      username: 'test',
+      // Password below is testtest. Hard coded to make deterministic
+      password: '$2a$08$0vfHFU/ukEKfVfaS8oQAwuSdmrpMmz6H75ZvMck8TFshFNTKVub.K',
     });
+
+    return user.save();
   })
   .then(() => {
     bcrypt.hash('testtest', 8, (err, hash) => {
@@ -99,7 +98,7 @@ if(process.env.NODE_ENV === 'development') {
       body: 'Step 1: heat up water, step 2: put the eggs in the water, step 3: boil for 10 minutes, step 4: run cold water over them',
       _author: '5634d4760066be016bf10c9a', // bruce wayne
       url_path:'how-to-boil-an-egg',
-      tags: ['5672c893dfad0d9fc16ae481', '5672c893dfad0d9fc16ae47f']
+      tags: ['5672c893dfad0d9fc16ae481', '5672c893dfad0d9fc16ae47f'],
     });
     return post.save();
   })

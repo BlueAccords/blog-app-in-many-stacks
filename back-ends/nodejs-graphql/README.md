@@ -6,13 +6,11 @@ The Blog Backend API.
 Eslint should handle the majority of conventions but please also [read this](https://gist.github.com/chiedojohn/50f5cf4e900523e24586)
 
 ## Setup
-1. Copy .env.example to .env and populate all necessary values.
+1. Install your packages with `npm install`
 
-2. Install your packages with `npm install`
+2. Make sure you have mongodb installed.
 
-3. Make sure you have mongodb installed.
-
-4. To get seed data run npm run seed
+3. To get seed data run npm run seed
 
 ## Development
 
