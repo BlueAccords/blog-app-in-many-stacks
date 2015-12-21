@@ -47,8 +47,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Log requests to the console
-app.use(morgan('dev'));
+if(env === 'development') {
+  // Log requests to the console
+  app.use(morgan('dev'));
+}
 // Routes
 app.use(express.static(__dirname + '/../api-resources/rest/build'));
 app.get('/api-documentation', (req, res) => {
