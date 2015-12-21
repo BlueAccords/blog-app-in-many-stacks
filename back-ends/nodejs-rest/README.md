@@ -4,13 +4,11 @@
 
 1. Make sure you have an `NODE_ENV` environment variable set on your machine and have it set to 'development'.
 
-2. Copy `.env.example` to `.env` and populate all necessary values.
+2. Install your packages by running `npm install`.
 
-3. Install your packages by running `npm install`.
+3. Make sure you will need to have MongoDB installed.
 
-4. Make sure you will need to have MongoDB installed.
-
-5. To get seed data run. `npm run seed`
+4. To get seed data run. `npm run seed`
 
 ### Conventions
 ESLint will handle most of the style and conventions of the project.

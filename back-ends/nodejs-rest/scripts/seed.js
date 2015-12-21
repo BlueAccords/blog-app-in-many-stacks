@@ -20,17 +20,16 @@ if(process.env.NODE_ENV === 'development') {
   // User seeds
   User.remove({})
   .then(() => {
-    bcrypt.hash('testtest', 8, (err, hash) => {
-      let user = new User({
-        _id: '5634d4760066be016bf10c9a',
-        name: 'Bruce Wayne',
-        email: 'test@test.com',
-        username: 'test',
-        password: hash,
-      });
-
-      return user.save();
+    let user = new User({
+      _id: '5634d4760066be016bf10c9a',
+      name: 'Bruce Wayne',
+      email: 'test@test.com',
+      username: 'test',
+      // Hardcoded password to make deterministic
+      password: '$2a$08$VfIdeznkm4ebLtloSHiEqO26RTkGSjRoLEI.mB/EkMPt/5jipIS1e',
     });
+
+    return user.save();
   })
   .then(() => {
     bcrypt.hash('testtest', 8, (err, hash) => {
