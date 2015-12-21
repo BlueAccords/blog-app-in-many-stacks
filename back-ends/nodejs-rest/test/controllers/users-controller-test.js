@@ -2,7 +2,7 @@
 /* eslint no-undef: 0*/
 import { expect } from 'chai';
 import request from 'supertest';
-import { setupDB } from '../test-helper';
+import { createDB } from '../test-helper';
 import factory from '../factory.js';
 
 describe('User requests', () => {
@@ -10,7 +10,7 @@ describe('User requests', () => {
 
   before((done) => {
     app = require('../../app');
-    setupDB(done);
+    createDB(done);
   });
 
   after(() => {
