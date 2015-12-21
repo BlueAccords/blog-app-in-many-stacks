@@ -4,7 +4,8 @@ require('babel/register');
 /*
  * Only to be used in development
  */
-require('dotenv').load();
+require('dotenv').config({silent: true});
+
 if(process.env.NODE_ENV === 'development') {
   let config   = require('../config/application');
   let mongoose = require('mongoose');
