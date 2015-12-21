@@ -15,7 +15,7 @@ let general = {
     port: process.env.DB_PORT || 27017,
     user: process.env.DB_USER || '',
     password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || 'blog_app',
+    database: process.env.DB_NAME || 'blog_app_in_many_stacks_nodejs_graphql',
   },
 };
 

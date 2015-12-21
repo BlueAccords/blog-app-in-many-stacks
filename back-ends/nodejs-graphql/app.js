@@ -43,7 +43,9 @@ app.use(morgan('dev'));
 app.use('/media', express.static(__dirname + '/media'));
 app.use(require('./app/routes'));
 
-let server = app.listen(process.env.WEB_PORT, () => {
+let PORT = process.env.PORT || 8000;
+
+let server = app.listen(PORT, () => {
   let host = server.address().address;
   let port = server.address().port;
 
