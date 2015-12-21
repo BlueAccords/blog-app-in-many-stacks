@@ -6,6 +6,14 @@ import config from '../../config/application';
 import User from './../models/User';
 import { generalErrorResponse, permissionsErrorResponse, unauthorizedErrorResponse } from '../utils/error-factory';
 
+const tokenOpts = {};
+// Makes sure tokens are deterministic on development
+if(process.env.NODE_ENV === 'development') {
+  tokenOpts['noTimestamp'] = true;
+} else {
+  tokenOpts['expiresIn'] = 1440 * 60;
+}
+
 module.exports.authenticate = (req, res) => {
   return User.findOne({
     email: req.body.user.email.toLowerCase(),
@@ -20,9 +28,17 @@ module.exports.authenticate = (req, res) => {
     } else {
       return bcrypt.compare(req.body.user.password, user.password, (err, result) => {
         if (result) {
-          let token = jwt.sign(user, config.jwt.secret, {
-            expiresIn: 1440 * 60,
-          });
+          let x = {
+            name: user.name,
+            username: user.username,
+            email: user.email,
+          };
+          // Make the token even more secure in production, while keeping
+          // it determistic in development
+          if(process.env.NODE_ENV === 'production') {
+            x['password'] = user.password;
+          }
+          let token = jwt.sign(x, config.jwt.secret, tokenOpts);
 
           return res.json({
             user: {
@@ -69,9 +85,17 @@ module.exports.create = (req, res) => {
     }
   })
   .then(user => {
-    let token = jwt.sign(user, config.jwt.secret, {
-      expiresIn: 1440 * 60,
-    });
+    let x = {
+      name: user.name,
+      username: user.username,
+      email: user.email,
+    };
+    // Make the token even more secure in production, while keeping
+    // it determistic in development
+    if(process.env.NODE_ENV === 'production') {
+      x['password'] = user.password;
+    }
+    let token = jwt.sign(x, config.jwt.secret, tokenOpts);
 
     return res.json({
       user: {
@@ -81,7 +105,7 @@ module.exports.create = (req, res) => {
         username: user.username,
       },
       token: token,
-    });
+    }).end();
   });
 };
 
