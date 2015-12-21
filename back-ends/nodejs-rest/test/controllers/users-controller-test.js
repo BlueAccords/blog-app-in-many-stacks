@@ -27,7 +27,6 @@ describe('User requests', () => {
 
     request(app)
     .post('/users')
-    .set('Accept', /json/)
     .send({user: user})
     .expect(200)
     .end((err, res) => {
@@ -43,7 +42,6 @@ describe('User requests', () => {
     .then((user) => {
       request(app)
       .post('/users')
-      .set('Accept', /json/)
       .send({user: {
         name: user.name,
         email: user.email,
