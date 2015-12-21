@@ -4,12 +4,10 @@ import { expect } from 'chai';
 import request from 'supertest';
 import { createDB } from '../test-helper';
 import factory from '../factory.js';
+import app from '../../app';
 
 describe('User requests', () => {
-  let  app;
-
   before((done) => {
-    app = require('../../app');
     createDB(done);
   });
 
