@@ -357,10 +357,10 @@
  */
 
 /**
- * @api {post} /posts/:post_id/tags Create a tag
+ * @api {post} /tags Create a tag
  * @apiName Create a tag
  * @apiGroup Tags
- * @apiDescription - Any user that is logged in can create a tag
+ * @apiDescription - Any user that is logged in can create a tag. A tag is unique so if an attempt to create a tag that already exists is made, the existing tag will be returned.
  *
  * @apiUse tagResponse
  * @apiUse tagFieldErrors
