@@ -4,6 +4,14 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User';
 import config from '../../config/application';
 
+const tokenOpts = {};
+// Makes sure tokens are deterministic on development
+if(process.env.NODE_ENV === 'development') {
+  tokenOpts['noTimestamp'] = true;
+} else {
+  tokenOpts['expiresIn'] = 1440 * 60;
+}
+
 module.exports.create = function(req, res) {
   bcrypt.hash(req.body.user.password, 8, (err, hash) => {
     let user = new User({
@@ -51,9 +59,17 @@ module.exports.authenticate = function(req, res) {
 
           // if user is found and password is right
           // create a token
-          let token = jwt.sign(user, config.jwt.secret, {
-            expiresIn: 1440 * 60, // expires in 24 hours (by seconds)
-          });
+          let x = {
+            name: user.name,
+            username: user.username,
+            email: user.email,
+          };
+          // Make the token even more secure in production, while keeping
+          // it determistic in development
+          if(process.env.NODE_ENV === 'production') {
+            x['password'] = user.password;
+          }
+          let token = jwt.sign(user, config.jwt.secret, tokenOpts);
 
           // return the information including token as JSON
           res.json({
