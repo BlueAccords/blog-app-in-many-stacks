@@ -16,7 +16,7 @@ describe('User requests', () => {
   });
 
   it('should register a user when given the correct credentials', (done) => {
-    let user ={
+    let user = {
       name: 'Bob Nolan',
       email: 'bob@bob.com',
       username: 'delicious',
@@ -28,8 +28,6 @@ describe('User requests', () => {
     .send({user: user})
     .expect(200)
     .end((err, res) => {
-      expect(err).to.equal(null);
-      expect(res.body.user.name).to.equal(user.name);
       expect(res.body.user).to.be.an('object');
       done();
     });

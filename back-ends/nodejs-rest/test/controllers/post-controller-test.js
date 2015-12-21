@@ -2,7 +2,9 @@
 import { createDB, destroyDB } from '../test-helper';
 import app from '../../app';
 import { expect } from 'chai';
+import factory from '../factory.js';
 import request from 'supertest';
+import { getToken } from '../../app/utils/functions';
 
 describe('Posts:', () => {
   before((done) => {
@@ -14,26 +16,24 @@ describe('Posts:', () => {
   });
 
   describe('Create', () => {
-    it('should register a user when given the correct credentials', (done) => {
-      let user ={
-        name: 'Bob Nolan',
-        email: 'bob@bob.com',
-        username: 'delicious',
-        password: 'testtest',
-      } ;
-
-      request(app)
-      .post('/users')
-      .send({user: user})
-      .expect(200)
-      .end((err, res) => {
-        expect(err).to.equal(null);
-        expect(res.body.user.name).to.equal(user.name);
-        expect(res.body.user).to.be.an('object');
-        done();
+    it('should allow a user to create a post', (done) => {
+      factory.create('user')
+      .then((user) => {
+        let token = getToken(user);
+        request(app)
+        .post(`/posts`)
+        .set('Authorization', `Bearer: ${token}`)
+        .send({post: {
+          title: 'Champion',
+          body: 'Nice body',
+        }})
+        .expect(200)
+        .end((err, res) => {
+          expect(res.body.post.title).to.equal('Champion');
+          done();
+        });
       });
     });
-    xit('should allow a user to create a post');
     xit('should not allow someone with no account to create a post');
   });
 
