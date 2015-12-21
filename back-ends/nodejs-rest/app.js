@@ -32,11 +32,6 @@ if(env === 'development') {
   mongoose.connect(`mongodb://${config.db.user}:${config.db.password}@${config.db.host}:${config.db.port}/${config.db.database}`);
 }
 
-// on successful connect
-mongoose.connection.on('connected', () => {
-  console.log('Mongoose connected');
-});
-
 // If the connection throws an error
 mongoose.connection.on('error',(err) => {
   console.log('Mongoose error: ' + err);

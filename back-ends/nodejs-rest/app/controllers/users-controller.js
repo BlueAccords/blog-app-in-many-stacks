@@ -1,18 +1,9 @@
 'use strict';
 
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import config from '../../config/application';
 import User from './../models/User';
+import { getToken } from '../utils/functions';
 import { generalErrorResponse, permissionsErrorResponse, unauthorizedErrorResponse } from '../utils/error-factory';
-
-const tokenOpts = {};
-// Makes sure tokens are deterministic on development
-if(process.env.NODE_ENV === 'development') {
-  tokenOpts['noTimestamp'] = true;
-} else {
-  tokenOpts['expiresIn'] = 1440 * 60;
-}
 
 module.exports.authenticate = (req, res) => {
   return User.findOne({
@@ -28,14 +19,7 @@ module.exports.authenticate = (req, res) => {
     } else {
       return bcrypt.compare(req.body.user.password, user.password, (err, result) => {
         if (result) {
-          let x = {
-            _id: user._id,
-            username: user.username,
-            email: user.email,
-            password: user.password,
-          };
-
-          let token = jwt.sign(x, config.jwt.secret, tokenOpts);
+          let token = getToken(user);
 
           return res.json({
             user: {
@@ -74,13 +58,7 @@ module.exports.create = (req, res) => {
 
       return user.save()
       .then(user => {
-        let x = {
-          _id: user._id,
-          username: user.username,
-          email: user.email,
-          password: user.password,
-        };
-        let token = jwt.sign(x, config.jwt.secret, tokenOpts);
+        let token = getToken(user);
 
         return res.json({
           user: {
@@ -145,14 +123,7 @@ module.exports.update = (req, res) => {
     return user.save();
   })
   .then(user => {
-    let x = {
-      _id: user._id,
-      username: user.username,
-      email: user.email,
-      password: user.password,
-    };
-
-    let token = jwt.sign(x, config.jwt.secret, tokenOpts);
+    let token = getToken(user);
 
     return res.json({
       user: {
