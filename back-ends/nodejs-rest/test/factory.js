@@ -1,5 +1,6 @@
 import factoryGirl from 'factory-girl';
 import User from '../app/models/User';
+import Post from '../app/models/Post';
 import faker from 'faker';
 import bluebird from 'bluebird';
 
@@ -10,6 +11,11 @@ factory.define('user', User, {
   email: faker.internet.email(),
   username: faker.internet.userName(),
   password: faker.internet.password(),
+});
+
+factory.define('post', Post, {
+  title: faker.lorem.sentence(),
+  body: faker.lorem.paragraphs(),
 });
 
 export default factory;

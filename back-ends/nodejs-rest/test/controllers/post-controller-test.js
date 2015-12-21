@@ -20,18 +20,18 @@ describe('Posts:', () => {
       factory.create('user')
       .then((user) => {
         let token = getToken(user);
-
-        request(app)
-        .post(`/posts`)
-        .set('Authorization', `Bearer: ${token}`)
-        .send({post: {
-          title: 'Champion',
-          body: 'Nice body',
-        }})
-        .expect(200)
-        .end((err, res) => {
-          expect(res.body.post.title).to.equal('Champion');
-          done();
+        factory.build('post')
+        .then((post) => {
+          request(app)
+          .post(`/posts`)
+          .set('Authorization', `Bearer: ${token}`)
+          .send({post: post})
+          .expect(200)
+          .end((err, res) => {
+            expect(res.body.post.title).to.equal(post.title);
+            expect(res.body.post.body).to.equal(post.body);
+            done();
+          });
         });
       });
     });
