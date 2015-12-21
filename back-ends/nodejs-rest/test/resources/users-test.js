@@ -18,17 +18,17 @@ describe('User requests', () => {
   });
 
   it('should register a user when given the correct credentials', (done) => {
-    let user = {
+    let user ={
       name: 'Bob Nolan',
       email: 'bob@bob.com',
       username: 'delicious',
       password: 'testtest',
-    };
+    } ;
 
     request(app)
     .post('/users')
     .set('Accept', /json/)
-    .send(user)
+    .send({user: user})
     .expect(200)
     .end((err, res) => {
       expect(err).to.equal(null);
@@ -44,17 +44,16 @@ describe('User requests', () => {
       request(app)
       .post('/users')
       .set('Accept', /json/)
-      .send({
+      .send({user: {
         name: user.name,
         email: user.email,
         username: user.username,
         password: user.password,
-      })
-      .expect(200)
+      }})
+      .expect(400)
       .end((err, res) => {
-        expect(err).to.equal(null);
-        expect(res.body.msg).to.equal('This Username or Email is already taken.');
-        expect(res.body).to.be.an('object');
+        let x = JSON.parse(res.text);
+        expect(x['errors']['email'][0]).to.equal('This Username or Email is already taken.');
         done();
       });
     });
