@@ -145,12 +145,22 @@ module.exports.update = (req, res) => {
     return user.save();
   })
   .then(user => {
+    let x = {
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      password: user.password,
+    };
+
+    let token = jwt.sign(x, config.jwt.secret, tokenOpts);
+
     return res.json({
       user: {
         name: user.name,
         email: user.email,
         username: user.username,
       },
+      token: token,
     });
   })
   .catch((err) => {
