@@ -12,10 +12,7 @@ describe('User requests', () => {
   });
 
   after(() => {
-    destroyDB()
-    .then(() => {
-      app.close();
-    });
+    destroyDB();
   });
 
   it('should register a user when given the correct credentials', (done) => {
