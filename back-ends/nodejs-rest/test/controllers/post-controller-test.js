@@ -20,6 +20,7 @@ describe('Posts:', () => {
       factory.create('user')
       .then((user) => {
         let token = getToken(user);
+
         request(app)
         .post(`/posts`)
         .set('Authorization', `Bearer: ${token}`)
