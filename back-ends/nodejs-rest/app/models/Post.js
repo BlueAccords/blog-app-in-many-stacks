@@ -6,27 +6,10 @@ import Promise from 'bluebird';
 mongoose.Promise = Promise;
 
 let PostSchema = new mongoose.Schema({
-  url_path: {
-    type: String,
-    required: true,
-    trim: true,
-    unique: true,
-  },
-  title: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  body: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  _author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
+  url_path: { type: String, required: true, trim: true, unique: true},
+  title: { type: String, required: true, trim: true },
+  body: { type: String, required: true, trim: true },
+  _author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
 }, {
   timestamps: true,
