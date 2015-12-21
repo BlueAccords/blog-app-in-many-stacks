@@ -6,7 +6,7 @@ import factory from '../factory.js';
 import request from 'supertest';
 import { getToken } from '../../app/utils/functions';
 
-describe('Posts:', () => {
+describe('Posts', () => {
   before((done) => {
     createDB(done);
   });
