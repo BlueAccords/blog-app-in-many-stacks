@@ -57,5 +57,8 @@ describe('User requests', () => {
     });
   });
 
+  xit('should allow a user to update his profile');
+  xit('should not allow a user to update another user\'s profile');
+  xit('should allow a user to delete his own profile');
+  xit('should not allow a user to delete another user\'s profile');
 });
-
