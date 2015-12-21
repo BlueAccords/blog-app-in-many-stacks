@@ -32,11 +32,6 @@ if(env === 'development') {
   mongoose.connect(`mongodb://${config.db.user}:${config.db.password}@${config.db.host}:${config.db.port}/${config.db.database}`);
 }
 
-// on successful connect
-mongoose.connection.on('connected', () => {
-  console.log('Mongoose connected');
-});
-
 // If the connection throws an error
 mongoose.connection.on('error',(err) => {
   console.log('Mongoose error: ' + err);
@@ -52,8 +47,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Log requests to the console
-app.use(morgan('dev'));
+if(env === 'development') {
+  // Log requests to the console
+  app.use(morgan('dev'));
+}
 // Routes
 app.use(express.static(__dirname + '/../api-resources/rest/build'));
 app.get('/api-documentation', (req, res) => {

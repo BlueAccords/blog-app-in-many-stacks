@@ -1,7 +1,13 @@
 let mongoose = require('mongoose');
 let mockgoose     = require('mockgoose');
 
-module.exports.setupDB = (done) => {
-  mockgoose(mongoose);
+
+mockgoose(mongoose);
+
+module.exports.createDB = (done) => {
   mongoose.connect('mongodb://localhost/test', done);
+};
+
+module.exports.destroyDB = () => {
+  mongoose.disconnect();
 };

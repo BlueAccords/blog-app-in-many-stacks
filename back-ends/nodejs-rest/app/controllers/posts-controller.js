@@ -9,18 +9,14 @@ module.exports.create = (req, res) => {
     return unauthorizedErrorResponse(res);
   }
 
-  let now = new Date();
-  let path = req.body.post.title.toLowerCase().split(' ').join('-');
-  let author = req.currentUser.username;
+  let path = req.body.post.title.replace(/\s/g, '-') + Date.now();
 
   return Post.create({
-    url_path: path + '-' + author,
+    url_path: path,
     title: req.body.post.title,
     body: req.body.post.body,
     _author: req.currentUser._id,
     tags: [],
-    date_created: now,
-    date_modified: now,
   })
   .then(post => {
     return res.json({
@@ -85,10 +81,7 @@ module.exports.update = (req, res) => {
     return unauthorizedErrorResponse(res);
   }
 
-  let author = req.currentUser.username;
-  let path = req.body.post.url_path ?
-  req.body.post.url_path.toLowerCase().split(' ').join('-') + '-' + author : '';
-
+  let path = req.body.post.url_path.replace(/\s/g, '-');
   return Post.findById(req.params.id)
   .populate('tags')
   .then(post => {
@@ -97,8 +90,6 @@ module.exports.update = (req, res) => {
       post.title = req.body.post.title || post.title;
       post.body = req.body.post.body || post.body;
       post._author = post.user_id;
-      post.date_created = post.date_created;
-      post.date_modified = new Date();
 
       return post.save();
     } else {
