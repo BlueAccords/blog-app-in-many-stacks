@@ -72,7 +72,26 @@ module.exports.create = (req, res) => {
         password: bcrypt.hashSync(req.body.user.password, 8),
       });
 
-      return user.save();
+      return user.save()
+      .then(user => {
+        let x = {
+          _id: user._id,
+          username: user.username,
+          email: user.email,
+          password: user.password,
+        };
+        let token = jwt.sign(x, config.jwt.secret, tokenOpts);
+
+        return res.json({
+          user: {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            username: user.username,
+          },
+          token: token,
+        }).end();
+      });
     } else {
       return res.status(400).json({
         errors: {
@@ -80,25 +99,6 @@ module.exports.create = (req, res) => {
         },
       });
     }
-  })
-  .then(user => {
-    let x = {
-      _id: user._id,
-      username: user.username,
-      email: user.email,
-      password: user.password,
-    };
-    let token = jwt.sign(x, config.jwt.secret, tokenOpts);
-
-    return res.json({
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        username: user.username,
-      },
-      token: token,
-    }).end();
   });
 };
 
