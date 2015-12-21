@@ -8,6 +8,7 @@ To get started, you will need to choose a front-end and from the list below. The
 
 - ReactJS + Redux (Coming Soon)
 - ReactJS + RelayJS (Coming Soon)
+- ReactJS + BaconJS (Coming Soon)
 - ReactJS + FalcorJS (Coming Soon)
 - CycleJS + RXJS (Coming Soon)
 - AngularJS 2.0 (Coming Soon)
