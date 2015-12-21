@@ -29,15 +29,12 @@ module.exports.authenticate = (req, res) => {
       return bcrypt.compare(req.body.user.password, user.password, (err, result) => {
         if (result) {
           let x = {
-            name: user.name,
+            _id: user._id,
             username: user.username,
             email: user.email,
+            password: user.password,
           };
-          // Make the token even more secure in production, while keeping
-          // it determistic in development
-          if(process.env.NODE_ENV === 'production') {
-            x['password'] = user.password;
-          }
+
           let token = jwt.sign(x, config.jwt.secret, tokenOpts);
 
           return res.json({
@@ -86,15 +83,11 @@ module.exports.create = (req, res) => {
   })
   .then(user => {
     let x = {
-      name: user.name,
+      _id: user._id,
       username: user.username,
       email: user.email,
+      password: user.password,
     };
-    // Make the token even more secure in production, while keeping
-    // it determistic in development
-    if(process.env.NODE_ENV === 'production') {
-      x['password'] = user.password;
-    }
     let token = jwt.sign(x, config.jwt.secret, tokenOpts);
 
     return res.json({
