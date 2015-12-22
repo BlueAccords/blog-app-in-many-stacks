@@ -17,21 +17,21 @@ describe('Posts', () => {
 
   describe('Create', () => {
     it('should allow a user to create a post', (done) => {
+      let post = factory.buildSync('post');
+
       factory.create('user')
       .then((user) => {
         let token = getToken(user);
-        factory.build('post')
-        .then((post) => {
-          request(app)
-          .post(`/posts`)
-          .set('Authorization', `Bearer: ${token}`)
-          .send({post: post})
-          .expect(200)
-          .end((err, res) => {
-            expect(res.body.post.title).to.equal(post.title);
-            expect(res.body.post.body).to.equal(post.body);
-            done();
-          });
+
+        request(app)
+        .post(`/posts`)
+        .set('Authorization', `Bearer: ${token}`)
+        .send({post: post})
+        .expect(200)
+        .end((err, res) => {
+          expect(res.body.post.title).to.equal(post.title);
+          expect(res.body.post.body).to.equal(post.body);
+          done();
         });
       });
     });
