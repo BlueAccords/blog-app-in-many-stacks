@@ -7,15 +7,15 @@ import bluebird from 'bluebird';
 let factory = factoryGirl.promisify(bluebird);
 
 factory.define('user', User, {
-  name: faker.name.findName(),
-  email: faker.internet.email(),
-  username: faker.internet.userName(),
-  password: faker.internet.password(),
+  name: () => faker.name.findName(),
+  email: () => faker.internet.email(),
+  username: () => faker.internet.userName(),
+  password: () => faker.internet.password(),
 });
 
 factory.define('post', Post, {
-  title: faker.lorem.sentence(),
-  body: faker.lorem.paragraphs(),
+  title: () => faker.lorem.sentence(),
+  body: () => faker.lorem.paragraphs(),
 });
 
 export default factory;
