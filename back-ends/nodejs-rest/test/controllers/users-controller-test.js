@@ -5,10 +5,11 @@ import request from 'supertest';
 import factory from '../factory.js';
 import app from '../../app';
 import { createDB, destroyDB } from '../test-helper';
+import { getToken } from '../../app/utils/functions';
 
 describe('Users', () => {
-  before((done) => {
-    createDB(done);
+  before(() => {
+    createDB();
   });
 
   after(() => {
@@ -48,7 +49,25 @@ describe('Users', () => {
   });
 
   describe('Show', () => {
-    xit('should return the given user if it is the current user');
+    it('should return the given user if it is the current user', (done) => {
+      let user = factory.buildSync('user');
+
+      user.save()
+      .then((user) => {
+        let token = getToken(user);
+
+        request(app)
+        .get(`/users/${user._id}/?token=${token}`)
+        .expect(200)
+        .end((err, res) => {
+          expect(res.body.user.name).to.equal(user.name);
+          expect(res.body.user.email).to.equal(user.email);
+          expect(res.body.user.username).to.equal(user.username);
+          done();
+        });
+      });
+    });
+
     xit('should not return the given user if it is not the current user');
     xit('should return a user by a given username');
   });
