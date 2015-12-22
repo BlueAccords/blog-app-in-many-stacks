@@ -81,11 +81,12 @@ module.exports.update = (req, res) => {
     return unauthorizedErrorResponse(res);
   }
 
-  let path = req.body.post.url_path.replace(/\s/g, '-');
   return Post.findById(req.params.id)
   .populate('tags')
   .then(post => {
     if (post._author.toString() === req.currentUser._id.toString()) {
+      let path = req.body.post.url_path.replace(/\s/g, '-');
+
       post.url_path = path || post.url_path;
       post.title = req.body.post.title || post.title;
       post.body = req.body.post.body || post.body;
