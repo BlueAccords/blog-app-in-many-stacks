@@ -8,7 +8,9 @@ import { getToken } from '../../app/utils/functions';
 
 describe('Posts', () => {
   before((done) => {
-    createDB(done);
+    createDB(() => {
+      done();
+    });
   });
 
   after(() => {

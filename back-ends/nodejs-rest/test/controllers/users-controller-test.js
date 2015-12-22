@@ -9,7 +9,9 @@ import { getToken } from '../../app/utils/functions';
 
 describe('Users', () => {
   before((done) => {
-    createDB(done);
+    createDB(() => {
+      done();
+    });
   });
 
   after(() => {
