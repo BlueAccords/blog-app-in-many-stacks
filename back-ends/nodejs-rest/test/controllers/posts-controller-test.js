@@ -38,13 +38,26 @@ describe('Posts', () => {
     xit('should not allow someone with no account to create a post');
   });
 
+  describe('Show', () => {
+    xit('should return a list of all posts');
+    xit('should return a post by ID');
+    xit('should return all posts by a given username');
+    xit('should return all posts with a given tag');
+    xit('should return all posts with a url_path');
+  });
+
   describe('Update', () => {
     xit('should allow a user to update a post he owns');
-    xit('should allow a user to update a post he owns');
+    xit('should not allow a user to update a post he doesn\'t own');
   });
 
   describe('Delete', () => {
+    xit('should allow a user to delete a post he owns');
     xit('should not allow a user to delete a post he does not own');
-    xit('should not allow a user to delete a post he does not own');
+  });
+
+  describe('Toggle tags', () => {
+    xit('should add a tag to a post');
+    xit('should remove a tag from a post');
   });
 });

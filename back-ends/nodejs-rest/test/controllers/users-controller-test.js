@@ -55,6 +55,12 @@ describe('Users', () => {
     });
   });
 
+  describe('Show', () => {
+    xit('should return the given user if it is the current user');
+    xit('should not return the given user if it is not the current user');
+    xit('should return a user by a given username');
+  });
+
   describe('Update', () => {
     xit('should allow a user to update his profile');
     xit('should not allow a user to update another user\'s profile');
