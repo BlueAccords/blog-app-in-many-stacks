@@ -1,6 +1,5 @@
-let mongoose = require('mongoose');
-let mockgoose     = require('mockgoose');
-
+import mongoose from 'mongoose';
+import mockgoose from 'mockgoose';
 
 mockgoose(mongoose);
 
