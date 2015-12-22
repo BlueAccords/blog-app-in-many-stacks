@@ -8,8 +8,8 @@ import { createDB, destroyDB } from '../test-helper';
 import { getToken } from '../../app/utils/functions';
 
 describe('Users', () => {
-  before(() => {
-    createDB();
+  before((done) => {
+    createDB(done);
   });
 
   after(() => {
