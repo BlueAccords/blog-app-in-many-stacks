@@ -85,21 +85,21 @@ module.exports.update = (req, res) => {
   return Post.findById(req.params.id)
   .populate('tags')
   .then(post => {
-    if (String(post._author) === req.currentUser._id) {
+    if (post._author.toString() === req.currentUser._id.toString()) {
       post.url_path = path || post.url_path;
       post.title = req.body.post.title || post.title;
       post.body = req.body.post.body || post.body;
       post._author = post.user_id;
 
-      return post.save();
+      return post.save()
+      .then(post => {
+        return res.json({
+          post: post,
+        });
+      });
     } else {
       return permissionsErrorResponse(res);
     }
-  })
-  .then(post => {
-    return res.json({
-      post: post,
-    });
   })
   .catch((err) => {
     return generalErrorResponse(res);
