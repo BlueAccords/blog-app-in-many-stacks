@@ -17,12 +17,7 @@ describe('Users', () => {
 
   describe('Create', () => {
     it('should register a user when given the correct credentials', (done) => {
-      let user = {
-        name: 'Bob Nolan',
-        email: 'bob@bob.com',
-        username: 'delicious',
-        password: 'testtest',
-      } ;
+      let user = factory.buildSync('user');
 
       request(app)
       .post('/users')
@@ -35,16 +30,13 @@ describe('Users', () => {
     });
 
     it('should not register a user that already exists', (done) => {
-      factory.create('user')
+      let user = factory.buildSync('user');
+
+      user.save()
       .then((user) => {
         request(app)
         .post('/users')
-        .send({user: {
-          name: user.name,
-          email: user.email,
-          username: user.username,
-          password: user.password,
-        }})
+        .send({user: user})
         .expect(400)
         .end((err, res) => {
           let x = JSON.parse(res.text);

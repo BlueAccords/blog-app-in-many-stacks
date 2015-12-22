@@ -18,8 +18,9 @@ describe('Posts', () => {
   describe('Create', () => {
     it('should allow a user to create a post', (done) => {
       let post = factory.buildSync('post');
+      let user = factory.buildSync('user');
 
-      factory.create('user')
+      user.save()
       .then((user) => {
         let token = getToken(user);
 
