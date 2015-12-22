@@ -305,7 +305,7 @@
  */
 
 /**
- * @api {get} /comments/:id Delete comment
+ * @api {delete} /comments/:id Delete comment
  * @apiName Delete comment
  * @apiGroup Comments
  *
@@ -381,7 +381,7 @@
  */
 
 /**
- * @api {get} /tags/:id Delete tag
+ * @api {delete} /tags/:id Delete tag
  * @apiName Delete tag
  * @apiGroup Tags
  * @apiDescription - Only a site admin can delete a tag once it's been created. No need to implement now.
