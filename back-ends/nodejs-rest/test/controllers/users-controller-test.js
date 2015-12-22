@@ -26,7 +26,7 @@ describe('Users', () => {
       .post('/users')
       .send({user: user})
       .expect(200)
-      .end((err, res) => {
+      .then((res) => {
         expect(res.body.user).to.be.an('object');
         done();
       });
@@ -41,7 +41,7 @@ describe('Users', () => {
         .post('/users')
         .send({user: user})
         .expect(400)
-        .end((err, res) => {
+        .then((res) => {
           let x = JSON.parse(res.text);
           expect(x['errors']['email'][0]).to.equal('This Username or Email is already taken.');
           done();
@@ -61,7 +61,7 @@ describe('Users', () => {
         request(app)
         .get(`/users/${user._id}/?token=${token}`)
         .expect(200)
-        .end((err, res) => {
+        .then((res) => {
           expect(res.body.user.name).to.equal(user.name);
           expect(res.body.user.email).to.equal(user.email);
           expect(res.body.user.username).to.equal(user.username);
