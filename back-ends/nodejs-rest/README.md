@@ -25,6 +25,10 @@ ESLint will handle most of the style and conventions of the project.
 
 ### Testing:
 
+Tests are written using mocha. You can run tests with the following:
+
+  	npm run test
+
 A sample Postman collection is provided [here](../api-resources/rest/blog-app-rest.json.postman_collection) that you can import and use for testing the API.
 
 ### Documentation
