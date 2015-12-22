@@ -10,19 +10,12 @@ describe('Posts', () => {
   let user1;
   let user2;
 
-  let newPost1;
-
   before((done) => {
     createDB(() => {
       factory.createMany('user', 2)
       .then((users) => {
         user1 = users[0];
         user2 = users[1];
-        return factory.buildMany('post', 2);
-      })
-      .then((posts) => {
-        newPost1 = posts[0];
-
         done();
       });
     });
@@ -35,23 +28,54 @@ describe('Posts', () => {
   describe('Create', () => {
     it('should allow a user to create a post', (done) => {
       let token = getToken(user1);
+      let newPost = factory.buildSync('post');
 
       request(app)
       .post(`/posts`)
       .set('Authorization', `Bearer: ${token}`)
-      .send({post: newPost1})
+      .send({post: newPost})
       .expect(200)
-      .end((err, res) => {
-        expect(res.body.post.title).to.equal(newPost1.title);
-        expect(res.body.post.body).to.equal(newPost1.body);
+      .then((res) => {
+        expect(res.body.post.title).to.equal(newPost.title);
+        expect(res.body.post.body).to.equal(newPost.body);
         done();
       });
     });
-    xit('should not allow someone with no account to create a post');
+
+    it('should not allow someone with no account to create a post', (done) => {
+      let newPost = factory.buildSync('post');
+
+      request(app)
+      .post(`/posts`)
+      .send({post: newPost})
+      .expect(401)
+      .then((res) => {
+        done();
+      });
+    });
   });
 
   describe('Update', () => {
-    xit('should allow a user to update a post he owns');
+    it('should allow a user to update a post he owns', (done) => {
+      let token = getToken(user1);
+      let updatedPost = factory.buildSync('post');
+      let user1Post;
+
+      factory.create('post', {'_author': user1._id})
+      .then((post) => {
+        user1Post = post;
+
+        request(app)
+        .put(`/posts/${user1Post._id}`)
+        .set('Authorization', `Bearer: ${token}`)
+        .send({post: updatedPost})
+        .expect(200)
+        .then((res) => {
+          expect(res.body.post.title).to.equal(updatedPost.title);
+          done();
+        });
+      });
+    });
     xit('should allow a user to update a post he owns');
   });
 

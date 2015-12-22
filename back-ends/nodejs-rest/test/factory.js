@@ -16,6 +16,9 @@ factory.define('user', User, {
 factory.define('post', Post, {
   title: () => faker.lorem.sentence(),
   body: () => faker.lorem.paragraphs(),
+  url_path: function() {
+    return this.title.replace(/\s/g, '-') + Date.now();
+  },
 });
 
 export default factory;
