@@ -43,7 +43,7 @@ describe('Users', () => {
         .expect(400)
         .then((res) => {
           let x = JSON.parse(res.text);
-          expect(x['errors']['email'][0]).to.equal('This Username or Email is already taken.');
+          expect(x['errors']['email'][0]).to.exist;
           done();
         });
       });
@@ -51,15 +51,11 @@ describe('Users', () => {
   });
 
   describe('Show', () => {
-    it('should return the given user if it is the current user', (done) => {
-      let user = factory.buildSync('user');
-
-      user.save()
+    it('should return the given user by id', (done) => {
+      factory.create('user')
       .then((user) => {
-        let token = getToken(user);
-
         request(app)
-        .get(`/users/${user._id}/?token=${token}`)
+        .get(`/users/${user._id}`)
         .expect(200)
         .then((res) => {
           expect(res.body.user.name).to.equal(user.name);
@@ -69,14 +65,53 @@ describe('Users', () => {
         });
       });
     });
-
-    xit('should not return the given user if it is not the current user');
     xit('should return a user by a given username');
   });
 
   describe('Update', () => {
-    xit('should allow a user to update his profile');
-    xit('should not allow a user to update another user\'s profile');
+    it('should allow a user to update his profile', (done) => {
+      let user = factory.buildSync('user');
+      let updatedUser = factory.buildSync('user');
+
+      user.save()
+      .then((user) => {
+        let token = getToken(user);
+
+        request(app)
+        .put(`/users/${user._id}/?token=${token}`)
+        .send({user: updatedUser})
+        .expect(200)
+        .then((res) => {
+          expect(res.body.user.name).to.equal(updatedUser.name);
+          expect(res.body.user.email).to.equal(updatedUser.email);
+          expect(res.body.user.username).to.equal(updatedUser.username);
+          done();
+        });
+      });
+    });
+
+    it('should not allow a user to update another\'s profile', (done) => {
+      let user1;
+      let user2;
+
+      factory.createMany('user', 2)
+      .then((users) => {
+        user1 = users[0];
+        user2 = users[1];
+      })
+      .then((user) => {
+        let token = getToken(user1);
+
+        request(app)
+        .put(`/users/${user2._id}/?token=${token}`)
+        .expect(401)
+        .end((err, res) => {
+          let x = JSON.parse(res.text);
+          expect(x['errors']['permissions'][0]).to.exist;
+          done();
+        });
+      });
+    });
   });
 
   describe('Delete', () => {
