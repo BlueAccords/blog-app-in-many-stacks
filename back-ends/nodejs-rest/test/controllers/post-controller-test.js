@@ -59,14 +59,10 @@ describe('Posts', () => {
     it('should allow a user to update a post he owns', (done) => {
       let token = getToken(user1);
       let updatedPost = factory.buildSync('post');
-      let user1Post;
-
       factory.create('post', {'_author': user1._id})
       .then((post) => {
-        user1Post = post;
-
         request(app)
-        .put(`/posts/${user1Post._id}`)
+        .put(`/posts/${post._id}`)
         .set('Authorization', `Bearer: ${token}`)
         .send({post: updatedPost})
         .expect(200)
@@ -76,11 +72,54 @@ describe('Posts', () => {
         });
       });
     });
-    xit('should allow a user to update a post he owns');
+    it('should not allow a user to update a post he does not own', (done) => {
+      let token = getToken(user2);
+
+      factory.create('post', {'_author': user1._id})
+      .then((post) => {
+        request(app)
+        .put(`/posts/${post._id}`)
+        .set('Authorization', `Bearer: ${token}`)
+        .expect(401)
+        .end((err, res) => {
+          let x = JSON.parse(res.text);
+          expect(x['errors']['permissions'][0]).to.exist;
+          done();
+        });
+      });
+    });
   });
 
   describe('Delete', () => {
-    xit('should not allow a user to delete a post he does not own');
-    xit('should not allow a user to delete a post he does not own');
+    it('should allow a user to delete a post he owns', (done) => {
+      let token = getToken(user1);
+      factory.create('post', {'_author': user1._id})
+      .then((post) => {
+        request(app)
+        .del(`/posts/${post._id}`)
+        .set('Authorization', `Bearer: ${token}`)
+        .expect(200)
+        .then((res) => {
+          expect(res.body.deleted_id).to.equal(post._id.toString());
+          done();
+        });
+      });
+    });
+    it('should not allow a user to delete a post he does not own', (done) => {
+      let token = getToken(user2);
+
+      factory.create('post', {'_author': user1._id})
+      .then((post) => {
+        request(app)
+        .del(`/posts/${post._id}`)
+        .set('Authorization', `Bearer: ${token}`)
+        .expect(401)
+        .end((err, res) => {
+          let x = JSON.parse(res.text);
+          expect(x['errors']['permissions'][0]).to.exist;
+          done();
+        });
+      });
+    });
   });
 });
