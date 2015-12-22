@@ -65,7 +65,20 @@ describe('Users', () => {
         });
       });
     });
-    xit('should return a user by a given username');
+    it('should return the given user by username', (done) => {
+      factory.create('user')
+      .then((user) => {
+        request(app)
+        .get(`/users?username=${user.username}`)
+        .expect(200)
+        .then((res) => {
+          expect(res.body.user.name).to.equal(user.name);
+          expect(res.body.user.email).to.equal(user.email);
+          expect(res.body.user.username).to.equal(user.username);
+          done();
+        });
+      });
+    });
   });
 
   describe('Update', () => {
