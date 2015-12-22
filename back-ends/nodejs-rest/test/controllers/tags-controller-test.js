@@ -13,6 +13,7 @@ describe('Tags', () => {
   describe('Create', () => {
     xit('should allow a user to create a tag');
     xit('should not allow someone with no account to create a tag');
+    xit('should return an existing tag if one with the same text already exists');
   });
 
   describe('Show', () => {
