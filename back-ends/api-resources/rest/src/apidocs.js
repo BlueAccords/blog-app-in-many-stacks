@@ -367,7 +367,6 @@
  * @apiUse generalErrors
  * @apiUse protected
  *
- * @apiParam {String} post_id The post id
  * @apiParam {Object} tag
  * @apiParam {String} tag.text The tag text
  */
