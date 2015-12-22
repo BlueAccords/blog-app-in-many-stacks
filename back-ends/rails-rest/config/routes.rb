@@ -28,4 +28,9 @@ Rails.application.routes.draw do
     match '/posts/:id', :to => 'posts#destroy', via: :delete
   end 
 
+  # 
+  # Tag Routes
+  #
+  match '/tags', :to => 'tags#create', via: :post
+
 end
