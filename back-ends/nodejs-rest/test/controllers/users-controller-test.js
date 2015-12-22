@@ -128,7 +128,43 @@ describe('Users', () => {
   });
 
   describe('Delete', () => {
-    xit('should allow a user to delete his own profile');
-    xit('should not allow a user to delete another user\'s profile');
+    it('should allow a user to delete his profile', (done) => {
+      let user = factory.buildSync('user');
+
+      user.save()
+      .then((user) => {
+        let token = getToken(user);
+        request(app)
+        .del(`/users/${user._id}/?token=${token}`)
+        .expect(200)
+        .then((res) => {
+          expect(res.body.deleted_id).to.equal(user._id.toString());
+          done();
+        });
+      });
+    });
+
+    it('should not allow a user to delete another\'s profile', (done) => {
+      let user1;
+      let user2;
+
+      factory.createMany('user', 2)
+      .then((users) => {
+        user1 = users[0];
+        user2 = users[1];
+      })
+      .then((user) => {
+        let token = getToken(user1);
+
+        request(app)
+        .del(`/users/${user2._id}/?token=${token}`)
+        .expect(401)
+        .end((err, res) => {
+          let x = JSON.parse(res.text);
+          expect(x['errors']['permissions'][0]).to.exist;
+          done();
+        });
+      });
+    });
   });
 });
