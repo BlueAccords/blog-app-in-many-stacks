@@ -22,7 +22,7 @@ let cors          = require('cors');
 // No password needed in development
 if(env === 'development') {
   mongoose.connect(`mongodb://${config.db.host}:${config.db.port}/${config.db.database}`);
-} else {
+} else if(env !== 'test') {
   mongoose.connect(`mongodb://${config.db.user}:${config.db.password}@${config.db.host}:${config.db.port}/${config.db.database}`);
 }
 
@@ -41,11 +41,17 @@ app.use(morgan('dev'));
 app.use('/media', express.static(__dirname + '/media'));
 app.use(require('./app/routes'));
 
-let PORT = process.env.PORT || 8000;
+let port;
 
-let server = app.listen(PORT, () => {
+if(env !== 'test') {
+  port = process.env.PORT || 8000;
+}
+
+let server = app.listen(port, () => {
   let host = server.address().address;
   let port = server.address().port;
 
   console.log('Example app listening at http://%s:%s', host, port);
 });
+
+module.exports = server;
