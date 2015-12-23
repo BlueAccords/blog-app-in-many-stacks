@@ -7,8 +7,8 @@ mongoose.Promise = Promise;
 
 module.exports = mongoose.model('User', new mongoose.Schema({
   name: { type : String , required : true},
-  email: { type : String , unique : true, required : true, dropDups: true},
-  username: { type : String , unique : true, required : true, dropDups: true},
+  email: { type : String , unique : true, required : true, dropDups: true, lowercase: true, trim: true},
+  username: { type : String , unique : true, required : true, dropDups: true, lowercase: true, trim:true},
   password: { type : String , required : true},
 },{
   timestamps: true,

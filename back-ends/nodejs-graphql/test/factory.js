@@ -8,8 +8,8 @@ let factory = factoryGirl.promisify(bluebird);
 
 factory.define('user', User, {
   name: () => faker.name.findName(),
-  email: () => faker.internet.email().toLowerCase(),
-  username: () => faker.internet.userName().toLowerCase(),
+  email: () => faker.internet.email(),
+  username: () => faker.internet.userName(),
   password: () => faker.internet.password(),
 });
 
@@ -17,7 +17,7 @@ factory.define('post', Post, {
   title: () => faker.lorem.sentence(),
   body: () => faker.lorem.paragraphs(),
   url_path: function() {
-    return (this.title.replace(/\s/g, '-') + Date.now()).toLowerCase();
+    return this.title.replace(/\s/g, '-') + Date.now();
   },
 });
 

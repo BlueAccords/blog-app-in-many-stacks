@@ -8,8 +8,8 @@ mongoose.Promise = Promise;
 
 let schema = new mongoose.Schema({
   _author: { type: ObjectId, ref: 'User', required: true },
-  title: { type: String, required: true },
-  url_path: { type: String, required: true, unique: true },
+  title: { type: String, required: true},
+  url_path: { type: String, required: true, unique: true, lowercase: true, trim: true },
   body: { type: String, required: true },
   tags: [{ type: ObjectId, ref: 'Tag' }],
 },{
