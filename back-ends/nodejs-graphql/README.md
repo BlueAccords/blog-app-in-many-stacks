@@ -29,4 +29,9 @@ You can view the schema that this repo should conform to [here](../api-resources
 In a isolated project outside of this Blog app repo though, the schema.json and schema.graphql files [in the data folder](data/) would be authoritative.
 
 ## Testing
+
+Tests are written with Mocha. You can run tests with the following:
+
+  	npm test
+  
 A sample Postman collection is provided [here](../api-resources/graphql/blog-app-graphql.json.postman_collection) that you can use to test the API.
