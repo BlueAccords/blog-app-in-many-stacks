@@ -1,10 +1,16 @@
 'use strict';
+let fs = require('fs');
 
 let env  = process.env.NODE_ENV;
 // Ensure we're in the project directory, so relative paths work as expected
 // no matter where we actually lift from.
 // Load dotenv
-require('dotenv').config({silent: true});
+fs.stat('.env', (err, stat) => {
+  if(err === null) {
+    require('dotenv').config({silent: true});
+  }
+});
+
 process.chdir(__dirname);
 
 //Allow the use of more es6 features within the node project, such as es6 imports, etc.

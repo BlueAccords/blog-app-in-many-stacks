@@ -1,11 +1,16 @@
 // NEW
 'use strict';
+let fs = require('fs');
 
 let env  = process.env.NODE_ENV;
 // Ensure we're in the project directory, so relative paths work as expected
 // no matter where we actually lift from.
 // Load dotenv if available
-require('dotenv').config({silent: true});
+fs.stat('.env', (err, stat) => {
+  if(err === null) {
+    require('dotenv').config({silent: true});
+  }
+});
 
 process.chdir(__dirname);
 
