@@ -1,4 +1,6 @@
-# Blog app in many stacks.
+# Blog App In Many Stacks.
+![Bricks](img/logo.png)
+
 The goal of this repo is to implement the same app in different techology stacks. The traditional TodoMVC apps are far to simple when you want to dive deeply into a new technology and tend to leave out the back-end piece of the puzzle in most cases.
 
 ### Getting Started
