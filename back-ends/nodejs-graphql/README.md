@@ -1,9 +1,7 @@
-# blog-backend-api
+# Blog App In NodeJS + GraphQL
 
-The Blog Backend API.
+A blog API written in NodeJS and RelayJS compliant GraphQL.
 
-### Loose coventions
-Eslint should handle the majority of conventions but please also [read this](https://gist.github.com/chiedojohn/50f5cf4e900523e24586)
 
 ## Setup
 1. Install your packages with `npm install`

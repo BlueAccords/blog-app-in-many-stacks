@@ -1,4 +1,6 @@
-# Blog App In Many Stacks - RESTful-NodeJS
+# Blog App In NodeJS + REST
+
+A blog API written in NodeJS and REST.
 
 ### Setup
 
