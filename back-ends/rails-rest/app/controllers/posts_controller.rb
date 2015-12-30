@@ -5,7 +5,6 @@ class PostsController < BaseController
   before_filter :ensure_user_exists, only: :get_post_by_user
   skip_before_filter :authenticate_user_from_token!, :except => [:create, :update, :delete]
 
-
   # @description GET /posts   
   # @return {Object} posts - JSON Object of the Post 
   # @param {String} url_path - Searches for a particular post with url_path
@@ -30,9 +29,9 @@ class PostsController < BaseController
 
     # Successful JSON in /views/posts/create.json.rabl
 
-    # On Error /views/registrations/error
+    # On Error /views/helpers/error
     respond_with @post do 
-      'registrations/error' unless @post.save
+      'helpers/errors' unless @post.save
     end
   end
 
@@ -72,7 +71,7 @@ class PostsController < BaseController
       render 'posts/show'
     else
       respond_with @post do 
-        'registrations/error'
+        'helpers/errors'
       end
     end
   end

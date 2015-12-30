@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151221224802) do
+ActiveRecord::Schema.define(version: 20151222191917) do
+
+  create_table "post_tags", force: :cascade do |t|
+    t.integer  "tag_id",     limit: 4, null: false
+    t.integer  "post_id",    limit: 4, null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "post_tags", ["post_id", "tag_id"], name: "index_post_tags_on_post_id_and_tag_id", unique: true, using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.string   "url_path",   limit: 255
@@ -23,15 +32,6 @@ ActiveRecord::Schema.define(version: 20151221224802) do
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
-
-  create_table "taggings", force: :cascade do |t|
-    t.integer  "tag_id",     limit: 4, null: false
-    t.integer  "post_id",    limit: 4, null: false
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
-  add_index "taggings", ["post_id", "tag_id"], name: "index_taggings_on_post_id_and_tag_id", unique: true, using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string "text", limit: 255

@@ -1,6 +1,7 @@
 class Tag < ActiveRecord::Base
   validates :text, presence: true
-  
-  has_many :taggings, dependent: :destroy
-  has_many :posts, through: :taggings  
+  validates_uniqueness_of :text 
+
+  has_many :post_tags, dependent: :destroy
+  has_many :posts, through: :post_tags  
 end

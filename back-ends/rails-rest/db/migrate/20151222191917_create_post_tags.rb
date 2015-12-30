@@ -1,6 +1,6 @@
-class CreateTaggings < ActiveRecord::Migration
+class CreatePostTags < ActiveRecord::Migration
   def change
-    create_table :taggings do |t|
+    create_table :post_tags do |t|
       # Associations 
       t.belongs_to :tag, null: false
       t.belongs_to :post, null: false

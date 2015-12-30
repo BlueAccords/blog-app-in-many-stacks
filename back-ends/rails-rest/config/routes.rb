@@ -32,5 +32,9 @@ Rails.application.routes.draw do
   # Tag Routes
   #
   match '/tags', :to => 'tags#create', via: :post
+  match '/tags', :to => 'tags#index', via: :get
+  match '/tags/:id', :to => 'tags#update', via: :put
+  match '/tags/:id', :to => 'tags#destroy', via: :delete
+  match '/toggle-tag-on-post', :to => 'post_tags#toggle_tag_on_post', via: :post
 
 end

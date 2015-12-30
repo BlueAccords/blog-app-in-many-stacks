@@ -109,7 +109,7 @@ class BaseController < ActionController::Base
     def block_if_not_current_user(id)
 
       render_unauthorized errors: {
-        permissions: ["You do not have permission to view/edit this user"]
+        permissions: ["You do not have permission to view / edit"]
       } unless current_user.id == id
 
     end
