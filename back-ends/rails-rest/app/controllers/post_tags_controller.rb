@@ -7,8 +7,6 @@ class PostTagsController < BaseController
   # @param {String} post_id - The ID of the Post
   # @param {String} tag_id - The ID of the Tag
   def toggle_tag_on_post
-   
-
     if params[:status] == true
       create
     else

@@ -9,13 +9,33 @@ class PostsController < BaseController
   # @return {Object} posts - JSON Object of the Post 
   # @param {String} url_path - Searches for a particular post with url_path
   # @param {String} Authorization - Authentication token. Format is'Bearer: tokenvalue' and is required.
-  def index
+  def index(posts = nil)
     if !params[:url_path].blank?
-      @post = Post.where(:url_path => params[:url_path])
+      @post = Post.find_by(:url_path => params[:url_path])
       render 'posts/show'
     else 
-      @posts = Post.all 
-      'posts/index'
+      if posts 
+        @posts = posts
+      else 
+        @posts = Post.all 
+      end
+      
+      @viewable_posts = []
+      @posts.each do |post|
+
+        # Make  JSON Copy (This is a special case so that we can render :tags as an array of IDs)
+        post_copy = post.as_json
+        post_copy[:date_created] = post.created_at
+        post_copy[:date_updated] = post.updated_at
+
+        # Add Tags to our new Hash
+        add_post_tags(post_copy)
+
+        # Add the post hash to the array
+        @viewable_posts << post_copy
+      end 
+
+      render json: @viewable_posts
     end 
   end
 
@@ -44,16 +64,23 @@ class PostsController < BaseController
   # @description GET /tags/:tag_id/posts 
   # @return {Object} post - JSON Object of the Post 
   def get_post_by_tag
-    # TO DO -> Make after 
+    postTags = PostTag.where(:tag_id => params[:tag_id])
+    posts = []
+
+    postTags.each do |t|
+      posts << t.post_id
+    end 
+
+    @posts = Post.where("id IN (?)", posts)
+    index(@posts) 
   end
 
   # @description GET /users/:user_id/posts
   # @return {Object} posts - JSON Object of the Post 
   # @param {String} user_id - The user's id  
   def get_post_by_user
-    puts params[:user_id]
     @posts = Post.where(:user_id => params[:user_id])
-    render 'posts/index'
+    index(@posts)
   end
 
   # @description PUT /users/:id
@@ -97,6 +124,21 @@ class PostsController < BaseController
       # Rails escapes by default, so we only permit those.
       params.require(:post).permit(:title, :body, :user_id, :url_path)
     end
+
+    # @description (Mutator Method) Add Post Tags to a Hash based on the ID  
+    # @param {Hash} current_post - Gets Tags from PostTag Relationships and Adds those Tag's ID's to the hash
+    def add_post_tags(current_post)
+      # set tags as an array (we'll add each tag to it below)
+      current_post["tags"] = []
+
+      # Get a list of the PostTag Relationships
+      postTags = PostTag.where(:post_id => current_post["id"].to_i)
+      
+      # For each Post Tag, add the tag to the array of tags
+      postTags.each do |post_tag|
+        current_post["tags"] << post_tag.tag_id.to_s
+      end
+    end 
 
     # Make sure post exists.  That way if not, we can throw a 404
     def ensure_post_exists
