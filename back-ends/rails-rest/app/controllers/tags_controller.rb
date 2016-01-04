@@ -15,9 +15,19 @@ class TagsController < BaseController
   end
 
   # @description GET /tags   
+  # @param {String} (Optional URL Param) Get Tag by :text
   # @return {Object[]} tags - Array Object of all Tags 
   def index 
-    @tags = Tag.all 
+    if !params[:text].blank?
+      @tag = Tag.find_by(:text => params[:text])
+      if @tag.nil?
+        render_not_found('tag', params[:text], 'text')
+      else 
+        render 'tags/show'
+      end
+    else 
+      @tags = Tag.all 
+    end 
   end 
 
   # @description PUT /tags/:id   

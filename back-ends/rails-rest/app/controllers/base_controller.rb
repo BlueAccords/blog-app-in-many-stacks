@@ -79,8 +79,8 @@ class BaseController < ActionController::Base
     end
 
     # Renders an error response if not found
-    def render_not_found(type, id)
-      payload = { errors: { general: ["Could not find #{type} with 'id'=#{id}"] } }
+    def render_not_found(type, id, option='id')
+      payload = { errors: { general: ["Could not find #{type} with '#{option}'=#{id}"] } }
       render json: payload, status: 404
     end    
 

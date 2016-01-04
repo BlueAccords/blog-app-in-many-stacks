@@ -3,6 +3,7 @@ class PostsController < BaseController
   before_filter :ensure_post_exists, only: :show
   before_filter :check_url_path, only: :create
   before_filter :ensure_user_exists, only: :get_post_by_user
+  before_filter :ensure_current_user_is_owner, :only => [:delete, :update]
   skip_before_filter :authenticate_user_from_token!, :except => [:create, :update, :delete]
 
   # @description GET /posts   
@@ -165,5 +166,10 @@ class PostsController < BaseController
         @url_path = (params[:post][:title]).to_s.parameterize + '-' + Time.now.utc.iso8601
       end
     end
+
+    def ensure_current_user_is_owner
+      current_post = Post.find_by(:id => params[:id])
+      render_unauthorized unless  current_post.user_id == current_user.id
+    end      
 
 end

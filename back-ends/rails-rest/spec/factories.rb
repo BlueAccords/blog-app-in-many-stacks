@@ -19,6 +19,13 @@ FactoryGirl.define do
   factory :tag do
     id { Faker::Number.digit }
     text { Faker::Lorem.paragraph }
+  end 
+
+  factory :comment do
+    id { Faker::Number.digit }
+    post_id { Faker::Number.digit }
+    user_id { Faker::Number.digit  }
+    text { Faker::Lorem.paragraph }
   end  
 
 end

@@ -38,5 +38,12 @@ Rails.application.routes.draw do
     match '/tags/:id', :to => 'tags#destroy', via: :delete
     match '/toggle-tag-on-post', :to => 'post_tags#toggle_tag_on_post', via: :post
 
+    # 
+    # Comment Routes
+    #    
+    match '/posts/:post_id/comments', :to => 'comments#index', via: :get  
+    match '/posts/:post_id/comments', :to => 'comments#create', via: :post  
+    match '/comments/:id', :to => 'comments#update', via: :put
+    match '/comments/:id', :to => 'comments#destroy', via: :delete    
   end 
 end
