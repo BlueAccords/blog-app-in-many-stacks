@@ -20,7 +20,7 @@ RSpec.describe "Posts API", :type => :request do
     it "Shows the Post." do
       get(
         "/posts/#{default_post.id}?token=#{token}", 
-        @request_headers
+        request_headers
       )
       # 200 means everything OK
       expect(response.status).to eq 200
@@ -40,7 +40,7 @@ RSpec.describe "Posts API", :type => :request do
     it "Shows all posts." do
       get(
         "/posts/?token=#{token}", 
-        @request_headers
+        request_headers
       )
       # 200 means everything OK
       expect(response.status).to eq 200
@@ -55,18 +55,24 @@ RSpec.describe "Posts API", :type => :request do
     # Authorized
     it "Shows all posts by user." do
 
+      FactoryGirl.create(:post, :title => "This is a title", :user_id => user.id)
+      FactoryGirl.create(:post, :title => "Another Title", :user_id => user.id)
       # Create a Post from a different user to make sure it doesn't show up in the list
-      FactoryGirl.create(:post, :title => "This is a title", :user_id => 2)
-      
+      FactoryGirl.create(:post, :title => "This is a title from two", :user_id => 2)
+
       get(
-        "/users/#{user.id}/posts?token=#{token}", 
-        @request_headers
+        "/users/#{user.id}/posts"
       )
       # 200 means everything OK
+
       expect(response.status).to eq 200
       body = JSON.parse(response.body)
+
       #expect response to equal the same as the user we made earlier
-      expect(body['posts']).to all( have_attributes(:user_id => user.id) )
+      body.each do |post|
+        expect(post['user_id']).to eq(user.id)
+      end 
+
     end 
   end   
 

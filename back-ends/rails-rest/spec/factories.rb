@@ -13,6 +13,12 @@ FactoryGirl.define do
     title { Faker::Company.name }
     body { Faker::Lorem.paragraph }
     user_id { 1 }
+    url_path { Faker::Internet.slug }
   end
+
+  factory :tags do
+    id { Faker::Number.digit }
+    text { Faker::Lorem.paragraph }
+  end  
 
 end
