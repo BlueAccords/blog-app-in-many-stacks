@@ -9,8 +9,7 @@ RSpec.describe "Tags API", :type => :request do
 
   let(:user) { FactoryGirl.create(:user, :username => 'testtest', :password => 'testtest') }
   let(:token) { get_user_token(user) }
-  #let(:default_post) { FactoryGirl.create(:post, :title => "This is a title", :user_id => user.id ) }
-  let(:default_tag) { FactoryGirl.create(:tag, :text => "This is a tag text.") }
+  let(:default_tag) { FactoryGirl.create(:tag, :text => "This is a title" ) }
 
   #
   # GET ALL TAGS
@@ -40,7 +39,7 @@ RSpec.describe "Tags API", :type => :request do
     }.to_json
 
     # Authorized
-    it "Creates a post, for logged in user." do
+    it "Creates a tag, for logged in user." do
       post(
         "/tags?token=#{token}", 
         header_params,
@@ -54,7 +53,7 @@ RSpec.describe "Tags API", :type => :request do
     end 
 
     # Unauthorized
-    it "Creates a post, for logged in user." do
+    it "Returns error without Authentication" do
       post(
         "/tags", 
         header_params,
@@ -66,139 +65,62 @@ RSpec.describe "Tags API", :type => :request do
 
   end  
 
-  # #
-  # # SHOW ALL POSTS
-  # # 
-  # describe "GET /posts/" do
 
-  #   # Authorized
-  #   it "Shows all posts." do
-  #     get(
-  #       "/posts/?token=#{token}", 
-  #       @request_headers
-  #     )
-  #     # 200 means everything OK
-  #     expect(response.status).to eq 200
-  #   end 
-  # end 
+  #
+  # UPDATE POST
+  #
+  describe "UPDATE /tags/:id" do
+    header_params = {
+      'tag' => {
+        'text' => 'changed text'
+      }
+    }.to_json
 
-  # #
-  # # SHOW POSTS BY USER
-  # # 
-  # describe "GET /users/:user_id/posts" do
+    it "Updates a Tag, when Authorized." do
 
-  #   # Authorized
-  #   it "Shows all posts by user." do
+      put("/tags/#{default_tag.id}?token=#{token}", header_params, request_headers)
+ 
+      # 200 means everything OK
+      expect(response.status).to eq 200
+      body = JSON.parse(response.body)
+      expect(body['tag']['text']).to eq('changed-text')
+    end 
 
-  #     # Create a Post from a different user to make sure it doesn't show up in the list
-  #     FactoryGirl.create(:post, :title => "This is a title", :user_id => 2)
-      
-  #     get(
-  #       "/users/#{user.id}/posts?token=#{token}", 
-  #       @request_headers
-  #     )
-  #     # 200 means everything OK
-  #     expect(response.status).to eq 200
-  #     body = JSON.parse(response.body)
-  #     #expect response to equal the same as the user we made earlier
-  #     expect(body['posts']).to all( have_attributes(:user_id => user.id) )
-  #   end 
-  # end   
+    it "Returns error without Authentication" do
 
-  # #
-  # # CREATE POST
-  # #
-  # describe "POST /posts/" do
-  #   header_params = {
-  #     'post' => {
-  #       'title' => 'A new post title',
-  #       'body' => 'Test test'
-  #     }
-  #   }.to_json
-  #   wrong_params = {
-  #     'post' => {
-  #       'body' => 'Test test'
-  #     }
-  #   }.to_json    
+      put("/tags/#{default_tag.id}", header_params, request_headers)
 
-  #   it "Creates a Post, when correct info/ Authorized." do
+      # 401 means unauthorized
+      expect(response.status).to eq 401
+      body = JSON.parse(response.body)
+    end    
 
-  #     post("/posts?token=#{token}", header_params, request_headers)
+  end
+ 
+  #
+  # DELETE POST
+  #
+  describe "DELETE /posts/:id" do
 
-  #     # 200 means everything OK
-  #     expect(response.status).to eq 200
-  #     body = JSON.parse(response.body)
-  #     expect(body['post']['user_id']).to eq(user.id)
-  #   end 
+    it "Deletes a Tag, when Authorized." do
 
-  #   it "Doesn't create a Post, without a title" do
-  #     post("/posts?token=#{token}", wrong_params, request_headers)
-  #     expect(response.status).to eq 422
-  #   end   
+      delete("/tags/#{default_tag.id}?token=#{token}", request_headers)
 
-  #   it "Doesn't create a Post, without being logged in" do
-  #     post("/posts", header_params, request_headers)
-  #     expect(response.status).to eq 401
-  #   end     
+      # 200 means everything OK
+      expect(response.status).to eq 200
+      body = JSON.parse(response.body)
+      expect(body['deleted_id']).to eq(default_tag.id)
+    end 
 
-  # end
+    it "Returns error without Authentication" do
 
-  # #
-  # # UPDATE POST
-  # #
-  # describe "UPDATE /posts/:id" do
-  #   header_params = {
-  #     'post' => {
-  #       'title' => 'A new post title'
-  #     }
-  #   }.to_json
+      delete("/tags/#{default_tag.id}", request_headers)
 
-  #   it "Updates a Post, when Authorized." do
+      # 401 for Unauthorized
+      expect(response.status).to eq 401
+    end     
 
-
-  #     put("/posts/#{default_post.id}?token=#{token}", header_params, request_headers)
-
-  #     # 200 means everything OK
-  #     expect(response.status).to eq 200
-  #     body = JSON.parse(response.body)
-  #     expect(body['post']['title']).to eq('A new post title')
-  #   end 
-
-  #   it "Doesn't update a Post, when Unauthorized." do
-
-  #     put("/posts/#{default_post.id}", header_params, request_headers)
-
-  #     # 401 means unauthorized
-  #     expect(response.status).to eq 401
-  #     body = JSON.parse(response.body)
-  #   end    
-
-  # end
-
-  # #
-  # # DELETE POST
-  # #
-  # describe "DELETE /posts/:id" do
-
-  #   it "Deletes a Post, when Authorized." do
-
-  #     delete("/posts/#{default_post.id}?token=#{token}", request_headers)
-
-  #     # 200 means everything OK
-  #     expect(response.status).to eq 200
-  #     body = JSON.parse(response.body)
-  #     expect(body['deleted_id']).to eq(default_post.id)
-  #   end 
-
-  #   it "Does not delete post, when unauthorized." do
-
-  #     delete("/users/#{default_post.id}", request_headers)
-
-  #     # 401 for Unauthorized
-  #     expect(response.status).to eq 401
-  #   end     
-
-  # end
+  end
 
 end
 

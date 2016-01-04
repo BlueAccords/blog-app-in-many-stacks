@@ -16,7 +16,7 @@ FactoryGirl.define do
     url_path { Faker::Internet.slug }
   end
 
-  factory :tags do
+  factory :tag do
     id { Faker::Number.digit }
     text { Faker::Lorem.paragraph }
   end  
