@@ -1,7 +1,7 @@
 Rails-starter
 =============
 
-##Local Setup
+###Local Setup
 - Make sure you have an environment variable set up on your host machine which sets RAILS_ENV to development.
 - Create an .env file with the following contents within your application directory (Update the port, username and password in accordance with your local database setup)
 
@@ -13,12 +13,21 @@ Rails-starter
         MYSQL_PORT=8889
         SECRET_KEY_BASE=MAKE_SOMETHING_UP
 
-##LOCAL API DOCS
+###Local API Docs
 - blog-app-in-many-stacks/back-ends/api-resources/rest/build/index.html 
 
-##Running the rails server
+###Running the rails server
 
 `bundle exec rails s -p 8000`
 
-##Important Dependencies
-- RABL (Creates JSON views)
+###Important Dependencies
+- RABL (Creates JSON views) 
+  - https://github.com/nesquena/rabl 
+
+###Testing:
+
+Tests are written using rspec. You can run tests with the following:
+
+    bundle exec rspec
+
+A sample Postman collection is provided [here](../api-resources/rest/blog-app-rest.json.postman_collection) that you can import and use for testing the API.
