@@ -462,5 +462,6 @@
  * @apiParam {boolean} status The desired end result for the tag being or not being on a post
  *
  * @apiUse postResponse
+ * @apiUse protected
  * @apiUse generalErrors
  */
