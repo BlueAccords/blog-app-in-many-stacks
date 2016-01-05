@@ -1,7 +1,7 @@
 # app/controllers/api/registrations_controller.rb
 class RegistrationsController < BaseController
-  skip_before_filter :authenticate_user_from_token!, :only => [:create, :get_user_by_username]
-  before_action only: [:show, :update] do
+  skip_before_filter :authenticate_user_from_token!, :only => [:create, :show, :get_user_by_username]
+  before_action only: [:update] do
     block_if_not_current_user(params[:id].to_i)
   end
 
@@ -40,6 +40,7 @@ class RegistrationsController < BaseController
   def show
     @user = User.find(params[:id])   
     @auth_token = token_from_request
+    render 'registrations/public'
   end
 
   # @description GET /users/?username=:username
