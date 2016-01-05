@@ -1,0 +1,10 @@
+.vagrant
+public/assets
+public/system
+tmp
+doc
+log
+.env
+node_modules
+vendor/bundle
+.bundle/config
