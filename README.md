@@ -21,7 +21,7 @@ While it is recommended that you start with a front-end repo, you can dig right 
 
 - [NodeJS and REST](back-ends/nodejs-rest)
 - [NodeJS and GraphQL](back-ends/nodejs-graphql)
-- Rails and REST (Coming Soon)
+- [Rails and REST](back-ends/rails-rest)
 - Laravel and GraphQL (Coming Soon)
 
 #### Notes
