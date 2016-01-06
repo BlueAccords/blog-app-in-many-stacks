@@ -16,9 +16,9 @@ RSpec.describe "User API", :type => :request do
   describe "GET /users/:id" do
 
     # Authorized
-    it "Shows the User when Authorized." do
+    it "Shows the User" do
       get(
-        "/users/#{user.id}?token=#{token}", 
+        "/users/#{user.id}", 
         @request_headers
       )
       # 200 means everything OK
@@ -26,19 +26,6 @@ RSpec.describe "User API", :type => :request do
       body = JSON.parse(response.body)
       #expect response to equal the same as the user we made earlier
       expect(body['user']['username']).to eq(user.username)
-    end 
-
-    # Unauthorized
-    context "when not Authorized" do
-      it {
-        user_two = FactoryGirl.create(:user)
-        get(
-          "/users/#{user_two.id}?token=#{@token}", 
-          @request_headers
-        )
-        # 401 for Unauthorized
-        expect(response.status).to eq 401
-      }
     end 
 
   end  
@@ -68,17 +55,19 @@ RSpec.describe "User API", :type => :request do
       expect(body['user']['username']).to eq(user.username)
     end 
 
-    # Unauthorized
-    context "with incorrect credentials" do
-      it {
-        user_two = FactoryGirl.create(:user)
-        get(
-          "/users/#{user_two.id}?token=#{@token}", 
-          @request_headers
-        )
-        # 401 for Unauthorized
-        expect(response.status).to eq 401
-      }
+    # Authorized
+    it "Returns error with incorrect credentials" do
+
+      header_params = {
+        'user' => {
+          'email' => user.email,
+          'password' => 'notcorrect'
+        }
+      }.to_json
+
+      post('/sign-in', header_params, request_headers)
+
+      expect(response.status).to eq 401
     end  
   end   
 
