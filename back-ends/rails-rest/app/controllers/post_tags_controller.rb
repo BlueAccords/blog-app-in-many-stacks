@@ -9,19 +9,22 @@ class PostTagsController < BaseController
   def toggle_tag_on_post
     if params[:status] == true
       create
-    else
-      @post_tag = PostTag.where(:post_id => params[:post_id], :tag_id => params[:tag_id] ) 
-      destroy
+    else 
+      begin 
+        @post_tag = PostTag.where(:post_id => params[:post_id], :tag_id => params[:tag_id] ).first
+        destroy
+      rescue 
+        custom_not_found(params[:post_id], params[:tag_id])
+      end
+      
     end   
   end
 
   def create 
-    @post_tag = PostTag.create(:post_id => params[:post_id], :tag_id => params[:tag_id] )
+    @post_tag = PostTag.where(:post_id => params[:post_id], :tag_id => params[:tag_id] ).first_or_create
     if @post_tag.save
-       @post = Post.find(params[:post_id])
-      respond_with @post do 
-        'posts/show' 
-      end     
+      @post = Post.find(params[:post_id])
+      render 'posts/show'     
     else     
       respond_with @post_tag do 
         'helpers/errors' 
@@ -30,9 +33,14 @@ class PostTagsController < BaseController
   end 
 
   def destroy 
-    respond_with @post_tag do 
-      'helpers/errors' unless @post_tag.destroy
-    end     
+    if @post_tag.destroy 
+      @post = Post.find(params[:post_id])
+      render 'posts/show' 
+    else 
+      respond_with @post_tag do 
+        'helpers/errors'  
+      end   
+    end  
   end 
 
   private 
@@ -43,4 +51,10 @@ class PostTagsController < BaseController
     def post_tag_exists?
       return (PostTag.where(:post_id => params[:post_id], :tag_id => params[:tag_id])) ? true : false
     end
+    # Renders a custom error response if not found
+    def custom_not_found(post_id, tag_id)
+      payload = { errors: { general: ["Could not find post_tag with post_id: #{post_id} and tag_id: #{tag_id}"] } }
+      render json: payload, status: 400
+    end  
+
 end

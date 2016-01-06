@@ -8,7 +8,7 @@ A blog API written in NodeJS and REST.
 
 2. Install your packages by running `bundle install`.
 
-3. Make sure you will need to have Mysql installed.
+3. Make sure you have Mysql installed.
 
 4. Create the database with `bundle exec rake db:create`
  
