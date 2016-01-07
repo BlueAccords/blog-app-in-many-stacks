@@ -305,7 +305,7 @@
  */
 
 /**
- * @api {get} /comments/:id Delete comment
+ * @api {delete} /comments/:id Delete comment
  * @apiName Delete comment
  * @apiGroup Comments
  *
@@ -367,7 +367,6 @@
  * @apiUse generalErrors
  * @apiUse protected
  *
- * @apiParam {String} post_id The post id
  * @apiParam {Object} tag
  * @apiParam {String} tag.text The tag text
  */
@@ -382,7 +381,7 @@
  */
 
 /**
- * @api {get} /tags/:id Delete tag
+ * @api {delete} /tags/:id Delete tag
  * @apiName Delete tag
  * @apiGroup Tags
  * @apiDescription - Only a site admin can delete a tag once it's been created. No need to implement now.
@@ -463,5 +462,6 @@
  * @apiParam {boolean} status The desired end result for the tag being or not being on a post
  *
  * @apiUse postResponse
+ * @apiUse protected
  * @apiUse generalErrors
  */

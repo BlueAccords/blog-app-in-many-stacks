@@ -4,7 +4,12 @@ require('babel/register');
 /*
  * Only to be used in development
  */
-require('dotenv').config({silent: true});
+let fs = require('fs');
+fs.stat('.env', (err, stat) => {
+  if(err === null) {
+    require('dotenv').config({silent: true});
+  }
+});
 
 if(process.env.NODE_ENV === 'development') {
   let config   = require('../config/application');

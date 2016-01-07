@@ -1,4 +1,5 @@
-# Blog app in many stacks.
+![Bricks](img/blog-app-header.png)
+
 The goal of this repo is to implement the same app in different techology stacks. The traditional TodoMVC apps are far to simple when you want to dive deeply into a new technology and tend to leave out the back-end piece of the puzzle in most cases.
 
 ### Getting Started
@@ -7,6 +8,7 @@ To get started, you will need to choose a front-end and from the list below. The
 ####List of Frontends:
 
 - ReactJS + Redux (Coming Soon)
+- VueJS + Redux (Coming Soon)
 - ReactJS + RelayJS (Coming Soon)
 - ReactJS + BaconJS (Coming Soon)
 - ReactJS + FalcorJS (Coming Soon)
@@ -20,7 +22,7 @@ While it is recommended that you start with a front-end repo, you can dig right 
 
 - [NodeJS and REST](back-ends/nodejs-rest)
 - [NodeJS and GraphQL](back-ends/nodejs-graphql)
-- Rails and REST (Coming Soon)
+- [Rails and REST](back-ends/rails-rest)
 - Laravel and GraphQL (Coming Soon)
 
 #### Notes

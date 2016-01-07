@@ -1,0 +1,16 @@
+language: ruby
+rvm:
+  - 2.2.0
+install:
+- bundle install 
+# command to run tests
+script:
+- bundle exec rspec 
+branches:
+  only:
+    - master
+    - react
+notifications:
+  email:
+    on_success: never
+    on_failure: always
