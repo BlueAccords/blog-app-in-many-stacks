@@ -1,35 +1,20 @@
-## Printocracy Web
-This is the ReactJS web app for Printocracy.
+# Blog App In ReactJS + Redux for REST Backends 
 
-### Loose coventions
-Eslint should handle the majority of conventions but please also [read this](https://gist.github.com/chiedojohn/50f5cf4e900523e24586)
+This is the ReactJS web app for talking to the REST blog-app backends. 
 
-### Setup
-Environment variables can be overriden with a standard .env file
+Compatible Backends:
 
-### Development
-A lot can be learned just by looking at the package.json but in a nutshell, be sure to have Printocracy Rails API running on port 8000 then do the following:
+* [NodeJS + REST](../../back-ends/nodejs-rest)
+* [Rails + REST](../../back-ends/rails-rest)
 
-Install packages
+## Getting Started
 
-  npm install
+1. Start a compatible backend at port 8000.
 
-Run The local server
+2. Install your packages with `npm install`
 
-  npm start
+3. Run The local server with `npm start` in one terminal window.
 
-Run the sass watch script
+4. Run the sass watch script with `npm run sass-watch` in another terminal window.
 
-  npm run sass-watch
-
-### Notes
-Note that in development, a hot loader is setup so as you make changes, the javascript will automatically update without you refreshing the page. Pay attention tothe console though as you may need to do a manual refresh on ocassions.
-
-### Requirements
-- Node 4.2 (install with nvm if needed)
-
-### Deployment to staging
-
-  npm run build
-
-  git push staging master
+5. Visit your site at http://localhost:4001.

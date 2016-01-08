@@ -1,7 +1,7 @@
 {
-  "name": "printocracy",
+  "name": "react-redux-rest",
   "version": "0.0.1",
-  "description": "Printocracy",
+  "description": "The React Redux client for the blog app",
   "main": "server.js",
   "engines": {
     "node": "4.2.x"
@@ -15,7 +15,7 @@
     "gulp-minify-css": "^1.2.1",
     "gulp-sass": "^2.0.4",
     "gulp-sourcemaps": "^1.6.0",
-    "history": "1.13.0",
+    "history": "^1.17.0",
     "imports-loader": "^0.6.5",
     "jsx": "^0.9.89",
     "lodash": "^3.10.1",
@@ -71,6 +71,6 @@
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "https://github.com/byrdkw/printocracy-web.git"
+    "url": "https://github.com/chiedolabs/blog-app-in-many-stacks.git"
   }
 }
