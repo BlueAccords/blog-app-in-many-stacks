@@ -1,467 +1,578 @@
-/****************************************************** General ***********************************/
-/**
- * @apiDefine protected
- * @apiHeader (Authentication Headers) {String} Authorization Value will be in the following format 'Bearer: tokenvalue'. This token will be used to ensure the user has permissions to access a requested resource. A user must be the owner of the resource or the most top-level parent of the resource to have permissions.
- * @apiError (Authorization Errors 401) errors
- * @apiError (Authorization Errors 401) {String[]} [errors.unauthorized] You are not authorized
- *
- * @apiError (Permissions Errors 403) errors
- * @apiError (Permissions Errors 403) {String[]} [errors.permissions] You do not have permissions to perform this action
- */
+'use strict';
+import ob from 'objob';
+import faker from 'faker';
 
-/**
- * @apiDefine successfulDeletion
- *
- * @apiSuccess (Success Response 200) {string} deleted_id The ID of the deleted resource.
- */
+let token = {
+  description: 'Authentication token for a user.',
+  example: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9',
+};
 
-/**
- * @apiDefine generalErrors
- * @apiError (General Errors 400) errors
- * @apiError (General Errors 400) {String[]} [errors.general] General errors that can be used for any purpose.
- */
+let tag = {
+  'id': { description: 'The id.', example: '5634d4760066be016bf10c09'},
+  'text': { description: 'The public representation of the tag.', example: () => faker.lorem.words()[0]},
+};
 
-/****************************************************** Authentication ***********************************/
-/**
- * @api {post} /sign-in Authenticate a user
- * @apiName Authenticate a user
- * @apiGroup Authentication
- *
- * @apiParam {Object} user
- * @apiParam {string} user.id
- * @apiParam {string} user.email
- * @apiParam {string} user.password
- */
+let user = {
+  'id': { description: 'The id', example: '5634d4760066be016bf10c09'},
+  'name': { description: 'The name', example: 'Jane Doe'},
+  'email':{
+    description:'Email address',
+    example: () => {
+      return faker.internet.email();
+    },
+  },
+  'username': { description: 'The username', example: 'janedoe'},
+  'password': { description: 'The password', example: 'testtest'},
+  'date_created': { description: 'Date created', example: '2015-10-31T14:47:18.000Z'},
+  'date_modified': { description: 'Date modified', example: '2015-10-31T14:47:18.000Z'},
+};
 
-/****************************************************** USERS ***********************************/
+let post = {
+  'id': { description: 'The id', example: '5634d4760066be016bf10c09'},
+  'url_path': { description: 'The path for the url on the website.', example: 'example-title'},
+  'title': { description: 'The title for the blog post', example: () => faker.lorem.sentence()},
+  'body': { description: 'The content for the blog post.', example: () => faker.lorem.paragraph()},
+  'user_id': { description: 'The id of the user who wrote the post', example: '5634d4760066be016bf10c09'},
+  'tags': {
+    description: 'All the tags for the post',
+    example: [tag, tag, tag],
+  },
+  'date_created': { description: 'Date created', example: '2015-10-31T14:47:18.000Z'},
+  'date_modified': { description: 'Date modified', example: '2015-10-31T14:47:18.000Z'},
+};
 
-/**
- * @apiDefine userResponse
- *
- * @apiSuccess (Success Response 200) {Object} user
- * @apiSuccess (Success Response 200) {string} user.id
- * @apiSuccess (Success Response 200) {string} user.name
- * @apiSuccess (Success Response 200) {string} user.email
- * @apiSuccess (Success Response 200) {string} user.username
- * @apiSuccess (Success Response 200) {string} user.date_created
- * @apiSuccess (Success Response 200) {string} user.date_modified
- * @apiSuccess (Success Response 200) {String} token The user's jwt token
- */
-/**
- * @apiDefine userFieldErrors
- *
- * @apiError (Field Errors 400) {Object} errors
- * @apiError (Field Errors 400) {String[]} [errors.name] Errors related to the name field
- * @apiError (Field Errors 400) {String[]} [errors.email] Errors related to the email field
- * @apiError (Field Errors 400) {String[]} [errors.password] Errors related to the password field
- */
+let comment = {
+  'id': { description: 'The id', example: '5634d4760066be016bf10c09'},
+  'text': { description: 'The content for the comment', example: () => faker.lorem.paragraph()},
+  'user_id': { description: 'The Id for the user who posted the comment', example: '5634d4760066be016bf10c09'},
+  'post_id': { description: 'The ID for the post this comment is on.', example: '5634d4760066be016bf10c09'},
+  'date_created': { description: 'Date created', example: '2015-10-31T14:47:18.000Z'},
+  'date_modified': { description: 'Date modified', example: '2015-10-31T14:47:18.000Z'},
+};
 
-/**
- * @api {post} /users Create user
- * @apiName Create user
- * @apiGroup User
- *
- * @apiUse userResponse
- * @apiUse userFieldErrors
- * @apiUse generalErrors
- *
- * @apiParam {Object} user
- * @apiParam {String} user.name
- * @apiParam {string} user.email
- * @apiParam {string} user.username
- * @apiParam {string} user.password
- */
+/*******************************************
+ * ERRORS
+ *******************************************/
 
-/**
- * @api {get} /users/:id Get user
- * @apiName Get user
- * @apiGroup User
- * @apiDescription - Returns a 404 error if a user with <code>id</code> does not exist
- *
- * @apiUse generalErrors
- *
- * @apiSuccess (Success Response 200) {Object} user
- * @apiSuccess (Success Response 200) {string} user.id
- * @apiSuccess (Success Response 200) {string} user.name
- * @apiSuccess (Success Response 200) {string} user.username
- *
- * @apiParam {String} id The user ID
- */
+let unauthorizedError = {
+  name: 'Unauthorized Error',
+  status: 401,
+  body: {
+    errors: {
+      example: {
+        unauthorized: {
+          description: 'An array of messages stating that a user is not authorized',
+          example: ['You are not authorized'],
+        },
+      },
+    },
+  },
+};
 
-/**
- * @api {put} /users/:id Update user
- * @apiName updateUser
- * @apiGroup User
- * @apiUse userFieldErrors
- * @apiUse generalErrors
- *
- * @apiUse userResponse
- * @apiUse protected
- *
- * @apiParam {String} id The user ID
- * @apiParam {Object} user
- * @apiParam {String} user.name
- * @apiParam {string} user.email
- * @apiParam {string} user.username
- */
+let permissionsError = {
+  name: 'Permissions Error',
+  status: 403,
+  body: {
+    errors: {
+      example: {
+        permissions: {
+          example: ['You do not have permissions to perform this action.'],
+          description: 'An array of messages about a user\'s permission errors',
+        },
+      },
+    },
+  },
+};
 
-/**
- * @api {delete} /users/:id Delete user
- * @apiName Delete user
- * @apiGroup User
- *
- * @apiUse successfulDeletion
- * @apiUse protected
- *
- * @apiParam {String} id The user's id
- */
-
-/****************************************************** POSTS ***********************************/
-/**
- * @apiDefine postResponse
- *
- * @apiSuccess (Success Response 200) {Object} post
- * @apiSuccess (Success Response 200) {string} post.id
- * @apiSuccess (Success Response 200) {string} post.url_path
- * @apiSuccess (Success Response 200) {string} post.title
- * @apiSuccess (Success Response 200) {string} post.body
- * @apiSuccess (Success Response 200) {string} post.user_id
- * @apiSuccess (Success Response 200) {Object[]} post.tags
- * @apiSuccess (Success Response 200) {string} post.tags.id
- * @apiSuccess (Success Response 200) {String} post.tags.text
- * @apiSuccess (Success Response 200) {string} post.date_created
- * @apiSuccess (Success Response 200) {string} post.date_modified
- */
-
-/**
- * @apiDefine postsResponse
- *
- * @apiSuccess (Success Response 200) {Object[]} posts
- * @apiSuccess (Success Response 200) {string} posts.id
- * @apiSuccess (Success Response 200) {string} post.url_path
- * @apiSuccess (Success Response 200) {string} posts.title
- * @apiSuccess (Success Response 200) {string} posts.body
- * @apiSuccess (Success Response 200) {string} post.user_id
- * @apiSuccess (Success Response 200) {String[]} post.tags The tag IDs
- * @apiSuccess (Success Response 200) {string} posts.date_created
- * @apiSuccess (Success Response 200) {string} posts.date_modified
- */
-
-/**
- * @apiDefine postFieldErrors
- *
- * @apiError (Field Errors 400) {Object}  errors
- * @apiError (Field Errors 400) {String[]} [errors.title] Errors related to the title field.
- * @apiError (Field Errors 400) {String[]} [errors.body] Errors related to the body field.
- */
-
-/**
- * @api {get} /posts Get all posts
- * @apiName Get all posts
- * @apiGroup Posts
- *
- * @apiUse postsResponse
- * @apiUse generalErrors
- */
-
-/**
- * @api {get} /users/:user_id/posts Get posts by user
- * @apiName Get all posts by user
- * @apiGroup Posts
- * @apiDescription - Returns a 404 error if a user with <code>user_id</code> does not exist
- *
- * @apiUse postsResponse
- * @apiUse generalErrors
- *
- * @apiParam {String} user_id The user's id
- */
-
-/**
- * @api {get} /tags/:tag_id/posts Get posts by tag
- * @apiName Get all posts by tag
- * @apiGroup Posts
- * @apiDescription - Returns a 404 error if a tag with <code>tag_id</code> doesn't exist
- *
- * @apiUse postsResponse
- * @apiUse generalErrors
- *
- * @apiParam {String} tag_id The tag's id
- */
-
-/**
- * @api {post} /posts Create post
- * @apiName Create post
- * @apiGroup Posts
- *
- * @apiUse postResponse
- * @apiUse postFieldErrors
- * @apiUse generalErrors
- * @apiUse protected
- *
- * @apiParam {Object} post
- * @apiParam {String} post.title The title of the post
- * @apiParam {string} post.body The post content
- */
-
-/**
- * @api {get} /posts/:id Get post
- * @apiName Get post
- * @apiGroup Posts
- * @apiDescription - Returns a 404 error if a post with <code>id</code> is not found
- *
- * @apiUse postResponse
- * @apiUse generalErrors
- *
- * @apiParam {String} id The post id
- */
-
-/**
- * @api {put} /posts/:id Update post
- * @apiName Update post
- * @apiGroup Posts
- *
- * @apiUse postResponse
- * @apiUse postFieldErrors
- * @apiUse generalErrors
- * @apiUse protected
- *
- * @apiParam {String} id The post ID
- * @apiParam {Object} post
- * @apiParam {string} post.title
- * @apiParam {string} post.url_path
- * @apiParam {string} post.body
-*/
-/**
- * @api {delete} /posts/:id Delete post
- * @apiName Delete post
- * @apiGroup Posts
- *
- * @apiUse protected
- * @apiUse successfulDeletion
- *
- * @apiParam {String} id The post ID
- */
-
-/****************************************************** COMMENTS ***********************************/
-/**
- * @apiDefine commentResponse
- *
- * @apiSuccess (Success Response 200) {Object} comment
- * @apiSuccess (Success Response 200) {string} comment.id
- * @apiSuccess (Success Response 200) {string} comment.user_id
- * @apiSuccess (Success Response 200) {string} comment.post_id
- * @apiSuccess (Success Response 200) {string} comment.text
- * @apiSuccess (Success Response 200) {string} comment.date_created
- * @apiSuccess (Success Response 200) {string} comment.date_modified
- */
-
-/**
- * @apiDefine commentsResponse
- *
- * @apiSuccess (Success Response 200) {Object[]} comments
- * @apiSuccess (Success Response 200) {Object} comments
- * @apiSuccess (Success Response 200) {string} comments.user_id
- * @apiSuccess (Success Response 200) {string} comments.post_id
- * @apiSuccess (Success Response 200) {string} comments.id
- * @apiSuccess (Success Response 200) {string} comments.text
- * @apiSuccess (Success Response 200) {string} comments.date_created
- * @apiSuccess (Success Response 200) {string} comments.date_modified
- */
-
-/**
- * @apiDefine commentFieldErrors
- *
- * @apiError (Field Errors 400) {Object} errors
- * @apiError (Field Errors 400) {String[]} [errors.text] Errors related to the text field.
- */
-
-/**
- * @api {post} /posts/:post_id/comments Create a comment
- * @apiName Create a comment
- * @apiGroup Comments
- * @apiDescription - Any user that is logged in can create a comment
- *
- * @apiUse commentResponse
- * @apiUse commentFieldErrors
- * @apiUse generalErrors
- * @apiUse protected
- *
- * @apiParam {String} post_id The post id
- * @apiParam {Object} comment
- * @apiParam {String} comment.text The comment text
- */
-
-/**
- * @api {get} /posts/:post_id/comments Get comments by post
- * @apiName Get comments by post
- * @apiGroup Comments
- *
- * @apiUse commentsResponse
- * @apiUse generalErrors
- *
- * @apiParam {String} post_id The post id
- *
- * @apiDescription - Returns a 404 error if a post with <code>post_id</code> is not found
- */
-
-/**
- * @api {delete} /comments/:id Delete comment
- * @apiName Delete comment
- * @apiGroup Comments
- *
- * @apiUse successfulDeletion
- * @apiUse generalErrors
- * @apiUse protected
- *
- * @apiParam {String} id The comment id
- */
-
-/**
- * @api {put} /comments/:id Update comment
- * @apiName Update comment
- *
- * @apiGroup Comments
- *
- * @apiUse commentResponse
- * @apiUse commentFieldErrors
- * @apiUse generalErrors
- * @apiUse protected
- *
- * @apiParam {String} id The comment id
- * @apiParam {Object} comment
- * @apiParam {String} comment.text
-*/
-/****************************************************** TAGS ***********************************/
-/**
- * @apiDefine tagResponse
- *
- * @apiSuccess (Success Response 200) {Object} tag
- * @apiSuccess (Success Response 200) {string} tag.id
- * @apiSuccess (Success Response 200) {string} tag.text
- */
-
-/**
- * @apiDefine tagsResponse
- *
- * @apiSuccess (Success Response 200) {Object[]} tags
- * @apiSuccess (Success Response 200) {Object} tags
- * @apiSuccess (Success Response 200) {string} tags.id
- * @apiSuccess (Success Response 200) {string} tags.text
- */
-
-/**
- * @apiDefine tagFieldErrors
- *
- * @apiError (Field Errors 400) {Object} errors
- * @apiError (Field Errors 400) {String[]} [errors.text] Errors related to the text field.
- */
-
-/**
- * @api {post} /tags Create a tag
- * @apiName Create a tag
- * @apiGroup Tags
- * @apiDescription - Any user that is logged in can create a tag. A tag is unique so if an attempt to create a tag that already exists is made, the existing tag will be returned.
- *
- * @apiUse tagResponse
- * @apiUse tagFieldErrors
- * @apiUse generalErrors
- * @apiUse protected
- *
- * @apiParam {Object} tag
- * @apiParam {String} tag.text The tag text
- */
-
-/**
- * @api {get} /tags Get all tags
- * @apiName Get all tags
- * @apiGroup Tags
- *
- * @apiUse tagsResponse
- * @apiUse generalErrors
- */
-
-/**
- * @api {delete} /tags/:id Delete tag
- * @apiName Delete tag
- * @apiGroup Tags
- * @apiDescription - Only a site admin can delete a tag once it's been created. No need to implement now.
- *
- * @apiUse successfulDeletion
- * @apiUse generalErrors
- * @apiUse protected
- *
- * @apiParam {String} id The tag id
- */
-
-/**
- * @api {put} /tags/:id Update tag
- * @apiName Update tag
- * @apiGroup Tags
- * @apiDescription - Only a site admin can update a tag once it's been created. No need to implement now.
- *
- * @apiUse tagResponse
- * @apiUse tagFieldErrors
- * @apiUse generalErrors
- * @apiUse protected
- *
- * @apiParam {String} id The tag id
- * @apiParam {Object} tag
- * @apiParam {String} tag.text
- */
+let notFoundError = {
+  name: 'Not found',
+  status: 404,
+  body: 'Not found',
+};
 
 
-/****************************************************** SEARCH ***********************************/
-/**
- * @api {get} /posts?url_path=:url_path Get post by url_path
- * @apiName Get post by url_path
- * @apiGroup Search
- * @apiDescription - Returns a 404 error if a post with the url_path is not found
- *
- * @apiParam {String} url_path The unique url_path for the post you want to find
- *
- * @apiUse postResponse
- * @apiUse generalErrors
- */
+/*******************************************
+ * HEADERS
+ *******************************************/
+let tokenHeader = {
+  key: 'Authorization',
+  description: 'This token is used to authenticate a user with a request. If it is not attached, there will be no user attached to the request. Note that the token must be prepended with "Bearer: "',
+  example: 'Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI',
+};
 
-/**
- * @api {get} /tags/?text=:text Get tag by text
- * @apiName Get tag by text
- * @apiGroup Search
- * @apiDescription - Returns a 404 error if a tag wit the tag text is not found.
- *
- * @apiParam {String} text The text
- *
- * @apiUse tagResponse
- * @apiUse generalErrors
- */
+/*******************************************
+ * USERS
+ *******************************************/
+let createUserBody = ob.pick(user, ['name', 'email', 'username', 'password']);
+createUserBody.name.optional = true;
 
-/**
- * @api {get} /users/?username=:username Get user by username
- * @apiName Get user by username
- * @apiGroup Search
- * @apiDescription - Returns a 404 error if a user with the username is not found
- *
- * @apiParam {String} username The username
- *
- * @apiSuccess (Success Response 200) {Object} user
- * @apiSuccess (Success Response 200) {string} user.id
- * @apiSuccess (Success Response 200) {string} user.email
- * @apiSuccess (Success Response 200) {string} user.username
- *
- * @apiUse generalErrors
- */
+let createUserFieldErrorsBody = ob.omit(user, ['date_created','date_modified', 'id']);
+for (let i in createUserFieldErrorsBody) {
+  createUserFieldErrorsBody[i].description = ['Descriptive Errors about this field. There could be more than one since it\'s in an array'];
+  createUserFieldErrorsBody[i].example = ['Error message one', 'Error message two'];
+}
 
-/****************************************************** ADHOC ***********************************/
-/**
- * @api {get} /toggle-tag-on-post Toggle tag on post
- * @apiName Get post by url_path
- * @apiGroup Adhoc
- *
- * @apiParam {integer} post_id The ID of the post
- * @apiParam {integer} tag_id The ID of the tag
- * @apiParam {boolean} status The desired end result for the tag being or not being on a post
- *
- * @apiUse postResponse
- * @apiUse protected
- * @apiUse generalErrors
- */
+let createUser = {
+  name: 'Create user',
+  method: 'POST',
+  description: 'Allows someone to create a user.',
+  params: {
+    body: {user: {example: createUserBody, description: 'The user'}},
+  },
+  headers: [ tokenHeader ],
+  responses: [
+    {
+      name: 'Success',
+      status: 200,
+      body: {
+        user: {
+          description: 'The user',
+          example: ob.pick(user, ['id','name', 'email', 'username', 'date_created', 'date_modified']),
+        },
+        token: token,
+      },
+    },
+    {
+      name: 'Field Errors',
+      status: 400,
+      body: {
+        errors: {
+          example: createUserFieldErrorsBody,
+        },
+      },
+    },
+    unauthorizedError,
+    permissionsError,
+    notFoundError,
+  ],
+};
+
+let getUser = {
+  name: 'Get user',
+  method: 'GET',
+  params: {
+    url: ob.pick(user, ['id']),
+  },
+  responses: [
+    {
+      name: 'Success',
+      status: 200,
+      body: {
+        user: {
+          description: 'The user',
+          example: ob.pick(user, ['id','name', 'username']),
+        },
+      },
+    },
+    notFoundError,
+  ],
+};
+
+let deleteUser = {
+  name: 'Delete User',
+  method: 'DELETE',
+  headers: [ tokenHeader ],
+  params: {
+    url: ob.pick(user, ['id']),
+  },
+  responses: [
+    {
+      name: 'Success',
+      status: 200,
+      body: {
+        deleted_id: {
+          description: 'The ID of the deleted user.',
+          example: '5634d4760066be016bf10c09',
+        },
+      },
+    },
+    unauthorizedError,
+    permissionsError,
+    notFoundError,
+  ],
+  headers: [ tokenHeader ],
+};
+
+let updateUserBody = ob.pick(user, ['name', 'email', 'username']);
+updateUserBody.name.optional = true;
+updateUserBody.email.optional = true;
+updateUserBody.username.optional = true;
+
+let updateUser = {
+  name: 'Update user',
+  method: 'PUT',
+  headers: [ tokenHeader ],
+  params: {
+    url: ob.pick(user, ['id']),
+    body: updateUserBody,
+  },
+  responses: createUser.responses,
+};
+
+let getUserByUsername = {
+  name: 'Get user by the username',
+  method: 'GET',
+  params: {
+    query: {
+      'username': {
+        'description': 'When set, the user with the username will be returned',
+      },
+    },
+  },
+  responses: getUser.responses,
+};
+
+let signInFieldErrors = ob.pick(user, ['email', 'password']);
+signInFieldErrors.email.description = 'An array of errors about the email address';
+signInFieldErrors.password.description = 'An array of errors about the password';
+signInFieldErrors.email.example = ['There is no account with this email address.'];
+signInFieldErrors.password.example = ['Your password was invalid'];
+
+let signIn = {
+  name: 'Authenticate a user',
+  method: 'POST',
+  params: {
+    body: {
+      user: {
+        example: ob.pick(user, ['email','password']),
+      },
+    },
+  },
+  responses: [
+    {
+      name: 'Success',
+      status: 200,
+      body: {
+        token: token,
+      },
+    },
+    {
+      name: 'Field Errors',
+      status: 400,
+      body: {
+        errors: {
+          example: signInFieldErrors,
+        },
+      },
+    },
+    unauthorizedError,
+  ],
+};
+
+/**********************************
+ * POSTS
+ **********************************/
+let createPostResponse = ob.clone(post);
+createPostResponse.tags = {example: [tag, tag, tag], description: 'All the tags attached to the post'};
+
+let createPost = {
+  name: 'Create post',
+  method: 'POST',
+  description: 'Allows someone to create a user.',
+  headers: [ tokenHeader ],
+  params: {
+    body: {post: {example: ob.pick(post, ['title', 'body']), description: 'The post'}},
+  },
+  responses: [
+    {
+      name: 'Success',
+      status: 200,
+      body: {
+        post: {
+          description: 'The post',
+          example: createPostResponse,
+        },
+      },
+    },
+    unauthorizedError,
+    permissionsError,
+    notFoundError,
+  ],
+};
+
+let updatePostBody = ob.pick(post, ['title', 'url_path', 'body']);
+updatePostBody.title.optional = true;
+updatePostBody.url_path.optional = true;
+updatePostBody.body.optional = true;
+
+let updatePost = {
+  name: 'Update post',
+  method: 'PUT',
+  headers: [ tokenHeader ],
+  params: {
+    url: ob.pick(post, ['id']),
+    body: updatePostBody,
+  },
+  responses: createPost.responses,
+};
+
+let getPosts = {
+  name: 'Get posts',
+  method: 'GET',
+  params: {
+    query: {
+      'url_path': {
+        'description': 'When set, instead of returning all posts, only one post will be returned in the same format as /posts/:id',
+      },
+    },
+  },
+  responses: [
+    {
+      name: 'Success Response',
+      status: 200,
+      body: {
+        posts: {
+          description: 'The posts',
+          example: [post, post, post],
+        },
+      },
+    },
+  ],
+  description: '<p>Returns all posts.</p>',
+};
+
+let getPostsByTagId = {
+  name: 'Get posts By tag ID',
+  method: 'GET',
+  params: {
+    url: {
+      'tag_id': {
+        'description': 'The ID of the tag you want the posts for.',
+      },
+    },
+  },
+  responses: getPosts.responses,
+  description: '<p>Returns all posts that have a given tag.</p>',
+};
+
+let getPostsByUserId = {
+  name: 'Get posts By User ID',
+  method: 'GET',
+  params: {
+    url: {
+      'user_id': {
+        'description': 'The ID of the user you want the posts for.',
+      },
+    },
+  },
+  responses: getPosts.responses,
+  description: '<p>Returns all posts written by a given user</p>',
+};
+
+let getPost = {
+  name: 'Get post',
+  method: 'GET',
+  params: {
+    url: {
+      'id': {
+        'description': 'The ID of the post to retrieve.',
+      },
+    },
+  },
+  responses: [
+    {
+      name: 'Success Response',
+      status: 200,
+      body: {
+        post: {
+          description: 'The post',
+          example: post,
+        },
+      },
+    },
+    notFoundError,
+  ],
+};
+
+let getPostByUrlPath = {
+  name: 'Get post by URL Path',
+  method: 'GET',
+  params: {
+    query: {
+      'url_path': {
+        'description': 'When set, only one the post with the url_path will be returned',
+      },
+    },
+  },
+  responses: getPost.responses,
+};
+
+/******************************************
+ * TAGS
+ ******************************************/
+let getTagByText = {
+  name: 'Get tag by tag text',
+  method: 'GET',
+  params: {
+    query: {
+      'text': {
+        'description': 'When set, the tag with the given text will be returned.',
+      },
+    },
+  },
+  responses: [
+    {
+      name: 'Success',
+      status: 200,
+      body: {
+        user: {
+          description: 'The tag',
+          example: tag,
+        },
+      },
+    },
+    notFoundError,
+  ],
+};
+
+/*******************************************
+ * COMMENTS
+ *******************************************/
+let getCommentsByPostID = {
+  name: 'Get all comments for a post',
+  method: 'GET',
+  params: {
+    url: {post_id: {description: 'The Id of the post we want comments for'}},
+  },
+  responses: [
+    {
+      name: 'Success',
+      status: 200,
+      body: {
+        comments: {
+          description: 'The comments',
+          example: [comment, comment, comment],
+        },
+      },
+    },
+    notFoundError,
+  ],
+};
+
+let getComment = {
+  name: 'Get comment',
+  method: 'GET',
+  params: {
+    url: {id: {description: 'The Id of the comment we want'}},
+  },
+  responses: [
+    {
+      name: 'Success',
+      status: 200,
+      body: {
+        comment: {
+          description: 'The comment',
+          example: comment,
+        },
+      },
+    },
+    notFoundError,
+  ],
+};
+
+let createComment = {
+  name: 'Get comment',
+  method: 'GET',
+  headers: [ tokenHeader ],
+  params: {
+    url: {post_id: {description: 'The Id of the post we want comments for'}},
+    body: {
+      comment: ob.pick(comment, ['text']),
+    },
+  },
+  responses: [
+    {
+      name: 'Success',
+      status: 200,
+      body: {
+        comment: {
+          description: 'The comment',
+          example: comment,
+        },
+      },
+    },
+    notFoundError,
+    unauthorizedError,
+  ],
+};
+
+/*******************************************
+ * TOGGLE TAG ON POST
+ *******************************************/
+let toggleTagOnPost = {
+  name: 'Toggle Tag on Post',
+  method: 'POST',
+  description: '<p>Adds a tag to a post if it doesn\'t exist. Removes it otherwise.</p>',
+  headers: [ tokenHeader ],
+  params: {
+    body: {
+      post_id: {
+        description: 'The Id of the post to toggle the tag on',
+        example: '5634d4760066be016bf10c09',
+      },
+      tag_id: {
+        description: 'The Id of the tag to toggle on the post',
+        example: '3634d4760046be006bf10c09',
+      },
+    },
+  },
+  responses: [
+    {
+      name: 'Success',
+      status: 200,
+      body: {
+        post: {
+          description: 'The modified post',
+          example: post,
+        }
+      }
+    },
+    notFoundError,
+    unauthorizedError,
+    permissionsError,
+  ],
+};
+
+
+/******************************************
+ * EXPORT
+ ******************************************/
+module.exports = {
+  name: 'Blog app REST API',
+  description: 'Documentation for all versions of the REST API.',
+  paths: {
+    '/users': {
+      actions: [ createUser, getUserByUsername ],
+    },
+    '/users/:id': {
+      actions: [ getUser, updateUser, deleteUser ],
+    },
+    '/posts': {
+      actions: [ createPost, getPosts, getPostByUrlPath ],
+    },
+    '/posts/:id': {
+      actions: [ updatePost, getPost ],
+    },
+    '/tags': {
+      actions: [ getTagByText ],
+    },
+    '/tags/:tag_id/posts': {
+      actions: [getPostsByTagId],
+    },
+    '/users/:user_id/posts': {
+      actions: [getPostsByUserId],
+    },
+    '/posts/:post_id/comments': {
+      actions: [getCommentsByPostID, createComment],
+    },
+    '/comments/:id': {
+      actions: [getComment],
+    },
+    '/sign-in': {
+      actions: [signIn],
+    },
+    '/toggle-tag-on-post': {
+      actions: [toggleTagOnPost],
+    },
+  },
+};
