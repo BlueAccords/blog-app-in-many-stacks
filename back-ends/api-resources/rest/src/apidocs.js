@@ -204,7 +204,11 @@ let updateUser = {
   headers: [ tokenHeader ],
   params: {
     url: ob.pick(user, ['id']),
-    body: updateUserBody,
+    body: {
+      user: {
+        example: updateUserBody,
+      },
+    },
   },
   responses: createUser.responses,
 };
