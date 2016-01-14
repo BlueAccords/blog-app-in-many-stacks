@@ -11,6 +11,7 @@ import BlogApp from './containers/BlogApp';
 import PublicTemplate from './containers/PublicTemplate';
 import PublicHomePage from './containers/PublicHomePage';
 import PublicSinglePostPage from './containers/PublicSinglePostPage';
+import PostsByTagPage from './containers/PostsByTagPage';
 import NotFoundPage from './containers/NotFoundPage';
 
 export const store = configureStore();
@@ -42,6 +43,7 @@ function renderRoutes () {
           <IndexRoute component={PublicHomePage} />
           <Route path="archives" component={PublicHomePage} />
           <Route path="archives/:url_path" component={PublicSinglePostPage} />
+          <Route path="tags/:tag_text" component={PostsByTagPage} />
         </Route>
       </Route>
       <Route path="*" component={NotFoundPage}/>

@@ -1,5 +1,5 @@
-## Printocracy Web
-This is the ReactJS web app for Printocracy.
+## Blog App with Many Stacks - React/Redux Frontend
+This is the ReactJS + Redux frontend for Blog App with Many Stacks .
 
 ### Loose coventions
 Eslint should handle the majority of conventions but please also [read this](https://gist.github.com/chiedojohn/50f5cf4e900523e24586)
@@ -8,7 +8,7 @@ Eslint should handle the majority of conventions but please also [read this](htt
 Environment variables can be overriden with a standard .env file
 
 ### Development
-A lot can be learned just by looking at the package.json but in a nutshell, be sure to have Printocracy Rails API running on port 8000 then do the following:
+A lot can be learned just by looking at the package.json but in a nutshell, be sure to have one of the backend APIs running on port 8000 (found in /backends). Once a backend API is running, do the following:
 
 Install packages
 

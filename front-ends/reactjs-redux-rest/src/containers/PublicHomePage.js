@@ -19,9 +19,15 @@ class PublicHomePage extends Component {
 
   render(){
     return  (
-      <div>
-        <h1>A Very Groovy Blog</h1>
-        <AllPosts />
+      <div className="container">
+        <div className="row">
+          <div className="col-md-3"></div>
+          <div className="col-md-6">
+            <h1>A Very Groovy Blog</h1>
+            <AllPosts />
+          </div>
+          <div className="col-md-3"></div>
+        </div>
       </div>
     );
   }

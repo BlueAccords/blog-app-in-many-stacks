@@ -6,5 +6,5 @@ import { combineReducers } from 'redux';
 export default combineReducers({
   router: routerStateReducer,
   application: applicationReducer,
-  posts: postsReducer,
+  postData: postsReducer,
 });

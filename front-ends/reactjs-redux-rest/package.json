@@ -1,7 +1,7 @@
 {
-  "name": "printocracy",
+  "name": "blog-app-many-stacks",
   "version": "0.0.1",
-  "description": "Printocracy",
+  "description": "Blog App with Many Stacks",
   "main": "server.js",
   "engines": {
     "node": "4.2.x"
@@ -71,6 +71,6 @@
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "https://github.com/byrdkw/printocracy-web.git"
+    "url": "https://github.com/chiedolabs/blog-app-in-many-stacks"
   }
 }

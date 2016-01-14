@@ -23,21 +23,27 @@ class SinglePost extends Component {
   componentWillMount() {}
 
   render(){
-    let postDateRaw = new Date(this.props.singlePost.date_created),
-    postDate = postDateRaw.toDateString();
+    let { singlePost, singleAuthor } = this.props;
+
+    let postDateRaw = new Date(singlePost.date_created),
+      postDate = postDateRaw.toDateString();
+
+    let meta = () => {
+      return (
+        <div className="meta">
+          Created on <span className="date">{postDate}</span> by <span className="author">{singleAuthor.name}</span>
+        </div>
+      );
+    };
 
     return (
       <div>
-        <h1>{this.props.singlePost.title}</h1>
-        <div className="meta">
-          Created on <span className="date">{postDate}</span> by <span className="author">{this.props.singleAuthor.name}</span>
-        </div>
-        <div className="post-content">{this.props.singlePost.body}</div>
+        <h1>{singlePost.title}</h1>
+          {(singleAuthor) ? meta() : ''}
+        <div className="post-content">{singlePost.body}</div>
         <Link to="/">Go back</Link>
       </div>
     );
   }
 };
-export default connect((state) => {
-  return {};
-})(SinglePost);
+export default connect()(SinglePost);
