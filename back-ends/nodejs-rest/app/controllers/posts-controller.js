@@ -33,7 +33,7 @@ module.exports.index = (req, res) => {
   if(req.query.url_path) {
     return Post.findOne({
       'url_path': req.query.url_path,
-    })
+    }).populate('tags')
     .then(post => {
       if(post) {
         return res.json({
@@ -133,6 +133,7 @@ module.exports.delete = (req, res) => {
 
 module.exports.getPostsByTag = (req, res) => {
   return Post.find({'tags': req.params.tag_id})
+  .populate('tags')
   .then(posts => {
     return res.json({
       posts: posts,
