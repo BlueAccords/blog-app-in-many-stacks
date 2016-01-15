@@ -1,0 +1,2 @@
+object @object
+attribute :errors
