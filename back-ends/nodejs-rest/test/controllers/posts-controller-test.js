@@ -17,30 +17,6 @@ describe('Posts', () => {
     destroyDB();
   });
 
-  describe('Create', () => {
-    it('should allow a user to create a post', (done) => {
-      let post = factory.buildSync('post');
-      let user = factory.buildSync('user');
-
-      user.save()
-      .then((user) => {
-        let token = getToken(user);
-
-        request(app)
-        .post(`/posts`)
-        .set('Authorization', `Bearer: ${token}`)
-        .send({post: post})
-        .expect(200)
-        .end((err, res) => {
-          expect(res.body.post.title).to.equal(post.title);
-          expect(res.body.post.body).to.equal(post.body);
-          done();
-        });
-      });
-    });
-    xit('should not allow someone with no account to create a post');
-  });
-
   describe('Show', () => {
     it('should return a list of all posts', (done) => {
       let user = factory.buildSync('user');
@@ -51,9 +27,9 @@ describe('Posts', () => {
           .get('/posts')
           .expect(200)
           .end((err, res) => {
-            expect(res.body.posts[1].title).to.equal(posts[0].title);
-            expect(res.body.posts[2].title).to.equal(posts[1].title);
-            expect(res.body.posts[3].title).to.equal(posts[2].title);
+            expect(res.body.posts[0].title).to.equal(posts[0].title);
+            expect(res.body.posts[1].title).to.equal(posts[1].title);
+            expect(res.body.posts[2].title).to.equal(posts[2].title);
             done();
           });
 
@@ -94,6 +70,32 @@ describe('Posts', () => {
     xit('should return all posts by a given username');
     xit('should return all posts with a given tag');
   });
+
+  describe('Create', () => {
+    it('should allow a user to create a post', (done) => {
+      let post = factory.buildSync('post');
+      let user = factory.buildSync('user');
+
+      user.save()
+      .then((user) => {
+        let token = getToken(user);
+
+        request(app)
+        .post(`/posts`)
+        .set('Authorization', `Bearer: ${token}`)
+        .send({post: post})
+        .expect(200)
+        .end((err, res) => {
+          expect(res.body.post.title).to.equal(post.title);
+          expect(res.body.post.body).to.equal(post.body);
+          done();
+        });
+      });
+    });
+    xit('should not allow someone with no account to create a post');
+  });
+
+  
 
   describe('Update', () => {
     xit('should allow a user to update a post he owns');
