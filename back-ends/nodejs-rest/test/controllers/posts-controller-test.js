@@ -42,9 +42,55 @@ describe('Posts', () => {
   });
 
   describe('Show', () => {
-    xit('should return a list of all posts');
-    xit('should return a post by ID');
-    xit('should return the post with a given url_path');
+    it('should return a list of all posts', (done) => {
+      let user = factory.buildSync('user');
+      factory.createMany('post', [{_author: user}, {_author: user}, {_author: user}])
+      .then((posts) => {
+
+        request(app)
+          .get('/posts')
+          .expect(200)
+          .end((err, res) => {
+            expect(res.body.posts[1].title).to.equal(posts[0].title);
+            expect(res.body.posts[2].title).to.equal(posts[1].title);
+            expect(res.body.posts[3].title).to.equal(posts[2].title);
+            done();
+          });
+
+      });
+
+    });
+    it('should return a post by ID', (done) => {
+      let user = factory.buildSync('user');
+      factory.create('post', {_author: user})
+      .then((post) => {
+        request(app)
+        .get(`/posts/${post._id}`)
+        .expect(200)
+        .then((res) => {
+          expect(res.body.post.title).to.equal(post.title);
+          expect(res.body.post.body).to.equal(post.body);
+          done();
+        });
+      });
+    });
+
+    it('should return the post with a given url_path', (done) => {
+      let user = factory.buildSync('user');
+      factory.create('post', {_author: user})
+      .then((post) => {
+        request(app)
+        .get(`/posts/?url_path=${post.url_path}`)
+        .expect(200)
+        .then((res) => {
+          expect(res.body.post.title).to.equal(post.title);
+          expect(res.body.post.body).to.equal(post.body);
+          done();
+        });
+      });
+    });
+
+
     xit('should return all posts by a given username');
     xit('should return all posts with a given tag');
   });
