@@ -137,7 +137,7 @@ class PostsController < BaseController
       
       # For each Post Tag, add the tag to the array of tags
       postTags.each do |post_tag|
-        current_post["tags"] << post_tag.tag_id.to_s
+        current_post["tags"] << Tag.find(post_tag.tag_id)
       end
     end 
 
