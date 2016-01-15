@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 import Gravatar from 'react-gravatar';
-import { Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
@@ -20,23 +19,18 @@ class Header extends Component {
 
     if(this.props.authenticated && user) {
       authLink = <LogoutLink />;
-      image = <Link to="/my-account"><Gravatar email={user.email} size={40} https className="img-circle navbar-right me" /></Link>;
+      image = <Link to="/my-account"><Gravatar email={user.email} size={40} https className /></Link>;
     } else {
-      authLink = <Link to="/my-account" className="navbar-right"><Glyphicon glyph="user" /> Log In</Link>;
+      authLink = <Link to="/my-account">Log In</Link>;
     }
 
     return (
       <header>
-        <nav className="header-navbar navbar">
-          <div className="navbar-header">
-            <a href="#" className="navbar-left"><Glyphicon glyph="menu-hamburger" /></a>
-            <span className="navbar-brand"><Link to="/">blog appendages</Link></span>
-            {authLink}
-            {image}
-            <a href="#" className="navbar-right "><Glyphicon glyph="th" /></a>
-            <a href="#" className="navbar-right "><Glyphicon glyph="search" /></a>
-          </div>
-        </nav>
+        <h1>
+          <Link to="/">Blog</Link>
+        </h1>
+        {authLink}
+        {image}
       </header>
     );
   }

@@ -13,11 +13,11 @@ class PublicHomePage extends Component {
     singlePost: PropTypes.object,
     singleAuthor: PropTypes.object,
     params: PropTypes.object.isRequired,
-  }
+  };
 
   constructor(props) {
     super(props);
-  }
+  };
 
   componentWillMount() {
     const { dispatch, singlePost } = this.props;

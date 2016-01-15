@@ -9,11 +9,11 @@ class PublicHomePage extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     errors: PropTypes.array,
-  }
+  };
 
   constructor(props) {
     super(props);
-  }
+  };
 
   componentWillMount() {}
 

@@ -1,7 +1,7 @@
 {
-  "name": "blog-app-many-stacks",
+  "name": "react-redux-rest",
   "version": "0.0.1",
-  "description": "Blog App with Many Stacks",
+  "description": "The React Redux client for the blog app",
   "main": "server.js",
   "engines": {
     "node": "4.2.x"
@@ -15,7 +15,7 @@
     "gulp-minify-css": "^1.2.1",
     "gulp-sass": "^2.0.4",
     "gulp-sourcemaps": "^1.6.0",
-    "history": "1.13.0",
+    "history": "^1.17.0",
     "imports-loader": "^0.6.5",
     "jsx": "^0.9.89",
     "lodash": "^3.10.1",
@@ -71,6 +71,10 @@
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
+<<<<<<< HEAD
     "url": "https://github.com/chiedolabs/blog-app-in-many-stacks"
+=======
+    "url": "https://github.com/chiedolabs/blog-app-in-many-stacks.git"
+>>>>>>> 970b9f7f08d292321cbd943e09b6de6f071f8c56
   }
 }

@@ -1,0 +1,4 @@
+/Users/ricardo/.rvm/rubies/ruby-2.1.2/bin/ruby extconf.rb
+/Users/ricardo/.rvm/rubies/ruby-2.1.2/bin/ruby: No such file or directory -- extconf.rb (LoadError)
+
+extconf failed, exit code 1

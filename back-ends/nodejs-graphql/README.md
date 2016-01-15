@@ -1,9 +1,7 @@
-# blog-backend-api
+# Blog App In NodeJS + GraphQL
 
-The Blog Backend API.
+A blog API written in NodeJS and RelayJS compliant GraphQL.
 
-### Loose coventions
-Eslint should handle the majority of conventions but please also [read this](https://gist.github.com/chiedojohn/50f5cf4e900523e24586)
 
 ## Setup
 1. Install your packages with `npm install`
@@ -29,4 +27,9 @@ You can view the schema that this repo should conform to [here](../api-resources
 In a isolated project outside of this Blog app repo though, the schema.json and schema.graphql files [in the data folder](data/) would be authoritative.
 
 ## Testing
+
+Tests are written with Mocha. You can run tests with the following:
+
+  	npm test
+  
 A sample Postman collection is provided [here](../api-resources/graphql/blog-app-graphql.json.postman_collection) that you can use to test the API.

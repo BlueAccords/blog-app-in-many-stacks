@@ -11,8 +11,11 @@ let router = express.Router();
 /*
  * OPEN ROUTES
  */
-router.post('/authenticate', user.authenticate);
-router.post('/user', user.create);
+router.route('/sign-in')
+.post(user.authenticate);
+
+router.route('/users')
+.post(user.create);
 
 /*
  * PROTECTED ROUTES - order matters. Protected routes need to be below

@@ -5,10 +5,13 @@ import request from 'supertest';
 import factory from '../factory.js';
 import app from '../../app';
 import { createDB, destroyDB } from '../test-helper';
+import { getToken } from '../../app/utils/functions';
 
 describe('Users', () => {
   before((done) => {
-    createDB(done);
+    createDB(() => {
+      done();
+    });
   });
 
   after(() => {
@@ -17,38 +20,61 @@ describe('Users', () => {
 
   describe('Create', () => {
     it('should register a user when given the correct credentials', (done) => {
-      let user = {
-        name: 'Bob Nolan',
-        email: 'bob@bob.com',
-        username: 'delicious',
-        password: 'testtest',
-      } ;
+      let user = factory.buildSync('user');
 
       request(app)
       .post('/users')
       .send({user: user})
       .expect(200)
-      .end((err, res) => {
+      .then((res) => {
         expect(res.body.user).to.be.an('object');
         done();
       });
     });
 
     it('should not register a user that already exists', (done) => {
-      factory.create('user')
+      let user = factory.buildSync('user');
+
+      user.save()
       .then((user) => {
         request(app)
         .post('/users')
-        .send({user: {
-          name: user.name,
-          email: user.email,
-          username: user.username,
-          password: user.password,
-        }})
+        .send({user: user})
         .expect(400)
-        .end((err, res) => {
+        .then((res) => {
           let x = JSON.parse(res.text);
-          expect(x['errors']['email'][0]).to.equal('This Username or Email is already taken.');
+          expect(x['errors']['email'][0]).to.exist;
+          done();
+        });
+      });
+    });
+  });
+
+  describe('Show', () => {
+    it('should return the given user by id', (done) => {
+      factory.create('user')
+      .then((user) => {
+        request(app)
+        .get(`/users/${user._id}`)
+        .expect(200)
+        .then((res) => {
+          expect(res.body.user.name).to.equal(user.name);
+          expect(res.body.user.email).to.equal(user.email);
+          expect(res.body.user.username).to.equal(user.username);
+          done();
+        });
+      });
+    });
+    it('should return the given user by username', (done) => {
+      factory.create('user')
+      .then((user) => {
+        request(app)
+        .get(`/users?username=${user.username}`)
+        .expect(200)
+        .then((res) => {
+          expect(res.body.user.name).to.equal(user.name);
+          expect(res.body.user.email).to.equal(user.email);
+          expect(res.body.user.username).to.equal(user.username);
           done();
         });
       });
@@ -56,12 +82,89 @@ describe('Users', () => {
   });
 
   describe('Update', () => {
-    xit('should allow a user to update his profile');
-    xit('should not allow a user to update another user\'s profile');
+    it('should allow a user to update his profile', (done) => {
+      let user = factory.buildSync('user');
+      let updatedUser = factory.buildSync('user');
+
+      user.save()
+      .then((user) => {
+        let token = getToken(user);
+
+        request(app)
+        .put(`/users/${user._id}/?token=${token}`)
+        .send({user: updatedUser})
+        .expect(200)
+        .then((res) => {
+          expect(res.body.user.name).to.equal(updatedUser.name);
+          expect(res.body.user.email).to.equal(updatedUser.email);
+          expect(res.body.user.username).to.equal(updatedUser.username);
+          done();
+        });
+      });
+    });
+
+    it('should not allow a user to update another\'s profile', (done) => {
+      let user1;
+      let user2;
+
+      factory.createMany('user', 2)
+      .then((users) => {
+        user1 = users[0];
+        user2 = users[1];
+      })
+      .then((user) => {
+        let token = getToken(user1);
+
+        request(app)
+        .put(`/users/${user2._id}/?token=${token}`)
+        .expect(401)
+        .end((err, res) => {
+          let x = JSON.parse(res.text);
+          expect(x['errors']['permissions'][0]).to.exist;
+          done();
+        });
+      });
+    });
   });
 
   describe('Delete', () => {
-    xit('should allow a user to delete his own profile');
-    xit('should not allow a user to delete another user\'s profile');
+    it('should allow a user to delete his profile', (done) => {
+      let user = factory.buildSync('user');
+
+      user.save()
+      .then((user) => {
+        let token = getToken(user);
+        request(app)
+        .del(`/users/${user._id}/?token=${token}`)
+        .expect(200)
+        .then((res) => {
+          expect(res.body.deleted_id).to.equal(user._id.toString());
+          done();
+        });
+      });
+    });
+
+    it('should not allow a user to delete another\'s profile', (done) => {
+      let user1;
+      let user2;
+
+      factory.createMany('user', 2)
+      .then((users) => {
+        user1 = users[0];
+        user2 = users[1];
+      })
+      .then((user) => {
+        let token = getToken(user1);
+
+        request(app)
+        .del(`/users/${user2._id}/?token=${token}`)
+        .expect(401)
+        .end((err, res) => {
+          let x = JSON.parse(res.text);
+          expect(x['errors']['permissions'][0]).to.exist;
+          done();
+        });
+      });
+    });
   });
 });
