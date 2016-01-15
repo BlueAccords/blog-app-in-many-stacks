@@ -44,9 +44,9 @@ describe('Posts', () => {
   describe('Show', () => {
     xit('should return a list of all posts');
     xit('should return a post by ID');
+    xit('should return the post with a given url_path');
     xit('should return all posts by a given username');
     xit('should return all posts with a given tag');
-    xit('should return all posts with a url_path');
   });
 
   describe('Update', () => {
