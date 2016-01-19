@@ -16,12 +16,12 @@ export function login (data, redirect) {
       type: constants.APPLICATION_LOADING,
     });
 
-    return fetch(api(`/api/users/sign_in`), tokenize({
+    return fetch(api(`/users/sign_in`), tokenize({
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(data.user),
     }))
     .then(checkStatus)
     .then(parseJSON)
@@ -74,7 +74,9 @@ export function register (data, redirect) {
       type: constants.APPLICATION_LOADING,
     });
 
-    return fetch(api(`/api/users`), tokenize({
+    console.log('data', data);
+
+    return fetch(api('/users'), tokenize({
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -111,7 +113,7 @@ export function loadUser () {
       type: constants.APPLICATION_LOADING,
     });
 
-    return fetch(api(`/api/users`), tokenize({
+    return fetch(api(`/users`), tokenize({
       method: 'get',
     }))
     .then(checkStatus)
@@ -140,7 +142,7 @@ export function updateUser (data) {
       type: constants.APPLICATION_LOADING,
     });
 
-    return fetch(api(`/api/users`), tokenize({
+    return fetch(api(`/users`), tokenize({
       method: 'put',
       headers: {
         'Content-Type': 'application/json',

@@ -71,10 +71,6 @@
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-<<<<<<< HEAD
-    "url": "https://github.com/chiedolabs/blog-app-in-many-stacks"
-=======
     "url": "https://github.com/chiedolabs/blog-app-in-many-stacks.git"
->>>>>>> 970b9f7f08d292321cbd943e09b6de6f071f8c56
   }
 }
