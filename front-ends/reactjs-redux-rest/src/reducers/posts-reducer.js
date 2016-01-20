@@ -22,6 +22,8 @@ export default (state = initialState, action) => {
       return { ...state, posts: action.payload.posts };
     case constants.SINGLE_AUTHOR_LOADED:
       return { ...state, singleAuthor: action.payload.singleAuthor };
+    case constants.COMMENTS_LOADED:
+      return { ...state, comments: action.payload.comments };
     default:
       return state;
   }

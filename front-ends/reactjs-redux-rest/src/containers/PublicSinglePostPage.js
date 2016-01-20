@@ -4,6 +4,7 @@ import SinglePost from '../components/SinglePost';
 import { loadPostByUrl, getAuthorById } from '../actions/blog-post-actions';
 
 import { connect } from 'react-redux';
+import * as _ from 'lodash';
 
 class PublicHomePage extends Component {
 
@@ -12,6 +13,7 @@ class PublicHomePage extends Component {
     errors: PropTypes.array,
     singlePost: PropTypes.object,
     singleAuthor: PropTypes.object,
+    comments: PropTypes.array,
     params: PropTypes.object.isRequired,
   };
 
@@ -49,12 +51,27 @@ class PublicHomePage extends Component {
 
   render(){
     let singlePost = (this.props.singlePost ? <SinglePost singlePost={this.props.singlePost} singleAuthor={this.props.singleAuthor}/> : <div>Loading...</div>);
+    let comments = _.map(this.props.comments, (comment, index) => {
+      return (
+        <div>
+          <p><span>{index+1}: </span>{comment.text}</p>
+        </div>
+      );
+    });
     return  (
       <div className="container">
         <div className="row">
           <div className="col-md-3"></div>
           <div className="col-md-6">
             {singlePost}
+          </div>
+          <div className="col-md-3"></div>
+        </div>
+        <div className="row">
+          <div className="col-md-3"></div>
+          <div className="col-md-6">
+            <h3>da commentation:</h3>
+            {comments}
           </div>
           <div className="col-md-3"></div>
         </div>
@@ -69,5 +86,6 @@ export default connect((state) => {
     errors: state.application.errors,
     singlePost: state.postData.singlePost,
     singleAuthor: state.postData.singleAuthor,
+    comments: state.postData.comments,
   };
 })(PublicHomePage);

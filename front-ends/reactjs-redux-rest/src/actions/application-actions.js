@@ -16,16 +16,17 @@ export function login (data, redirect) {
       type: constants.APPLICATION_LOADING,
     });
 
-    return fetch(api(`/users/sign_in`), tokenize({
+    return fetch(api(`/sign-in`), tokenize({
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data.user),
+      body: JSON.stringify(data),
     }))
     .then(checkStatus)
     .then(parseJSON)
     .then((data) => {
+      console.log('data',data);
       dispatch({
         type: constants.USER_LOADED,
         payload: {user: data.user, token: data.token},

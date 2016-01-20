@@ -49,7 +49,7 @@ class RegisterForm extends Component {
     e.preventDefault();
     const { dispatch } = this.props;
     let user = this.state.user;
-    user.uid = user.email;
+    user.username = user.email;
     dispatch(register({user}));
   }
   render(){

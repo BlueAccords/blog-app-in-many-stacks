@@ -186,3 +186,29 @@ export function getAuthorById(id) {
     });
   };
 }
+
+export function getCommentsByPostId(postId) {
+  return (dispatch) => {
+    dispatch({
+      type: constants.APPLICATION_LOADING,
+    });
+
+    return fetch(api('/posts/' + postId + '/comments'), tokenize({
+      method: 'get',
+    }))
+    .then(checkStatus)
+    .then(parseJSON)
+    .then((data) => {
+      dispatch({
+        type: constants.COMMENTS_LOADED,
+        payload: {comments: data.comments},
+      });
+      dispatch({
+        type: constants.APPLICATION_LOADED,
+      });
+    })
+    .catch((error) => {
+      dispatchJSONErrors(dispatch, constants.APPLICATION_ERRORS, error);
+    });
+  };
+}

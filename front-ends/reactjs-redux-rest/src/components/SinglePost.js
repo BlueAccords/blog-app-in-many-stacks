@@ -4,6 +4,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import { getCommentsByPostId } from '../actions/blog-post-actions';
 import * as _ from 'lodash';
 
 class SinglePost extends Component {
@@ -20,7 +21,12 @@ class SinglePost extends Component {
     super(props);
   }
 
-  componentWillMount() {}
+  componentWillMount() {
+    let { singlePost, dispatch } = this.props,
+      postId = singlePost.id;
+
+    dispatch(getCommentsByPostId(postId));
+  }
 
   render(){
     let { singlePost, singleAuthor } = this.props;
