@@ -177,6 +177,7 @@ module.exports.index = (req, res) => {
       if(user) {
         return res.json({
           user: {
+            id: user.id,
             name: user.name,
             email: user.email,
             username: user.username,
