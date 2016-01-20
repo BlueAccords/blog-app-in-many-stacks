@@ -1,6 +1,7 @@
 # Blog App In NodeJS + REST
 
-A blog API written in NodeJS and REST.
+A blog API written in NodeJS v4.2 and REST.
+
 
 ### Setup
 
