@@ -118,7 +118,7 @@ module.exports.update = (req, res) => {
     user.name = req.body.user.name || user.name;
     user.email = req.body.user.email || user.email;
     user.username = req.body.user.username || user.username;
-    user.password = req.body.user.password || user.password;
+    user.password = bcrypt.hashSync(req.body.user.password, 8) || user.password;
 
     return user.save();
   })
