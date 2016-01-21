@@ -31,9 +31,9 @@ module.exports.authenticate = (req, res) => {
             token: token,
           });
         } else {
-          return res.json({
+          return res.status(400).json({
             errors: {
-              password: ['Incorrect password'],
+              password: ['Incorrect password.'],
             },
           });
         }
