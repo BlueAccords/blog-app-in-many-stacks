@@ -67,7 +67,7 @@ export function getTags () {
 /**
  * Loads a set of posts given tag_text
  *
- * @param tag_text
+ * @param {string} tag_text
  * @returns {Promise}
  */
 export function getPostsByTag(tag_text) {
@@ -110,7 +110,7 @@ export function getPostsByTag(tag_text) {
 /**
  * Loads a single tag from queried tag text - NOT A PUBLIC FUNCTION, INTERNAL TO POST-ACTIONS
  *
- * @param tag_text
+ * @param {string} tag_text
  * @returns {Promise}
  */
 function getTagByTagText(tag_text) {
@@ -132,7 +132,7 @@ function getTagByTagText(tag_text) {
 /**
  * Loads a single blog post
  *
- * @param url_path
+ * @param {string} url_path
  * @returns {Promise}
  */
 export function loadPostByUrl(url_path) {
@@ -161,6 +161,12 @@ export function loadPostByUrl(url_path) {
   };
 }
 
+/**
+ * Gets author by author id
+ *
+ * @param {string} id
+ * @returns {Promise}
+ */
 export function getAuthorById(id) {
   return (dispatch) => {
     dispatch({
@@ -187,6 +193,12 @@ export function getAuthorById(id) {
   };
 }
 
+/**
+ * Gets comments corresponding to a post id
+ *
+ * @param {string} postId
+ * @returns {Promise}
+ */
 export function getCommentsByPostId(postId) {
   return (dispatch) => {
     dispatch({

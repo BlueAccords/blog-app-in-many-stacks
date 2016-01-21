@@ -19,7 +19,7 @@ class Header extends Component {
 
     if(this.props.authenticated && user) {
       authLink = <LogoutLink />;
-      image = <Link to="/my-account"><Gravatar email={user.email} size={40} https className /></Link>;
+      image = <Link to="/my-account"><Gravatar email={user.email} size={40} https className="" /></Link>;
     } else {
       authLink = <Link to="/my-account">Log In</Link>;
     }

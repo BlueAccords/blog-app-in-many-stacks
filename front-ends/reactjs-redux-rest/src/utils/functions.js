@@ -73,7 +73,7 @@ export function api(path) {
  */
 export function tokenize(obj){
   obj.headers = obj.headers || {};
-  obj.headers['Authorization'] = `Bearer ${storage.get('token')}`;
+  obj.headers['Authorization'] = `Bearer: ${storage.get('token')}`;
 
   return obj;
 }

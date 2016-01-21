@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Panel, Input, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { updateUser } from '../actions/application-actions';
+import { updateUser, deleteUser } from '../actions/application-actions';
 import * as _ from 'lodash';
 
 class AccountUpdater extends Component {
@@ -23,6 +23,7 @@ class AccountUpdater extends Component {
     this._handleInputChange = this._handleInputChange.bind(this);
     this._handleKeyDown = this._handleKeyDown.bind(this);
     this._save = this._save.bind(this);
+    this._delete = this._delete.bind(this);
   }
 
   _handleInputChange(ev) {
@@ -32,7 +33,7 @@ class AccountUpdater extends Component {
   }
 
   _handleKeyDown(e) {
-    let ENTER = 13;
+    const ENTER = 13;
     if( e.keyCode === ENTER ) {
       this._save(e);
     }
@@ -60,13 +61,30 @@ class AccountUpdater extends Component {
       }
     });
   }
+
+  _delete(e) {
+    const { dispatch, user } = this.props;
+    e.preventDefault();
+
+    // make sure user is set (it should be set in order to see this page, but just making sure!)
+    if (user) {
+      const confirmDelete = confirm('Are you sure you want to delete this user?');
+      if (confirmDelete) {
+        dispatch( deleteUser(user.id) );
+      }
+    } else {
+      alert('error - user not set.');
+    }
+  }
+
   render(){
     const { user, errors } = this.props;
     const { clientErrors } = this.state;
-    let content;
-    let passwordError;
-    let passwordConfirmationError;
-    let emailError;
+    let content,
+      passwordError,
+      passwordConfirmationError,
+      emailError,
+      permissionsError;
 
     if(user) {
       let alertErrors;
@@ -89,6 +107,10 @@ class AccountUpdater extends Component {
 
         if(errors.email) {
           emailError = { bsStyle:'error', label:errors.email};
+        }
+
+        if (errors.permissions) {
+          permissionsError = <p>{errors.permissions}</p>;
         }
       }
 
@@ -137,6 +159,10 @@ class AccountUpdater extends Component {
               />
             </div>
           </form>
+          {permissionsError}
+          <input type="submit" className="c-btn c-btn-2"
+            onClick={this._delete} value="Delete this user account"
+          />
         </Panel>
       );
     } else {
@@ -150,5 +176,6 @@ class AccountUpdater extends Component {
 export default connect((state) => {
   return {
     errors: state.application.errors,
+    user: state.application.user,
   };
 })(AccountUpdater);

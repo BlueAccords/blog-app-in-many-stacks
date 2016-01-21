@@ -26,19 +26,23 @@ export function login (data, redirect) {
     .then(checkStatus)
     .then(parseJSON)
     .then((data) => {
-      console.log('data',data);
-      dispatch({
-        type: constants.USER_LOADED,
-        payload: {user: data.user, token: data.token},
-      });
+      // make sure user is valid and that we received a valid response from api
+      if (data.user && data.token) {
+        dispatch({
+          type: constants.USER_LOADED,
+          payload: {user: data.user, token: data.token},
+        });
 
-      // Can be used to navigate to a new route
-      if (redirect) {
-        redirect();
+        // Can be used to navigate to a new route
+        if (redirect) {
+          redirect();
+        }
+      } else {
+        console.log('malformed data: ', data);
       }
     })
-    .catch((error) => {
-      dispatchJSONErrors(dispatch, constants.APPLICATION_ERRORS, error);
+    .catch((errors) => {
+      dispatchJSONErrors(dispatch, constants.APPLICATION_ERRORS, errors);
     });
   };
 }
@@ -74,8 +78,6 @@ export function register (data, redirect) {
     dispatch({
       type: constants.APPLICATION_LOADING,
     });
-
-    console.log('data', data);
 
     return fetch(api('/users'), tokenize({
       method: 'post',
@@ -120,10 +122,13 @@ export function loadUser () {
     .then(checkStatus)
     .then(parseJSON)
     .then((data) => {
-      dispatch({
-        type: constants.USER_LOADED,
-        payload: {user: data.user, token: data.token},
-      });
+      // make sure user is valid and that we received a valid response from api
+      if (data.user && data.token){
+        dispatch({
+          type: constants.USER_LOADED,
+          payload: {user: data.user, token: data.token},
+        });
+      }
     })
     .catch((error) => {
       logoutIfUnauthorized(dispatch, error.response.status);
@@ -153,15 +158,18 @@ export function updateUser (data) {
     .then(checkStatus)
     .then(parseJSON)
     .then((data) => {
-      dispatch({
-        type: constants.USER_LOADED,
-        payload: {user: data.user, token: data.token},
-      });
-      sweetalert({
-        title: 'Success',
-        type: 'success',
-        text: 'Your account was successfully updated',
-      });
+      // make sure user exists - we need a proper api response to continue
+      if (data.user && data.token) {
+        dispatch({
+          type: constants.USER_LOADED,
+          payload: {user: data.user, token: data.token},
+        });
+        sweetalert({
+          title: 'Success',
+          type: 'success',
+          text: 'Your account was successfully updated',
+        });
+      }
     })
     .catch((error) => {
       if(!logoutIfUnauthorized(dispatch, error.response.status)) {
@@ -184,3 +192,36 @@ export function loadUserIfNeeded () {
     }
   };
 }
+
+
+/**
+ * Deletes selected user given the user id
+ *
+ * @param {string} userId
+ * @returns {Promise}
+ */
+export function deleteUser(userId) {
+  return (dispatch) => {
+    dispatch({
+      type: constants.APPLICATION_LOADING,
+    });
+
+    return fetch(api('/users/' + userId), tokenize({
+      method: 'delete',
+      body: JSON.stringify(userId),
+    }))
+    .then(checkStatus)
+    .then(parseJSON)
+    .then((data) => {
+      dispatch({
+        type: constants.LOGGED_OUT,
+      });
+      dispatch(logout());
+    })
+    .catch((error) => {
+      dispatchJSONErrors(dispatch, constants.APPLICATION_ERRORS, error);
+    });
+  };
+}
+
+
