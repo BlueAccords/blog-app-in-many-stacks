@@ -32,5 +32,6 @@ Tests are written with Mocha. You can run tests with the following:
 
   	npm test
   
-A sample Postman collection is provided [here](../api-resources/graphql/blog-app-graphql.json.postman_collection) that you can use to test the API. You will need to make sure you setup a 'blog-app-nodejs-graphql' environment via postman and set a value for 'token' that you can get from the sign-in endpoint in postman. This will be used for authorization in future requests.
+A sample Postman collection is provided [here](../api-resources/graphql/blog-app-graphql.json.postman_collection) that you can use to test the API. You will need to create/use a postman environment called 'auto-token' and use the sign-in endpoint via postman. This will set your token via a 'test' for all future requests that need it. See [environments](https://www.getpostman.com/docs/environments) and [tests](https://www.getpostman.com/docs/writing_tests) for more info.
+
 
