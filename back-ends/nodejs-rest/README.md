@@ -32,7 +32,7 @@ Tests are written using mocha. You can run tests with the following:
 
   	npm run test
 
-A sample Postman collection is provided [here](../api-resources/rest/blog-app-rest.json.postman_collection) that you can import and use for testing the API.
+A sample Postman collection is provided [here](../api-resources/rest/blog-app-rest.json.postman_collection) that you can import and use for testing the API. You will need to make sure you setup a 'blog-app-nodejs-rest' environment via postman and set a value for 'token' that you can get from the sign-in endpoint in postman. This will be used for authorization in future requests.
 
 ### Documentation
 
