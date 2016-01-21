@@ -1,7 +1,7 @@
 {
 	"id": "86d56aeb-5812-e126-3a8e-3af563629054",
 	"name": "blog-app-rest",
-	"description": "The postman collection for the blog app with many stacks app.\nNote that you will likely need to update the authorization headers in each request to have valid tokens which\nyou can get from the 'Sign in' resource.",
+	"description": "The postman collection for the blog app with many stacks app.\nNote that in order to set the Postman Environment Variable for\nthe authorization token you will need to first switch to an\nenvironment other than \"No Environment\", then run the Sign In\nrequest to fetch the token for subsequent requests.",
 	"order": [
 		"d0b53bc0-65eb-1d6a-bb96-a68bc5553657",
 		"f3d51e7a-b781-27d0-2ddc-e77c6be53a15",
@@ -37,7 +37,7 @@
 	"requests": [
 		{
 			"id": "084ad277-fb69-f704-80e2-71115ec328e5",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRWZklkZXpua200ZWJMdGxvU0hpRXFPMjZSVGtHU2pSb0xFSS5tQi9Fa01QdC81amlwSVMxZSJ9.-4Ok9dHF4nx6GkQd-yL3DIDLfx6knodgVJNI-QbR-Yk\n",
+			"headers": "Authorization: Bearer: {{token}}\n",
 			"url": "http://localhost:8000/tags/56740952a9723bbc35d4a497",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -55,7 +55,7 @@
 		},
 		{
 			"id": "176f9367-86b4-41e5-1375-6c67c39cd2da",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRWZklkZXpua200ZWJMdGxvU0hpRXFPMjZSVGtHU2pSb0xFSS5tQi9Fa01QdC81amlwSVMxZSJ9.-4Ok9dHF4nx6GkQd-yL3DIDLfx6knodgVJNI-QbR-Yk\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer: {{token}}\nContent-Type: application/json\n",
 			"url": "http://localhost:8000/toggle-tag-on-post",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -74,7 +74,7 @@
 		},
 		{
 			"id": "31ae0091-f1f9-0f25-e278-23ba743ad6c0",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRWZklkZXpua200ZWJMdGxvU0hpRXFPMjZSVGtHU2pSb0xFSS5tQi9Fa01QdC81amlwSVMxZSJ9.-4Ok9dHF4nx6GkQd-yL3DIDLfx6knodgVJNI-QbR-Yk\n",
+			"headers": "Authorization: Bearer: {{token}}\n",
 			"url": "http://localhost:8000/users/5634d4760066be016bf10c9a",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -99,7 +99,7 @@
 		},
 		{
 			"id": "4a78dad0-f9dc-c0ba-f0a9-d3a3c43fc74b",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRWZklkZXpua200ZWJMdGxvU0hpRXFPMjZSVGtHU2pSb0xFSS5tQi9Fa01QdC81amlwSVMxZSJ9.-4Ok9dHF4nx6GkQd-yL3DIDLfx6knodgVJNI-QbR-Yk\n",
+			"headers": "Authorization: Bearer: {{token}}\n",
 			"url": "http://localhost:8000/posts",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -130,7 +130,7 @@
 		},
 		{
 			"id": "59ac9edb-3cc5-265a-2764-4f8593fc9428",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRWZklkZXpua200ZWJMdGxvU0hpRXFPMjZSVGtHU2pSb0xFSS5tQi9Fa01QdC81amlwSVMxZSJ9.-4Ok9dHF4nx6GkQd-yL3DIDLfx6knodgVJNI-QbR-Yk\n",
+			"headers": "Authorization: Bearer: {{token}}\n",
 			"url": "http://localhost:8000/comments/1",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -166,7 +166,7 @@
 		},
 		{
 			"id": "61fea504-1aad-f1bc-4e1e-0765e0e4fc00",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRWZklkZXpua200ZWJMdGxvU0hpRXFPMjZSVGtHU2pSb0xFSS5tQi9Fa01QdC81amlwSVMxZSJ9.-4Ok9dHF4nx6GkQd-yL3DIDLfx6knodgVJNI-QbR-Yk\n",
+			"headers": "Authorization: Bearer: {{token}}\n",
 			"url": "http://localhost:8000/users/5634d4760066be016bf10c9a",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -184,7 +184,7 @@
 		},
 		{
 			"id": "6b7c514a-475e-74c1-0490-75ff6ed37120",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRWZklkZXpua200ZWJMdGxvU0hpRXFPMjZSVGtHU2pSb0xFSS5tQi9Fa01QdC81amlwSVMxZSJ9.-4Ok9dHF4nx6GkQd-yL3DIDLfx6knodgVJNI-QbR-Yk\n",
+			"headers": "Authorization: Bearer: {{token}}\n",
 			"url": "http://localhost:8000/tags",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -299,7 +299,7 @@
 		},
 		{
 			"id": "9d8ecd3b-7cb2-78f2-464a-91125512a1a5",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRWZklkZXpua200ZWJMdGxvU0hpRXFPMjZSVGtHU2pSb0xFSS5tQi9Fa01QdC81amlwSVMxZSJ9.-4Ok9dHF4nx6GkQd-yL3DIDLfx6knodgVJNI-QbR-Yk\n",
+			"headers": "Authorization: Bearer: {{token}}\n",
 			"url": "http://localhost:8000/comments/567408c19473dd1233c7463a",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -324,7 +324,7 @@
 		},
 		{
 			"id": "aa4d678e-81de-9de1-8068-c81f9aa5c7f4",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRWZklkZXpua200ZWJMdGxvU0hpRXFPMjZSVGtHU2pSb0xFSS5tQi9Fa01QdC81amlwSVMxZSJ9.-4Ok9dHF4nx6GkQd-yL3DIDLfx6knodgVJNI-QbR-Yk\n",
+			"headers": "Authorization: Bearer: {{token}}\n",
 			"url": "http://localhost:8000/posts/5634d4760066be016bf10c09",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -360,7 +360,7 @@
 		},
 		{
 			"id": "c1e65d96-6fcc-eb67-6f03-c60dc620183c",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRWZklkZXpua200ZWJMdGxvU0hpRXFPMjZSVGtHU2pSb0xFSS5tQi9Fa01QdC81amlwSVMxZSJ9.-4Ok9dHF4nx6GkQd-yL3DIDLfx6knodgVJNI-QbR-Yk\n",
+			"headers": "Authorization: Bearer: {{token}}\n",
 			"url": "http://localhost:8000/posts/567406cfb1d9b9372b404a3a/comments",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -385,7 +385,7 @@
 		},
 		{
 			"id": "c8d5b6a3-434a-580b-e93d-fe6ea76e4b43",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRWZklkZXpua200ZWJMdGxvU0hpRXFPMjZSVGtHU2pSb0xFSS5tQi9Fa01QdC81amlwSVMxZSJ9.-4Ok9dHF4nx6GkQd-yL3DIDLfx6knodgVJNI-QbR-Yk\nContent-Type: application/json\n",
+			"headers": "Authorization: Bearer: {{token}}\nContent-Type: application/json\n",
 			"url": "http://localhost:8000/toggle-tag-on-post",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -422,7 +422,7 @@
 		},
 		{
 			"id": "cd63898c-9aa9-d075-bad2-eb952b6b2aca",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRWZklkZXpua200ZWJMdGxvU0hpRXFPMjZSVGtHU2pSb0xFSS5tQi9Fa01QdC81amlwSVMxZSJ9.-4Ok9dHF4nx6GkQd-yL3DIDLfx6knodgVJNI-QbR-Yk\n",
+			"headers": "Authorization: Bearer: {{token}}\n",
 			"url": "http://localhost:8000/tags/56740952a9723bbc35d4a497",
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -468,7 +468,7 @@
 			],
 			"dataMode": "urlencoded",
 			"version": 2,
-			"tests": "",
+			"tests": "var data = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"token\", data.token);",
 			"currentHelper": "normal",
 			"helperAttributes": {},
 			"time": 1450204214229,
@@ -514,7 +514,7 @@
 		},
 		{
 			"id": "e6795912-7124-8df9-361e-9bf3834da3fd",
-			"headers": "Authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NjM0ZDQ3NjAwNjZiZTAxNmJmMTBjOWEiLCJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRWZklkZXpua200ZWJMdGxvU0hpRXFPMjZSVGtHU2pSb0xFSS5tQi9Fa01QdC81amlwSVMxZSJ9.-4Ok9dHF4nx6GkQd-yL3DIDLfx6knodgVJNI-QbR-Yk\n",
+			"headers": "Authorization: Bearer: {{token}}\n",
 			"url": "http://localhost:8000/posts/5634d4760066be016bf10c09",
 			"preRequestScript": "",
 			"pathVariables": {},
