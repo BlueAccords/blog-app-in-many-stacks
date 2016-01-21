@@ -10,13 +10,14 @@ class AccountUpdater extends Component {
     dispatch: PropTypes.func.isRequired,
     errors: PropTypes.object,
     user: PropTypes.object,
+    token: PropTypes.string,
   }
 
   constructor(props) {
     super(props);
 
     this.state = {
-      user: {},
+      userUpdate: {},
       clientErrors: null,
     };
 
@@ -27,9 +28,9 @@ class AccountUpdater extends Component {
   }
 
   _handleInputChange(ev) {
-    let user = {...this.state.user};
-    user[ev.target.name] = ev.target.value;
-    this.setState({user});
+    let userUpdate = {...this.state.userUpdate};
+    userUpdate[ev.target.name] = ev.target.value;
+    this.setState({userUpdate});
   }
 
   _handleKeyDown(e) {
@@ -40,18 +41,23 @@ class AccountUpdater extends Component {
   }
 
   _save(e) {
-    const { dispatch } = this.props;
+    const { dispatch, token } = this.props;
+    const user = { ...this.state.userUpdate };
+    const userId = this.props.user.id;
+
     e.preventDefault();
 
     // reset the errors before attempting to save
     this.setState({ clientErrors: null}, () => {
       let errors = [];
-      if(_.isEmpty(this.state.user)) {
+      if(_.isEmpty(user)) {
         errors = [...errors, 'No changes to save have been made'];
       }
 
       if(_.isEmpty(errors)) {
-        dispatch(updateUser({user: this.state.user}));
+        console.log('updating: ', token, {user});
+
+        dispatch(updateUser({user}, userId));
       } else {
         this.setState({
           clientErrors: {
@@ -125,7 +131,7 @@ class AccountUpdater extends Component {
                 className="form-elem-full"
                 name="name"
                 placeholder="Name"
-                defaultValue={this.props.user.name}
+                defaultValue={user.name}
                 onChange={this._handleInputChange}
               />
               <Input
@@ -133,7 +139,7 @@ class AccountUpdater extends Component {
                 className="form-elem-full"
                 name="email"
                 placeholder="Email"
-                defaultValue={this.props.user.email}
+                defaultValue={user.email}
                 onChange={this._handleInputChange}
                 {...emailError}
               />
@@ -177,5 +183,6 @@ export default connect((state) => {
   return {
     errors: state.application.errors,
     user: state.application.user,
+    token: state.application.token,
   };
 })(AccountUpdater);

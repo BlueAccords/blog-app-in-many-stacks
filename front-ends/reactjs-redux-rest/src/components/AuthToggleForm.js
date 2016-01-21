@@ -3,7 +3,7 @@
  */
 let React       = require('react');
 let LoginForm  = require('./LoginForm');
-let SignUpForm  = require('./RegisterForm');
+let RegisterForm  = require('./RegisterForm');
 
 import { Glyphicon } from 'react-bootstrap';
 
@@ -40,7 +40,7 @@ class AuthToggleForm extends React.Component {
         case 1:
           return (
             <div>
-              <SignUpForm />
+              <RegisterForm />
               <div className="back-to-login" onClick={this._showLoginForm}>
                 <a href="#"><Glyphicon glyph="arrow-left" /> Back to login form</a>
               </div>

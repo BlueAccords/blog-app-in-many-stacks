@@ -139,43 +139,50 @@ export function loadUser () {
 /**
  * Updates a user
  *
- * @param {object} data
+ * @param {object} data - object containing user fields to update
+ * @param {string} userId - the user id of the user we want to update
  * @returns {Promise}
  */
-export function updateUser (data) {
+export function updateUser (data, userId) {
   return (dispatch) => {
     dispatch({
       type: constants.APPLICATION_LOADING,
     });
 
-    return fetch(api(`/users`), tokenize({
-      method: 'put',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    }))
-    .then(checkStatus)
-    .then(parseJSON)
-    .then((data) => {
-      // make sure user exists - we need a proper api response to continue
-      if (data.user && data.token) {
-        dispatch({
-          type: constants.USER_LOADED,
-          payload: {user: data.user, token: data.token},
-        });
-        sweetalert({
-          title: 'Success',
-          type: 'success',
-          text: 'Your account was successfully updated',
-        });
-      }
-    })
-    .catch((error) => {
-      if(!logoutIfUnauthorized(dispatch, error.response.status)) {
-        dispatchJSONErrors(dispatch, constants.APPLICATION_ERRORS, error);
-      }
-    });
+    console.log('will update: ', data, userId);
+
+    if (userId){
+      return fetch(api(`/users/` + userId), tokenize({
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }))
+      .then(checkStatus)
+      .then(parseJSON)
+      .then((data) => {
+        // make sure user exists - we need a proper api response to continue
+        if (data.user && data.token) {
+          dispatch({
+            type: constants.USER_LOADED,
+            payload: {user: data.user, token: data.token},
+          });
+          sweetalert({
+            title: 'Success',
+            type: 'success',
+            text: 'Your account was successfully updated',
+          });
+        }
+      })
+      .catch((error) => {
+        if(!logoutIfUnauthorized(dispatch, error.response.status)) {
+          dispatchJSONErrors(dispatch, constants.APPLICATION_ERRORS, error);
+        }
+      });
+    } else {
+      return null;
+    }
   };
 }
 
