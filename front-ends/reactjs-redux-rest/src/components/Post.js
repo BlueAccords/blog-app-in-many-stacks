@@ -7,14 +7,14 @@ import { Link } from 'react-router';
 import { getCommentsByPostId } from '../actions/blog-post-actions';
 import * as _ from 'lodash';
 
-class SinglePost extends Component {
+class Post extends Component {
   static propTypes = {
     className: PropTypes.string,
     dispatch: PropTypes.func.isRequired,
     posts: PropTypes.array,
     errors: PropTypes.array,
-    singlePost: PropTypes.object,
-    singleAuthor: PropTypes.object,
+    post: PropTypes.object,
+    author: PropTypes.object,
   };
 
   constructor(props) {
@@ -22,34 +22,34 @@ class SinglePost extends Component {
   }
 
   componentWillMount() {
-    let { singlePost, dispatch } = this.props,
-      postId = singlePost.id;
+    let { post, dispatch } = this.props;
 
-    dispatch(getCommentsByPostId(postId));
+    dispatch(getCommentsByPostId(post.id));
   }
 
   render(){
-    let { singlePost, singleAuthor } = this.props;
+    let { post, author } = this.props,
+      loading = <div className="meta">Loading...</div>;
 
-    let postDateRaw = new Date(singlePost.date_created),
+    let postDateRaw = new Date(post.date_created),
       postDate = postDateRaw.toDateString();
 
     let meta = () => {
       return (
         <div className="meta">
-          Created on <span className="date">{postDate}</span> by <span className="author">{singleAuthor.name}</span>
+          Created on <span className="date">{postDate}</span> by <span className="author">{author.name}</span>
         </div>
       );
     };
 
     return (
       <div>
-        <h1>{singlePost.title}</h1>
-          {(singleAuthor) ? meta() : ''}
-        <div className="post-content">{singlePost.body}</div>
+        <h1>{post.title}</h1>
+          {(author) ? meta() : loading}
+        <div className="post-content">{post.body}</div>
         <Link to="/">Go back</Link>
       </div>
     );
   }
 };
-export default connect()(SinglePost);
+export default connect()(Post);

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
-import SinglePost from '../components/SinglePost';
-import { loadPostByUrl, getAuthorById } from '../actions/blog-post-actions';
+import Post from '../components/Post';
+import { loadPostByUrl, getAuthorById, setSinglePost } from '../actions/blog-post-actions';
 
 import { connect } from 'react-redux';
 import * as _ from 'lodash';
@@ -11,6 +11,8 @@ class PublicHomePage extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     errors: PropTypes.array,
+    posts: PropTypes.array,
+    allPostsLoaded: PropTypes.bool,
     singlePost: PropTypes.object,
     singleAuthor: PropTypes.object,
     comments: PropTypes.array,
@@ -19,25 +21,14 @@ class PublicHomePage extends Component {
 
   constructor(props) {
     super(props);
+    this._loadSinglePost = this._loadSinglePost.bind(this);
   };
 
-  componentWillMount() {
-    const { dispatch, singlePost } = this.props;
-    let url_path = this._getParam('url_path');
-    if (url_path) {
-      dispatch( loadPostByUrl(this._getParam('url_path')) );
-    }
-    if (this.props.singlePost) {
-      dispatch( getAuthorById(singlePost._author) );
-    }
-  }
+  componentWillMount() {}
 
-  componentWillReceiveProps() {
-    const { dispatch, singlePost, singleAuthor } = this.props;
-    if (singlePost && singleAuthor === undefined) {
-      dispatch( getAuthorById(this.props.singlePost._author) );
-    }
-  }
+  componentWillReceiveProps() {}
+
+  _loadSinglePost() {}
 
   _getParam(param) {
     switch (param) {
@@ -50,20 +41,69 @@ class PublicHomePage extends Component {
   }
 
   render(){
-    let singlePost = (this.props.singlePost ? <SinglePost singlePost={this.props.singlePost} singleAuthor={this.props.singleAuthor}/> : <div>Loading...</div>);
-    let comments = _.map(this.props.comments, (comment, index) => {
-      return (
-        <div>
-          <p><span>{index+1}: </span>{comment.text}</p>
-        </div>
-      );
-    });
+    const { dispatch, posts, singlePost, singleAuthor, errors } = this.props;
+    let singlePostLoaded = false,
+      singleAuthorLoaded = false;
+
+    // load single post from already loaded posts, or fetch from api
+    // get url_path
+    let url_path = this._getParam('url_path');
+    if (url_path && !errors) {
+      if (singlePost && singlePost.url_path === url_path) {
+        // singlePost is already loaded
+        singlePostLoaded = true;
+      } else if (posts) {
+        // try and find singlePost in posts already loaded
+        for (let index in posts) {
+          let post = posts[index];
+          if (post.url_path === url_path) { console.log(post); dispatch(setSinglePost(post)); break; };
+        }
+        // single post not found - load post by url
+        dispatch(loadPostByUrl( url_path ));
+      } else {
+        // no posts are loaded - load post by url
+        dispatch(loadPostByUrl( url_path ));
+      }
+    }
+
+    // get author of this post - see if current author is currently loaded before fetching from api
+    if (singlePostLoaded) {
+      if (!singleAuthor || singlePost._author !== singleAuthor.id) {
+        // single author is not set or does not match the author of this post - reload the author!
+        dispatch( getAuthorById(singlePost._author) );
+      } else {
+        // author matches - kindly proceed
+        singleAuthorLoaded = true;
+      }
+    }
+
+
+    let printSinglePost,
+      comments;
+    if (singlePostLoaded){
+
+      printSinglePost = <Post post={singlePost} author={(singleAuthorLoaded) ? singleAuthor : null}/>;
+      comments = _.map(this.props.comments, (comment, index) => {
+        return (
+          <div>
+            <p><span>{index+1}: </span>{comment.text}</p>
+          </div>
+        );
+      });
+
+    } else {
+
+      printSinglePost = <div>Loading...</div>;
+      comments = <div>Loading...</div>;
+
+    }
+
     return  (
       <div className="container">
         <div className="row">
           <div className="col-md-3"></div>
           <div className="col-md-6">
-            {singlePost}
+            {printSinglePost}
           </div>
           <div className="col-md-3"></div>
         </div>
@@ -84,6 +124,8 @@ export default connect((state) => {
   return {
     loading: state.application.loading,
     errors: state.application.errors,
+    posts: state.postData.posts,
+    allPostsLoaded: state.postData.allPostsLoaded,
     singlePost: state.postData.singlePost,
     singleAuthor: state.postData.singleAuthor,
     comments: state.postData.comments,

@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 import { Panel, Button } from 'react-bootstrap';
 import AccountUpdater from '../components/AccountUpdater';
+import PostsByUser from '../containers/PostsByUser';
 import { connect } from 'react-redux';
 import { loadUserIfNeeded } from '../actions/application-actions';
 
@@ -22,6 +23,7 @@ class MyAccountHomePage extends Component {
     return  (
       <Panel header={<h1>My Account</h1>}>
         <AccountUpdater user={this.props.user} />
+        <PostsByUser />
       </Panel>
     );
   }

@@ -14,6 +14,7 @@ class AllPosts extends Component {
     posts: PropTypes.array,
     tags: PropTypes.array,
     errors: PropTypes.array,
+    allPostsLoaded: PropTypes.bool,
   };
 
   constructor(props) {
@@ -38,7 +39,7 @@ class AllPosts extends Component {
   }
 
   render(){
-    let { posts, tags } = this.props;
+    let { posts, tags, allPostsLoaded } = this.props;
 
     let printPosts = _.map(posts, (post) => {
       let url = 'archives/' + post.url_path;
@@ -49,6 +50,12 @@ class AllPosts extends Component {
       let url = '/tags/' + tag.text;
       return <li key={tag.id} tag={tag} text={tag.text}><Link to={url}>{tag.text}</Link></li>;
     });
+
+    if (!allPostsLoaded){
+      this._loadPosts();
+      printPosts = <div>Loading...</div>;
+      printTags = <div>Loading...</div>;
+    }
 
     return (
       <div>
@@ -65,5 +72,6 @@ export default connect((state) => {
     posts: state.postData.posts,
     tags: state.postData.tags,
     errors: state.postData.errors,
+    allPostsLoaded: state.postData.allPostsLoaded,
   };
 })(AllPosts);

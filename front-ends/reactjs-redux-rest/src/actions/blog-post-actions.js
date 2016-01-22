@@ -11,7 +11,7 @@ import history from '../utils/history';
 export function getPosts () {
   return (dispatch) => {
     dispatch({
-      type: constants.APPLICATION_LOADING,
+      type: constants.POSTS_LOADING,
     });
 
     return fetch(api(`/posts`), tokenize({
@@ -43,7 +43,7 @@ export function getPosts () {
 export function getTags () {
   return (dispatch) => {
     dispatch({
-      type: constants.APPLICATION_LOADING,
+      type: constants.TAGS_LOADING,
     });
 
     return fetch(api(`/tags`), tokenize({
@@ -74,7 +74,7 @@ export function getPostsByTag(tag_text) {
   let tagId = null;
   return (dispatch) => {
     dispatch({
-      type: constants.APPLICATION_LOADING,
+      type: constants.POSTS_LOADING,
     });
 
     return getTagByTagText(tag_text)
@@ -128,6 +128,22 @@ function getTagByTagText(tag_text) {
 }
 
 
+/**
+ * Sets queriedPostsLoaded state variable to false
+ *
+ * Used to reset queried posts loading logic after a successful post query
+ *
+ * @returns {Promise}
+ */
+export function queriedPostsWillChange() {
+  return (dispatch) => {
+    dispatch({
+      type: constants.QUERIED_POSTS_CHANGED,
+    });
+  };
+}
+
+
 
 /**
  * Loads a single blog post
@@ -138,7 +154,7 @@ function getTagByTagText(tag_text) {
 export function loadPostByUrl(url_path) {
   return (dispatch) => {
     dispatch({
-      type: constants.APPLICATION_LOADING,
+      type: constants.POSTS_LOADING,
     });
 
     return fetch(api('/posts?url_path='+url_path), tokenize({
@@ -149,7 +165,7 @@ export function loadPostByUrl(url_path) {
     .then((data) => {
       dispatch({
         type: constants.SINGLE_POST_LOADED,
-        payload: {singlePost: data.post},
+        payload: {post: data.post},
       });
       dispatch({
         type: constants.APPLICATION_LOADED,
@@ -157,6 +173,21 @@ export function loadPostByUrl(url_path) {
     })
     .catch((error) => {
       dispatchJSONErrors(dispatch, constants.APPLICATION_ERRORS, error);
+    });
+  };
+}
+
+/**
+ * Sets the single blog post
+ *
+ * @param {object} post
+ * @returns {Promise}
+ */
+export function setSinglePost(post) {
+  return (dispatch) => {
+    dispatch({
+      type: constants.SINGLE_POST_LOADED,
+      payload: {post},
     });
   };
 }
@@ -170,7 +201,7 @@ export function loadPostByUrl(url_path) {
 export function getAuthorById(id) {
   return (dispatch) => {
     dispatch({
-      type: constants.APPLICATION_LOADING,
+      type: constants.AUTHOR_LOADING,
     });
 
     return fetch(api('/users/' + id), tokenize({
@@ -202,7 +233,7 @@ export function getAuthorById(id) {
 export function getCommentsByPostId(postId) {
   return (dispatch) => {
     dispatch({
-      type: constants.APPLICATION_LOADING,
+      type: constants.COMMENTS_LOADING,
     });
 
     return fetch(api('/posts/' + postId + '/comments'), tokenize({
@@ -215,8 +246,34 @@ export function getCommentsByPostId(postId) {
         type: constants.COMMENTS_LOADED,
         payload: {comments: data.comments},
       });
+    })
+    .catch((error) => {
+      dispatchJSONErrors(dispatch, constants.APPLICATION_ERRORS, error);
+    });
+  };
+}
+
+/**
+ * Gets all posts written by author with userId
+ *
+ * @param {string} userId
+ * @returns {Promise}
+ */
+export function getPostsByUserId(userId) {
+  return (dispatch) => {
+    dispatch({
+      type: constants.POSTS_LOADING,
+    });
+
+    return fetch(api('/users/' + userId + '/posts'), tokenize({
+      method: 'get',
+    }))
+    .then(checkStatus)
+    .then(parseJSON)
+    .then((data) => {
       dispatch({
-        type: constants.APPLICATION_LOADED,
+        type: constants.QUERIED_POSTS_LOADED,
+        payload: { posts: data.posts },
       });
     })
     .catch((error) => {

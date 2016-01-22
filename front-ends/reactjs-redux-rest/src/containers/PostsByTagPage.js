@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import { getPostsByTag } from '../actions/blog-post-actions';
+import { getPostsByTag, queriedPostsWillChange } from '../actions/blog-post-actions';
 
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
@@ -12,6 +12,9 @@ class PostsByTagPage extends Component {
     dispatch: PropTypes.func.isRequired,
     errors: PropTypes.array,
     posts: PropTypes.array,
+    allPostsLoaded: PropTypes.bool,
+    queriedPosts: PropTypes.array,
+    queriedPostsLoaded: PropTypes.bool,
     params: PropTypes.object.isRequired,
   }
 
@@ -20,12 +23,11 @@ class PostsByTagPage extends Component {
   }
 
   componentWillMount() {
-
+    const { dispatch } = this.props;
+    dispatch(queriedPostsWillChange());
   }
 
-  componentWillReceiveProps() {
-    const { dispatch, posts } = this.props;
-  }
+  componentWillReceiveProps() {}
 
   _getParam(param) {
     switch (param) {
@@ -37,26 +39,37 @@ class PostsByTagPage extends Component {
     }
   }
 
+  _getFilteredPosts(posts, tag_text) {
+    return posts.filter((post) => {
+      for (let tag in post.tags) {
+        if (post.tags[tag].text === tag_text) { return true; }
+      }
+      return false;
+    });
+  }
+
   render(){
-    const { dispatch, posts } = this.props;
+    const { dispatch, posts, allPostsLoaded, queriedPosts, queriedPostsLoaded } = this.props;
     let tag_text = this._getParam('tag_text');
-    let filteredPosts = null,
-      printFilteredPosts = null;
-    if (posts) {
+
+    let loading = <div>Loading...</div>,
+      filteredPosts = null,
+      printFilteredPosts = loading,
+      postCount = 0;
+
+    if (posts && allPostsLoaded) {
       // load filtered post data from previously loaded posts
-      filteredPosts = posts.filter((post) => {
-        for (let tag in post.tags) {
-          if (post.tags[tag].text === tag_text) { return true; }
-        }
-        return false;
-      });
-    }
-    else {
-      // lead posts from api
+      filteredPosts = this._getFilteredPosts(posts, tag_text);
+    } else if(queriedPosts && queriedPostsLoaded) {
+      filteredPosts = this._getFilteredPosts(queriedPosts, tag_text);
+    } else {
+      // no posts are loaded - lead posts from api
       dispatch( getPostsByTag(tag_text) );
     }
 
+    // get filtered posts
     if (filteredPosts) {
+      postCount = filteredPosts.length;
       printFilteredPosts = filteredPosts.map((post) => {
         return (
           <div>
@@ -72,7 +85,7 @@ class PostsByTagPage extends Component {
         <div className="row">
           <div className="col-md-3"></div>
           <div className="col-md-6">
-            <p>Only showing posts with tag: {tag_text}</p>
+            <p>Only showing posts with tag: {tag_text} ({postCount} result{(postCount === 1) ? '' : 's'})</p>
             {printFilteredPosts}
             <Link to="/">Go back</Link>
           </div>
@@ -86,5 +99,8 @@ class PostsByTagPage extends Component {
 export default connect((state) => {
   return {
     posts: state.postData.posts,
+    allPostsLoaded: state.postData.allPostsLoaded,
+    queriedPosts: state.postData.queriedPosts,
+    queriedPostsLoaded: state.postData.queriedPostsLoaded,
   };
 })(PostsByTagPage);
