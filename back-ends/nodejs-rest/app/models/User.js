@@ -30,6 +30,16 @@ let UserSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  date_modified: {
+    type: Date,
+    required: true,
+    trim: true,
+  },
+  date_created: {
+    type: Date,
+    required: true,
+    trim: true,
+  },
 }, {
   toObject: { virtuals: true },
   toJSON: { virtuals: true },
