@@ -123,9 +123,10 @@ module.exports.update = (req, res) => {
     user.email = req.body.user.email || user.email;
     user.username = req.body.user.username || user.username;
     user.date_modified = new Date();
-    user.date_created = user.date_created;
+    user.date_created = user.date_created || new Date();
+    user.password = user.password;
     // if request password is set, update the password (apply hashing to password as)
-    if (req.body.user.password) { user.password = bcrypt.hashSync(req.body.user.password, 8); }
+    if (req.body.user.password && req.body.user.password.length > 0) { user.password = bcrypt.hashSync(req.body.user.password, 8); }
 
     return user.save();
   })
@@ -145,7 +146,7 @@ module.exports.update = (req, res) => {
     });
   })
   .catch((err) => {
-    return generalErrorResponse(res);
+    return generalErrorResponse(res, err);
   });
 };
 
