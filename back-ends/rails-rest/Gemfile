@@ -19,7 +19,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # Uniquely identifies a model instance
 gem 'globalid', '~> 0.3.3'
-# Easily build JSON exactly how you want to to be viewed: 
+# Easily build JSON exactly how you want to to be viewed:
   # Added to make JSON responses to look exactly like Other Stacks
 gem 'rabl'
 # gem 'oj'
@@ -30,6 +30,9 @@ gem "validates_existence", ">= 0.4"
 # User authentication
 gem 'devise', '~> 3.4.1'
 gem 'jwt', '~> 1.5.1'
+
+# For allowing CORS
+gem 'rack-cors', :require => 'rack/cors'
 
 # For providing javascript es5 functions for old browsers (mainly IE8)
 gem 'es5-shim-rails', '~> 4.0.1'

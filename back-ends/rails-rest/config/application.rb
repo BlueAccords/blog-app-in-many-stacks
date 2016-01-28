@@ -32,5 +32,13 @@ module ExampleApp
       g.controller_specs true
       g.routing_specs true
     end
+
+    # Allow for Rack Cors
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins ENV["CORS_ALLOW_ORIGINS"] ? ENV["CORS_ALLOW_ORIGINS"] : '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options, :put, :delete]
+      end
+    end
   end
 end

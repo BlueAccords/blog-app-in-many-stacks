@@ -31,9 +31,9 @@ module.exports.authenticate = (req, res) => {
             token: token,
           });
         } else {
-          return res.json({
+          return res.status(400).json({
             errors: {
-              password: ['Incorrect password'],
+              password: ['Incorrect password.'],
             },
           });
         }
@@ -54,6 +54,8 @@ module.exports.create = (req, res) => {
         email: req.body.user.email,
         username: req.body.user.username,
         password: bcrypt.hashSync(req.body.user.password, 8),
+        date_created: new Date(),
+        date_modified: new Date(),
       });
 
       return user.save()
@@ -66,6 +68,8 @@ module.exports.create = (req, res) => {
             name: user.name,
             email: user.email,
             username: user.username,
+            date_created: user.date_created,
+            date_modified: user.date_modified,
           },
           token: token,
         }).end();
@@ -118,7 +122,11 @@ module.exports.update = (req, res) => {
     user.name = req.body.user.name || user.name;
     user.email = req.body.user.email || user.email;
     user.username = req.body.user.username || user.username;
-    user.password = req.body.user.password || user.password;
+    user.date_modified = new Date();
+    user.date_created = user.date_created || new Date();
+    user.password = user.password;
+    // if request password is set, update the password (apply hashing to password as)
+    if (req.body.user.password && req.body.user.password.length > 0) { user.password = bcrypt.hashSync(req.body.user.password, 8); }
 
     return user.save();
   })
@@ -127,15 +135,18 @@ module.exports.update = (req, res) => {
 
     return res.json({
       user: {
+        id: user.id,
         name: user.name,
         email: user.email,
         username: user.username,
+        date_modified: user.date_modified,
+        date_created: user.date_created,
       },
       token: token,
     });
   })
   .catch((err) => {
-    return generalErrorResponse(res);
+    return generalErrorResponse(res, err);
   });
 };
 
