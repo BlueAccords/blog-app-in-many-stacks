@@ -5,6 +5,7 @@ import schema from './schema';
 import user from './controllers/users-controller';
 import jwtMiddleware from './middlewares/jwt';
 import graphqlHTTP from 'express-graphql';
+import path from 'path';
 
 let router = express.Router();
 
@@ -16,6 +17,16 @@ router.route('/sign-in')
 
 router.route('/users')
 .post(user.create);
+
+// Graphiql exploratory interface
+router.route('/graphiql')
+.get((req,res) => {
+  res.sendFile(path.join(__dirname+'/../graphiql/build/index.html'));
+});
+router.route('/graphiql.js')
+.get((req,res) => {
+  res.sendFile(path.join(__dirname+'/../graphiql/build/graphiql.js'));
+});
 
 /*
  * PROTECTED ROUTES - order matters. Protected routes need to be below
