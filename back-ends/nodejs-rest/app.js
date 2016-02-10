@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 // NEW
 'use strict';
 let fs = require('fs');
